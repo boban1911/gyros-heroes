@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from './assets/logo.png';
+import logoBig from './assets/logo-big.png';
+import pin from './assets/pin.png';
 
 const imgImg = "https://www.figma.com/api/mcp/asset/2842987a-801f-4124-b9d3-784c352bb31c";
 const imgImg1 = "https://www.figma.com/api/mcp/asset/7f7e8acd-7539-482f-9e28-e96a4a76aa46";
@@ -31,7 +32,7 @@ const imgDizajn = "https://www.figma.com/api/mcp/asset/a9567097-1954-4e65-b993-b
 const imgLogo2 = "https://www.figma.com/api/mcp/asset/1bc3eea6-7fa0-47ef-8d79-1c171d32e652";
 const img = "https://www.figma.com/api/mcp/asset/8e15e63b-b60e-45c4-a9b3-fad3057bf9d9";
 const img1 = "https://www.figma.com/api/mcp/asset/4ba894d1-caa7-4b58-97e6-23e2e7c148ff";
-const img2 = logo;
+const img2 = logoBig;
 const img3 = "https://www.figma.com/api/mcp/asset/fbb8147b-ec8c-4461-bdcd-d853ba5df82f";
 const imgPlay = "https://www.figma.com/api/mcp/asset/0384ec16-a29c-4aaa-95c8-33238d11c57c";
 const img4 = "https://www.figma.com/api/mcp/asset/a68c01df-3ac4-4dd7-b099-813665fe0392";
@@ -105,7 +106,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[36.497px] items-center justify-center relative shrink-0 w-[239.074px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:154">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:154">
                         <p className="leading-[1.2]">classic hero</p>
                       </div>
                     </div>
@@ -119,7 +120,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-node-id="602:156">
                   <div className="flex h-[36.237px] items-center justify-center relative shrink-0 w-[114.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:157">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:157">
                         <p className="leading-[1.2]">490rsd</p>
                       </div>
                     </div>
@@ -135,7 +136,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[36.431px] items-center justify-center relative shrink-0 w-[207.074px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:162">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:162">
                         <p className="leading-[1.2]">veliki hero</p>
                       </div>
                     </div>
@@ -151,7 +152,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:164">
                   <div className="flex h-[36.231px] items-center justify-center relative shrink-0 w-[111.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:165">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:165">
                         <p className="leading-[1.2]">560rsd</p>
                       </div>
                     </div>
@@ -167,7 +168,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[72.378px] items-center justify-center relative shrink-0 w-[182.149px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[1.2] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:170">
+                      <div className="flex flex-col font-black justify-center leading-[1.2] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:170">
                         <p className="mb-0">BAŠ VELIKI</p>
                         <p>HERO</p>
                       </div>
@@ -182,7 +183,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:172">
                   <div className="flex h-[36.231px] items-center justify-center relative shrink-0 w-[111.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:173">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:173">
                         <p className="leading-[1.2]">620rsd</p>
                       </div>
                     </div>
@@ -198,7 +199,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[36.374px] items-center justify-center relative shrink-0 w-[180.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:178">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:178">
                         <p className="leading-[1.2]">KIDS HERO</p>
                       </div>
                     </div>
@@ -212,7 +213,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:180">
                   <div className="flex h-[36.235px] items-center justify-center relative shrink-0 w-[113.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:181">
+                      <div className="flex col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:181">
                         <p className="leading-[1.2]">420rsd</p>
                       </div>
                     </div>
@@ -241,7 +242,7 @@ export default function LandingPage() {
                 </div>
                 <div className="flex h-[36.31px] items-center justify-center relative shrink-0 w-[149.075px]">
                   <div className="flex-none rotate-[359.881deg]">
-                    <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:189">
+                    <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:189">
                       <p className="leading-[1.2]">POMFRIT</p>
                     </div>
                   </div>
@@ -249,7 +250,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:190">
                   <div className="flex h-[36.233px] items-center justify-center relative shrink-0 w-[112.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:191">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:191">
                         <p className="leading-[1.2]">200rsd</p>
                       </div>
                     </div>
@@ -276,7 +277,7 @@ export default function LandingPage() {
                 </div>
                 <div className="flex h-[72.31px] items-center justify-center relative shrink-0 w-[149.149px]">
                   <div className="flex-none rotate-[359.881deg]">
-                    <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[1.2] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:198">
+                    <div className="flex flex-col font-black justify-center leading-[1.2] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:198">
                       <p className="mb-0">HERO</p>
                       <p>POMFRIT</p>
                     </div>
@@ -285,7 +286,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:199">
                   <div className="flex h-[36.235px] items-center justify-center relative shrink-0 w-[113.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:200">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:200">
                         <p className="leading-[1.2]">240rsd</p>
                       </div>
                     </div>
@@ -312,7 +313,7 @@ export default function LandingPage() {
                 </div>
                 <div className="flex h-[72.466px] items-center justify-center relative shrink-0 w-[224.149px]">
                   <div className="flex-none rotate-[359.881deg]">
-                    <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[1.2] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:207">
+                    <div className="flex flex-col font-black justify-center leading-[1.2] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:207">
                       <p className="mb-0">POMFRIT</p>
                       <p>CHEDDAR SIR</p>
                     </div>
@@ -321,7 +322,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:208">
                   <div className="flex h-[36.229px] items-center justify-center relative shrink-0 w-[110.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:209">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:209">
                         <p className="leading-[1.2]">270rsd</p>
                       </div>
                     </div>
@@ -348,7 +349,7 @@ export default function LandingPage() {
                 </div>
                 <div className="flex h-[108.472px] items-center justify-center min-w-full relative shrink-0 w-[min-content]">
                   <div className="flex-none rotate-[359.881deg] w-full">
-                    <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[1.2] relative text-[30px] text-center text-white uppercase w-full whitespace-pre-wrap" data-node-id="602:216">
+                    <div className="flex flex-col font-black justify-center leading-[1.2] relative text-[30px] text-center text-white uppercase w-full whitespace-pre-wrap" data-node-id="602:216">
                       <p className="mb-0">POMFRIT</p>
                       <p className="mb-0">CHEDDAR</p>
                       <p>- SLANINA</p>
@@ -358,7 +359,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:217">
                   <div className="flex h-[36.235px] items-center justify-center relative shrink-0 w-[113.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:218">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:218">
                         <p className="leading-[1.2]">340rsd</p>
                       </div>
                     </div>
@@ -388,7 +389,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[36.474px] items-center justify-center min-w-full relative shrink-0 w-[min-content]">
                     <div className="flex-none rotate-[359.881deg] w-full">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:227">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:227">
                         <p className="leading-[1.2] whitespace-pre-wrap">SUPER HERO</p>
                       </div>
                     </div>
@@ -400,7 +401,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:229">
                   <div className="flex h-[36.233px] items-center justify-center relative shrink-0 w-[112.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:230">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:230">
                         <p className="leading-[1.2]">870rsd</p>
                       </div>
                     </div>
@@ -428,7 +429,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[72.376px] items-center justify-center relative shrink-0 w-[181.149px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[1.2] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:238">
+                      <div className="flex flex-col font-black justify-center leading-[1.2] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:238">
                         <p className="mb-0">HERO FULL</p>
                         <p>OBROK</p>
                       </div>
@@ -442,7 +443,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:240">
                   <div className="flex h-[36.233px] items-center justify-center relative shrink-0 w-[112.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:241">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:241">
                         <p className="leading-[1.2]">870rsd</p>
                       </div>
                     </div>
@@ -477,7 +478,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[72.474px] items-center justify-center min-w-full relative shrink-0 w-[min-content]">
                     <div className="flex-none rotate-[359.881deg] w-full">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:249">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:249">
                         <p className="leading-[1.2] whitespace-pre-wrap">HERO TORTILLA</p>
                       </div>
                     </div>
@@ -489,7 +490,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:251">
                   <div className="flex h-[36.237px] items-center justify-center relative shrink-0 w-[114.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:252">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:252">
                         <p className="leading-[1.2]">460rsd</p>
                       </div>
                     </div>
@@ -517,7 +518,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[108.472px] items-center justify-center min-w-full relative shrink-0 w-[min-content]">
                     <div className="flex-none rotate-[359.881deg] w-full">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:260">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:260">
                         <p className="leading-[1.2] whitespace-pre-wrap">CHICKEN HERO NUGGETS</p>
                       </div>
                     </div>
@@ -529,7 +530,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:262">
                   <div className="flex h-[36.22px] items-center justify-center relative shrink-0 w-[106.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:263">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:263">
                         <p className="leading-[1.2]">410rsd</p>
                       </div>
                     </div>
@@ -559,7 +560,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[72.473px] items-center justify-center min-w-full relative shrink-0 w-[min-content]">
                     <div className="flex-none rotate-[359.881deg] w-full">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:272">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:272">
                         <p className="leading-[1.2] whitespace-pre-wrap">POHOVANI HERO</p>
                       </div>
                     </div>
@@ -571,7 +572,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:274">
                   <div className="flex h-[36.235px] items-center justify-center relative shrink-0 w-[113.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:275">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:275">
                         <p className="leading-[1.2]">420rsd</p>
                       </div>
                     </div>
@@ -594,7 +595,7 @@ export default function LandingPage() {
                 <div className="content-stretch flex flex-col gap-[10px] items-center relative shrink-0 w-full" data-name="items" data-node-id="602:280">
                   <div className="flex h-[108.504px] items-center justify-center relative shrink-0 w-[242.587px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-[242.362px]" data-node-id="602:281">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-[242.362px]" data-node-id="602:281">
                         <p className="leading-[1.2] whitespace-pre-wrap">CHICKEN HERO NUGGETS BOX</p>
                       </div>
                     </div>
@@ -605,14 +606,14 @@ export default function LandingPage() {
                 </div>
                 <div className="bg-[#4866b0] content-stretch flex flex-col gap-[10px] items-center justify-center px-[25px] py-[15px] relative rounded-[15px] shrink-0 w-full" data-name="price" data-node-id="602:283">
                   <div className="flex flex-col items-center justify-center w-full">
-                    <p className="font-['Montserrat:Black',sans-serif] font-black leading-[1.2] text-[20px] text-center text-white uppercase whitespace-nowrap">
-                      <span className="font-['Montserrat:SemiBold',sans-serif] font-semibold">6 kom</span> 250 rsd
+                    <p className="font-black leading-none text-white text-[30px] text-center uppercase whitespace-nowrap">
+                      <span className="font-semibold text-[22px] lowercase">6kom</span> 250<span className="lowercase">rsd</span>
                     </p>
-                    <p className="font-['Montserrat:Black',sans-serif] font-black leading-[1.2] text-[20px] text-center text-white uppercase whitespace-nowrap">
-                      <span className="font-['Montserrat:SemiBold',sans-serif] font-semibold">8 kom</span> 320 rsd
+                    <p className="font-black leading-none text-white text-[30px] text-center uppercase whitespace-nowrap">
+                      <span className="font-semibold text-[22px] lowercase">8kom</span> 320<span className="lowercase">rsd</span>
                     </p>
-                    <p className="font-['Montserrat:Black',sans-serif] font-black leading-[1.2] text-[20px] text-center text-white uppercase whitespace-nowrap">
-                      <span className="font-['Montserrat:SemiBold',sans-serif] font-semibold">12 kom</span> 430 rsd
+                    <p className="font-black leading-none text-white text-[30px] text-center uppercase whitespace-nowrap">
+                      <span className="font-semibold text-[22px] lowercase">12kom</span> 430<span className="lowercase">rsd</span>
                     </p>
                   </div>
                 </div>
@@ -638,7 +639,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[72.473px] items-center justify-center min-w-full relative shrink-0 w-[min-content]">
                     <div className="flex-none rotate-[359.881deg] w-full">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:294">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:294">
                         <p className="leading-[1.2] whitespace-pre-wrap">HERO PILEćI BOX</p>
                       </div>
                     </div>
@@ -647,32 +648,13 @@ export default function LandingPage() {
                     <p className="leading-[1.2] whitespace-pre-wrap">Preni pileci stapici + 2 sosa po izboru</p>
                   </div>
                 </div>
-                <div className="bg-[#4866b0] content-stretch flex flex-col gap-[10px] items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0 w-full" data-name="price" data-node-id="602:296">
-                  <div className="flex h-[36.41px] items-center justify-center relative shrink-0 w-[197.074px]">
-                    <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[0px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:297">
-                        <p className="leading-[1.2]">
-                          <span className="font-['Montserrat:SemiBold',sans-serif] font-semibold text-[28px]">3</span>
-                          <span className="font-['Montserrat:SemiBold',sans-serif] font-semibold text-[28px]">kom</span>
-                          <span className="font-['Montserrat:SemiBold',sans-serif] font-semibold text-[28px]"> </span>
-                          <span className="font-['Montserrat:Black',sans-serif] font-black text-[28px]">420</span>
-                          <span className="text-[30px]">rsd</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex h-[36.416px] items-center justify-center relative shrink-0 w-[200.074px]">
-                    <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[0px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:298">
-                        <p className="leading-[1.2]">
-                          <span className="font-['Montserrat:SemiBold',sans-serif] font-semibold text-[28px]">5</span>
-                          <span className="font-['Montserrat:SemiBold',sans-serif] font-semibold text-[28px]">kom</span>
-                          <span className="text-[30px]">{` 550`}</span>
-                          <span className="text-[30px]">rsd</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="bg-[#4866b0] content-stretch flex flex-col gap-[5px] items-center justify-center px-[25px] py-[15px] relative rounded-[15px] shrink-0 w-full" data-name="price" data-node-id="602:296">
+                  <p className="font-black leading-none text-white text-[30px] text-center uppercase whitespace-nowrap">
+                    <span className="font-semibold text-[22px] lowercase">3kom</span> 420<span className="lowercase">rsd</span>
+                  </p>
+                  <p className="font-black leading-none text-white text-[30px] text-center uppercase whitespace-nowrap">
+                    <span className="font-semibold text-[22px] lowercase">5kom</span> 550<span className="lowercase">rsd</span>
+                  </p>
                 </div>
               </div>
             </div>
@@ -696,7 +678,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[72.473px] items-center justify-center min-w-full relative shrink-0 w-[min-content]">
                     <div className="flex-none rotate-[359.881deg] w-full">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:306">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:306">
                         <p className="leading-[1.2] whitespace-pre-wrap">CHICKEN HERO WRAP</p>
                       </div>
                     </div>
@@ -708,7 +690,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:308">
                   <div className="flex h-[36.237px] items-center justify-center relative shrink-0 w-[114.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:309">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:309">
                         <p className="leading-[1.2]">460rsd</p>
                       </div>
                     </div>
@@ -738,7 +720,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[36.391px] items-center justify-center relative shrink-0 w-[188.074px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:318">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase whitespace-nowrap" data-node-id="602:318">
                         <p className="leading-[1.2]">VEGE HERO</p>
                       </div>
                     </div>
@@ -751,7 +733,7 @@ export default function LandingPage() {
                 <div className="bg-[#4866b0] content-stretch flex items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0" data-name="price" data-node-id="602:320">
                   <div className="flex h-[36.233px] items-center justify-center relative shrink-0 w-[112.075px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:321">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white whitespace-nowrap" data-node-id="602:321">
                         <p className="leading-[1.2]">280rsd</p>
                       </div>
                     </div>
@@ -782,7 +764,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex h-[72.473px] items-center justify-center min-w-full relative shrink-0 w-[min-content]">
                     <div className="flex-none rotate-[359.881deg] w-full">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:329">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[30px] text-center text-white uppercase w-full" data-node-id="602:329">
                         <p className="leading-[1.2] whitespace-pre-wrap">KIDS HERO OBROK</p>
                       </div>
                     </div>
@@ -794,28 +776,13 @@ export default function LandingPage() {
                     <p>Kids Hero Gyros, pomfrit, sok od jabuke + poklon</p>
                   </div>
                 </div>
-                <div className="bg-[#4866b0] content-stretch flex flex-col gap-[5px] items-center justify-center px-[25px] py-[5px] relative rounded-[15px] shrink-0 w-[249px]" data-name="price" data-node-id="602:331">
-                  <div className="flex h-[36.493px] items-center justify-center relative shrink-0 w-[237.074px]">
-                    <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[0px] text-center text-white whitespace-nowrap" data-node-id="602:332">
-                        <p className="leading-[1.2]">
-                          <span className="font-['Montserrat:SemiBold',sans-serif] font-semibold text-[28px]">{`nuggets `}</span>
-                          <span className="font-['Montserrat:Black',sans-serif] font-black text-[28px]">540</span>
-                          <span className="text-[30px]">rsd</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex h-[36.418px] items-center justify-center relative shrink-0 w-[201.074px]">
-                    <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[0px] text-center text-white whitespace-nowrap" data-node-id="602:333">
-                        <p className="leading-[1.2]">
-                          <span className="font-['Montserrat:SemiBold',sans-serif] font-semibold text-[28px]">gyros</span>
-                          <span className="text-[30px]">{` 660rsd`}</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="bg-[#4866b0] content-stretch flex flex-col gap-[5px] items-center justify-center px-[25px] py-[15px] relative rounded-[15px] shrink-0 w-[249px]" data-name="price" data-node-id="602:331">
+                  <p className="font-black leading-none text-white text-[30px] text-center uppercase whitespace-nowrap">
+                    <span className="font-semibold text-[22px] lowercase">nuggets</span> 540<span className="lowercase">rsd</span>
+                  </p>
+                  <p className="font-black leading-none text-white text-[30px] text-center uppercase whitespace-nowrap">
+                    <span className="font-semibold text-[22px] lowercase">gyros</span> 660<span className="lowercase">rsd</span>
+                  </p>
                 </div>
               </div>
             </div>
@@ -856,7 +823,7 @@ export default function LandingPage() {
                   <IconsGyros className="overflow-clip relative shrink-0 size-[50px]" />
                   <div className="flex h-[34.218px] items-center justify-center relative shrink-0 w-[105.071px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[28px] text-center text-white whitespace-nowrap" data-node-id="602:346">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[28px] text-center text-white whitespace-nowrap" data-node-id="602:346">
                         <p className="leading-[1.2]">GYROS</p>
                       </div>
                     </div>
@@ -873,7 +840,7 @@ export default function LandingPage() {
                   <IconsSpecial className="overflow-clip relative shrink-0 size-[50px]" />
                   <div className="flex h-[34.541px] items-center justify-center relative shrink-0 w-[260.07px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[28px] text-center text-white whitespace-nowrap" data-node-id="602:352">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[28px] text-center text-white whitespace-nowrap" data-node-id="602:352">
                         <p className="leading-[1.2]">HEROES SPECIAL</p>
                       </div>
                     </div>
@@ -892,7 +859,7 @@ export default function LandingPage() {
                   <IconsTortilla className="overflow-clip relative shrink-0 size-[50px]" />
                   <div className="flex h-[34.358px] items-center justify-center relative shrink-0 w-[172.07px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[28px] text-center text-white whitespace-nowrap" data-node-id="602:359">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[28px] text-center text-white whitespace-nowrap" data-node-id="602:359">
                         <p className="leading-[1.2]">KIDS MENU</p>
                       </div>
                     </div>
@@ -909,7 +876,7 @@ export default function LandingPage() {
                   <IconsSalad className="overflow-clip relative shrink-0 size-[50px]" />
                   <div className="flex h-[34.466px] items-center justify-center relative shrink-0 w-[224.07px]">
                     <div className="flex-none rotate-[359.881deg]">
-                      <div className="flex flex-col font-['Montserrat:Black',sans-serif] font-black justify-center leading-[0] relative text-[28px] text-center text-white whitespace-nowrap" data-node-id="602:365">
+                      <div className="flex flex-col font-black justify-center leading-[0] relative text-[28px] text-center text-white whitespace-nowrap" data-node-id="602:365">
                         <p className="leading-[1.2]">PIĆA I NAMAZI</p>
                       </div>
                     </div>
@@ -933,13 +900,13 @@ export default function LandingPage() {
         </p>
         <div className="content-stretch flex gap-[30px] items-start relative shrink-0" data-name="slider" data-node-id="602:383">
           <div className="bg-[#fbad18] border border-[#fbad18] border-solid content-stretch flex items-center justify-center overflow-clip px-[25px] py-[20px] relative rounded-[1000px] shadow-[0px_1px_2px_0px_rgba(198,228,246,0.05)] shrink-0" data-name="buttons/basic yellow" data-node-id="602:384">
-            <p className="font-['Montserrat:SemiBold',sans-serif] font-semibold leading-none relative shrink-0 text-[#212121] text-[20px]" data-node-id="I602:384;602:717">
+            <p className="font-semibold leading-none relative shrink-0 text-[#212121] text-[20px]" data-node-id="I602:384;602:717">
               <span>{`Poruči i pokupi - `}</span>
               <span className="font-['Montserrat:Bold',sans-serif] font-bold">CENTAR</span>
             </p>
           </div>
           <div className="bg-[#fbad18] border border-[#fbad18] border-solid content-stretch flex items-center justify-center overflow-clip px-[25px] py-[20px] relative rounded-[1000px] shadow-[0px_1px_2px_0px_rgba(198,228,246,0.05)] shrink-0" data-name="buttons/basic yellow" data-node-id="602:385">
-            <p className="font-['Montserrat:SemiBold',sans-serif] font-semibold leading-none relative shrink-0 text-[#212121] text-[20px]" data-node-id="I602:385;602:717">
+            <p className="font-semibold leading-none relative shrink-0 text-[#212121] text-[20px]" data-node-id="I602:385;602:717">
               <span>{`Poruči i pokupi - `}</span>
               <span className="font-['Montserrat:Bold',sans-serif] font-bold">{`PARK `}</span>
               <span className="font-['Montserrat:Bold',sans-serif] font-bold">SV.SAVE</span>
@@ -972,14 +939,14 @@ export default function LandingPage() {
                   }
                 }}
               >
-                <div className="flex flex-col font-['Montserrat:SemiBold',sans-serif] font-semibold justify-center leading-[0] relative shrink-0 text-[14px] text-white whitespace-nowrap">
+                <div className="flex flex-col font-semibold justify-center leading-[0] relative shrink-0 text-[14px] text-white whitespace-nowrap">
                   <p className="leading-[1.2]">{page.name}</p>
                 </div>
               </div>
             ))}
           </div>
           <div className="border-2 border-[#f9b023] border-solid content-stretch flex gap-[8px] h-[40px] items-center justify-center overflow-clip px-[16px] py-[10px] relative rounded-[1000px] shrink-0" data-name="buttons/icon left yellow" data-node-id="I602:386;602:930">
-            <p className="font-['Montserrat:SemiBold',sans-serif] font-semibold leading-none relative shrink-0 text-[#f9b023] text-[14px]" data-node-id="I602:386;602:930;1:343">{`Order & Pick Up`}</p>
+            <p className="font-semibold leading-none relative shrink-0 text-[#f9b023] text-[14px]" data-node-id="I602:386;602:930;1:343">{`Order & Pick Up`}</p>
           </div>
         </div>
       </div>
@@ -1005,7 +972,7 @@ export default function LandingPage() {
               <p className="leading-[1.4] whitespace-pre-wrap">Pridruži se Hero timu i postani deo brenda koji postavlja više standarde u modernom fast-food segmentu. Tražimo motivisane, odgovorne i energične ljude koji žele stabilan posao, jasnu organizaciju i rad u brzo rastućem sistemu. Ako želiš da radiš u dinamičnom okruženju, da učiš, napreduješ i budeš deo tima koji drži kvalitet na prvom mestu, popuni kratku anketu i uđi u našu bazu kandidata. Ovo je prvi korak ka tome da postaneš deo Gyros Heroes ekipe.</p>
             </div>
             <div className="bg-[#fbad18] border border-[#fbad18] border-solid content-stretch flex items-center justify-center overflow-clip px-[25px] py-[20px] relative rounded-[1000px] shadow-[0px_1px_2px_0px_rgba(198,228,246,0.05)] shrink-0" data-name="buttons/basic yellow" data-node-id="602:397">
-              <a className="block font-['Montserrat:SemiBold',sans-serif] font-semibold leading-[0] relative shrink-0 text-[#212121] text-[20px] whitespace-nowrap" href="https://forms.gle/JiJMEKCDsXSJ558M6" data-node-id="I602:397;602:717">
+              <a className="block font-semibold leading-[0] relative shrink-0 text-[#212121] text-[20px] whitespace-nowrap" href="https://forms.gle/JiJMEKCDsXSJ558M6" data-node-id="I602:397;602:717">
                 <p className="cursor-pointer decoration-solid leading-none underline">Popuni Anketu</p>
               </a>
             </div>
@@ -1069,14 +1036,20 @@ export default function LandingPage() {
         </div>
         <div className="content-stretch flex gap-[30px] items-start relative shrink-0" data-name="slider" data-node-id="602:416">
           <div className="bg-[#fbad18] border border-[#fbad18] border-solid content-stretch flex gap-[8px] h-[60px] items-center justify-center overflow-clip px-[25px] py-[20px] relative rounded-[1000px] shadow-[0px_1px_2px_0px_rgba(198,228,246,0.05)] shrink-0" data-name="buttons/icon left yellow">
-            <p className="font-['Montserrat:SemiBold',sans-serif] font-semibold leading-none relative shrink-0 text-[#212121] text-[20px]">
-              <span>{`Lokacija - `}</span>
+            <div className="relative w-5 h-5 shrink-0">
+              <img src={pin} alt="" className="w-full h-full object-contain" />
+            </div>
+            <p className="font-semibold leading-none relative shrink-0 text-[#212121] text-[20px]">
+              <span>{`Poruči i pokupi - `}</span>
               <span className="font-['Montserrat:Bold',sans-serif] font-bold">CENTAR</span>
             </p>
           </div>
           <div className="bg-[#fbad18] border border-[#fbad18] border-solid content-stretch flex gap-[8px] h-[60px] items-center justify-center overflow-clip px-[25px] py-[20px] relative rounded-[1000px] shadow-[0px_1px_2px_0px_rgba(198,228,246,0.05)] shrink-0" data-name="buttons/icon left yellow">
-            <p className="font-['Montserrat:SemiBold',sans-serif] font-semibold leading-none relative shrink-0 text-[#212121] text-[20px]">
-              <span>{`Lokacija - `}</span>
+            <div className="relative w-5 h-5 shrink-0">
+              <img src={pin} alt="" className="w-full h-full object-contain" />
+            </div>
+            <p className="font-semibold leading-none relative shrink-0 text-[#212121] text-[20px]">
+              <span>{`Poruči i pokupi - `}</span>
               <span className="font-['Montserrat:Bold',sans-serif] font-bold">{`PARK `}</span>
               <span className="font-['Montserrat:Bold',sans-serif] font-bold">SV.SAVE</span>
             </p>
@@ -1106,7 +1079,7 @@ export default function LandingPage() {
             <p className="leading-[1.4] whitespace-pre-wrap">Poruči svoj omiljeni gyros brzo i jednostavno putem Glovo aplikacije. Dovoljno je da klikneš na dugme ispod, izabereš proizvod i potvrdiš porudžbinu — hranu pripremamo odmah, a dostava stiže sveža i topla. Tvoj sledeći giros je na jedan klik od tebe.</p>
           </div>
           <div className="bg-[#fbad18] border border-[#fbad18] border-solid content-stretch flex items-center justify-center overflow-clip px-[25px] py-[20px] relative rounded-[1000px] shadow-[0px_1px_2px_0px_rgba(198,228,246,0.05)] shrink-0" data-name="buttons/basic yellow" data-node-id="602:432">
-            <p className="font-['Montserrat:SemiBold',sans-serif] font-semibold leading-none relative shrink-0 text-[#212121] text-[20px]" data-node-id="I602:432;602:717">
+            <p className="font-semibold leading-none relative shrink-0 text-[#212121] text-[20px]" data-node-id="I602:432;602:717">
               Poruči Glovo
             </p>
           </div>
@@ -1135,6 +1108,28 @@ export default function LandingPage() {
               <p>Glovo</p>
             </div>
           </div>
+        </div>
+        <div className="absolute content-stretch flex gap-[24px] items-center justify-center left-1/2 -translate-x-1/2 top-[801.33px] w-[1340px]" data-name="bottom bar" data-node-id="602:495">
+          <div className="content-stretch flex gap-[4px] items-center relative shrink-0" data-node-id="602:496">
+            <p className="font-normal leading-[1.5] relative shrink-0 text-[16px] text-white" data-node-id="602:497">
+              All right reserved
+            </p>
+            <div className="relative shrink-0 size-[24px]" data-name="copyright" data-node-id="602:498">
+              <div className="absolute contents inset-0" data-name="vuesax/linear/copyright" data-node-id="I602:498;9:36354">
+                <img alt="" className="block max-w-none size-full" src={img6} />
+              </div>
+            </div>
+            <p className="font-normal leading-[1.5] relative shrink-0 text-[16px] text-white" data-node-id="602:499">
+              Gyros Heroes 2025
+            </p>
+          </div>
+          <p className="font-normal leading-[1.5] relative shrink-0 text-[16px] text-white" data-node-id="602:500">{`Term & Conditions`}</p>
+          <p className="font-normal leading-[1.5] relative shrink-0 text-[16px] text-white" data-node-id="602:501">
+            Privacy Policy
+          </p>
+          <p className="font-normal leading-[1.5] relative shrink-0 text-[16px] text-white" data-node-id="602:502">
+            Cookie Settings
+          </p>
         </div>
       </div>
     </div>
