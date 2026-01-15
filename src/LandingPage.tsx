@@ -2,51 +2,45 @@ import React from 'react';
 import logoBig from './assets/logo-big.png';
 import pin from './assets/pin.png';
 
-const imgImg = "https://www.figma.com/api/mcp/asset/2842987a-801f-4124-b9d3-784c352bb31c";
-const imgImg1 = "https://www.figma.com/api/mcp/asset/7f7e8acd-7539-482f-9e28-e96a4a76aa46";
-const imgImg2 = "https://www.figma.com/api/mcp/asset/ca50c104-d2ee-45d6-b07b-5691a71203de";
-const imgImg3 = "https://www.figma.com/api/mcp/asset/7206efb1-b2ae-4142-ac0d-2cc21f3d4c02";
-const imgImg4 = "https://www.figma.com/api/mcp/asset/6d1fb34c-82b5-4256-aa14-bb7074eb8927";
-const imgImg5 = "https://www.figma.com/api/mcp/asset/2a6aaa72-7d6f-426f-8905-2436ed2924aa";
-const imgImg6 = "https://www.figma.com/api/mcp/asset/e7620aea-a2f5-44aa-ae58-803c8c3c87ca";
-const imgImg7 = "https://www.figma.com/api/mcp/asset/dc39ec98-332d-40ed-ab3d-56e412d16192";
-const imgImg8 = "https://www.figma.com/api/mcp/asset/370307a5-9c6b-4967-b1c1-d3a6582d830e";
-const imgImg9 = "https://www.figma.com/api/mcp/asset/19ea0dd0-49b1-4d6e-a77f-d5480cef9cd0";
-const imgImg10 = "https://www.figma.com/api/mcp/asset/6be9b3e2-525b-4a37-9ba1-39a25492e886";
-const imgImg11 = "https://www.figma.com/api/mcp/asset/de6477f0-7bd8-4d95-969b-5d4a44236ba9";
-const imgImg12 = "https://www.figma.com/api/mcp/asset/9e233f31-d50f-4bde-b07d-32f931f87709";
-const imgImg13 = "https://www.figma.com/api/mcp/asset/bce006d3-7c17-42ff-8a66-bdd95e773138";
-const imgImg14 = "https://www.figma.com/api/mcp/asset/072ce318-27ad-46e4-af87-5d6b9683c8b6";
-const imgImg15 = "https://www.figma.com/api/mcp/asset/7d5fe1d8-ad53-4b9d-8a74-912ef5bc41af";
-const imgHero = "https://www.figma.com/api/mcp/asset/a6febb14-a84d-4088-8ecf-ddee6f97a78d";
-const imgFrame1618868612 = "https://www.figma.com/api/mcp/asset/45b4880f-bdc9-40c0-a646-2259f2e2be96";
-const imgImg16 = "https://www.figma.com/api/mcp/asset/040d5ba6-c9f4-4f64-bc3c-ac6ae6efa3a6";
-const imgImg17 = "https://www.figma.com/api/mcp/asset/14c824b9-89d6-4ca7-8dbf-867e381a8582";
-const imgImg18 = "https://www.figma.com/api/mcp/asset/b40db2fd-41eb-4b2a-82c7-c4482624f044";
-const imgImg19 = "https://www.figma.com/api/mcp/asset/642d7bc6-5d4b-4248-a4ac-10b2406a22f1";
-const imgGroup = "https://www.figma.com/api/mcp/asset/c3df7294-5f30-4263-bfe9-a97b4194b89b";
-const imgGroup1 = "https://www.figma.com/api/mcp/asset/8e538f8c-4d74-465a-bafe-df03de8cd89e";
-const imgIconsSpecial = "https://www.figma.com/api/mcp/asset/ec57139f-9246-40ea-95fe-6bb1e400a97b";
-const imgGroup2 = "https://www.figma.com/api/mcp/asset/6c5709fa-4114-4683-bce6-d2e1625a0be0";
-const imgDizajn = "https://www.figma.com/api/mcp/asset/a9567097-1954-4e65-b993-b323368b994b";
-const imgLogo2 = "https://www.figma.com/api/mcp/asset/1bc3eea6-7fa0-47ef-8d79-1c171d32e652";
-const img = "https://www.figma.com/api/mcp/asset/8e15e63b-b60e-45c4-a9b3-fad3057bf9d9";
-const img1 = "https://www.figma.com/api/mcp/asset/4ba894d1-caa7-4b58-97e6-23e2e7c148ff";
-const img2 = logoBig;
-const img3 = "https://www.figma.com/api/mcp/asset/fbb8147b-ec8c-4461-bdcd-d853ba5df82f";
-const imgPlay = "https://www.figma.com/api/mcp/asset/0384ec16-a29c-4aaa-95c8-33238d11c57c";
-const img4 = "https://www.figma.com/api/mcp/asset/a68c01df-3ac4-4dd7-b099-813665fe0392";
-const img5 = "https://www.figma.com/api/mcp/asset/d297529e-fb12-4223-a854-02726bd509cd";
-const imgDizajn1 = "https://www.figma.com/api/mcp/asset/3a46a422-1156-4893-84e1-daedac897d76";
-const imgLogo3 = "https://www.figma.com/api/mcp/asset/593b9dc2-9f4c-4215-be35-5536d9138ae2";
-const img6 = "https://www.figma.com/api/mcp/asset/4184eb4c-e33f-4011-8822-c8334732d345";
+import menuCardHero from './assets/menu-card-hero.png';
+import menuPomfrit from './assets/menu-pomfrit.png';
+import menuHeroPomfrit from './assets/menu-hero-pomfrit.png';
+import menuPomfritCheddar from './assets/menu-pomfrit-cheddar.png';
+import menuPomfritBacon from './assets/menu-pomfrit-bacon.png';
+import menuSuperHero from './assets/menu-super-hero.png';
+import menuFullObrokBg from './assets/menu-full-obrok-bg.png';
+import menuFullObrok from './assets/menu-full-obrok.jpg';
+import menuTortilla from './assets/menu-tortilla.png';
+import menuNuggets from './assets/menu-nuggets.png';
+import menuPohovani from './assets/menu-pohovani.png';
+import menuNuggetsBox from './assets/menu-nuggets-box.png';
+import menuPileciBox from './assets/menu-pileci-box.png';
+import menuWrap from './assets/menu-wrap.png';
+import menuVege from './assets/menu-vege.jpg';
+import menuKids from './assets/menu-kids.png';
+import heroImage from './assets/hero-image.jpg';
+import joinTeam from './assets/join-team.jpg';
+import gallery1 from './assets/gallery-1.jpg';
+import gallery2 from './assets/gallery-2.jpg';
+import gallery3 from './assets/gallery-3.jpg';
+import gallery4 from './assets/gallery-4.jpg';
+import iconSalad from './assets/icon-salad.svg';
+import iconTortilla from './assets/icon-tortilla.svg';
+import iconSpecial from './assets/icon-special.svg';
+import iconGyros from './assets/icon-gyros.svg';
+import bgDesignTop from './assets/bg-design-top.svg';
+import logoAbout from './assets/logo-about.svg';
+import iconPlay from './assets/icon-play.svg';
+import bgDesignBottom from './assets/bg-design-bottom.svg';
+import logoFooter from './assets/logo-footer.svg';
+import iconCopyright from './assets/icon-copyright.svg';
 
 function IconsSalad({ className }: { className?: string }) {
   return (
     <div className={className} data-name="icons/salad" data-node-id="602:1002">
       <div className="absolute contents inset-[1.07%_0]" data-name="Group" data-node-id="602:1003">
         <div className="absolute inset-[1.07%_0]" data-name="Group" data-node-id="602:1004">
-          <img alt="" className="block max-w-none size-full" src={imgGroup} />
+          <img alt="" className="block max-w-none size-full" src={iconSalad} />
         </div>
       </div>
     </div>
@@ -57,7 +51,7 @@ function IconsTortilla({ className }: { className?: string }) {
   return (
     <div className={className} data-name="icons/tortilla" data-node-id="602:993">
       <div className="absolute inset-[0.57%_0]" data-name="Group" data-node-id="602:994">
-        <img alt="" className="block max-w-none size-full" src={imgGroup1} />
+        <img alt="" className="block max-w-none size-full" src={iconTortilla} />
       </div>
     </div>
   );
@@ -66,7 +60,7 @@ function IconsTortilla({ className }: { className?: string }) {
 function IconsSpecial({ className }: { className?: string }) {
   return (
     <div className={className} data-name="icons/special" data-node-id="602:964">
-      <img alt="" className="block max-w-none size-full" src={imgIconsSpecial} />
+      <img alt="" className="block max-w-none size-full" src={iconSpecial} />
     </div>
   );
 }
@@ -75,7 +69,7 @@ function IconsGyros({ className }: { className?: string }) {
   return (
     <div className={className} data-name="icons/gyros" data-node-id="602:1011">
       <div className="absolute inset-[0_0.41%]" data-name="Group" data-node-id="602:1012">
-        <img alt="" className="block max-w-none size-full" src={imgGroup2} />
+        <img alt="" className="block max-w-none size-full" src={iconGyros} />
       </div>
     </div>
   );
@@ -85,7 +79,7 @@ export default function LandingPage() {
   return (
     <div className="bg-[#4866b0] relative w-full font-montserrat min-h-[10756px]" data-name="Landing page" data-node-id="602:110">
       <div className="absolute h-[1192.135px] left-[calc(50%-0.12px)] top-[1383px] translate-x-[-50%] w-[1765.76px]" data-name="Dizajn" data-node-id="602:111">
-        <img alt="" className="block max-w-none size-full" src={imgDizajn} />
+        <img alt="" className="block max-w-none size-full" src={bgDesignTop} />
       </div>
       <div id="menu" className="absolute bg-[#fbad18] content-stretch flex flex-col gap-[60px] items-center justify-center left-1/2 pb-[100px] pt-[300px] px-0 top-[2575px] -translate-x-1/2 w-full" data-name="menu" data-node-id="602:144">
         <div className="content-stretch flex flex-col items-center justify-center relative shrink-0" data-name="title" data-node-id="602:145">
@@ -226,7 +220,7 @@ export default function LandingPage() {
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[60px]">
               <div className="absolute bg-[#1f3b81] inset-0 rounded-[60px]" />
               <div className="absolute inset-0 overflow-hidden rounded-[60px]">
-                <img alt="" className="absolute h-[216.67%] left-[9.63%] max-w-none top-[-65.37%] w-full" src={imgImg} />
+                <img alt="" className="absolute h-[216.67%] left-[9.63%] max-w-none top-[-65.37%] w-full" src={menuCardHero} />
               </div>
             </div>
           </div>
@@ -262,7 +256,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute left-[-23.55%] max-w-none size-[203.77%] top-[-66.06%]" src={imgImg1} />
+                  <img alt="" className="absolute left-[-23.55%] max-w-none size-[203.77%] top-[-66.06%]" src={menuPomfrit} />
                 </div>
               </div>
             </div>
@@ -298,7 +292,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute left-[-23.55%] max-w-none size-[203.77%] top-[-66.06%]" src={imgImg2} />
+                  <img alt="" className="absolute left-[-23.55%] max-w-none size-[203.77%] top-[-66.06%]" src={menuHeroPomfrit} />
                 </div>
               </div>
             </div>
@@ -334,7 +328,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute left-[-23.55%] max-w-none size-[203.77%] top-[-66.06%]" src={imgImg3} />
+                  <img alt="" className="absolute left-[-23.55%] max-w-none size-[203.77%] top-[-66.06%]" src={menuPomfritCheddar} />
                 </div>
               </div>
             </div>
@@ -371,7 +365,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute left-[-23.55%] max-w-none size-[203.77%] top-[-66.06%]" src={imgImg4} />
+                  <img alt="" className="absolute left-[-23.55%] max-w-none size-[203.77%] top-[-66.06%]" src={menuPomfritBacon} />
                 </div>
               </div>
             </div>
@@ -413,7 +407,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute left-[-15.53%] max-w-none size-[135.13%] top-[-19.13%]" src={imgImg5} />
+                  <img alt="" className="absolute left-[-15.53%] max-w-none size-[135.13%] top-[-19.13%]" src={menuSuperHero} />
                 </div>
               </div>
             </div>
@@ -457,10 +451,10 @@ export default function LandingPage() {
                   <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                     <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                     <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                      <img alt="" className="absolute left-[-15.63%] max-w-none size-[191.34%] top-[-42.18%]" src={imgImg6} />
+                      <img alt="" className="absolute left-[-15.63%] max-w-none size-[191.34%] top-[-42.18%]" src={menuFullObrokBg} />
                     </div>
                     <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                      <img alt="" className="absolute h-[130.67%] left-[-54.06%] max-w-none top-[-11.47%] w-[195.98%]" src={imgImg7} />
+                      <img alt="" className="absolute h-[130.67%] left-[-54.06%] max-w-none top-[-11.47%] w-[195.98%]" src={menuFullObrok} />
                     </div>
                   </div>
                 </div>
@@ -502,7 +496,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute left-[-10.97%] max-w-none size-[142.16%] top-[-22.2%]" src={imgImg8} />
+                  <img alt="" className="absolute left-[-10.97%] max-w-none size-[142.16%] top-[-22.2%]" src={menuTortilla} />
                 </div>
               </div>
             </div>
@@ -542,7 +536,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute left-[-10.8%] max-w-none size-[152.53%] top-[-24.06%]" src={imgImg9} />
+                  <img alt="" className="absolute left-[-10.8%] max-w-none size-[152.53%] top-[-24.06%]" src={menuNuggets} />
                 </div>
               </div>
             </div>
@@ -584,7 +578,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute left-[-13.27%] max-w-none size-[158.8%] top-[-31.9%]" src={imgImg10} />
+                  <img alt="" className="absolute left-[-13.27%] max-w-none size-[158.8%] top-[-31.9%]" src={menuPohovani} />
                 </div>
               </div>
             </div>
@@ -623,7 +617,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute h-full left-[1.54%] max-w-none top-[10.03%] w-[140.85%]" src={imgImg11} />
+                  <img alt="" className="absolute h-full left-[1.54%] max-w-none top-[10.03%] w-[140.85%]" src={menuNuggetsBox} />
                 </div>
               </div>
             </div>
@@ -662,7 +656,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute h-full left-[1.23%] max-w-none top-[8.27%] w-[146.62%]" src={imgImg12} />
+                  <img alt="" className="absolute h-full left-[1.23%] max-w-none top-[8.27%] w-[146.62%]" src={menuPileciBox} />
                 </div>
               </div>
             </div>
@@ -702,7 +696,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute left-[-11.8%] max-w-none size-[197.16%] top-[-59.89%]" src={imgImg13} />
+                  <img alt="" className="absolute left-[-11.8%] max-w-none size-[197.16%] top-[-59.89%]" src={menuWrap} />
                 </div>
               </div>
             </div>
@@ -745,10 +739,10 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute left-[-15.63%] max-w-none size-[191.34%] top-[-42.18%]" src={imgImg6} />
+                  <img alt="" className="absolute left-[-15.63%] max-w-none size-[191.34%] top-[-42.18%]" src={menuFullObrokBg} />
                 </div>
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute h-[214.09%] left-[-106.14%] max-w-none top-[-67.05%] w-[321.18%]" src={imgImg14} />
+                  <img alt="" className="absolute h-[214.09%] left-[-106.14%] max-w-none top-[-67.05%] w-[321.18%]" src={menuVege} />
                 </div>
               </div>
             </div>
@@ -790,7 +784,7 @@ export default function LandingPage() {
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[300px]">
                 <div className="absolute bg-[#1f3b81] inset-0 rounded-[300px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-[300px]">
-                  <img alt="" className="absolute h-[86.11%] left-[5.44%] max-w-none top-[15.2%] w-[89.12%]" src={imgImg15} />
+                  <img alt="" className="absolute h-[86.11%] left-[5.44%] max-w-none top-[15.2%] w-[89.12%]" src={menuKids} />
                 </div>
               </div>
             </div>
@@ -800,7 +794,7 @@ export default function LandingPage() {
       <div id="hero" className="absolute h-[708px] left-1/2 rounded-tl-[100px] rounded-tr-[100px] top-[100px] translate-x-[-50%] w-[1240px]" data-name="hero" data-node-id="602:335">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-tl-[100px] rounded-tr-[100px]">
           <div className="absolute inset-0 overflow-hidden rounded-tl-[100px] rounded-tr-[100px]">
-            <img alt="" className="absolute h-[116.01%] left-0 max-w-none top-[-14.46%] w-full" src={imgHero} />
+            <img alt="" className="absolute h-[116.01%] left-0 max-w-none top-[-14.46%] w-full" src={heroImage} />
           </div>
           <div className="absolute inset-0 rounded-tl-[100px] rounded-tr-[100px]" style={{ backgroundImage: "linear-gradient(180deg, rgba(72, 102, 176, 0) 55%, rgba(72, 102, 176, 1) 100%), linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%)" }} />
         </div>
@@ -889,7 +883,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="absolute left-[370px] size-[500px] top-0" data-name="Logo 2" data-node-id="602:367">
-            <img alt="" className="block max-w-none size-full" src={imgLogo2} />
+            <img alt="" className="block max-w-none size-full" src={logoAbout} />
           </div>
         </div>
       </div>
@@ -917,7 +911,7 @@ export default function LandingPage() {
       <div className="absolute content-stretch flex flex-col gap-[20px] items-center left-[calc(50%+4px)] px-0 py-[10px] top-0 translate-x-[-50%] w-[1240px]" data-name="nav/basic" data-node-id="602:386">
         <div className="bg-[#4866b0] content-stretch flex items-center justify-between overflow-clip px-0 py-[10px] relative rounded-[300px] shrink-0 w-full" data-name="nav" data-node-id="I602:386;602:901">
           <div className="h-[60px] overflow-clip relative shrink-0 w-[355px]" data-name="Logo 4" data-node-id="I602:386;602:902">
-            <img alt="" className="block max-w-none h-full" src={img2} />
+            <img alt="" className="block max-w-none h-full" src={logoBig} />
           </div>
           <div className="content-stretch flex items-center relative shrink-0" data-name="pages" data-node-id="I602:386;602:923">
             {[
@@ -952,14 +946,14 @@ export default function LandingPage() {
       </div>
       <div className="absolute bg-[#212121] content-stretch flex h-[600px] items-center justify-center left-1/2 overflow-clip px-[680px] py-[221px] rounded-[80px] top-[2157px] translate-x-[-50%] w-[1240px]" data-name="video" data-node-id="602:387">
         <div className="relative shrink-0 size-[80px]" data-name="play" data-node-id="602:388">
-          <img alt="" className="block max-w-none size-full" src={imgPlay} />
+          <img alt="" className="block max-w-none size-full" src={iconPlay} />
         </div>
       </div>
       <div id="jobs" className="absolute bg-[#1f3b81] content-stretch flex gap-[12px] items-center left-1/2 -translate-x-1/2 px-[20px] py-[100px] rounded-bl-[80px] rounded-br-[80px] top-[7578px] w-[1440px]" data-node-id="602:391">
         <div className="flex-[1_0_0] h-[598px] min-h-px min-w-px relative rounded-[80px]" data-node-id="602:392">
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[80px]">
             <div className="absolute bg-[rgba(0,0,0,0.2)] inset-0 rounded-[80px]" />
-            <img alt="" className="absolute max-w-none object-cover rounded-[80px] size-full" src={imgFrame1618868612} />
+            <img alt="" className="absolute max-w-none object-cover rounded-[80px] size-full" src={joinTeam} />
           </div>
         </div>
         <div className="bg-[#3e9c5b] content-stretch flex flex-[1_0_0] flex-col items-center justify-center min-h-px min-w-px p-[40px] relative rounded-[80px]" data-node-id="602:393">
@@ -1056,7 +1050,7 @@ export default function LandingPage() {
           </div>
         </div>
         <div className="content-stretch flex gap-[20px] items-end justify-center relative shrink-0 w-full" data-name="slide" data-node-id="602:419">
-          {[imgImg16, imgImg17, imgImg18, imgImg19].map((img, i) => (
+          {[gallery1, gallery2, gallery3, gallery4].map((img, i) => (
             <div key={i} className={`overflow-clip relative rounded-[80px] shrink-0 ${i === 1 ? 'w-[597px] h-[500px]' : 'w-[482px] h-[444px]'}`} data-name="img">
               <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[80px]">
                 <img alt="" className="absolute max-w-none object-cover rounded-[80px] size-full" src={img} />
@@ -1087,7 +1081,7 @@ export default function LandingPage() {
       </div>
       <div className="absolute bg-[#1f3b81] content-stretch flex flex-col gap-[60px] h-[879px] items-center left-1/2 -translate-x-1/2 overflow-clip p-[100px] top-[9877px] w-[1440px]" data-name="footer" data-node-id="602:433">
         <div className="absolute h-[1228.135px] left-[-190px] top-[623px] w-[1819.082px]" data-name="Dizajn" data-node-id="602:434">
-          <img alt="" className="block max-w-none size-full" src={imgDizajn1} />
+          <img alt="" className="block max-w-none size-full" src={bgDesignBottom} />
         </div>
         <div className="content-stretch flex gap-[80px] items-center justify-center relative shrink-0 w-full" data-name="items" data-node-id="602:467">
           <div className="capitalize content-stretch flex flex-col font-['Montserrat:Medium',sans-serif] font-medium gap-[20px] items-center leading-[1.2] relative shrink-0 text-[24px] text-center text-white w-[194px]" data-name="pages" data-node-id="602:468">
@@ -1096,7 +1090,7 @@ export default function LandingPage() {
             ))}
           </div>
           <div className="relative shrink-0 size-[500px]" data-name="Logo 2" data-node-id="602:475">
-            <img alt="" className="block max-w-none size-full" src={imgLogo3} />
+            <img alt="" className="block max-w-none size-full" src={logoFooter} />
           </div>
           <div className="capitalize content-stretch flex flex-col font-['Montserrat:Medium',sans-serif] font-medium gap-[20px] items-center leading-[1.2] relative shrink-0 text-[24px] text-center text-white whitespace-pre-wrap" data-name="social" data-node-id="602:489">
             <p className="relative shrink-0 w-[206px]">Instagram</p>
@@ -1116,7 +1110,7 @@ export default function LandingPage() {
             </p>
             <div className="relative shrink-0 size-[24px]" data-name="copyright" data-node-id="602:498">
               <div className="absolute contents inset-0" data-name="vuesax/linear/copyright" data-node-id="I602:498;9:36354">
-                <img alt="" className="block max-w-none size-full" src={img6} />
+                <img alt="" className="block max-w-none size-full" src={iconCopyright} />
               </div>
             </div>
             <p className="font-normal leading-[1.5] relative shrink-0 text-[16px] text-white" data-node-id="602:499">
