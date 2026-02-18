@@ -13,13 +13,13 @@ Establish access and retrieve raw design data from Figma.
 ## Phase 2: Color & Typography Integration
 Extract and map visual identity tokens to Tailwind.
 
-- [ ] Task: Write tests to verify Tailwind theme extensions for colors and typography
+- [x] Task: Write tests to verify Tailwind theme extensions for colors and typography
     - [ ] Create `tests/tailwind-theme.test.ts`
     - [ ] Use `resolveConfig` from `tailwindcss` to verify expected keys exist in the final theme
-- [ ] Task: Implement color tokens in `tailwind.config.js`
+- [x] Task: Implement color tokens in `tailwind.config.js`
     - [ ] Extract solid colors, gradients, and opacities using `get_variable_defs`
     - [ ] Map to `theme.extend.colors` using semantic names
-- [ ] Task: Implement typography tokens in `tailwind.config.js`
+- [x] Task: Implement typography tokens in `tailwind.config.js`
     - [ ] Extract font families, sizes, weights, and line heights
     - [ ] Map to `theme.extend.fontFamily`, `fontSize`, and `fontWeight`
 - [ ] Task: Conductor - User Manual Verification 'Color & Typography Integration' (Protocol in workflow.md)

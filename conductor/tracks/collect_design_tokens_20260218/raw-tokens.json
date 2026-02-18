@@ -1,1 +1,25 @@
-{}
+{
+  "colors": {
+    "Colors/Dark Blue": "#1F3B81",
+    "Colors/Main Blue": "#4866B0",
+    "Colors/Yellow Dark": "#B07400",
+    "Colors/Yellow": "#FBAD18",
+    "Grey/Black": "#212121",
+    "Grey/Middle": "#9596A4",
+    "Grey/Light": "#D0D1DD",
+    "White/100%": "#FFFFFF"
+  },
+  "typography": {
+    "fontFamily": {
+      "Montserrat": ["Montserrat", "sans-serif"]
+    },
+    "weights": {
+      "SemiBold": 600
+    }
+  },
+  "effects": {
+    "Shadow/xs": "0px 1px 2px 0px rgba(198,228,246,0.05)",
+    "Shadow/xs focused 4px primary-200": "0px 1px 2px 0px rgba(16,24,40,0.05), 0px 0px 0px 4px #94F3DA",
+    "Focus/Yellow": "0px 1px 2px 0px rgba(16,24,40,0.05), 0px 0px 0px 4px #FBAD18"
+  }
+}
