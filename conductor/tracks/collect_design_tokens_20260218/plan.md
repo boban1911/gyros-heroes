@@ -10,7 +10,7 @@ Establish access and retrieve raw design data from Figma.
     - [ ] Create a temporary `raw-tokens.json` to store raw data if needed for analysis
 - [ ] Task: Conductor - User Manual Verification 'Setup & Initial Extraction' (Protocol in workflow.md)
 
-## Phase 2: Color & Typography Integration
+## Phase 2: Color & Typography Integration [checkpoint: 471a5a7]
 Extract and map visual identity tokens to Tailwind.
 
 - [x] Task: Write tests to verify Tailwind theme extensions for colors and typography
