@@ -15,7 +15,7 @@ Extract design details and set up the basic component structure.
     - [ ] Apply sticky positioning and brand colors (Hero Blue/Yellow)
 - [ ] Task: Conductor - User Manual Verification 'Preparation & Layout' (Protocol in workflow.md)
 
-## Phase 2: Responsive Sidebar & Logic
+## Phase 2: Responsive Sidebar & Logic [checkpoint: 32bb82e]
 Implement the mobile-specific UI and interaction logic.
 
 - [x] Task: Write tests for Navbar responsive states and interactions
