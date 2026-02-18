@@ -24,7 +24,7 @@ Extract and map visual identity tokens to Tailwind.
     - [ ] Map to `theme.extend.fontFamily`, `fontSize`, and `fontWeight`
 - [ ] Task: Conductor - User Manual Verification 'Color & Typography Integration' (Protocol in workflow.md)
 
-## Phase 3: Spacing, Radius & Effects Integration
+## Phase 3: Spacing, Radius & Effects Integration [checkpoint: d068249]
 Extract and map structural and decorative tokens.
 
 - [x] Task: Write tests to verify Tailwind theme extensions for spacing, radius, and effects
