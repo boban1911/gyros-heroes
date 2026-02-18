@@ -2,7 +2,7 @@
 
 This plan outlines the steps to build a high-fidelity, responsive Navbar component with a slide-over mobile menu and smooth scrolling functionality.
 
-## Phase 1: Preparation & Layout
+## Phase 1: Preparation & Layout [checkpoint: 4ce551a]
 Extract design details and set up the basic component structure.
 
 - [x] Task: Extract exact Navbar dimensions and assets from Figma
