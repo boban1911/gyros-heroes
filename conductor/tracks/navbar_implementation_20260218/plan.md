@@ -18,17 +18,17 @@ Extract design details and set up the basic component structure.
 ## Phase 2: Responsive Sidebar & Logic
 Implement the mobile-specific UI and interaction logic.
 
-- [ ] Task: Write tests for Navbar responsive states and interactions
-    - [ ] Create `tests/components/Navbar.test.tsx`
-    - [ ] Verify that links are visible on desktop
-    - [ ] Verify that hamburger icon appears on mobile and clicking it opens the menu
-- [ ] Task: Implement Hamburger menu and Mobile Slide-over
-    - [ ] Add state for mobile menu open/closed
-    - [ ] Create the slide-over sidebar using Tailwind transitions
-    - [ ] Integrate Lucide React icons for Menu and X
-- [ ] Task: Implement Smooth Scrolling logic
-    - [ ] Add click handlers to links to scroll to section IDs
-    - [ ] Close the mobile sidebar upon link selection
+- [x] Task: Write tests for Navbar responsive states and interactions
+    - [x] Create `tests/components/Navbar.test.tsx`
+    - [x] Verify that links are visible on desktop
+    - [x] Verify that hamburger icon appears on mobile and clicking it opens the menu
+- [x] Task: Implement Hamburger menu and Mobile Slide-over
+    - [x] Add state for mobile menu open/closed
+    - [x] Create the slide-over sidebar using Tailwind transitions
+    - [x] Integrate Lucide React icons for Menu and X
+- [x] Task: Implement Smooth Scrolling logic
+    - [x] Add click handlers to links to scroll to section IDs
+    - [x] Close the mobile sidebar upon link selection
 - [ ] Task: Conductor - User Manual Verification 'Responsive Sidebar & Logic' (Protocol in workflow.md)
 
 ## Phase 3: Integration & Polishing
