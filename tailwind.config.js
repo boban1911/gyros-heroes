@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'nav': '1230px',
+      },
       colors: {
         'hero-blue-dark': '#1F3B81',
         'hero-blue': '#4866B0',

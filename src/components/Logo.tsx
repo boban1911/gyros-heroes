@@ -1,7 +1,7 @@
 
-import logoPart1 from '../assets/logo-part-1.png';
-import logoPart2 from '../assets/logo-part-2.png';
-import logoPart3 from '../assets/logo-part-3.png';
+import logoPart1 from '../assets/logo-part-1.svg';
+import logoPart2 from '../assets/logo-part-2.svg';
+import logoPart3 from '../assets/logo-part-3.svg';
 
 export default function Logo({ className }: { className?: string }) {
   return (

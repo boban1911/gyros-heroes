@@ -34,10 +34,10 @@ Implement the mobile-specific UI and interaction logic.
 ## Phase 3: Integration & Polishing
 Refine the component and integrate it into the main application.
 
-- [ ] Task: Integrate Navbar into `src/App.tsx` and add placeholder sections
+- [x] Task: Integrate Navbar into `src/App.tsx` and add placeholder sections
     - [ ] Add `Navbar` to the top of the main layout
     - [ ] Create simple sections with IDs matching the links to verify scrolling
-- [ ] Task: Final visual polish and responsiveness audit
+- [x] Task: Final visual polish and responsiveness audit
     - [ ] Check padding and alignment against Figma screenshots
     - [ ] Ensure smooth transitions and hover states match the brand guidelines
-- [ ] Task: Conductor - User Manual Verification 'Integration & Polishing' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Integration & Polishing' (Protocol in workflow.md)
