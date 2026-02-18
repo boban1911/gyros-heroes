@@ -16,9 +16,11 @@ module.exports = {
         'grey-black': '#212121',
         'grey-middle': '#9596A4',
         'grey-light': '#D0D1DD',
+        'dandelion': '#F9B023',
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
       },
       spacing: {
         'xs': '10px',

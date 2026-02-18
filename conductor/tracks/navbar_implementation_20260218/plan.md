@@ -5,11 +5,11 @@ This plan outlines the steps to build a high-fidelity, responsive Navbar compone
 ## Phase 1: Preparation & Layout
 Extract design details and set up the basic component structure.
 
-- [ ] Task: Extract exact Navbar dimensions and assets from Figma
+- [x] Task: Extract exact Navbar dimensions and assets from Figma
     - [ ] Run `get_design_context` on the Navbar node (`1:4598`)
     - [ ] Download the logo asset
     - [ ] Identify precise font sizes and padding/spacing from the design context
-- [ ] Task: Create basic Navbar structure and styling
+- [x] Task: Create basic Navbar structure and styling
     - [ ] Implement `src/components/Navbar.tsx`
     - [ ] Add the logo and horizontal link list for desktop
     - [ ] Apply sticky positioning and brand colors (Hero Blue/Yellow)
