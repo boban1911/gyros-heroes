@@ -2,7 +2,7 @@
 
 ## Visual Identity
 - **Aesthetic:** High-Energy & Bold.
-- **Palette:** Deep Navy Blue (#1B2A4E), Vibrant Yellow (#FFC107), and accent colors from the "Hero" brand.
+- **Palette:** Hero Dark Blue (#1F3B81), Hero Blue (#4866B0), Hero Yellow (#FBAD18), and Hero Green (#3E9C5B).
 - **Graphic Elements:** Strong outlines, dynamic container shapes, and prominent "Hero" themed icons.
 - **Images:** High-quality food photography and atmospheric restaurant interior shots.
 

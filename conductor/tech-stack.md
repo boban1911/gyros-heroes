@@ -2,7 +2,7 @@
 
 ## Frontend
 - **Framework:** React (Vite-based for speed).
-- **Styling:** Tailwind CSS (for mapping Figma tokens and handling responsiveness).
+- **Styling:** Tailwind CSS v3.4 (configured with Figma design tokens for colors, typography, spacing, and effects).
 - **Icons:** Lucide React or similar (to match Figma iconography).
 - **State Management:** React Context (if needed for simple UI states).
 
