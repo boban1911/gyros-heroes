@@ -37,7 +37,7 @@ Extract and map structural and decorative tokens.
     - [ ] Map to `theme.extend.boxShadow`
 - [ ] Task: Conductor - User Manual Verification 'Spacing, Radius & Effects Integration' (Protocol in workflow.md)
 
-## Phase 4: Final Verification & Cleanup
+## Phase 4: Final Verification & Cleanup [checkpoint: 3e28c88]
 Ensure all tokens are correctly integrated and accessible.
 
 - [x] Task: Perform final theme audit
