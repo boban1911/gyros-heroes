@@ -2,7 +2,7 @@
 
 This plan outlines the steps to extract design tokens (colors, typography, spacing, effects, border radius) from Figma and integrate them into the project's `tailwind.config.js`.
 
-## Phase 1: Setup & Initial Extraction
+## Phase 1: Setup & Initial Extraction [checkpoint: 1662917]
 Establish access and retrieve raw design data from Figma.
 
 - [x] Task: Initialize track and verify Figma node accessibility
