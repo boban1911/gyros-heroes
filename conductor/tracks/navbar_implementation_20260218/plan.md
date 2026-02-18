@@ -31,7 +31,7 @@ Implement the mobile-specific UI and interaction logic.
     - [x] Close the mobile sidebar upon link selection
 - [ ] Task: Conductor - User Manual Verification 'Responsive Sidebar & Logic' (Protocol in workflow.md)
 
-## Phase 3: Integration & Polishing
+## Phase 3: Integration & Polishing [checkpoint: 115920b]
 Refine the component and integrate it into the main application.
 
 - [x] Task: Integrate Navbar into `src/App.tsx` and add placeholder sections
