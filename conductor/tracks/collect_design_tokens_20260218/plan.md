@@ -5,7 +5,7 @@ This plan outlines the steps to extract design tokens (colors, typography, spaci
 ## Phase 1: Setup & Initial Extraction
 Establish access and retrieve raw design data from Figma.
 
-- [ ] Task: Initialize track and verify Figma node accessibility
+- [x] Task: Initialize track and verify Figma node accessibility
     - [ ] Run `get_metadata` on the Figma URL to ensure all nodes are reachable
     - [ ] Create a temporary `raw-tokens.json` to store raw data if needed for analysis
 - [ ] Task: Conductor - User Manual Verification 'Setup & Initial Extraction' (Protocol in workflow.md)
