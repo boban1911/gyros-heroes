@@ -27,12 +27,12 @@ Extract and map visual identity tokens to Tailwind.
 ## Phase 3: Spacing, Radius & Effects Integration
 Extract and map structural and decorative tokens.
 
-- [ ] Task: Write tests to verify Tailwind theme extensions for spacing, radius, and effects
+- [x] Task: Write tests to verify Tailwind theme extensions for spacing, radius, and effects
     - [ ] Update `tests/tailwind-theme.test.ts` with checks for spacing, borderRadius, and boxShadow
-- [ ] Task: Implement spacing and border-radius tokens in `tailwind.config.js`
+- [x] Task: Implement spacing and border-radius tokens in `tailwind.config.js`
     - [ ] Extract spacing values and corner radii
     - [ ] Map to `theme.extend.spacing` and `theme.extend.borderRadius`
-- [ ] Task: Implement effects (shadows/blurs) in `tailwind.config.js`
+- [x] Task: Implement effects (shadows/blurs) in `tailwind.config.js`
     - [ ] Extract drop shadows and inner shadows
     - [ ] Map to `theme.extend.boxShadow`
 - [ ] Task: Conductor - User Manual Verification 'Spacing, Radius & Effects Integration' (Protocol in workflow.md)

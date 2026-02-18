@@ -14,6 +14,7 @@ describe('Tailwind Theme Configuration', () => {
     expect(theme?.colors).toHaveProperty('hero-blue', '#4866B0');
     expect(theme?.colors).toHaveProperty('hero-yellow-dark', '#B07400');
     expect(theme?.colors).toHaveProperty('hero-yellow', '#FBAD18');
+    expect(theme?.colors).toHaveProperty('hero-green', '#3E9C5B');
     expect(theme?.colors).toHaveProperty('grey-black', '#212121');
     expect(theme?.colors).toHaveProperty('grey-middle', '#9596A4');
     expect(theme?.colors).toHaveProperty('grey-light', '#D0D1DD');
@@ -24,5 +25,23 @@ describe('Tailwind Theme Configuration', () => {
     expect(theme?.fontFamily).toHaveProperty('montserrat');
     // @ts-ignore
     expect(theme?.fontFamily?.montserrat).toContain('Montserrat');
+  });
+
+  it('should have custom spacing defined', () => {
+    expect(theme?.spacing).toHaveProperty('xs', '10px');
+    expect(theme?.spacing).toHaveProperty('sm', '12px');
+    expect(theme?.spacing).toHaveProperty('100', '100px');
+    expect(theme?.spacing).toHaveProperty('200', '200px');
+  });
+
+  it('should have custom border radius defined', () => {
+    expect(theme?.borderRadius).toHaveProperty('md', '60px');
+    expect(theme?.borderRadius).toHaveProperty('lg', '80px');
+  });
+
+  it('should have custom box shadows defined', () => {
+    // Check for presence of custom shadow keys
+    expect(theme?.boxShadow).toHaveProperty('hero-xs');
+    expect(theme?.boxShadow).toHaveProperty('hero-focus');
   });
 });

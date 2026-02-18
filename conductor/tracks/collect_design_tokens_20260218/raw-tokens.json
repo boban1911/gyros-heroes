@@ -4,6 +4,7 @@
     "Colors/Main Blue": "#4866B0",
     "Colors/Yellow Dark": "#B07400",
     "Colors/Yellow": "#FBAD18",
+    "Colors/Green": "#3E9C5B",
     "Grey/Black": "#212121",
     "Grey/Middle": "#9596A4",
     "Grey/Light": "#D0D1DD",
@@ -13,9 +14,33 @@
     "fontFamily": {
       "Montserrat": ["Montserrat", "sans-serif"]
     },
-    "weights": {
-      "SemiBold": 600
+    "fontSize": {
+      "xs": "14px",
+      "sm": "16px",
+      "lg": "20px",
+      "4xl": "30px",
+      "9xl": "80px"
+    },
+    "lineHeight": {
+      "none": "1",
+      "tight": "1.2",
+      "normal": "1.4"
     }
+  },
+  "spacing": {
+    "xs": "10px",
+    "sm": "12px",
+    "md": "16px",
+    "lg": "20px",
+    "xl": "30px",
+    "2xl": "40px",
+    "100": "100px",
+    "200": "200px"
+  },
+  "borderRadius": {
+    "md": "60px",
+    "lg": "80px",
+    "full": "1000px"
   },
   "effects": {
     "Shadow/xs": "0px 1px 2px 0px rgba(198,228,246,0.05)",
