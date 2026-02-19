@@ -2,17 +2,17 @@
 
 This plan details the steps to build the high-fidelity Hero section, including assets extraction and responsive layout.
 
-## Phase 1: Asset Extraction & Layout
+## Phase 1: Asset Extraction & Layout [checkpoint: 650531c]
 Retrieve necessary visuals and build the primary structure.
 
 - [x] Task: Export and optimize Hero background assets from Figma [e876f68]
-    - [ ] Run `get_design_context` on the Hero node (`1:4542`)
-    - [ ] Download the background illustrative elements (sun, etc.)
+    - [x] Run `get_design_context` on the Hero node (`1:4542`)
+    - [x] Download the background illustrative elements (sun, etc.)
 - [x] Task: Implement basic Hero component structure [e876f68]
-    - [ ] Create `src/components/Hero.tsx`
-    - [ ] Add the "HERO IS IN TOWN!" headline with Montserrat font
-    - [ ] Implement the city-specific ordering blocks (Niš and Novi Sad)
-- [ ] Task: Conductor - User Manual Verification 'Asset Extraction & Layout' (Protocol in workflow.md)
+    - [x] Create `src/components/Hero.tsx`
+    - [x] Add the "HERO IS IN TOWN!" headline with Montserrat font
+    - [x] Implement the city-specific ordering blocks (Niš and Novi Sad)
+- [x] Task: Conductor - User Manual Verification 'Asset Extraction & Layout' (Protocol in workflow.md) [650531c]
 
 ## Phase 2: Logic & Styling
 Add interactive elements and refine the visual design.
