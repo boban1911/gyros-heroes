@@ -27,15 +27,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Banner - Yellow */}
-      <div className="relative z-50 pt-[10px] flex justify-center w-full px-[20px]">
-        <div className="bg-hero-yellow w-full max-w-[1400px] rounded-[50px] py-[10px] px-[20px] nav:px-[100px] flex justify-center items-center text-center shadow-sm">
-            <p className="font-inter font-medium text-[14px] text-grey-black">
-            Limited-Time Offer! Get <span className="font-bold">20% OFF on Wolt</span> – Order Now!
-            </p>
-        </div>
-      </div>
-
       {/* Main Navbar - Blue */}
       <div className="sticky top-[10px] z-50 flex justify-center w-full mt-[10px] px-[20px]">
         <div className="bg-hero-blue w-full max-w-[1400px] rounded-[30px] py-[10px] px-[20px] nav:px-[100px] flex items-center justify-between shadow-hero-xs">

@@ -3,7 +3,7 @@ import sunImg from '../assets/sun.png';
 
 export default function Hero() {
   return (
-    <section id="hero" className="flex justify-center w-full px-[20px] pb-20">
+    <section id="hero" className="flex justify-center w-full px-[20px] pb-10">
       <div className="relative w-full max-w-[1400px] rounded-t-[100px] overflow-hidden min-h-[800px]">
         {/* Background Image Container */}
         <div className="absolute inset-0 w-full h-full pointer-events-none">
