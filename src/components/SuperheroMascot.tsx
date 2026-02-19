@@ -11,6 +11,7 @@ const SuperheroMascot: React.FC = () => {
         src={superheroTortilla} 
         alt="Superhero tortilla character mascot" 
         className="w-full h-auto drop-shadow-2xl"
+        style={{ transform: 'rotate(19.22deg)' }}
       />
     </div>
   );
