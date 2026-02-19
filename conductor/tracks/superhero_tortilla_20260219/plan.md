@@ -7,12 +7,12 @@
 - [x] Task: Conductor - User Manual Verification 'Setup and Assets' (Protocol in workflow.md)
 
 ## Phase 2: Implementation (TDD)
-- [ ] Task: Create a new component `SuperheroMascot.tsx` in `src/components/` to encapsulate the image logic.
-    - [ ] Sub-task: Create `tests/components/SuperheroMascot.test.tsx`.
-    - [ ] Sub-task: Write a failing test to verify the component renders the image with the correct `src` and `alt` text.
-    - [ ] Sub-task: Write a failing test to verify the component has the base styling classes for positioning (e.g., `absolute`, `z-10`, etc. - checking class names or styles).
-    - [ ] Sub-task: Implement the `SuperheroMascot` component to pass the tests.
-- [ ] Task: Integrate `SuperheroMascot` into `App.tsx` (or the relevant parent component) between the Hero and About Us sections.
+- [x] Task: Create a new component `SuperheroMascot.tsx` in `src/components/` to encapsulate the image logic. [46ee551]
+    - [x] Sub-task: Create `tests/components/SuperheroMascot.test.tsx`.
+    - [x] Sub-task: Write a failing test to verify the component renders the image with the correct `src` and `alt` text.
+    - [x] Sub-task: Write a failing test to verify the component has the base styling classes for positioning (e.g., `absolute`, `z-10`, etc. - checking class names or styles).
+    - [x] Sub-task: Implement the `SuperheroMascot` component to pass the tests.
+- [~] Task: Integrate `SuperheroMascot` into `App.tsx` (or the relevant parent component) between the Hero and About Us sections.
     - [ ] Sub-task: Write/Update integration test in `tests/integration/App.test.tsx` (or similar) to ensure `SuperheroMascot` is present in the document.
     - [ ] Sub-task: Add the component to the JSX in `App.tsx`.
 - [ ] Task: Apply responsive styling.
