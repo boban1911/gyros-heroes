@@ -24,6 +24,6 @@
 - [~] Task: Conductor - User Manual Verification 'Implementation (TDD)' (Protocol in workflow.md)
 
 ## Phase 3: Final Verification
-- [ ] Task: Run full test suite (`npm test`) to ensure no regressions.
-- [ ] Task: Verify visually on both Desktop and Mobile viewports.
-- [ ] Task: Conductor - User Manual Verification 'Final Verification' (Protocol in workflow.md)
+- [x] Task: Run full test suite (`npm test`) to ensure no regressions. [1344a02]
+- [x] Task: Verify visually on both Desktop and Mobile viewports. [1344a02]
+- [x] Task: Conductor - User Manual Verification 'Final Verification' (Protocol in workflow.md)
