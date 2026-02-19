@@ -1,9 +1,9 @@
 # Implementation Plan - Floating Superhero Tortilla Implementation
 
 ## Phase 1: Setup and Assets
-- [ ] Task: Export and optimize the "superhero tortilla" image from Figma (Node: 1:4726) as `superhero-tortilla.png` (or WebP).
-    - [ ] Sub-task: Verify dimensions and optimization (e.g., using TinyPNG or similar) to ensure small file size without visual loss.
-- [ ] Task: Add the image to `src/assets/`.
+- [x] Task: Export and optimize the "superhero tortilla" image from Figma (Node: 1:4726) as `superhero-tortilla.png` (or WebP). [e42cdbb]
+    - [x] Sub-task: Verify dimensions and optimization (e.g., using TinyPNG or similar) to ensure small file size without visual loss.
+- [x] Task: Add the image to `src/assets/`.
 - [ ] Task: Conductor - User Manual Verification 'Setup and Assets' (Protocol in workflow.md)
 
 ## Phase 2: Implementation (TDD)
