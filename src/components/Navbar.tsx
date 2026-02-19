@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <>
       {/* Main Navbar - Blue */}
-      <div className="sticky top-[10px] z-50 flex justify-center w-full mt-[10px] px-[20px]">
+      <div className="sticky top-0 z-50 flex justify-center w-full px-[20px] pt-[10px]">
         <div className="bg-hero-blue w-full max-w-[1400px] rounded-[30px] py-[10px] px-[20px] nav:px-[100px] flex items-center justify-between shadow-hero-xs">
             
             {/* Logo */}
