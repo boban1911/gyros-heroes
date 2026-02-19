@@ -10,12 +10,12 @@ describe('SuperheroMascot', () => {
     expect(img.getAttribute('src')).toContain('superhero-tortilla.svg');
   });
 
-  it('has responsive classes to hide on mobile and tablet', () => {
+  it('has responsive classes to hide on mobile and tablet (including iPad Pro)', () => {
     const { container } = render(<SuperheroMascot />);
     const div = container.firstChild as HTMLElement;
-    // Mobile/Tablet hidden, desktop visible (lg:block)
+    // Mobile/Tablet hidden, desktop visible (xl:block)
     expect(div.className).toContain('hidden');
-    expect(div.className).toContain('lg:block');
+    expect(div.className).toContain('xl:block');
   });
 
   it('has absolute positioning classes', () => {
