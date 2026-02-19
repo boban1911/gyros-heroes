@@ -12,16 +12,16 @@
     - [x] Sub-task: Write a failing test to verify the component renders the image with the correct `src` and `alt` text.
     - [x] Sub-task: Write a failing test to verify the component has the base styling classes for positioning (e.g., `absolute`, `z-10`, etc. - checking class names or styles).
     - [x] Sub-task: Implement the `SuperheroMascot` component to pass the tests.
-- [~] Task: Integrate `SuperheroMascot` into `App.tsx` (or the relevant parent component) between the Hero and About Us sections.
-    - [ ] Sub-task: Write/Update integration test in `tests/integration/App.test.tsx` (or similar) to ensure `SuperheroMascot` is present in the document.
-    - [ ] Sub-task: Add the component to the JSX in `App.tsx`.
-- [ ] Task: Apply responsive styling.
-    - [ ] Sub-task: Update `SuperheroMascot` to include `hidden` on mobile breakpoints (e.g., `md:block` or similar Tailwind classes) and `block` on desktop.
-    - [ ] Sub-task: Add a test case in `tests/components/SuperheroMascot.test.tsx` to verify the responsive classes are applied (e.g., checking for `hidden md:block`).
-- [ ] Task: Fine-tune positioning.
-    - [ ] Sub-task: Adjust `top`, `left`/`right`, or `margin` classes on `SuperheroMascot` to match the visual reference (overlapping sections).
-    - [ ] Sub-task: Verify visually against `src/assets/screenshoots/Monosnap Gyros Heroes bdj – Figma 2026-02-19 12-22-32.png`.
-- [ ] Task: Conductor - User Manual Verification 'Implementation (TDD)' (Protocol in workflow.md)
+- [x] Task: Integrate `SuperheroMascot` into `App.tsx` (or the relevant parent component) between the Hero and About Us sections. [d41e6d5]
+    - [x] Sub-task: Write/Update integration test in `tests/integration/App.test.tsx` (or similar) to ensure `SuperheroMascot` is present in the document.
+    - [x] Sub-task: Add the component to the JSX in `App.tsx`.
+- [x] Task: Apply responsive styling. [d41e6d5]
+    - [x] Sub-task: Update `SuperheroMascot` to include `hidden` on mobile breakpoints (e.g., `md:block` or similar Tailwind classes) and `block` on desktop.
+    - [x] Sub-task: Add a test case in `tests/components/SuperheroMascot.test.tsx` to verify the responsive classes are applied (e.g., checking for `hidden md:block`).
+- [x] Task: Fine-tune positioning. [d41e6d5]
+    - [x] Sub-task: Adjust `top`, `left`/`right`, or `margin` classes on `SuperheroMascot` to match the visual reference (overlapping sections).
+    - [x] Sub-task: Verify visually against `src/assets/screenshoots/Monosnap Gyros Heroes bdj – Figma 2026-02-19 12-22-32.png`.
+- [~] Task: Conductor - User Manual Verification 'Implementation (TDD)' (Protocol in workflow.md)
 
 ## Phase 3: Final Verification
 - [ ] Task: Run full test suite (`npm test`) to ensure no regressions.
