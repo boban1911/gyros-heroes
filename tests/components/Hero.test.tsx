@@ -22,6 +22,9 @@ describe('Hero Component', () => {
     const links = screen.getAllByRole('link');
     expect(links.length).toBeGreaterThanOrEqual(3);
     expect(links[0]).toHaveAttribute('href');
+    
+    // Check for partial text since it's now split into spans
     expect(links[0]).toHaveTextContent(/Poruči i pokupi/i);
+    expect(links[0]).toHaveTextContent(/CENTAR/i);
   });
 });
