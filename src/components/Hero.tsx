@@ -4,14 +4,16 @@ import sunImg from '../assets/sun.png';
 export default function Hero() {
   return (
     <section id="hero" className="flex justify-center w-full px-[20px] pb-10">
-      <div className="relative w-full max-w-[1400px] rounded-t-[100px] overflow-hidden min-h-[800px]">
+      <div className="relative w-full max-w-[1400px] rounded-t-[100px] overflow-hidden min-h-[700px] bg-hero-blue">
         {/* Background Image Container */}
         <div className="absolute inset-0 w-full h-full pointer-events-none">
-            <img 
-                src={heroBg} 
-                alt="Hero Background" 
-                className="w-full h-full object-cover object-top"
-            />
+            <div className="absolute inset-0 overflow-hidden rounded-t-[100px]">
+                <img 
+                    src={heroBg} 
+                    alt="" 
+                    className="absolute h-[116.01%] left-0 max-w-none top-[-14.46%] w-full object-cover"
+                />
+            </div>
             
             {/* Sun Decoration */}
             <div className="absolute -left-[10%] top-[-10%] w-[120%] aspect-square opacity-20 mix-blend-overlay">
@@ -28,7 +30,7 @@ export default function Hero() {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-[800px] px-4 py-20 text-center text-white">
+        <div className="relative z-10 flex flex-col items-center justify-start min-h-[700px] px-4 pt-[170px] md:pt-[200px] pb-20 text-center text-white">
             
             {/* Headline */}
             <h1 className="font-montserrat font-extrabold italic leading-none tracking-tighter text-[64px] md:text-8xl lg:text-[150px] xl:text-[200px] mb-12 drop-shadow-lg">
