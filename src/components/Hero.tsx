@@ -49,11 +49,11 @@ export default function Hero() {
                     <h2 className="font-montserrat font-bold text-[24px] md:text-[32px] tracking-[-1.2px] md:tracking-[-1.6px]">
                         Poruči <span className="text-hero-yellow">Niš</span>
                     </h2>
-                    <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                        <a href="https://glovoapp.com/rs/sr/nis/gyros-heroes-nis/" target="_blank" rel="noopener noreferrer" className="bg-hero-yellow text-grey-black font-montserrat text-[16px] h-[44px] md:h-[60px] w-full md:w-auto px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300">
+                    <div className="flex flex-col items-center md:flex-row gap-4 w-full md:w-auto">
+                        <a href="https://glovoapp.com/rs/sr/nis/gyros-heroes-nis/" target="_blank" rel="noopener noreferrer" className="bg-hero-yellow text-grey-black font-montserrat text-[16px] h-[44px] md:h-[60px] w-fit px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300">
                             <span className="font-medium">Poruči i pokupi</span><span className="font-bold"> - CENTAR</span>
                         </a>
-                        <a href="https://wolt.com/sr/srb/nis/restaurant/gyros-heroes-nis" target="_blank" rel="noopener noreferrer" className="bg-hero-yellow text-grey-black font-montserrat text-[16px] h-[44px] md:h-[60px] w-full md:w-auto px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300">
+                        <a href="https://wolt.com/sr/srb/nis/restaurant/gyros-heroes-nis" target="_blank" rel="noopener noreferrer" className="bg-hero-yellow text-grey-black font-montserrat text-[16px] h-[44px] md:h-[60px] w-fit px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300">
                             <span className="font-medium">Poruči i pokupi</span><span className="font-bold"> - PARK SV.SAVE</span>
                         </a>
                     </div>
@@ -64,8 +64,8 @@ export default function Hero() {
                     <h2 className="font-montserrat font-bold text-[24px] md:text-[32px] tracking-[-1.2px] md:tracking-[-1.6px]">
                         Poruči <span className="text-hero-yellow">Novi Sad</span>
                     </h2>
-                    <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                        <a href="https://wolt.com/sr/srb/novi-sad/restaurant/gyros-heroes-ns" target="_blank" rel="noopener noreferrer" className="bg-hero-yellow text-grey-black font-montserrat text-[16px] h-[44px] md:h-[60px] w-full md:w-auto px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300">
+                    <div className="flex flex-col items-center md:flex-row gap-4 w-full md:w-auto">
+                        <a href="https://wolt.com/sr/srb/novi-sad/restaurant/gyros-heroes-ns" target="_blank" rel="noopener noreferrer" className="bg-hero-yellow text-grey-black font-montserrat text-[16px] h-[44px] md:h-[60px] w-fit px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300">
                             <span className="font-medium">Poruči i pokupi</span><span className="font-bold"> - BUL. OSLOBODJENJA</span>
                         </a>
                     </div>
