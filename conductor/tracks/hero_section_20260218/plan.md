@@ -5,10 +5,10 @@ This plan details the steps to build the high-fidelity Hero section, including a
 ## Phase 1: Asset Extraction & Layout
 Retrieve necessary visuals and build the primary structure.
 
-- [ ] Task: Export and optimize Hero background assets from Figma
+- [x] Task: Export and optimize Hero background assets from Figma [e876f68]
     - [ ] Run `get_design_context` on the Hero node (`1:4542`)
     - [ ] Download the background illustrative elements (sun, etc.)
-- [ ] Task: Implement basic Hero component structure
+- [x] Task: Implement basic Hero component structure [e876f68]
     - [ ] Create `src/components/Hero.tsx`
     - [ ] Add the "HERO IS IN TOWN!" headline with Montserrat font
     - [ ] Implement the city-specific ordering blocks (Niš and Novi Sad)
