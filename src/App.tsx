@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import Hero from './components/Hero';
 
 function App() {
   return (
@@ -15,9 +16,7 @@ function App() {
       */}
       <main className="pt-[140px]">
         
-        <section id="hero" className="min-h-screen flex items-center justify-center bg-gray-100 border-b border-gray-200">
-          <h1 className="text-4xl font-bold font-montserrat text-hero-blue">Hero Section</h1>
-        </section>
+        <Hero />
 
         <section id="o-nama" className="min-h-screen flex items-center justify-center bg-gray-50 border-b border-gray-200">
           <h2 className="text-3xl font-bold font-montserrat text-hero-blue">O nama</h2>
