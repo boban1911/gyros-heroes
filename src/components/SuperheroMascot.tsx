@@ -4,7 +4,7 @@ import superheroTortilla from '../assets/superhero-tortilla.svg';
 const SuperheroMascot: React.FC = () => {
   return (
     <div 
-      className="absolute left-4 md:left-10 lg:left-[20px] bottom-[-80px] md:bottom-[-120px] lg:bottom-[-130px] z-10 hidden md:block w-40 md:w-56 lg:w-[380px]"
+      className="absolute left-4 lg:left-[20px] bottom-[-80px] lg:bottom-[-130px] z-10 hidden lg:block w-40 lg:w-[380px]"
       data-testid="superhero-mascot"
     >
       <img 
