@@ -36,3 +36,12 @@ Connect the section to the main landing page.
 - [x] Task: Perform visual audit and cross-browser check [73cb6f1]
     - [x] Verify 1:1 parity with Figma screenshot
 - [x] Task: Conductor - User Manual Verification 'Final Integration' (Protocol in workflow.md) [ee611ff]
+
+## Phase 4: Design Refinement [checkpoint: 21fa77b]
+Address visual discrepancies identified during review.
+
+- [x] Task: Refine Hero container layout and border radius [21fa77b]
+    - [x] Constraint background width to match Navbar (max-width 1400px)
+    - [x] Apply rounded top corners (e.g., 100px or as per design)
+    - [x] Ensure background image and overlay respect the border radius
+- [x] Task: Conductor - User Manual Verification 'Design Refinement' (Protocol in workflow.md) [21fa77b]
