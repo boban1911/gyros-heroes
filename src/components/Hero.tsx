@@ -1,4 +1,5 @@
 import heroBg from '../assets/hero-bg.png';
+import sunImg from '../assets/sun.png';
 
 export default function Hero() {
   return (
@@ -10,6 +11,12 @@ export default function Hero() {
             alt="Hero Background" 
             className="w-full h-full object-cover object-top"
         />
+        
+        {/* Sun Decoration */}
+        <div className="absolute -left-[10%] top-[-10%] w-[120%] aspect-square opacity-20 mix-blend-overlay">
+            <img src={sunImg} alt="" className="w-full h-full object-contain" />
+        </div>
+
         {/* Gradient Overlay from design */}
         <div 
             className="absolute inset-0" 
@@ -23,7 +30,7 @@ export default function Hero() {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[800px] px-4 py-20 text-center text-white">
         
         {/* Headline */}
-        <h1 className="font-montserrat font-extrabold italic leading-none tracking-tighter text-5xl md:text-8xl lg:text-[150px] xl:text-[200px] mb-12 drop-shadow-lg">
+        <h1 className="font-montserrat font-extrabold italic leading-none tracking-tighter text-[64px] md:text-8xl lg:text-[150px] xl:text-[200px] mb-12 drop-shadow-lg">
           <span className="text-hero-yellow block md:inline">HERO</span>
           <span className="block md:inline"> IS IN TOWN!</span>
         </h1>
@@ -38,10 +45,10 @@ export default function Hero() {
                 </h2>
                 <div className="flex flex-col sm:flex-row gap-4">
                     <a href="https://glovoapp.com/rs/sr/nis/gyros-heroes-nis/" target="_blank" rel="noopener noreferrer" className="bg-hero-yellow text-grey-black font-montserrat font-semibold text-sm md:text-base px-8 py-3 rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300">
-                        Glovo
+                        Poruči i pokupi - CENTAR
                     </a>
                     <a href="https://wolt.com/sr/srb/nis/restaurant/gyros-heroes-nis" target="_blank" rel="noopener noreferrer" className="bg-hero-yellow text-grey-black font-montserrat font-semibold text-sm md:text-base px-8 py-3 rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300">
-                        Wolt
+                        Poruči i pokupi - PARK SV.SAVE
                     </a>
                 </div>
             </div>
@@ -53,7 +60,7 @@ export default function Hero() {
                 </h2>
                 <div className="flex flex-col sm:flex-row gap-4">
                     <a href="https://wolt.com/sr/srb/novi-sad/restaurant/gyros-heroes-ns" target="_blank" rel="noopener noreferrer" className="bg-hero-yellow text-grey-black font-montserrat font-semibold text-sm md:text-base px-8 py-3 rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300">
-                        Wolt
+                        Poruči i pokupi - BUL. OSLOBODJENJA
                     </a>
                 </div>
             </div>
