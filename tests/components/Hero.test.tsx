@@ -16,11 +16,12 @@ describe('Hero Component', () => {
     expect(screen.getByText(/Novi Sad/i)).toBeInTheDocument();
   });
 
-  it('renders ordering buttons', () => {
+  it('renders ordering links', () => {
     render(<Hero />);
-    // We expect 3 buttons: 2 for Niš, 1 for Novi Sad
-    const buttons = screen.getAllByRole('button');
-    expect(buttons.length).toBeGreaterThanOrEqual(3);
-    expect(buttons[0]).toHaveTextContent(/Glovo|Wolt|Button CTA/i);
+    // We expect 3 links: 2 for Niš, 1 for Novi Sad
+    const links = screen.getAllByRole('link');
+    expect(links.length).toBeGreaterThanOrEqual(3);
+    expect(links[0]).toHaveAttribute('href');
+    expect(links[0]).toHaveTextContent(/Glovo|Wolt/i);
   });
 });
