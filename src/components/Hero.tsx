@@ -3,10 +3,10 @@ import sunImg from '../assets/sun.png';
 
 export default function Hero() {
   return (
-    <section id="hero" className="flex justify-center w-full px-[20px] pb-10">
-      <div className="relative w-full max-w-[1400px] rounded-t-[100px] overflow-hidden min-h-[700px] bg-hero-blue">
+    <section id="hero" className="flex justify-center w-full px-[20px]">
+      <div className="relative w-full max-w-[1400px] rounded-t-[100px] overflow-hidden min-h-[1100px] bg-hero-blue">
         {/* Background Image Container */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none">
+        <div className="absolute inset-0 h-[708px] w-full pointer-events-none">
             <div className="absolute inset-0 overflow-hidden rounded-t-[100px]">
                 <img 
                     src={heroBg} 
@@ -30,10 +30,10 @@ export default function Hero() {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 flex flex-col items-center justify-start min-h-[700px] px-4 pt-[170px] md:pt-[200px] pb-20 text-center text-white">
+        <div className="relative z-10 flex flex-col items-center justify-start w-full px-4 pt-[204px] pb-20 text-center text-white">
             
             {/* Headline */}
-            <h1 className="font-montserrat font-extrabold italic leading-none tracking-tighter text-[64px] md:text-8xl lg:text-[150px] xl:text-[200px] mb-12 drop-shadow-lg">
+            <h1 className="font-montserrat font-extrabold italic leading-none tracking-tighter text-[64px] md:text-[150px] xl:text-[250px] mb-12 drop-shadow-lg">
             <span className="text-hero-yellow block md:inline">HERO</span>
             <span className="block md:inline"> IS IN TOWN!</span>
             </h1>
