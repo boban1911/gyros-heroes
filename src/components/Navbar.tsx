@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <>
       {/* Main Navbar - Blue */}
-      <div className="sticky top-0 z-50 flex justify-center w-full px-[20px] pt-[10px]">
+      <nav className="sticky top-0 z-50 flex justify-center w-full px-[20px] pt-[10px]">
         <div className="bg-hero-blue w-full max-w-[1400px] rounded-[30px] py-[10px] px-[20px] nav:px-[100px] flex items-center justify-between shadow-hero-xs">
             
             {/* Logo */}
@@ -71,8 +71,9 @@ export default function Navbar() {
                         >
                             <img src={menuIcon} alt="" className="w-6 h-6" />
                         </button>
-                    </div>        </div>
-      </div>
+                    </div>
+        </div>
+      </nav>
 
       {/* Mobile Slide-over Menu */}
       <div className={`fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsMenuOpen(false)}>
