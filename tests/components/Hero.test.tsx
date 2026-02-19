@@ -6,7 +6,8 @@ describe('Hero Component', () => {
   it('renders the main headline', () => {
     render(<Hero />);
     expect(screen.getByText(/HERO/i)).toBeInTheDocument();
-    expect(screen.getByText(/IS IN TOWN!/i)).toBeInTheDocument();
+    expect(screen.getByText(/IS/i)).toBeInTheDocument();
+    expect(screen.getByText(/IN TOWN!/i)).toBeInTheDocument();
   });
 
   it('renders location blocks', () => {

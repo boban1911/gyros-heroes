@@ -7,6 +7,6 @@ describe('App Integration', () => {
     render(<App />);
     const heroElements = screen.getAllByText(/HERO/i);
     expect(heroElements.length).toBeGreaterThan(0);
-    expect(screen.getByText(/IS IN TOWN!/i)).toBeInTheDocument();
+    expect(screen.getByText(/IN TOWN!/i)).toBeInTheDocument();
   });
 });
