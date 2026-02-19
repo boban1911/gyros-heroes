@@ -22,6 +22,6 @@ describe('Hero Component', () => {
     const links = screen.getAllByRole('link');
     expect(links.length).toBeGreaterThanOrEqual(3);
     expect(links[0]).toHaveAttribute('href');
-    expect(links[0]).toHaveTextContent(/Glovo|Wolt/i);
+    expect(links[0]).toHaveTextContent(/Poruči i pokupi/i);
   });
 });
