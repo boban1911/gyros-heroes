@@ -33,7 +33,7 @@ export default function Hero() {
         <div className="relative z-10 flex flex-col items-center justify-start w-full px-4 pt-[150px] md:pt-[204px] pb-20 text-center text-white">
             
             {/* Headline */}
-            <h1 className="font-montserrat font-extrabold leading-none tracking-tighter text-[64px] md:text-[150px] xl:text-[250px] mb-12 drop-shadow-lg flex flex-col items-center">
+            <h1 className="w-full font-montserrat font-extrabold leading-none text-[64px] md:text-[150px] xl:text-[250px] mb-12 drop-shadow-lg flex flex-col items-center">
                 <span className="block">
                     <span className="text-hero-yellow italic">HERO</span>
                     <span> IS</span>
