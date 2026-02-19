@@ -3,10 +3,14 @@ import { describe, it, expect } from 'vitest';
 import App from '../../src/App';
 
 describe('App Integration', () => {
-  it('renders the Hero component', () => {
+  it('renders the navbar and hero section', () => {
     render(<App />);
-    const heroElements = screen.getAllByText(/HERO/i);
-    expect(heroElements.length).toBeGreaterThan(0);
-    expect(screen.getByText(/IN TOWN!/i)).toBeInTheDocument();
+    expect(screen.getByRole('navigation')).toBeDefined();
+    expect(screen.getByRole('heading', { name: /HERO.*IS.*IN.*TOWN/i })).toBeDefined();
+  });
+
+  it('renders the superhero mascot image', () => {
+    render(<App />);
+    expect(screen.getByAltText(/superhero tortilla/i)).toBeDefined();
   });
 });
