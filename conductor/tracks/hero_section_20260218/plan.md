@@ -14,25 +14,25 @@ Retrieve necessary visuals and build the primary structure.
     - [x] Implement the city-specific ordering blocks (Niš and Novi Sad)
 - [x] Task: Conductor - User Manual Verification 'Asset Extraction & Layout' (Protocol in workflow.md) [650531c]
 
-## Phase 2: Logic & Styling
+## Phase 2: Logic & Styling [checkpoint: ee611ff]
 Add interactive elements and refine the visual design.
 
-- [ ] Task: Write tests for Hero section components
-    - [ ] Create `tests/components/Hero.test.tsx`
-    - [ ] Verify the headline text and presence of 3 ordering buttons
-- [ ] Task: Implement ordering buttons with external links
-    - [ ] Apply the yellow button styles using Tailwind tokens
-    - [ ] Add hardcoded URLs for delivery platforms
-- [ ] Task: Apply responsive styling and background assets
-    - [ ] Position background graphics relative to content
-    - [ ] Adjust font sizes and stacking behavior for mobile viewports
-- [ ] Task: Conductor - User Manual Verification 'Logic & Styling' (Protocol in workflow.md)
+- [x] Task: Write tests for Hero section components [e876f68]
+    - [x] Create `tests/components/Hero.test.tsx`
+    - [x] Verify the headline text and presence of 3 ordering buttons
+- [x] Task: Implement ordering buttons with external links [5f816e9]
+    - [x] Apply the yellow button styles using Tailwind tokens
+    - [x] Add hardcoded URLs for delivery platforms
+- [x] Task: Apply responsive styling and background assets [6a89b86]
+    - [x] Position background graphics relative to content
+    - [x] Adjust font sizes and stacking behavior for mobile viewports
+- [x] Task: Conductor - User Manual Verification 'Logic & Styling' (Protocol in workflow.md) [ee611ff]
 
-## Phase 3: Final Integration
+## Phase 3: Final Integration [checkpoint: ee611ff]
 Connect the section to the main landing page.
 
-- [ ] Task: Integrate Hero section into `src/App.tsx`
-    - [ ] Replace the placeholder `#hero` section with the new `Hero` component
-- [ ] Task: Perform visual audit and cross-browser check
-    - [ ] Verify 1:1 parity with Figma screenshot
-- [ ] Task: Conductor - User Manual Verification 'Final Integration' (Protocol in workflow.md)
+- [x] Task: Integrate Hero section into `src/App.tsx` [73cb6f1]
+    - [x] Replace the placeholder `#hero` section with the new `Hero` component
+- [x] Task: Perform visual audit and cross-browser check [73cb6f1]
+    - [x] Verify 1:1 parity with Figma screenshot
+- [x] Task: Conductor - User Manual Verification 'Final Integration' (Protocol in workflow.md) [ee611ff]
