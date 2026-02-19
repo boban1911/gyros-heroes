@@ -2,5 +2,5 @@
 
 ---
 
-- [~] **Track: Floating Superhero Tortilla Implementation**
+- [x] **Track: Floating Superhero Tortilla Implementation**
 *Link: [./tracks/superhero_tortilla_20260219/](./tracks/superhero_tortilla_20260219/)*
