@@ -6,12 +6,12 @@ export default function Hero() {
     <section id="hero" className="flex justify-center w-full px-[20px]">
       <div className="relative w-full max-w-[1400px] rounded-t-[100px] overflow-hidden min-h-[1100px] bg-hero-blue">
         {/* Background Image Container */}
-        <div className="absolute inset-0 h-[708px] w-full pointer-events-none">
+        <div className="absolute inset-0 h-[300px] md:h-[500px] lg:h-[708px] w-full pointer-events-none">
             <div className="absolute inset-0 overflow-hidden rounded-t-[100px]">
                 <img 
                     src={heroBg} 
                     alt="" 
-                    className="absolute h-[116.01%] left-0 max-w-none top-[-14.46%] w-full object-cover"
+                    className="absolute h-full w-full object-cover"
                 />
             </div>
             
@@ -30,7 +30,7 @@ export default function Hero() {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 flex flex-col items-center justify-start w-full px-4 pt-[204px] pb-20 text-center text-white">
+        <div className="relative z-10 flex flex-col items-center justify-start w-full px-4 pt-[150px] md:pt-[204px] pb-20 text-center text-white">
             
             {/* Headline */}
             <h1 className="font-montserrat font-extrabold italic leading-none tracking-tighter text-[64px] md:text-[150px] xl:text-[250px] mb-12 drop-shadow-lg">
