@@ -13,4 +13,10 @@ describe('App Integration', () => {
     render(<App />);
     expect(screen.getByAltText(/superhero tortilla/i)).toBeDefined();
   });
+
+  it('renders the About Us section', () => {
+    render(<App />);
+    expect(screen.getByRole('heading', { level: 2, name: /O Nama/i })).toBeDefined();
+    expect(screen.getByText(/Gyros Heroes je savremen fast-food koncept/i)).toBeDefined();
+  });
 });
