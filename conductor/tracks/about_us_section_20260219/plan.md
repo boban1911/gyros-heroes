@@ -33,3 +33,9 @@
 - [x] Task: Visual verification on Desktop and Mobile viewports against Figma design.
     - [x] Sub-task: Verify the specific mobile overlap requirement.
 - [x] Task: Conductor - User Manual Verification 'Final Verification' (Protocol in workflow.md)
+
+## Phase 4: Feedback Fixes
+- [x] Task: Fix logo overlap on text issues. [f401d2f]
+    - [x] Sub-task: Change desktop split layout breakpoint from `lg` (1024px) to `xl` (1280px) to prevent card overlap on smaller desktop screens.
+    - [x] Sub-task: Adjust mobile/stacked layout z-index to place mascot *behind* (z-0) the cards (z-10) to ensure text readability, or increase top padding of the first card if mascot must be on top.
+    - [x] Sub-task: Verify no text is obscured on any screen size.
