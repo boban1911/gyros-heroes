@@ -68,8 +68,14 @@
     - [x] Sub-task: Set first card top padding to `pt-[120px]` (96px overlap + 24px clearance) to position text below mascot.
     - [x] Sub-task: Verify mascot is `z-20` and cards are `z-10` for correct layering.
 
-## Phase 10: Place Mascot Behind Cards
+## Phase 10: Place Mascot Behind Cards [checkpoint: 868fa8b]
 - [x] Task: Adjust z-index and padding for "behind" layering. [292c21b]
     - [x] Sub-task: Change mobile mascot z-index to `z-0` (behind) and cards container to `z-10` (front).
     - [x] Sub-task: Remove `pt-[120px]` from the first card, as text won't be covered by mascot anymore.
     - [x] Sub-task: Keep `-mt-24` overlap so cards visually cover the bottom of the mascot.
+
+## Phase 11: Adapt to Specific Mobile Design
+- [x] Task: Match precise mobile design from node 1-4923. [2c66abd]
+    - [x] Sub-task: Fetch design context and screenshot for node `1-4923` to get exact spacing and overlap values.
+    - [x] Sub-task: Update `src/components/AboutUs.tsx` negative margin and padding to match the design.
+    - [x] Sub-task: Verify visual fidelity with the new reference screenshot.
