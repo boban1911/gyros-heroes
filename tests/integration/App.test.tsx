@@ -19,4 +19,15 @@ describe('App Integration', () => {
     expect(screen.getByRole('heading', { level: 2, name: /O Nama/i })).toBeDefined();
     expect(screen.getByText(/Gyros Heroes je savremen fast-food koncept/i)).toBeDefined();
   });
+
+  it('renders the Menu section', () => {
+    render(<App />);
+    expect(screen.getByRole('heading', { level: 2, name: /Pogledaj/i })).toBeDefined();
+    // Check for a few items to ensure menu data is loaded
+    const classicHeroes = screen.getAllByText('CLASSIC HERO');
+    expect(classicHeroes.length).toBeGreaterThan(0);
+    
+    const pomfrits = screen.getAllByText('POMFRIT');
+    expect(pomfrits.length).toBeGreaterThan(0);
+  });
 });

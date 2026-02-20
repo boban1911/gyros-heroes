@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AboutUs from './components/AboutUs';
+import Menu from './components/Menu';
 
 function App() {
   return (
@@ -19,9 +20,7 @@ function App() {
 
         <AboutUs />
 
-        <section id="meni" className="py-20 flex items-center justify-center bg-hero-blue border-b border-white/10">
-          <h2 className="text-3xl font-bold font-montserrat text-white">Meni</h2>
-        </section>
+        <Menu />
 
         <section id="lokacije" className="py-20 flex items-center justify-center bg-hero-blue border-b border-white/10">
           <h2 className="text-3xl font-bold font-montserrat text-white">Lokacije</h2>
