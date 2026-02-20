@@ -51,11 +51,11 @@ const AboutUs = () => {
       <div className="relative w-full max-w-[1240px] px-4">
         
         {/* Desktop Layout */}
-        <div className="hidden lg:flex items-center justify-between relative h-[600px]">
+        <div className="hidden xl:flex items-center justify-between relative h-[600px]">
           {/* Left Cards */}
           <div className="flex flex-col gap-[30px] w-[600px] absolute left-0 top-1/2 -translate-y-1/2 z-0">
             {cards.slice(0, 2).map((card, idx) => (
-              <div key={idx} className="bg-hero-green rounded-[80px] py-[30px] pl-[50px] pr-[200px] flex flex-col gap-2 relative">
+              <div key={idx} className="bg-hero-green rounded-[80px] py-[30px] pl-[50px] pr-[260px] flex flex-col gap-2 relative">
                 <div className="flex items-center gap-[15px]">
                   <img src={card.icon} alt="" className="size-[50px]" />
                   <h3 className="font-montserrat font-black text-[28px] text-white leading-tight transform -rotate-[0.12deg]">{card.title}</h3>
@@ -75,7 +75,7 @@ const AboutUs = () => {
           {/* Right Cards */}
           <div className="flex flex-col gap-[30px] w-[600px] absolute right-0 top-1/2 -translate-y-1/2 z-0">
             {cards.slice(2).map((card, idx) => (
-              <div key={idx} className="bg-hero-green rounded-[80px] py-[30px] pl-[200px] pr-[50px] flex flex-col gap-2 relative">
+              <div key={idx} className="bg-hero-green rounded-[80px] py-[30px] pl-[260px] pr-[50px] flex flex-col gap-2 relative">
                 <div className="flex items-center gap-[15px]">
                   <img src={card.icon} alt="" className="size-[50px]" />
                   <h3 className="font-montserrat font-black text-[28px] text-white leading-tight transform -rotate-[0.12deg]">{card.title}</h3>
@@ -89,7 +89,7 @@ const AboutUs = () => {
         </div>
 
         {/* Mobile/Tablet Layout */}
-        <div className="lg:hidden flex flex-col items-center gap-10">
+        <div className="xl:hidden flex flex-col items-center gap-10">
            {/* Mascot Top */}
            <div className="size-[300px] md:size-[400px] z-20 relative">
              <img src={mascotImg} alt="Gyros Heroes Logo" className="w-full h-full object-contain" />
@@ -98,7 +98,7 @@ const AboutUs = () => {
            {/* Cards Stack */}
            <div className="flex flex-col gap-6 w-full max-w-[500px] -mt-20 md:-mt-24 z-10 relative">
              {cards.map((card, idx) => (
-                <div key={idx} className="bg-hero-green rounded-[40px] p-6 md:p-8 flex flex-col gap-3 shadow-lg">
+                <div key={idx} className={`bg-hero-green rounded-[40px] p-6 md:p-8 flex flex-col gap-3 shadow-lg ${idx === 0 ? 'pt-[140px]' : ''}`}>
                   <div className="flex items-center gap-3">
                     <img src={card.icon} alt="" className="size-10" />
                     <h3 className="font-montserrat font-black text-[24px] md:text-[28px] text-white leading-tight">{card.title}</h3>
