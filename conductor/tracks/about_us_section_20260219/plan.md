@@ -92,8 +92,14 @@
     - [x] Sub-task: Ensure `-mt-[38px]` overlap applies to the top row (both cards) on tablet view.
     - [x] Sub-task: Verify mobile remains single column (`grid-cols-1`) and desktop remains split (`hidden xl:flex`).
 
-## Phase 14: Adjust Section Spacing
+## Phase 14: Adjust Section Spacing [checkpoint: 5cca8c5]
 - [x] Task: Reduce space between Hero button and About Us title. [711bb75]
     - [x] Sub-task: Fetch design context for node `1-4774` to determine correct spacing.
     - [x] Sub-task: Update `src/components/AboutUs.tsx` top padding (`py`) to match design.
     - [x] Sub-task: Verify visual fidelity with screenshot.
+
+## Phase 15: Remove Mobile/Tablet Top Padding
+- [x] Task: Remove top padding from About Us section on mobile and tablet. [b28a196]
+    - [x] Sub-task: Update `src/components/AboutUs.tsx` to set `pt-0` for mobile/tablet breakpoints.
+    - [x] Sub-task: Maintain `pb` and keep desktop `pt` intact.
+    - [x] Sub-task: Verify layout visually.
