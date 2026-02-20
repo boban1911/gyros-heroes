@@ -1,13 +1,13 @@
 # Implementation Plan - About Us Section Implementation
 
 ## Phase 1: Setup and Assets
-- [ ] Task: Export and optimize assets from Figma (Node: 1-4543).
-    - [ ] Sub-task: Export the "Gyros Heroes" circular mascot (as `about-us-mascot.svg` or `png` if complex).
-    - [ ] Sub-task: Export the 4 icons for the feature cards (Gyros, Heroes Special, Kids Menu, Pića i Namazi).
-    - [ ] Sub-task: Add assets to `src/assets/`.
-- [ ] Task: Verify/Update Tailwind config.
-    - [ ] Sub-task: Ensure the blue background color (#4A6FA5 or similar from Figma) and green card color are defined in `tailwind.config.js`.
-- [ ] Task: Conductor - User Manual Verification 'Setup and Assets' (Protocol in workflow.md)
+- [x] Task: Export and optimize assets from Figma (Node: 1-4543). [d34bc8a]
+    - [x] Sub-task: Export the "Gyros Heroes" circular mascot (as `about-us-mascot.svg` or `png` if complex).
+    - [x] Sub-task: Export the 4 icons for the feature cards (Gyros, Heroes Special, Kids Menu, Pića i Namazi).
+    - [x] Sub-task: Add assets to `src/assets/`.
+- [x] Task: Verify/Update Tailwind config. [d34bc8a]
+    - [x] Sub-task: Ensure the blue background color (#4A6FA5 or similar from Figma) and green card color are defined in `tailwind.config.js`.
+- [x] Task: Conductor - User Manual Verification 'Setup and Assets' (Protocol in workflow.md) [d34bc8a]
 
 ## Phase 2: Implementation (TDD)
 - [ ] Task: Create `AboutUs` component structure.
