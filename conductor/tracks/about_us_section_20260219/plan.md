@@ -51,7 +51,13 @@
     - [x] Sub-task: Reduce top padding of first card from `pt-[90px] md:pt-[140px]` to `pt-[70px] md:pt-[100px]`.
     - [x] Sub-task: Ensure layout still looks intentional (slight overlap) but minimizes wasted space.
 
-## Phase 7: Finalize Mobile Padding
+## Phase 7: Finalize Mobile Padding [checkpoint: 10fd5fa]
 - [x] Task: Set mobile padding top to fixed 100px. [fcf2d34]
     - [x] Sub-task: Update `src/components/AboutUs.tsx` to set the first card's top padding to `pt-[100px]` on all stacked breakpoints (mobile/tablet/lg).
     - [x] Sub-task: Adjust negative margin to `-mt-20` (80px) to balance the layout.
+
+## Phase 8: Remove Excessive Mobile Spacing
+- [x] Task: Remove top padding and negative margin from mobile layout. [deccf38]
+    - [x] Sub-task: Update `src/components/AboutUs.tsx` to remove `pt-[100px]` from the first card in stacked view.
+    - [x] Sub-task: Remove `-mt-16 md:-mt-20` from the cards stack container to eliminate overlap and wasted space.
+    - [x] Sub-task: Confirm all green sections have uniform height and fit text perfectly.
