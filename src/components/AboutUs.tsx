@@ -98,7 +98,7 @@ const AboutUs = () => {
            {/* Cards Stack */}
            <div className="flex flex-col gap-6 w-full max-w-[500px] -mt-20 md:-mt-24 z-10 relative">
              {cards.map((card, idx) => (
-                <div key={idx} className={`bg-hero-green rounded-[40px] p-6 md:p-8 flex flex-col gap-3 shadow-lg ${idx === 0 ? 'pt-[140px]' : ''}`}>
+                <div key={idx} className={`bg-hero-green rounded-[40px] p-6 md:p-8 flex flex-col gap-3 shadow-lg ${idx === 0 ? 'pt-[90px] md:pt-[140px]' : ''}`}>
                   <div className="flex items-center gap-3">
                     <img src={card.icon} alt="" className="size-10" />
                     <h3 className="font-montserrat font-black text-[24px] md:text-[28px] text-white leading-tight">{card.title}</h3>
