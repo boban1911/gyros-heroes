@@ -84,3 +84,10 @@
 - [x] Task: Remove gap from mobile container to allow overlap. [4ea585e]
     - [x] Sub-task: Update `src/components/AboutUs.tsx` to remove `gap-10` from the mobile flex container, setting it to `gap-0` to let `-mt-[38px]` create the true overlap.
     - [x] Sub-task: Verify no unintentional gaps appear.
+
+## Phase 13: Tablet Layout (2x2 Grid)
+- [x] Task: Implement responsive 2x2 grid for tablet screens. [d6c80d0]
+    - [x] Sub-task: Update `src/components/AboutUs.tsx` to change the cards container to a responsive grid: `grid grid-cols-1 md:grid-cols-2`.
+    - [x] Sub-task: Increase `max-w` on `md` screens (e.g., `md:max-w-[800px]`) to accommodate two columns.
+    - [x] Sub-task: Ensure `-mt-[38px]` overlap applies to the top row (both cards) on tablet view.
+    - [x] Sub-task: Verify mobile remains single column (`grid-cols-1`) and desktop remains split (`hidden xl:flex`).
