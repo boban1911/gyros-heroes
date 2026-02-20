@@ -62,8 +62,14 @@
     - [x] Sub-task: Remove `-mt-16 md:-mt-20` from the cards stack container to eliminate overlap and wasted space.
     - [x] Sub-task: Confirm all green sections have uniform height and fit text perfectly.
 
-## Phase 9: Restore Overlap Correctly
+## Phase 9: Restore Overlap Correctly [checkpoint: b8ded8d]
 - [x] Task: Re-introduce overlap and padding to match Figma reference. [ddc5492]
     - [x] Sub-task: Set negative margin to `-mt-24` (96px) on mobile stack to pull cards up under mascot.
     - [x] Sub-task: Set first card top padding to `pt-[120px]` (96px overlap + 24px clearance) to position text below mascot.
     - [x] Sub-task: Verify mascot is `z-20` and cards are `z-10` for correct layering.
+
+## Phase 10: Place Mascot Behind Cards
+- [x] Task: Adjust z-index and padding for "behind" layering. [292c21b]
+    - [x] Sub-task: Change mobile mascot z-index to `z-0` (behind) and cards container to `z-10` (front).
+    - [x] Sub-task: Remove `pt-[120px]` from the first card, as text won't be covered by mascot anymore.
+    - [x] Sub-task: Keep `-mt-24` overlap so cards visually cover the bottom of the mascot.
