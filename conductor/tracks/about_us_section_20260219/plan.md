@@ -74,8 +74,13 @@
     - [x] Sub-task: Remove `pt-[120px]` from the first card, as text won't be covered by mascot anymore.
     - [x] Sub-task: Keep `-mt-24` overlap so cards visually cover the bottom of the mascot.
 
-## Phase 11: Adapt to Specific Mobile Design
+## Phase 11: Adapt to Specific Mobile Design [checkpoint: 1486fe2]
 - [x] Task: Match precise mobile design from node 1-4923. [2c66abd]
     - [x] Sub-task: Fetch design context and screenshot for node `1-4923` to get exact spacing and overlap values.
     - [x] Sub-task: Update `src/components/AboutUs.tsx` negative margin and padding to match the design.
     - [x] Sub-task: Verify visual fidelity with the new reference screenshot.
+
+## Phase 12: Fix Gap Conflict
+- [x] Task: Remove gap from mobile container to allow overlap. [4ea585e]
+    - [x] Sub-task: Update `src/components/AboutUs.tsx` to remove `gap-10` from the mobile flex container, setting it to `gap-0` to let `-mt-[38px]` create the true overlap.
+    - [x] Sub-task: Verify no unintentional gaps appear.
