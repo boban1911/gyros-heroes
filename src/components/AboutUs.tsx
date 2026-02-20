@@ -53,14 +53,14 @@ const AboutUs = () => {
         {/* Desktop Layout */}
         <div className="hidden lg:flex items-center justify-between relative h-[600px]">
           {/* Left Cards */}
-          <div className="flex flex-col gap-[30px] w-[530px] z-10">
+          <div className="flex flex-col gap-[30px] w-[600px] absolute left-0 top-1/2 -translate-y-1/2 z-0">
             {cards.slice(0, 2).map((card, idx) => (
-              <div key={idx} className="bg-hero-green rounded-lg p-[30px] pl-[50px] pr-[150px] flex flex-col gap-2">
-                <div className="flex items-center gap-[10px]">
-                  <img src={card.icon} alt="" className="size-6" />
-                  <h3 className="font-montserrat font-black text-[28px] text-white leading-tight">{card.title}</h3>
+              <div key={idx} className="bg-hero-green rounded-[80px] py-[30px] pl-[50px] pr-[200px] flex flex-col gap-2 relative">
+                <div className="flex items-center gap-[15px]">
+                  <img src={card.icon} alt="" className="size-[50px]" />
+                  <h3 className="font-montserrat font-black text-[28px] text-white leading-tight transform -rotate-[0.12deg]">{card.title}</h3>
                 </div>
-                <p className="font-montserrat font-medium text-[16px] text-grey-black leading-tight">
+                <p className="font-montserrat font-medium text-[16px] text-grey-black leading-[1.2]">
                   {card.description}
                 </p>
               </div>
@@ -68,19 +68,19 @@ const AboutUs = () => {
           </div>
 
           {/* Mascot Center */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px]">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[500px] z-20 pointer-events-none">
             <img src={mascotImg} alt="Gyros Heroes Logo" className="w-full h-full object-contain" />
           </div>
 
           {/* Right Cards */}
-          <div className="flex flex-col gap-[30px] w-[530px] z-10">
+          <div className="flex flex-col gap-[30px] w-[600px] absolute right-0 top-1/2 -translate-y-1/2 z-0">
             {cards.slice(2).map((card, idx) => (
-              <div key={idx} className="bg-hero-green rounded-lg p-[30px] pr-[50px] pl-[150px] flex flex-col gap-2">
-                <div className="flex items-center gap-[10px]">
-                  <img src={card.icon} alt="" className="size-6" />
-                  <h3 className="font-montserrat font-black text-[28px] text-white leading-tight">{card.title}</h3>
+              <div key={idx} className="bg-hero-green rounded-[80px] py-[30px] pl-[200px] pr-[50px] flex flex-col gap-2 relative">
+                <div className="flex items-center gap-[15px]">
+                  <img src={card.icon} alt="" className="size-[50px]" />
+                  <h3 className="font-montserrat font-black text-[28px] text-white leading-tight transform -rotate-[0.12deg]">{card.title}</h3>
                 </div>
-                <p className="font-montserrat font-medium text-[16px] text-grey-black leading-tight">
+                <p className="font-montserrat font-medium text-[16px] text-grey-black leading-[1.2]">
                   {card.description}
                 </p>
               </div>
@@ -91,16 +91,16 @@ const AboutUs = () => {
         {/* Mobile/Tablet Layout */}
         <div className="lg:hidden flex flex-col items-center gap-10">
            {/* Mascot Top */}
-           <div className="size-[300px] md:size-[400px]">
+           <div className="size-[300px] md:size-[400px] z-20 relative">
              <img src={mascotImg} alt="Gyros Heroes Logo" className="w-full h-full object-contain" />
            </div>
 
            {/* Cards Stack */}
-           <div className="flex flex-col gap-6 w-full max-w-[500px] -mt-20 md:-mt-24">
+           <div className="flex flex-col gap-6 w-full max-w-[500px] -mt-20 md:-mt-24 z-10 relative">
              {cards.map((card, idx) => (
-                <div key={idx} className="bg-hero-green rounded-lg p-6 md:p-8 flex flex-col gap-3 shadow-lg">
+                <div key={idx} className="bg-hero-green rounded-[40px] p-6 md:p-8 flex flex-col gap-3 shadow-lg">
                   <div className="flex items-center gap-3">
-                    <img src={card.icon} alt="" className="size-6" />
+                    <img src={card.icon} alt="" className="size-10" />
                     <h3 className="font-montserrat font-black text-[24px] md:text-[28px] text-white leading-tight">{card.title}</h3>
                   </div>
                   <p className="font-montserrat font-medium text-[15px] md:text-[16px] text-grey-black leading-tight">
