@@ -91,3 +91,9 @@
     - [x] Sub-task: Increase `max-w` on `md` screens (e.g., `md:max-w-[800px]`) to accommodate two columns.
     - [x] Sub-task: Ensure `-mt-[38px]` overlap applies to the top row (both cards) on tablet view.
     - [x] Sub-task: Verify mobile remains single column (`grid-cols-1`) and desktop remains split (`hidden xl:flex`).
+
+## Phase 14: Adjust Section Spacing
+- [x] Task: Reduce space between Hero button and About Us title. [711bb75]
+    - [x] Sub-task: Fetch design context for node `1-4774` to determine correct spacing.
+    - [x] Sub-task: Update `src/components/AboutUs.tsx` top padding (`py`) to match design.
+    - [x] Sub-task: Verify visual fidelity with screenshot.
