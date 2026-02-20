@@ -34,8 +34,13 @@
     - [x] Sub-task: Verify the specific mobile overlap requirement.
 - [x] Task: Conductor - User Manual Verification 'Final Verification' (Protocol in workflow.md)
 
-## Phase 4: Feedback Fixes
+## Phase 4: Feedback Fixes [checkpoint: 8e7f201]
 - [x] Task: Fix logo overlap on text issues. [f401d2f]
     - [x] Sub-task: Change desktop split layout breakpoint from `lg` (1024px) to `xl` (1280px) to prevent card overlap on smaller desktop screens.
     - [x] Sub-task: Adjust mobile/stacked layout z-index to place mascot *behind* (z-0) the cards (z-10) to ensure text readability, or increase top padding of the first card if mascot must be on top.
     - [x] Sub-task: Verify no text is obscured on any screen size.
+
+## Phase 5: Refine Mobile Layout
+- [x] Task: Reduce vertical padding on mobile first card. [91d1165]
+    - [x] Sub-task: Change top padding of the first card from `140px` to a responsive value (e.g., `pt-[90px] md:pt-[140px]`) to reduce excessive whitespace on mobile.
+    - [x] Sub-task: Verify text is still not covered by mascot.
