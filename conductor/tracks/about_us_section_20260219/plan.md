@@ -45,8 +45,13 @@
     - [x] Sub-task: Change top padding of the first card from `140px` to a responsive value (e.g., `pt-[90px] md:pt-[140px]`) to reduce excessive whitespace on mobile.
     - [x] Sub-task: Verify text is still not covered by mascot.
 
-## Phase 6: Optimize Mobile Spacing
+## Phase 6: Optimize Mobile Spacing [checkpoint: 29c71f1]
 - [x] Task: Reduce overlap and card height on mobile. [69f7890]
     - [x] Sub-task: Change negative margin from `-mt-20 md:-mt-24` to `-mt-12 md:-mt-16`.
     - [x] Sub-task: Reduce top padding of first card from `pt-[90px] md:pt-[140px]` to `pt-[70px] md:pt-[100px]`.
     - [x] Sub-task: Ensure layout still looks intentional (slight overlap) but minimizes wasted space.
+
+## Phase 7: Finalize Mobile Padding
+- [x] Task: Set mobile padding top to fixed 100px. [fcf2d34]
+    - [x] Sub-task: Update `src/components/AboutUs.tsx` to set the first card's top padding to `pt-[100px]` on all stacked breakpoints (mobile/tablet/lg).
+    - [x] Sub-task: Adjust negative margin to `-mt-20` (80px) to balance the layout.
