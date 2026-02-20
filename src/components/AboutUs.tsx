@@ -89,7 +89,7 @@ const AboutUs = () => {
         </div>
 
         {/* Mobile/Tablet Layout */}
-        <div className="xl:hidden flex flex-col items-center gap-10">
+        <div className="xl:hidden flex flex-col items-center gap-0">
            {/* Mascot Top */}
            <div className="size-[300px] md:size-[400px] z-0 relative">
              <img src={mascotImg} alt="Gyros Heroes Logo" className="w-full h-full object-contain" />
