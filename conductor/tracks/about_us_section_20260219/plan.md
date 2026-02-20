@@ -61,3 +61,9 @@
     - [x] Sub-task: Update `src/components/AboutUs.tsx` to remove `pt-[100px]` from the first card in stacked view.
     - [x] Sub-task: Remove `-mt-16 md:-mt-20` from the cards stack container to eliminate overlap and wasted space.
     - [x] Sub-task: Confirm all green sections have uniform height and fit text perfectly.
+
+## Phase 9: Restore Overlap Correctly
+- [x] Task: Re-introduce overlap and padding to match Figma reference. [ddc5492]
+    - [x] Sub-task: Set negative margin to `-mt-24` (96px) on mobile stack to pull cards up under mascot.
+    - [x] Sub-task: Set first card top padding to `pt-[120px]` (96px overlap + 24px clearance) to position text below mascot.
+    - [x] Sub-task: Verify mascot is `z-20` and cards are `z-10` for correct layering.
