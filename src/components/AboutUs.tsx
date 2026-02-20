@@ -91,14 +91,14 @@ const AboutUs = () => {
         {/* Mobile/Tablet Layout */}
         <div className="xl:hidden flex flex-col items-center gap-10">
            {/* Mascot Top */}
-           <div className="size-[300px] md:size-[400px] z-20 relative">
+           <div className="size-[300px] md:size-[400px] z-0 relative">
              <img src={mascotImg} alt="Gyros Heroes Logo" className="w-full h-full object-contain" />
            </div>
 
            {/* Cards Stack */}
            <div className="flex flex-col gap-6 w-full max-w-[500px] -mt-24 z-10 relative">
              {cards.map((card, idx) => (
-                <div key={idx} className={`bg-hero-green rounded-[40px] p-6 md:p-8 flex flex-col gap-3 shadow-lg ${idx === 0 ? 'pt-[120px]' : ''}`}>
+                <div key={idx} className="bg-hero-green rounded-[40px] p-6 md:p-8 flex flex-col gap-3 shadow-lg">
                   <div className="flex items-center gap-3">
                     <img src={card.icon} alt="" className="size-10" />
                     <h3 className="font-montserrat font-black text-[24px] md:text-[28px] text-white leading-tight">{card.title}</h3>
