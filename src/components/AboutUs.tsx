@@ -32,7 +32,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="o-nama" className="relative w-full bg-hero-blue py-[60px] md:py-[100px] flex flex-col items-center gap-[60px] overflow-hidden">
+    <section id="o-nama" className="relative w-full bg-hero-blue py-[40px] md:py-[100px] flex flex-col items-center gap-[30px] md:gap-[60px] overflow-hidden">
       {/* Title */}
       <div className="text-center px-4">
         <h2 className="font-montserrat font-bold text-[60px] md:text-[120px] text-white leading-none tracking-[-3px] md:tracking-[-6px]">
