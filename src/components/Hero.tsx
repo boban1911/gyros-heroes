@@ -1,5 +1,5 @@
-import heroBg from '../assets/hero-bg.png';
-import sunImg from '../assets/sun.png';
+import heroBg from '../assets/hero-bg.webp';
+import sunImg from '../assets/sun.webp';
 import SuperheroMascot from './SuperheroMascot';
 
 export default function Hero() {
