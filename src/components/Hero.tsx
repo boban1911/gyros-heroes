@@ -1,5 +1,4 @@
 import heroBg from '../assets/hero-bg.webp';
-import sunImg from '../assets/sun.webp';
 import SuperheroMascot from './SuperheroMascot';
 
 export default function Hero() {
@@ -17,11 +16,6 @@ export default function Hero() {
                   />
               </div>
               
-              {/* Sun Decoration */}
-              <div className="absolute -left-[10%] top-[-10%] w-[120%] aspect-square opacity-20 mix-blend-overlay">
-                  <img src={sunImg} alt="" className="w-full h-full object-contain" />
-              </div>
-
               {/* Gradient Overlay from design */}
               <div 
                   className="absolute inset-0" 
