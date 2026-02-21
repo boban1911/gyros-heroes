@@ -6,12 +6,17 @@ import gallery2 from '../assets/gallery/gallery-2.webp';
 import gallery3 from '../assets/gallery/gallery-3.webp';
 import gallery4 from '../assets/gallery/gallery-4.webp';
 
-const images = [gallery1, gallery2, gallery3, gallery4];
+const images = [
+  { src: gallery1, type: 'small' },
+  { src: gallery2, type: 'large' },
+  { src: gallery3, type: 'small' },
+  { src: gallery4, type: 'small' },
+];
 
 export default function GallerySlider() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     dragFree: true, 
-    containScroll: false, // Must be false for loop to work correctly with variable widths sometimes, but 'trimSnaps' is usually fine. Let's try loop: true.
+    containScroll: false, 
     align: 'start',
     loop: true
   });
@@ -28,25 +33,41 @@ export default function GallerySlider() {
     <div className="relative w-full group">
       {/* Slider Viewport */}
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex gap-4 md:gap-8 px-4 md:px-0">
-          {images.map((src, index) => (
-            <div 
-              key={index} 
-              // Increased width: mobile 85%, tablet 60%, desktop 45%
-              className="relative flex-[0_0_85%] md:flex-[0_0_60%] lg:flex-[0_0_45%] min-w-0"
-            >
-              <div className={`relative overflow-hidden rounded-[40px] md:rounded-[80px] h-[350px] md:h-[500px]`}>
-                <img 
-                  src={src} 
-                  alt={`Gallery image ${index + 1}`} 
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/10" />
-                {/* Bottom Gradient Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-hero-blue/80 to-transparent backdrop-blur-[2px]" />
+        {/* Added items-end for bottom alignment of different height images */}
+        <div className="flex gap-4 md:gap-8 px-4 md:px-0 items-end">
+          {images.map((img, index) => {
+            const isLarge = img.type === 'large';
+            
+            return (
+              <div 
+                key={index} 
+                className={`
+                  relative min-w-0
+                  /* Mobile: Wide cards for swiping */
+                  flex-[0_0_85%]
+                  /* Tablet/Desktop: Variable widths based on type */
+                  ${isLarge ? 'md:flex-[0_0_55%] lg:flex-[0_0_45%]' : 'md:flex-[0_0_45%] lg:flex-[0_0_35%]'}
+                  transition-all duration-300
+                `}
+              >
+                <div className={`
+                  relative overflow-hidden rounded-[40px] md:rounded-[80px]
+                  /* Heights based on type */
+                  ${isLarge ? 'h-[400px] md:h-[500px]' : 'h-[350px] md:h-[444px]'}
+                  w-full
+                `}>
+                  <img 
+                    src={img.src} 
+                    alt={`Gallery image ${index + 1}`} 
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/10" />
+                  {/* Bottom Gradient Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-hero-blue/80 to-transparent backdrop-blur-[2px]" />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
