@@ -40,7 +40,7 @@ const AboutUs = () => {
         <img 
           src={aboutUsBg} 
           alt="" 
-          className="w-full h-full object-cover object-top" 
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 min-w-[700px] md:min-w-full w-auto md:w-full h-auto md:h-full object-cover object-top" 
         />
       </div>
 
