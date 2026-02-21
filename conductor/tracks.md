@@ -7,5 +7,5 @@
 
 ---
 
-- [ ] **Track: Implement Locations & Gallery Section**
+- [x] **Track: Implement Locations & Gallery Section**
 *Link: [./tracks/locations_gallery_20260221/](./tracks/locations_gallery_20260221/)*
