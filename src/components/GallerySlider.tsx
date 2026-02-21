@@ -36,7 +36,7 @@ export default function GallerySlider() {
   return (
     <div className="relative w-full group">
       {/* Slider Viewport - Handle its own overflow */}
-      <div className="overflow-visible" ref={emblaRef}>
+      <div className="overflow-hidden" ref={emblaRef}>
         {/* Negative margin to align first slide's padding with the parent container's left padding */}
         <div className="flex items-end -ml-4 md:-ml-8">
           {images.map((img, index) => {

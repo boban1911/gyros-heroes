@@ -19,10 +19,10 @@ const locations = [
 export default function LocationsGallery() {
   return (
     <section id="lokacije" className="w-full bg-hero-blue py-20 flex flex-col items-center">
-      <div className="w-full max-w-[1400px] px-[20px] flex flex-col gap-12 md:gap-16">
+      <div className="w-full max-w-[1400px] px-[20px] flex flex-col items-center gap-12 md:gap-16">
         
         {/* Title & Description */}
-        <div className="flex flex-col gap-8 text-left max-w-4xl">
+        <div className="flex flex-col gap-8 items-center text-center max-w-4xl">
           <h2 className="font-montserrat font-bold text-[48px] md:text-[80px] leading-[1.1] text-white">
             Pogledaj naše <br />
             <span className="text-hero-yellow italic italic-important">Lokacije & galeriju</span>
@@ -33,7 +33,7 @@ export default function LocationsGallery() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col md:flex-row flex-wrap gap-4 md:gap-6 items-start">
+        <div className="flex flex-col md:flex-row flex-wrap gap-4 md:gap-6 justify-center w-full">
           {locations.map((loc, idx) => (
             <a 
               key={idx}
