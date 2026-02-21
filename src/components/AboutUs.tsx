@@ -36,11 +36,11 @@ const AboutUs = () => {
     <section id="o-nama" className="relative w-full bg-hero-blue pt-0 pb-[40px] md:pb-[100px] xl:py-[100px] flex flex-col items-center gap-[30px] md:gap-[60px] overflow-hidden">
       
       {/* Background Illustration - Anchored to bottom, scales with width */}
-      <div className="absolute bottom-0 left-0 right-0 z-0 flex items-end justify-center pointer-events-none opacity-80 overflow-hidden">
+      <div className="absolute top-[220px] md:top-[280px] left-0 right-0 bottom-0 z-0 pointer-events-none opacity-80 overflow-hidden">
         <img 
           src={aboutUsBg} 
           alt="" 
-          className="w-full h-auto object-cover object-top min-w-[1440px] md:min-w-full" 
+          className="w-full h-full object-cover object-top" 
         />
       </div>
 
