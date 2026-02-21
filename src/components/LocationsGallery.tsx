@@ -18,8 +18,8 @@ const locations = [
 
 export default function LocationsGallery() {
   return (
-    <section id="lokacije" className="w-full bg-hero-blue py-20 px-4 md:px-0 flex flex-col items-center">
-      <div className="w-full max-w-[1240px] flex flex-col gap-16 overflow-hidden">
+    <section id="lokacije" className="w-full bg-hero-blue py-20 flex flex-col items-center">
+      <div className="w-full max-w-[1400px] px-[20px] flex flex-col gap-12 md:gap-16">
         
         {/* Title & Description */}
         <div className="flex flex-col gap-8 text-left max-w-4xl">
@@ -33,14 +33,14 @@ export default function LocationsGallery() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col md:flex-row flex-wrap gap-4 md:gap-8 items-start">
+        <div className="flex flex-col md:flex-row flex-wrap gap-4 md:gap-6 items-start">
           {locations.map((loc, idx) => (
             <a 
               key={idx}
               href={loc.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-hero-yellow text-grey-black font-montserrat font-semibold text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-6 md:px-10 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-all duration-300 whitespace-nowrap gap-2"
+              className="group bg-hero-yellow text-grey-black font-montserrat font-semibold text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-6 md:px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-all duration-300 whitespace-nowrap gap-2"
             >
               <svg 
                 viewBox="0 0 24 24" 
@@ -59,7 +59,7 @@ export default function LocationsGallery() {
           ))}
         </div>
 
-        {/* Gallery Slider */}
+        {/* Gallery Slider - No overflow-hidden here, handled by Slider component */}
         <div className="w-full mt-4">
           <GallerySlider />
         </div>

@@ -11,6 +11,10 @@ const images = [
   { src: gallery2, type: 'large' },
   { src: gallery3, type: 'small' },
   { src: gallery4, type: 'small' },
+  { src: gallery1, type: 'small' },
+  { src: gallery2, type: 'large' },
+  { src: gallery3, type: 'small' },
+  { src: gallery4, type: 'small' },
 ];
 
 export default function GallerySlider() {
@@ -31,10 +35,10 @@ export default function GallerySlider() {
 
   return (
     <div className="relative w-full group">
-      {/* Slider Viewport */}
-      <div className="overflow-hidden" ref={emblaRef}>
-        {/* Added items-end for bottom alignment of different height images */}
-        <div className="flex gap-4 md:gap-8 px-4 md:px-0 items-end">
+      {/* Slider Viewport - Handle its own overflow */}
+      <div className="overflow-visible" ref={emblaRef}>
+        {/* Negative margin to align first slide's padding with the parent container's left padding */}
+        <div className="flex items-end -ml-4 md:-ml-8">
           {images.map((img, index) => {
             const isLarge = img.type === 'large';
             
@@ -42,18 +46,17 @@ export default function GallerySlider() {
               <div 
                 key={index} 
                 className={`
-                  relative min-w-0
+                  relative min-w-0 pl-4 md:pl-8
                   /* Mobile: Wide cards for swiping */
                   flex-[0_0_85%]
                   /* Tablet/Desktop: Variable widths based on type */
-                  ${isLarge ? 'md:flex-[0_0_55%] lg:flex-[0_0_45%]' : 'md:flex-[0_0_45%] lg:flex-[0_0_35%]'}
-                  transition-all duration-300
+                  ${isLarge ? 'md:flex-[0_0_65%] lg:flex-[0_0_45%]' : 'md:flex-[0_0_55%] lg:flex-[0_0_35%]'}
                 `}
               >
                 <div className={`
                   relative overflow-hidden rounded-[40px] md:rounded-[80px]
                   /* Heights based on type */
-                  ${isLarge ? 'h-[400px] md:h-[500px]' : 'h-[350px] md:h-[444px]'}
+                  ${isLarge ? 'h-[350px] md:h-[500px]' : 'h-[300px] md:h-[444px]'}
                   w-full
                 `}>
                   <img 
@@ -74,7 +77,7 @@ export default function GallerySlider() {
       {/* Navigation Arrows (Visible on Desktop) */}
       <button 
         onClick={scrollPrev}
-        className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 rounded-full items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 text-hero-blue"
+        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 rounded-full items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 text-hero-blue"
         aria-label="Previous slide"
       >
         <ChevronLeft size={28} />
@@ -82,7 +85,7 @@ export default function GallerySlider() {
 
       <button 
         onClick={scrollNext}
-        className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 rounded-full items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 text-hero-blue"
+        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 rounded-full items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 text-hero-blue"
         aria-label="Next slide"
       >
         <ChevronRight size={28} />
