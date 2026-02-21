@@ -23,8 +23,10 @@
 - [ ] Task: Implement Gallery Slider.
     - [ ] Setup `embla-carousel-react` in `GallerySlider.tsx`.
     - [ ] Create slides using the exported WebP images.
-    - [ ] Configure Embla options (dragFree: true, containScroll: 'trimSnaps', slidesToScroll: 1, align: 'start').
+    - [ ] Configure Embla options (dragFree: true, containScroll: 'trimSnaps', slidesToScroll: 1, align: 'start', loop: true).
     - [ ] Add responsive styles (show ~1.2 images on mobile, ~3 on desktop).
+    - [ ] Make images wider (adjust flex basis).
+    - [ ] Add navigation arrows (Previous/Next) visible on larger screens.
 - [ ] Task: Verify & Polish.
     - [ ] Verify responsiveness on Mobile (375px), Tablet (768px), and Desktop (1440px).
     - [ ] Verify button links open in new tabs.

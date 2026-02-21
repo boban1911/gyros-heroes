@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AboutUs from './components/AboutUs';
 import Menu from './components/Menu';
+import LocationsGallery from './components/LocationsGallery';
 
 function App() {
   return (
@@ -22,9 +23,7 @@ function App() {
 
         <Menu />
 
-        <section id="lokacije" className="py-20 flex items-center justify-center bg-hero-blue border-b border-white/10">
-          <h2 className="text-3xl font-bold font-montserrat text-white">Lokacije</h2>
-        </section>
+        <LocationsGallery />
 
         <section id="posao" className="py-20 flex items-center justify-center bg-hero-blue border-b border-white/10">
           <h2 className="text-3xl font-bold font-montserrat text-white">Posao</h2>
