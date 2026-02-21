@@ -36,7 +36,7 @@ const AboutUs = () => {
     <section id="o-nama" className="relative w-full bg-hero-blue pt-0 pb-[40px] md:pb-[100px] xl:py-[100px] flex flex-col items-center gap-[30px] md:gap-[60px] overflow-hidden">
       
       {/* Background Illustration */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-20">
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-40">
         <img 
           src={aboutUsBg} 
           alt="" 
