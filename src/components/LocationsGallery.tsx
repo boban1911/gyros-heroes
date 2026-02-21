@@ -18,14 +18,14 @@ const locations = [
 
 export default function LocationsGallery() {
   return (
-    <section id="lokacije" className="w-full bg-hero-blue py-20 flex flex-col items-center">
+    <section id="lokacije" className="w-full bg-hero-blue-dark py-20 flex flex-col items-center">
       <div className="w-full max-w-[1400px] px-[20px] flex flex-col items-center gap-12 md:gap-16">
         
         {/* Title & Description */}
         <div className="flex flex-col gap-8 items-center text-center max-w-4xl">
           <h2 className="font-montserrat font-bold text-[48px] md:text-[80px] leading-[1.1] text-white">
             Pogledaj naše <br />
-            <span className="text-hero-yellow italic italic-important">Lokacije & galeriju</span>
+            <span className="text-hero-green italic italic-important">Lokacije & galeriju</span>
           </h2>
           <p className="font-montserrat text-[16px] md:text-[20px] text-grey-light leading-relaxed max-w-4xl">
             Naši lokali su uređeni da pruže brzo i prijatno iskustvo, sa modernim enterijerom i kuhinjom spremnom da ispuni sve porudžbine. Svaki posetilac može da očekuje isti visok kvalitet hrane i usluge, bez obzira koji lokal poseti. U galeriji možeš da pogledaš atmosferu, detalje iz kuhinje i naše najpopularnije obroke, i stekneš utisak šta te očekuje kada dođeš kod nas.

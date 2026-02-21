@@ -65,8 +65,8 @@ export default function GallerySlider() {
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/10" />
-                  {/* Bottom Gradient Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-hero-blue/80 to-transparent backdrop-blur-[2px]" />
+                  {/* Bottom Gradient Overlay - Smoother Transition */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-hero-blue-dark/90 via-hero-blue-dark/40 to-transparent backdrop-blur-[1px]" />
                 </div>
               </div>
             );

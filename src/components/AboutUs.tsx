@@ -1,5 +1,6 @@
 import React from 'react';
 import mascotImg from '../assets/about-us-mascot.svg';
+import aboutUsBg from '../assets/about-us-bg.webp';
 import iconGyros from '../assets/icon-gyros.svg';
 import iconSpecial from '../assets/icon-special.svg';
 import iconKids from '../assets/icon-kids.svg';
@@ -33,22 +34,32 @@ const AboutUs = () => {
 
   return (
     <section id="o-nama" className="relative w-full bg-hero-blue pt-0 pb-[40px] md:pb-[100px] xl:py-[100px] flex flex-col items-center gap-[30px] md:gap-[60px] overflow-hidden">
+      
+      {/* Background Illustration */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-20">
+        <img 
+          src={aboutUsBg} 
+          alt="" 
+          className="w-full h-full object-cover min-w-[1440px]" 
+        />
+      </div>
+
       {/* Title */}
-      <div className="text-center px-4">
+      <div className="relative z-10 text-center px-4">
         <h2 className="font-montserrat font-bold text-[60px] md:text-[120px] text-white leading-none tracking-[-3px] md:tracking-[-6px]">
           O <span className="text-hero-yellow italic">Nama</span>
         </h2>
       </div>
 
       {/* Description */}
-      <div className="max-w-[900px] px-6 text-center">
+      <div className="relative z-10 max-w-[900px] px-6 text-center">
         <p className="font-montserrat font-normal text-[16px] md:text-[20px] text-grey-light leading-[1.4]">
           {brandStory}
         </p>
       </div>
 
       {/* Content Grid/Stack */}
-      <div className="relative w-full max-w-[1240px] px-4">
+      <div className="relative z-10 w-full max-w-[1240px] px-4">
         
         {/* Desktop Layout */}
         <div className="hidden xl:flex items-center justify-between relative h-[600px]">

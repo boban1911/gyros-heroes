@@ -12,5 +12,5 @@
 
 ---
 
-- [ ] **Track: Add Castle Background to About Us**
+- [x] **Track: Add Castle Background to About Us**
 *Link: [./tracks/about_us_castle_bg_20260221/](./tracks/about_us_castle_bg_20260221/)*
