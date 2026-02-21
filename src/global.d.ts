@@ -1,32 +1,37 @@
 /// <reference types="vite/client" />
 
-declare module "*.svg" {
-  import * as React from "react";
+import * as React from "react";
 
+declare module "*.svg" {
+  const content: string;
+  export default content;
+  
   export const ReactComponent: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & { title?: string }
   >;
-
-  const src: string;
-  export default src;
 }
 
 declare module "*.png" {
-  const src: string;
-  export default src;
+  const content: string;
+  export default content;
 }
 
 declare module "*.jpg" {
-  const src: string;
-  export default src;
+  const content: string;
+  export default content;
 }
 
 declare module "*.jpeg" {
-  const src: string;
-  export default src;
+  const content: string;
+  export default content;
 }
 
 declare module "*.webp" {
-  const src: string;
-  export default src;
+  const content: string;
+  export default content;
+}
+
+declare module "*.gif" {
+  const content: string;
+  export default content;
 }
