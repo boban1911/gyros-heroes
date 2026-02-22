@@ -8,6 +8,7 @@ import LocationsGallery from './components/LocationsGallery';
 import Testimonials from './components/Testimonials';
 import JoinUs from './components/JoinUs';
 import OrderHero from './components/OrderHero';
+import sunBg from './assets/sun.webp';
 
 import Footer from './components/Footer';
 
@@ -37,11 +38,18 @@ function App() {
 
         <LocationsGallery />
 
-        <JoinUs />
-
-        <Testimonials />
-
-        <OrderHero />
+        <div className="relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none z-0">
+            <img 
+              src={sunBg} 
+              alt="" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <JoinUs />
+          <Testimonials />
+          <OrderHero />
+        </div>
 
       </main>
 

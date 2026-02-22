@@ -3,7 +3,7 @@ import joinUsImg from '../assets/join-us.webp';
 
 const JoinUs: React.FC = () => {
   return (
-    <section id="posao" className="w-full bg-hero-blue-dark px-[20px] py-[100px] flex flex-col items-center rounded-b-[40px] lg:rounded-b-lg">
+    <section id="posao" className="w-full bg-hero-blue-dark px-[20px] py-[100px] flex flex-col items-center rounded-b-[40px] lg:rounded-b-lg relative z-10">
       <div className="max-w-[1400px] w-full flex flex-col lg:flex-row gap-xs lg:gap-sm items-stretch">
         
         {/* Image - Left on Desktop, Bottom on Mobile */}

@@ -24,3 +24,8 @@
 
 - [x] **Track: Order Hero Section**
 *Link: [./tracks/order_hero_section_20260222/](./tracks/order_hero_section_20260222/)*
+
+---
+
+- [x] **Track: Sun Background Implementation**
+*Link: [./tracks/sun_background_20260222/](./tracks/sun_background_20260222/)*

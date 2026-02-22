@@ -2,7 +2,7 @@ import React from 'react';
 
 const OrderHero: React.FC = () => {
   return (
-    <section className="w-full px-[20px] pb-20">
+    <section className="w-full px-[20px] pb-20 relative z-10">
       <div className="w-full max-w-[1400px] mx-auto bg-hero-green rounded-[40px] lg:rounded-[80px] p-[20px] lg:p-[50px] flex flex-col lg:flex-row items-center lg:items-center justify-between gap-[30px] lg:gap-[50px] xl:gap-[150px]">
         
         {/* Title Section */}
