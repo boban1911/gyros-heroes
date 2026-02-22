@@ -7,7 +7,6 @@ export interface TestimonialCardProps {
 }
 
 export default function TestimonialCard({ author, quote, color }: TestimonialCardProps) {
-  // Map prop colors to Tailwind classes (placeholder logic for now)
   const bgClass = {
     yellow: 'bg-hero-yellow',
     green: 'bg-hero-green',
@@ -15,9 +14,14 @@ export default function TestimonialCard({ author, quote, color }: TestimonialCar
   }[color];
 
   return (
-    <div className={`p-8 rounded-[40px] md:rounded-[80px] ${bgClass} text-white flex flex-col items-center text-center gap-6 shadow-lg h-full`}>
-      <p className="font-montserrat text-lg md:text-xl leading-relaxed">"{quote}"</p>
-      <p className="font-montserrat font-bold uppercase text-base md:text-lg">— {author}</p>
+    // Updated classes:
+    // - aspect-square: To force a square-ish shape.
+    // - h-full: Fill the container.
+    // - justify-center: Center content vertically.
+    // - w-full: Fill container width.
+    <div className={`p-8 md:p-12 rounded-[40px] md:rounded-[80px] ${bgClass} text-white flex flex-col items-center justify-center text-center gap-8 shadow-lg h-full aspect-square w-full`}>
+      <p className="font-montserrat font-normal text-xl md:text-2xl lg:text-[32px] leading-relaxed">"{quote}"</p>
+      <p className="font-montserrat font-bold uppercase text-lg md:text-2xl tracking-wide">— {author}</p>
     </div>
   );
 }
