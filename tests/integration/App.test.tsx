@@ -22,7 +22,7 @@ describe('App Integration', () => {
 
   it('renders the Menu section', () => {
     render(<App />);
-    expect(screen.getByRole('heading', { level: 2, name: /Pogledaj/i })).toBeDefined();
+    expect(screen.getByRole('heading', { level: 2, name: /Pogledaj Meni/i })).toBeDefined();
     // Check for a few items to ensure menu data is loaded
     const classicHeroes = screen.getAllByText('CLASSIC HERO');
     expect(classicHeroes.length).toBeGreaterThan(0);

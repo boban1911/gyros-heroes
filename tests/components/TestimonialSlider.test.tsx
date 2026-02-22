@@ -4,28 +4,6 @@ import { describe, it, expect, vi, beforeAll } from 'vitest';
 import TestimonialSlider from '../../src/components/TestimonialSlider';
 import React from 'react';
 
-// Mock IntersectionObserver
-beforeAll(() => {
-  const mockIntersectionObserver = vi.fn();
-  mockIntersectionObserver.mockReturnValue({
-    observe: () => null,
-    unobserve: () => null,
-    disconnect: () => null,
-  });
-  window.IntersectionObserver = mockIntersectionObserver;
-  global.IntersectionObserver = mockIntersectionObserver;
-
-  // Mock ResizeObserver
-  const mockResizeObserver = vi.fn();
-  mockResizeObserver.mockReturnValue({
-    observe: () => null,
-    unobserve: () => null,
-    disconnect: () => null,
-  });
-  window.ResizeObserver = mockResizeObserver;
-  global.ResizeObserver = mockResizeObserver;
-});
-
 describe('TestimonialSlider', () => {
   it('renders slider container', () => {
     render(<TestimonialSlider />);
@@ -36,23 +14,19 @@ describe('TestimonialSlider', () => {
   it('has alignment classes for staggered layout', () => {
     render(<TestimonialSlider />);
     
-    // Radoš (Index 0) -> mt-12
-    const radosElements = screen.getAllByText(/Radoš/i);
-    // Find the wrapper div - we assume structure is: div.mt-XX > div > p(Author)
-    // Actually structure is: div.mt-XX > TestimonialCard > div > p
-    // So closest with the margin class should be 3 levels up?
-    // Let's find the element that has the transition class which is on the same div as margin
-    const radosWrapper = radosElements[0].closest('.transition-all');
+    // Radoš (Index 0) -> mt-12 md:mt-16
+    const radosElement = screen.getAllByText(/Radoš/i)[0];
+    const radosWrapper = radosElement.parentElement?.parentElement;
     expect(radosWrapper).toHaveClass('mt-12'); 
 
     // Maša (Index 1) -> mt-0
-    const masaElements = screen.getAllByText(/Maša/i);
-    const masaWrapper = masaElements[0].closest('.transition-all');
+    const masaElement = screen.getAllByText(/Maša/i)[0];
+    const masaWrapper = masaElement.parentElement?.parentElement;
     expect(masaWrapper).toHaveClass('mt-0'); 
 
-    // Vuk (Index 2) -> mt-12
-    const vukElements = screen.getAllByText(/Vuk/i);
-    const vukWrapper = vukElements[0].closest('.transition-all');
-    expect(vukWrapper).toHaveClass('mt-12'); 
+    // Vuk (Index 2) -> mt-6 md:mt-8
+    const vukElement = screen.getAllByText(/Vuk/i)[0];
+    const vukWrapper = vukElement.parentElement?.parentElement;
+    expect(vukWrapper).toHaveClass('mt-6'); 
   });
 });
