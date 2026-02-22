@@ -17,5 +17,5 @@
 
 ---
 
-- [ ] **Track: Implement testimonials section from Figma**
+- [x] **Track: Implement testimonials section from Figma**
 *Link: [./tracks/testimonials_20260222/](./tracks/testimonials_20260222/)*
