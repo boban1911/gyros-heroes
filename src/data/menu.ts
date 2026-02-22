@@ -116,7 +116,7 @@ export const MENU_ITEMS: MenuItem[] = [
       { src: platterBaseImg, className: 'absolute left-[-15.63%] max-w-none size-[191.34%] top-[-42.18%]' },
       { src: heroFullObrokMeatImg, className: 'absolute h-[130.67%] left-[-54.06%] max-w-none top-[-11.47%] w-[195.98%]' }
     ],
-    category: 'gyros',
+    category: 'meals',
   },
   {
     id: 'chicken-hero-nuggets',
@@ -155,7 +155,7 @@ export const MENU_ITEMS: MenuItem[] = [
       { src: platterBaseImg, className: 'absolute left-[-15.63%] max-w-none size-[191.34%] top-[-42.18%]' },
       { src: vegeHeroToppingImg, className: 'absolute h-[214.09%] left-[-106.14%] max-w-none top-[-67.05%] w-[321.18%]' }
     ],
-    category: 'gyros',
+    category: 'meals',
   },
 
   // Kids

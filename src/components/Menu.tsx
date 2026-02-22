@@ -17,7 +17,20 @@ const Menu: React.FC = () => {
 
     const filteredItems = activeCategory === 'all' 
         ? MENU_ITEMS 
-        : MENU_ITEMS.filter(item => item.category === activeCategory);
+        : MENU_ITEMS.filter(item => {
+            // Special handling for mobile category "move"
+            const specialGyrosItems = ['vege-hero', 'hero-full-obrok'];
+
+            if (activeCategory === 'gyros') {
+                return item.category === 'gyros' || specialGyrosItems.includes(item.id);
+            }
+
+            if (activeCategory === 'meals') {
+                return item.category === 'meals' && !specialGyrosItems.includes(item.id);
+            }
+
+            return item.category === activeCategory;
+        });
 
     // Group items for specific layout sections (Desktop view primarily)
     const gyrosItems = MENU_ITEMS.filter(item => item.category === 'gyros');
