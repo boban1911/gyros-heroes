@@ -22,23 +22,17 @@ const testimonials: TestimonialCardProps[] = [
 ];
 
 export default function TestimonialSlider() {
-  // Use 'start' alignment for consistent layout, or 'center' if we want the middle card strictly centered.
-  // The "jumping" often comes from inconsistent slide sizes or alignment + loop.
-  // Since we have exactly 3 items and maybe show 3 on desktop, looping might be redundant or jumpy if not enough slides.
-  // Embla docs say: "Loop: true requires at least as many slides as per view + 1 usually".
-  // If we have 3 slides and show 3, loop can be tricky.
-  // Let's duplicate the slides if we want a smooth infinite loop effect, OR just disable loop if we fit all content.
-  // But the design implies a carousel.
-  // Let's double the slides to 6 to make the loop smoother.
+  // Use dragFree: true for natural scrolling flow (like GallerySlider)
+  // Use containScroll: false to allow free movement
+  // Use loop: true for infinite scroll
   
   const duplicatedTestimonials = [...testimonials, ...testimonials];
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: true, 
-    align: 'start', // 'start' usually behaves better for equal-width grids
-    breakpoints: {
-      '(min-width: 1024px)': { align: 'start' }
-    }
+    dragFree: true, 
+    containScroll: false,
+    align: 'start',
+    loop: true
   });
 
   const scrollPrev = useCallback(() => {
@@ -54,14 +48,10 @@ export default function TestimonialSlider() {
       <div className="overflow-hidden py-12" ref={emblaRef}>
         <div className="flex -ml-4 items-start">
           {duplicatedTestimonials.map((t, i) => {
-            // Staggered layout logic needs to adapt to index % 3
-            // Original: 0->Down, 1->Up, 2->Down
-            // Pattern repeats: 0, 1, 2, 0, 1, 2...
-            // So modulo 3: 
-            // 0 -> Down
-            // 1 -> Up
-            // 2 -> Down
-            
+            // Stagger logic based on i % 3 to match design:
+            // 0 (Yellow) -> Down
+            // 1 (Green) -> Up
+            // 2 (Blue) -> Down
             const modIndex = i % 3;
             const isCenter = modIndex === 1;
             const marginTopClass = isCenter ? 'mt-0' : 'mt-12 md:mt-16'; 
@@ -69,7 +59,7 @@ export default function TestimonialSlider() {
             return (
               <div 
                 key={i} 
-                className={`flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4 min-w-0 transition-all duration-300 ${marginTopClass}`}
+                className={`flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4 min-w-0 ${marginTopClass}`}
               >
                 <TestimonialCard {...t} />
               </div>
