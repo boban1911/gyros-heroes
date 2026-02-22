@@ -17,11 +17,11 @@
     - [x] Use `embla-carousel-react` (following `GallerySlider` pattern).
     - [x] Implement responsive behavior (cards per view).
     - [x] Add navigation buttons/controls.
-- [~] Task: Implement `Testimonials` section wrapper.
-    - [ ] Add Section Header "Šta naši gosti kažu".
-    - [ ] Integrate `TestimonialSlider` with static data.
-- [ ] Task: Verify tests pass.
-- [ ] Task: Conductor - User Manual Verification 'Component Implementation' (Protocol in workflow.md)
+- [x] Task: Implement `Testimonials` section wrapper. [commit: d61fa69]
+    - [x] Add Section Header "Šta naši gosti kažu".
+    - [x] Integrate `TestimonialSlider` with static data.
+- [x] Task: Verify tests pass. [commit: d61fa69]
+- [~] Task: Conductor - User Manual Verification 'Component Implementation' (Protocol in workflow.md)
 
 ## Phase 3: Integration and Polish
 - [ ] Task: Integrate `Testimonials` into `src/App.tsx`.
