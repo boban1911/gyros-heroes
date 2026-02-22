@@ -19,9 +19,16 @@ export default function TestimonialCard({ author, quote, color }: TestimonialCar
     // - h-full: Fill the container.
     // - justify-center: Center content vertically.
     // - w-full: Fill container width.
-    <div className={`p-8 md:p-12 rounded-[40px] md:rounded-[80px] ${bgClass} text-white flex flex-col items-center justify-center text-center gap-8 shadow-lg h-full aspect-square w-full`}>
-      <p className="font-montserrat font-normal text-xl md:text-2xl lg:text-[32px] leading-relaxed">"{quote}"</p>
-      <p className="font-montserrat font-bold uppercase text-lg md:text-2xl tracking-wide">— {author}</p>
+    // - overflow-hidden: Ensure content doesn't spill out.
+    // - max-w-full: Constrain width.
+    <div className={`p-6 md:p-8 lg:p-12 rounded-[40px] md:rounded-[80px] ${bgClass} text-white flex flex-col items-center justify-center text-center gap-4 md:gap-8 shadow-lg h-full aspect-square w-full overflow-hidden`}>
+      {/* Quote Container: flex-1 to take available space, overflow-y-auto to scroll if *really* long, but hidden scrollbar preferred */}
+      <div className="flex-1 flex items-center justify-center w-full overflow-hidden">
+        <p className="font-montserrat font-normal text-lg md:text-xl lg:text-[28px] leading-relaxed line-clamp-[8] md:line-clamp-none">
+          "{quote}"
+        </p>
+      </div>
+      <p className="font-montserrat font-bold uppercase text-base md:text-xl lg:text-2xl tracking-wide shrink-0 pb-2 md:pb-0">— {author}</p>
     </div>
   );
 }
