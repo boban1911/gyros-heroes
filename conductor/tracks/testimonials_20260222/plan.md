@@ -10,14 +10,14 @@
 - [x] Task: Conductor - User Manual Verification 'Setup and Test Structure' (Protocol in workflow.md) [commit: 366c591]
 
 ## Phase 2: Component Implementation (TDD)
-- [ ] Task: Implement `TestimonialCard`.
-    - [ ] Match Figma design (colors, typography, layout).
-    - [ ] Props: `author`, `quote`, `color` (Yellow/Green/Blue).
-- [ ] Task: Implement `TestimonialSlider`.
-    - [ ] Use `embla-carousel-react` (following `GallerySlider` pattern).
-    - [ ] Implement responsive behavior (cards per view).
-    - [ ] Add navigation buttons/controls.
-- [ ] Task: Implement `Testimonials` section wrapper.
+- [x] Task: Implement `TestimonialCard`. [commit: ffe7fa4]
+    - [x] Match Figma design (colors, typography, layout).
+    - [x] Props: `author`, `quote`, `color` (Yellow/Green/Blue).
+- [x] Task: Implement `TestimonialSlider`. [commit: 4999c88]
+    - [x] Use `embla-carousel-react` (following `GallerySlider` pattern).
+    - [x] Implement responsive behavior (cards per view).
+    - [x] Add navigation buttons/controls.
+- [~] Task: Implement `Testimonials` section wrapper.
     - [ ] Add Section Header "Šta naši gosti kažu".
     - [ ] Integrate `TestimonialSlider` with static data.
 - [ ] Task: Verify tests pass.
