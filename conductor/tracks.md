@@ -14,8 +14,3 @@
 
 - [x] **Track: Add Castle Background to About Us**
 *Link: [./tracks/about_us_castle_bg_20260221/](./tracks/about_us_castle_bg_20260221/)*
-
----
-
-- [x] **Track: Implement testimonials section from Figma**
-*Link: [./tracks/testimonials_20260222/](./tracks/testimonials_20260222/)*
