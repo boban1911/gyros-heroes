@@ -56,11 +56,10 @@ export default function TestimonialSlider() {
             return (
               <div 
                 key={i} 
-                // Adjusted breakpoints:
-                // md: 50% (2 cards)
-                // lg: 50% (2 cards - iPad Pro Portrait 1024px)
-                // xl: 33.33% (3 cards - Desktop/Landscape 1280px+)
-                className={`flex-[0_0_100%] md:flex-[0_0_50%] xl:flex-[0_0_33.33%] pl-4 min-w-0 ${marginTopClass}`}
+                // Reverted to 33.33% on lg (3 cards)
+                // xl stays 33.33%
+                // md stays 50%
+                className={`flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4 min-w-0 ${marginTopClass}`}
               >
                 <TestimonialCard {...t} />
               </div>
