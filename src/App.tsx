@@ -5,6 +5,7 @@ import AboutUs from './components/AboutUs';
 import Menu from './components/Menu';
 import LocationsGallery from './components/LocationsGallery';
 import Testimonials from './components/Testimonials';
+import JoinUs from './components/JoinUs';
 
 function App() {
   return (
@@ -26,9 +27,7 @@ function App() {
 
         <LocationsGallery />
 
-        <section id="posao" className="py-20 flex items-center justify-center bg-hero-blue border-b border-white/10">
-          <h2 className="text-3xl font-bold font-montserrat text-white">Posao</h2>
-        </section>
+        <JoinUs />
 
         <Testimonials />
 
