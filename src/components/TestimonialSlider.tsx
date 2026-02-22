@@ -21,30 +21,40 @@ const testimonials: TestimonialCardProps[] = [
 ];
 
 export default function TestimonialSlider() {
-  // Use 'center' alignment so the middle card is actually centered if there are 3 cards visible
+  // Use 'start' alignment for consistent layout, or 'center' if we want the middle card strictly centered.
+  // The "jumping" often comes from inconsistent slide sizes or alignment + loop.
+  // Since we have exactly 3 items and maybe show 3 on desktop, looping might be redundant or jumpy if not enough slides.
+  // Embla docs say: "Loop: true requires at least as many slides as per view + 1 usually".
+  // If we have 3 slides and show 3, loop can be tricky.
+  // Let's duplicate the slides if we want a smooth infinite loop effect, OR just disable loop if we fit all content.
+  // But the design implies a carousel.
+  // Let's double the slides to 6 to make the loop smoother.
+  
+  const duplicatedTestimonials = [...testimonials, ...testimonials];
+
   const [emblaRef] = useEmblaCarousel({ 
     loop: true, 
-    align: 'center', // Center alignment for the prominent middle card
+    align: 'start', // 'start' usually behaves better for equal-width grids
     breakpoints: {
-      '(min-width: 1024px)': { align: 'start' } // On desktop, we want to align start but control layout via margins manually if we show all 3
+      '(min-width: 1024px)': { align: 'start' }
     }
   });
 
   return (
-    <div className="overflow-hidden py-12" ref={emblaRef}> {/* Added py-12 to allow space for transform/margins */}
-      <div className="flex -ml-4 items-start"> {/* items-start to allow margin-top to push down */}
-        {testimonials.map((t, i) => {
-          // Logic for staggered layout:
-          // Center card (index 1) is "up" (no margin top).
-          // Side cards (index 0 and 2) are "down" (margin top).
-          // This applies mostly to desktop/tablet where multiple cards are visible.
-          // On mobile (stack/single view), this might look weird if we enforce it strictly, 
-          // but let's try to match the desktop design first.
+    <div className="overflow-hidden py-12" ref={emblaRef}>
+      <div className="flex -ml-4 items-start">
+        {duplicatedTestimonials.map((t, i) => {
+          // Staggered layout logic needs to adapt to index % 3
+          // Original: 0->Down, 1->Up, 2->Down
+          // Pattern repeats: 0, 1, 2, 0, 1, 2...
+          // So modulo 3: 
+          // 0 -> Down
+          // 1 -> Up
+          // 2 -> Down
           
-          // Let's assume on desktop we see all 3.
-          // Index 1 is the "center" visually.
-          const isCenter = i === 1;
-          const marginTopClass = isCenter ? 'mt-0' : 'mt-12 md:mt-16'; // Push side cards down
+          const modIndex = i % 3;
+          const isCenter = modIndex === 1;
+          const marginTopClass = isCenter ? 'mt-0' : 'mt-12 md:mt-16'; 
           
           return (
             <div 
