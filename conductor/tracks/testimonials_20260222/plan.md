@@ -1,13 +1,13 @@
 # Implementation Plan - Implement Testimonials Section
 
 ## Phase 1: Setup and Test Structure
-- [ ] Task: Create initial component files (skeletons).
-    - [ ] Create `src/components/Testimonials.tsx`
-    - [ ] Create `src/components/TestimonialSlider.tsx`
-    - [ ] Create `src/components/TestimonialCard.tsx`
-- [ ] Task: Create test file `src/tests/components/Testimonials.test.tsx`.
-    - [ ] Define initial failing tests (render check, key elements presence).
-- [ ] Task: Conductor - User Manual Verification 'Setup and Test Structure' (Protocol in workflow.md)
+- [x] Task: Create initial component files (skeletons). [commit: c63034b]
+    - [x] Create `src/components/Testimonials.tsx`
+    - [x] Create `src/components/TestimonialSlider.tsx`
+    - [x] Create `src/components/TestimonialCard.tsx`
+- [x] Task: Create test file `src/tests/components/Testimonials.test.tsx`. [commit: 366c591]
+    - [x] Define initial failing tests (render check, key elements presence).
+- [x] Task: Conductor - User Manual Verification 'Setup and Test Structure' (Protocol in workflow.md) [commit: 366c591]
 
 ## Phase 2: Component Implementation (TDD)
 - [ ] Task: Implement `TestimonialCard`.
