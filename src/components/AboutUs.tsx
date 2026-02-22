@@ -33,7 +33,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="o-nama" className="relative w-full bg-hero-blue pt-0 pb-[40px] md:pb-[100px] xl:py-[100px] flex flex-col items-center gap-[30px] md:gap-[60px] overflow-hidden">
+    <section id="o-nama" className="relative w-full bg-hero-blue pt-0 pb-[150px] md:pb-[300px] xl:py-[100px] xl:pb-[300px] flex flex-col items-center gap-[30px] md:gap-[60px] overflow-visible">
       
       {/* Background Illustration - Anchored to bottom, scales with width */}
       <div className="absolute top-[220px] md:top-[280px] left-0 right-0 bottom-0 z-0 pointer-events-none opacity-80 overflow-hidden">
