@@ -30,13 +30,17 @@ describe('TestimonialCard', () => {
 
   it('has square-ish aspect ratio or min-height', () => {
     const { container } = render(<TestimonialCard {...defaultProps} />);
-    // We check for aspect-square OR a specific min-height/width class that enforces the shape
-    // Based on Figma, it's roughly 578x545 which is almost square.
-    // So 'aspect-square' or 'h-full' with a wrapper constraints.
-    // Let's check for 'aspect-square' as a starting point for "square-ish".
-    // Or check if it has w-full and h-full to fill a square container.
-    // Let's check for a class that implies size.
-    expect(container.firstChild).toHaveClass('h-full'); 
-    expect(container.firstChild).toHaveClass('justify-center'); // Content centered vertically
+    expect(container.firstChild).toHaveClass('aspect-square'); 
+    expect(container.firstChild).toHaveClass('justify-center');
+  });
+
+  it('has overflow handling', () => {
+    const { container } = render(<TestimonialCard {...defaultProps} />);
+    // Check for overflow-hidden or similar
+    // Actually we want text to FIT, so maybe flex-shrink or clamping?
+    // Or just overflow-hidden to prevent spilling out.
+    // The safest check is overflow-hidden on the card container.
+    // Or on a text wrapper.
+    expect(container.firstChild).toHaveClass('overflow-hidden');
   });
 });
