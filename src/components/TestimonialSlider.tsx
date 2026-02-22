@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import TestimonialCard, { TestimonialCardProps } from './TestimonialCard';
 
 const testimonials: TestimonialCardProps[] = [
@@ -32,7 +33,7 @@ export default function TestimonialSlider() {
   
   const duplicatedTestimonials = [...testimonials, ...testimonials];
 
-  const [emblaRef] = useEmblaCarousel({ 
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true, 
     align: 'start', // 'start' usually behaves better for equal-width grids
     breakpoints: {
@@ -40,32 +41,59 @@ export default function TestimonialSlider() {
     }
   });
 
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
   return (
-    <div className="overflow-hidden py-12" ref={emblaRef}>
-      <div className="flex -ml-4 items-start">
-        {duplicatedTestimonials.map((t, i) => {
-          // Staggered layout logic needs to adapt to index % 3
-          // Original: 0->Down, 1->Up, 2->Down
-          // Pattern repeats: 0, 1, 2, 0, 1, 2...
-          // So modulo 3: 
-          // 0 -> Down
-          // 1 -> Up
-          // 2 -> Down
-          
-          const modIndex = i % 3;
-          const isCenter = modIndex === 1;
-          const marginTopClass = isCenter ? 'mt-0' : 'mt-12 md:mt-16'; 
-          
-          return (
-            <div 
-              key={i} 
-              className={`flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4 min-w-0 transition-all duration-300 ${marginTopClass}`}
-            >
-              <TestimonialCard {...t} />
-            </div>
-          );
-        })}
+    <div className="relative w-full group">
+      <div className="overflow-hidden py-12" ref={emblaRef}>
+        <div className="flex -ml-4 items-start">
+          {duplicatedTestimonials.map((t, i) => {
+            // Staggered layout logic needs to adapt to index % 3
+            // Original: 0->Down, 1->Up, 2->Down
+            // Pattern repeats: 0, 1, 2, 0, 1, 2...
+            // So modulo 3: 
+            // 0 -> Down
+            // 1 -> Up
+            // 2 -> Down
+            
+            const modIndex = i % 3;
+            const isCenter = modIndex === 1;
+            const marginTopClass = isCenter ? 'mt-0' : 'mt-12 md:mt-16'; 
+            
+            return (
+              <div 
+                key={i} 
+                className={`flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4 min-w-0 transition-all duration-300 ${marginTopClass}`}
+              >
+                <TestimonialCard {...t} />
+              </div>
+            );
+          })}
+        </div>
       </div>
+
+      {/* Navigation Arrows (Visible on Desktop) */}
+      <button 
+        onClick={scrollPrev}
+        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 rounded-full items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 text-hero-blue"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft size={28} />
+      </button>
+
+      <button 
+        onClick={scrollNext}
+        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 rounded-full items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 text-hero-blue"
+        aria-label="Next slide"
+      >
+        <ChevronRight size={28} />
+      </button>
     </div>
   );
 }
