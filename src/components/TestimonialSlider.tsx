@@ -44,13 +44,8 @@ export default function TestimonialSlider() {
       <div className="overflow-hidden py-12" ref={emblaRef}>
         <div className="flex -ml-4 items-start">
           {duplicatedTestimonials.map((t, i) => {
-            // Adjusted stagger logic:
-            // 0 (Yellow) -> Down (Lowest) -> mt-12 md:mt-16
-            // 1 (Green) -> Up (Highest) -> mt-0
-            // 2 (Blue) -> Mid (Intermediate) -> mt-6 md:mt-8
-            
             const modIndex = i % 3;
-            let marginTopClass = 'mt-12 md:mt-16'; // Default lowest (Yellow)
+            let marginTopClass = 'mt-12 md:mt-16'; 
 
             if (modIndex === 1) { // Green
               marginTopClass = 'mt-0';
@@ -61,7 +56,11 @@ export default function TestimonialSlider() {
             return (
               <div 
                 key={i} 
-                className={`flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4 min-w-0 ${marginTopClass}`}
+                // Adjusted breakpoints:
+                // md: 50% (2 cards)
+                // lg: 50% (2 cards - iPad Pro Portrait 1024px)
+                // xl: 33.33% (3 cards - Desktop/Landscape 1280px+)
+                className={`flex-[0_0_100%] md:flex-[0_0_50%] xl:flex-[0_0_33.33%] pl-4 min-w-0 ${marginTopClass}`}
               >
                 <TestimonialCard {...t} />
               </div>
