@@ -22,10 +22,6 @@ const testimonials: TestimonialCardProps[] = [
 ];
 
 export default function TestimonialSlider() {
-  // Use dragFree: true for natural scrolling flow (like GallerySlider)
-  // Use containScroll: false to allow free movement
-  // Use loop: true for infinite scroll
-  
   const duplicatedTestimonials = [...testimonials, ...testimonials];
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
@@ -48,13 +44,19 @@ export default function TestimonialSlider() {
       <div className="overflow-hidden py-12" ref={emblaRef}>
         <div className="flex -ml-4 items-start">
           {duplicatedTestimonials.map((t, i) => {
-            // Stagger logic based on i % 3 to match design:
-            // 0 (Yellow) -> Down
-            // 1 (Green) -> Up
-            // 2 (Blue) -> Down
+            // Adjusted stagger logic:
+            // 0 (Yellow) -> Down (Lowest) -> mt-12 md:mt-16
+            // 1 (Green) -> Up (Highest) -> mt-0
+            // 2 (Blue) -> Mid (Intermediate) -> mt-6 md:mt-8
+            
             const modIndex = i % 3;
-            const isCenter = modIndex === 1;
-            const marginTopClass = isCenter ? 'mt-0' : 'mt-12 md:mt-16'; 
+            let marginTopClass = 'mt-12 md:mt-16'; // Default lowest (Yellow)
+
+            if (modIndex === 1) { // Green
+              marginTopClass = 'mt-0';
+            } else if (modIndex === 2) { // Blue
+              marginTopClass = 'mt-6 md:mt-8';
+            }
             
             return (
               <div 
