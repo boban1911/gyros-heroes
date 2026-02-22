@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import AboutUs from './components/AboutUs';
 import Menu from './components/Menu';
 import LocationsGallery from './components/LocationsGallery';
+import Testimonials from './components/Testimonials';
 
 function App() {
   return (
@@ -29,9 +30,7 @@ function App() {
           <h2 className="text-3xl font-bold font-montserrat text-white">Posao</h2>
         </section>
 
-        <section id="testimonijali" className="py-20 flex items-center justify-center bg-hero-blue border-b border-white/10">
-          <h2 className="text-3xl font-bold font-montserrat text-white">Testimonijali</h2>
-        </section>
+        <Testimonials />
 
       </main>
     </div>
