@@ -11,39 +11,49 @@ describe('Footer Component', () => {
 
   it('renders the logo', () => {
     render(<Footer />);
-    // Logo usually has an img role or we can check for alt text if we know it
-    // In Logo.tsx, alt="Gyros Heroes Logo"
-    expect(screen.getByAltText(/Gyros Heroes Logo/i)).toBeInTheDocument();
+    const logo = screen.getByAltText('Gyros Heroes');
+    expect(logo).toBeInTheDocument();
+  });
+
+  it('renders navigation links', () => {
+    render(<Footer />);
+    expect(screen.getByText('Hero')).toBeInTheDocument();
+    expect(screen.getByText('O nama')).toBeInTheDocument();
+    expect(screen.getByText('Meni')).toBeInTheDocument();
+    expect(screen.getByText('Lokacije')).toBeInTheDocument();
+    expect(screen.getByText('Posao')).toBeInTheDocument();
+    expect(screen.getByText('Testimonijali')).toBeInTheDocument();
+  });
+
+  it('renders location entries', () => {
+    render(<Footer />);
+    expect(screen.getAllByText('Order & Pickup').length).toBeGreaterThan(0);
+    expect(screen.getByText('Location NI 1')).toBeInTheDocument();
+    expect(screen.getByText('Location NI 2')).toBeInTheDocument();
+    expect(screen.getByText('Location NS')).toBeInTheDocument();
   });
 
   it('renders social media links', () => {
     render(<Footer />);
-    const facebookLink = screen.getByLabelText(/Facebook/i);
-    const instagramLink = screen.getByLabelText(/Instagram/i);
-    expect(facebookLink).toBeInTheDocument();
-    expect(facebookLink).toHaveAttribute('href', 'https://facebook.com/gyrosheroes');
-    expect(instagramLink).toBeInTheDocument();
-    expect(instagramLink).toHaveAttribute('href', 'https://instagram.com/gyrosheroes');
+    const facebookImg = screen.getByAltText('Facebook');
+    const instagramImg = screen.getByAltText('Instagram');
+    
+    expect(facebookImg).toBeInTheDocument();
+    expect(instagramImg).toBeInTheDocument();
+    
+    const facebookLink = facebookImg.closest('a');
+    const instagramLink = instagramImg.closest('a');
+    
+    expect(facebookLink).toHaveAttribute('href', 'https://facebook.com');
+    expect(instagramLink).toHaveAttribute('href', 'https://instagram.com');
   });
 
-  it('renders quick links', () => {
+  it('renders bottom bar information', () => {
     render(<Footer />);
-    expect(screen.getByText(/O Nama/i)).toBeInTheDocument();
-    expect(screen.getByText(/Meni/i)).toBeInTheDocument();
-    expect(screen.getByText(/Lokacije/i)).toBeInTheDocument();
-    expect(screen.getByText(/Utisci/i)).toBeInTheDocument();
-  });
-
-  it('renders contact information', () => {
-    render(<Footer />);
-    expect(screen.getByText(/Trg Republike 5/i)).toBeInTheDocument();
-    expect(screen.getByText(/\+381 11 123 4567/i)).toBeInTheDocument();
-    expect(screen.getByText(/info@gyrosheroes.com/i)).toBeInTheDocument();
-  });
-
-  it('renders copyright information', () => {
-    render(<Footer />);
-    const currentYear = new Date().getFullYear();
-    expect(screen.getByText(new RegExp(`© ${currentYear} Gyros Heroes`, 'i'))).toBeInTheDocument();
+    expect(screen.getByText('All right reserved')).toBeInTheDocument();
+    expect(screen.getByText(`Gyros Heroes ${new Date().getFullYear()}`)).toBeInTheDocument();
+    expect(screen.getByText('Term & Conditions')).toBeInTheDocument();
+    expect(screen.getByText('Privacy Policy')).toBeInTheDocument();
+    expect(screen.getByText('Cookie Settings')).toBeInTheDocument();
   });
 });

@@ -7,8 +7,8 @@ const Menu: React.FC = () => {
     const categories = [
         { id: 'all', label: 'Sve' },
         { id: 'gyros', label: 'Gyros' },
-        { id: 'sides', label: 'Prilozi' },
-        { id: 'meals', label: 'Obroci' },
+        { id: 'sides', label: 'Dodaci' },
+        { id: 'meals', label: 'Special' },
         { id: 'tortillas', label: 'Tortilje' },
         { id: 'kids', label: 'Kids' },
     ];
@@ -35,7 +35,7 @@ const Menu: React.FC = () => {
     );
 
     return (
-        <section className="bg-hero-yellow min-h-screen py-[100px] pt-[150px] md:pt-[300px] relative overflow-hidden" id="meni">
+        <section className="bg-hero-yellow min-h-screen py-[100px] pt-[200px] md:pt-[400px] relative overflow-hidden" id="meni">
             {/* Title */}
             <div className="text-center mb-[60px] md:mb-0 relative z-20 px-4">
                 <h2 className="text-5xl md:text-[120px] leading-none font-bold font-montserrat text-white tracking-[-6px]">
