@@ -38,15 +38,16 @@ function App() {
 
         <LocationsGallery />
 
-        <div className="relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none z-0">
+        <JoinUs />
+
+        <div className="relative">
+          <div className="absolute top-[-50px] left-0 right-0 bottom-0 pointer-events-none z-0 overflow-hidden">
             <img 
               src={sunBg} 
               alt="" 
               className="w-full h-full object-cover"
             />
           </div>
-          <JoinUs />
           <Testimonials />
           <OrderHero />
         </div>
