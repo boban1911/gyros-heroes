@@ -1,24 +1,25 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import Footer from '../../src/components/Footer';
 import React from 'react';
 
 describe('Footer Component', () => {
   it('renders the footer element', () => {
-    render(<Footer />);
+    render(<MemoryRouter><Footer /></MemoryRouter>);
     // Check by data-node-id since role might be ambiguous if not explicitly set as contentinfo
     const footer = document.querySelector('footer');
     expect(footer).toBeInTheDocument();
   });
 
   it('renders the logo', () => {
-    render(<Footer />);
+    render(<MemoryRouter><Footer /></MemoryRouter>);
     const logo = screen.getByAltText('Gyros Heroes Logo');
     expect(logo).toBeInTheDocument();
   });
 
   it('renders navigation links', () => {
-    render(<Footer />);
+    render(<MemoryRouter><Footer /></MemoryRouter>);
     expect(screen.getByText('Hero')).toBeInTheDocument();
     expect(screen.getByText('O nama')).toBeInTheDocument();
     expect(screen.getByText('Meni')).toBeInTheDocument();
@@ -28,7 +29,7 @@ describe('Footer Component', () => {
   });
 
   it('renders location entries', () => {
-    render(<Footer />);
+    render(<MemoryRouter><Footer /></MemoryRouter>);
     expect(screen.getAllByText('Poruči i Pokupi').length).toBe(3);
     expect(screen.getByText('Nikole Pašića 39')).toBeInTheDocument();
     expect(screen.getByText('Park Sv. Save')).toBeInTheDocument();
@@ -41,7 +42,7 @@ describe('Footer Component', () => {
   });
 
   it('renders social media links', () => {
-    render(<Footer />);
+    render(<MemoryRouter><Footer /></MemoryRouter>);
     const facebookImg = screen.getByAltText('Facebook');
     const instagramImg = screen.getByAltText('Instagram');
     
@@ -56,7 +57,7 @@ describe('Footer Component', () => {
   });
 
   it('renders bottom bar information', () => {
-    render(<Footer />);
+    render(<MemoryRouter><Footer /></MemoryRouter>);
     expect(screen.getByText('All right reserved')).toBeInTheDocument();
     expect(screen.getByText('Gyros Heroes 2025')).toBeInTheDocument();
     expect(screen.getByText('Term & Conditions')).toBeInTheDocument();

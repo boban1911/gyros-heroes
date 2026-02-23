@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import footerLogo from '../assets/footer/footer-logo-new.svg';
 import iconCopyright from '../assets/footer/icon-copyright-new.svg';
 import iconFacebook from '../assets/footer/icon-facebook-new.svg';
@@ -9,21 +10,43 @@ const LINKS = [
   { name: 'Hero', href: '#hero' },
   { name: 'O nama', href: '#o-nama' },
   { name: 'Meni', href: '#meni' },
-  { name: 'Lokacije', href: '#lokacije' },
+  { name: 'Lokacije', href: '/locations' },
   { name: 'Posao', href: '#posao' },
   { name: 'Testimonijali', href: '#testimonijali' },
 ];
 
 const LOCATIONS = [
-  { label: 'Poruči i Pokupi', name: 'Nikole Pašića 39', href: 'tel:0637389890' },
-  { label: 'Poruči i Pokupi', name: 'Park Sv. Save', href: 'tel:0659381784' },
-  { label: 'Poruči i Pokupi', name: 'Bulevar Oslobođenja 89e', href: 'tel:066373666' },
+  { label: 'Poruči i Pokupi', name: 'Nikole Pašića 39', href: '/locations' },
+  { label: 'Poruči i Pokupi', name: 'Park Sv. Save', href: '/locations' },
+  { label: 'Poruči i Pokupi', name: 'Bulevar Oslobođenja 89e', href: '/locations' },
   { label: 'PORUČI ZA DOSTAVU NIŠ', name: 'Glovo', href: 'https://glovoapp.com/rs/sr/nis/gyros-heroes-nis/' },
   { label: 'PORUČI ZA DOSTAVU NOVI SAD', name: 'Glovo', href: 'https://glovoapp.com/rs/sr/novi-sad/gyros-heroes/' },
   { label: 'PORUČI ZA DOSTAVU NOVI SAD', name: 'Wolt', href: 'https://wolt.com/sr/srb/novi-sad/restaurant/gyros-heroes' },
 ];
 
 const Footer: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    
+    if (href.startsWith('/')) {
+      navigate(href);
+      window.scrollTo(0, 0);
+    } else {
+      // Hash link
+      if (location.pathname === '/') {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        navigate(`/${href}`);
+      }
+    }
+  };
+
   return (
     <footer className="bg-hero-blue-dark relative w-full overflow-hidden flex flex-col items-center pt-[60px] pb-[40px] md:pt-[100px] md:pb-[100px]" data-node-id="1:4652">
       
@@ -49,7 +72,8 @@ const Footer: React.FC = () => {
               <a 
                 key={link.name} 
                 href={link.href} 
-                className="font-montserrat font-medium text-[18px] md:text-[24px] leading-tight text-white hover:text-hero-yellow transition-colors capitalize"
+                onClick={(e) => handleLinkClick(e, link.href)}
+                className="font-montserrat font-medium text-[18px] md:text-[24px] leading-tight text-white hover:text-hero-yellow transition-colors capitalize cursor-pointer"
               >
                 {link.name}
               </a>
@@ -57,7 +81,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Center Column: Logo */}
-          <div className="size-[180px] md:size-[350px] lg:size-[500px] shrink-0 my-4 md:my-0">
+          <div className="size-[180px] md:size-[350px] lg:size-[500px] shrink-0 my-4 md:my-0 cursor-pointer" onClick={() => navigate('/')}>
             <img src={footerLogo} alt="Gyros Heroes Logo" className="w-full h-full object-contain" />
           </div>
 
@@ -67,7 +91,10 @@ const Footer: React.FC = () => {
               <a 
                 key={index} 
                 href={loc.href}
-                className="flex flex-col items-center leading-tight group"
+                onClick={(e) => !loc.href.startsWith('http') && handleLinkClick(e, loc.href)}
+                className="flex flex-col items-center leading-tight group cursor-pointer"
+                target={loc.href.startsWith('http') ? '_blank' : undefined}
+                rel={loc.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               >
                 <span className="font-medium text-[18px] md:text-[24px] group-hover:text-hero-yellow transition-colors whitespace-nowrap">{loc.label}</span>
                 <span className="font-bold text-hero-yellow text-[18px] md:text-[24px] whitespace-nowrap">{loc.name}</span>

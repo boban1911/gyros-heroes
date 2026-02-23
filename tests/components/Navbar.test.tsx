@@ -1,11 +1,16 @@
 
 import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Navbar from '../../src/components/Navbar';
 import { describe, it, expect, vi } from 'vitest';
 
 describe('Navbar Responsiveness and Interactions', () => {
   it('renders all navigation links', () => {
-    render(<Navbar />);
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
     // We check for both desktop and mobile versions if they are both in DOM
     // My implementation has them both in DOM (desktop in flex, mobile in side-over)
     const heroLinks = screen.getAllByText('Hero');
@@ -13,7 +18,11 @@ describe('Navbar Responsiveness and Interactions', () => {
   });
 
   it('opens mobile menu when hamburger is clicked', () => {
-    render(<Navbar />);
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
     const hamburger = screen.getByLabelText(/Open menu/i);
     fireEvent.click(hamburger);
     expect(screen.getByText('Menu')).toBeInTheDocument();
@@ -24,7 +33,11 @@ describe('Navbar Responsiveness and Interactions', () => {
   });
 
   it('closes mobile menu when close button is clicked', () => {
-    render(<Navbar />);
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
     fireEvent.click(screen.getByLabelText(/Open menu/i));
     fireEvent.click(screen.getByLabelText(/Close menu/i));
     
@@ -33,7 +46,11 @@ describe('Navbar Responsiveness and Interactions', () => {
   });
 
   it('closes mobile menu when a link is clicked', () => {
-    render(<Navbar />);
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
     fireEvent.click(screen.getByLabelText(/Open menu/i));
     
     // Click a link in the mobile menu

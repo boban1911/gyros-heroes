@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import menuIcon from '../assets/icon-menu.svg';
 import arrowIcon from '../assets/icon-arrow.svg';
@@ -8,20 +9,34 @@ const LINKS = [
   { name: 'Hero', href: '#hero' },
   { name: 'O nama', href: '#o-nama' },
   { name: 'Meni', href: '#meni' },
-  { name: 'Lokacije', href: '#lokacije' },
+  { name: 'Lokacije', href: '/locations' },
   { name: 'Posao', href: '#posao' },
   { name: 'Testimonijali', href: '#testimonijali' },
 ];
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    
+    if (href.startsWith('/')) {
+      navigate(href);
+      window.scrollTo(0, 0);
+    } else {
+      // Hash link
+      if (location.pathname === '/') {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        navigate(`/${href}`);
+      }
     }
+    
     setIsMenuOpen(false);
   };
 
@@ -32,7 +47,7 @@ export default function Navbar() {
         <div className="bg-hero-blue w-full max-w-[1400px] rounded-[30px] py-[10px] px-[20px] nav:px-[100px] flex items-center justify-between shadow-hero-xs">
             
             {/* Logo */}
-            <div className="h-[40px] md:h-[60px] aspect-[355/60] relative shrink-0">
+            <div className="h-[40px] md:h-[60px] aspect-[355/60] relative shrink-0 cursor-pointer" onClick={() => navigate('/')}>
                <Logo className="w-full h-full" />
             </div>
 
@@ -43,7 +58,7 @@ export default function Navbar() {
                           key={link.name}
                           href={link.href}
                           onClick={(e) => handleLinkClick(e, link.href)}
-                          className="px-[15px] py-[10px] rounded-[16px] text-white font-montserrat font-semibold text-[14px] hover:bg-white/10 transition-colors whitespace-nowrap"
+                          className="px-[15px] py-[10px] rounded-[16px] text-white font-montserrat font-semibold text-[14px] hover:bg-white/10 transition-colors whitespace-nowrap cursor-pointer"
                         >
                           {link.name}
                         </a>
@@ -93,7 +108,7 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleLinkClick(e, link.href)}
-                    className="text-white font-montserrat font-semibold text-[16px] py-2 border-b border-white/10"
+                    className="text-white font-montserrat font-semibold text-[16px] py-2 border-b border-white/10 cursor-pointer"
                     >
                     {link.name}
                     </a>
