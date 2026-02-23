@@ -15,12 +15,12 @@ const LINKS = [
 ];
 
 const LOCATIONS = [
-  { label: 'Order & Pickup', name: 'Location NI 1', href: '#' },
-  { label: 'Order & Pickup', name: 'Location NI 2', href: '#' },
-  { label: 'Order & Pickup', name: 'Location NS', href: '#' },
-  { label: 'Order & Pickup', name: 'Glovo NI', href: '#' },
-  { label: 'Order & Pickup', name: 'Glovo NS', href: '#' },
-  { label: 'Order & Pickup', name: 'Wolt NS', href: '#' },
+  { label: 'Poruči i Pokupi', name: 'Nikole Pašića 39', href: 'tel:0637389890' },
+  { label: 'Poruči i Pokupi', name: 'Park Sv. Save', href: 'tel:0659381784' },
+  { label: 'Poruči i Pokupi', name: 'Bulevar Oslobođenja 89e', href: 'tel:066373666' },
+  { label: 'PORUČI ZA DOSTAVU NIŠ', name: 'Glovo', href: 'https://glovoapp.com/rs/sr/nis/gyros-heroes-nis/' },
+  { label: 'PORUČI ZA DOSTAVU NOVI SAD', name: 'Glovo', href: 'https://glovoapp.com/rs/sr/novi-sad/gyros-heroes/' },
+  { label: 'PORUČI ZA DOSTAVU NOVI SAD', name: 'Wolt', href: 'https://wolt.com/sr/srb/novi-sad/restaurant/gyros-heroes' },
 ];
 
 const Footer: React.FC = () => {

@@ -60,7 +60,7 @@ export default function Navbar() {
                             <div className="w-[24px] h-[24px] relative shrink-0">
                                 <img src={arrowIcon} alt="" className="absolute top-1/4 left-1/4 w-1/2 h-1/2 object-contain" />
                             </div>
-                            Order & Pick Up
+                                                        Poruči i Pokupi
                         </a>
             
                         {/* Mobile Hamburger */}
@@ -105,7 +105,7 @@ export default function Navbar() {
                     <div className="w-[24px] h-[24px] relative shrink-0">
                         <img src={arrowIcon} alt="" className="absolute top-1/4 left-1/4 w-1/2 h-1/2 object-contain" />
                     </div>
-                    Order & Pick Up
+                                                Poruči i Pokupi
                 </a>
             </div>
         </div>

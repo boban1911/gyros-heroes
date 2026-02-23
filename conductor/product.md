@@ -9,7 +9,7 @@ To build a high-fidelity, single-page application for \"Gyros Heroes,\" a fast-f
 - **Secondary:** Potential employees interested in joining the team.
 
 ### Key Features & Sections
-- **Hero Section:** \"Hero is in Town\" with city/location-specific Order & Pickup call-to-actions.
+- **Hero Section:** "Hero is in Town" with city/location-specific Poruči i Pokupi call-to-actions.
 - **About Us:** Brand story (\"O Nama\") section.
 - **Menu Showcase:** detailed visual menu with categories (Classic Hero, Veliki Hero, Kids Hero, etc.), item descriptions, and images.
 - **Locations & Gallery:** Visual gallery of store locations and interior atmosphere.

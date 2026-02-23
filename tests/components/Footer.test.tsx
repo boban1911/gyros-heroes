@@ -29,10 +29,15 @@ describe('Footer Component', () => {
 
   it('renders location entries', () => {
     render(<Footer />);
-    expect(screen.getAllByText('Order & Pickup').length).toBeGreaterThan(0);
-    expect(screen.getByText('Location NI 1')).toBeInTheDocument();
-    expect(screen.getByText('Location NI 2')).toBeInTheDocument();
-    expect(screen.getByText('Location NS')).toBeInTheDocument();
+    expect(screen.getAllByText('Poruči i Pokupi').length).toBe(3);
+    expect(screen.getByText('Nikole Pašića 39')).toBeInTheDocument();
+    expect(screen.getByText('Park Sv. Save')).toBeInTheDocument();
+    expect(screen.getByText('Bulevar Oslobođenja 89e')).toBeInTheDocument();
+    
+    expect(screen.getByText('PORUČI ZA DOSTAVU NIŠ')).toBeInTheDocument();
+    expect(screen.getAllByText('PORUČI ZA DOSTAVU NOVI SAD').length).toBe(2);
+    expect(screen.getAllByText('Glovo').length).toBe(2);
+    expect(screen.getByText('Wolt')).toBeInTheDocument();
   });
 
   it('renders social media links', () => {
