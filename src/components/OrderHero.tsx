@@ -30,7 +30,7 @@ const OrderHero: React.FC = () => {
                 href="https://glovoapp.com/rs/sr/nis/gyros-heroes-nis/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-full lg:w-auto bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300 whitespace-nowrap gap-1"
+                className="w-full lg:w-auto bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap gap-1"
               >
                 <span className="font-medium">Poruči Glovo -</span>
                 <span className="font-bold">NI</span>
@@ -41,7 +41,7 @@ const OrderHero: React.FC = () => {
             <div className="flex flex-col md:flex-row gap-[20px] lg:gap-[30px] w-full lg:w-auto">
               <a 
                 href="#" // TODO: Add Glovo NS link when available
-                className="w-full lg:w-auto bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300 whitespace-nowrap gap-1"
+                className="w-full lg:w-auto bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap gap-1"
                 onClick={(e) => e.preventDefault()} // Prevent default for placeholder
               >
                 <span className="font-medium">Poruči Glovo -</span>
@@ -51,7 +51,7 @@ const OrderHero: React.FC = () => {
                 href="https://wolt.com/sr/srb/novi-sad/restaurant/gyros-heroes-ns" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-full lg:w-auto bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-300 whitespace-nowrap gap-1"
+                className="w-full lg:w-auto bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap gap-1"
               >
                 <span className="font-medium">Poruči Wolt -</span>
                 <span className="font-bold">NS</span>

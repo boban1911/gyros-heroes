@@ -19,21 +19,36 @@ export interface MenuItemLayer {
   className: string;
 }
 
-export interface MenuItem {
+export type MenuCategory = 'gyros' | 'sides' | 'tortillas' | 'meals' | 'kids';
+
+export interface BaseMenuItem {
   id: string;
   title: string;
   description?: string;
-  image: string;
-  category: 'gyros' | 'sides' | 'tortillas' | 'meals' | 'kids';
-  price?: string; // Prices are not in the screenshot, so optional
+  category: MenuCategory;
+  price?: string;
   tags?: string[];
   scale?: string;
-  layers?: MenuItemLayer[];
 }
+
+export interface SimpleMenuItem extends BaseMenuItem {
+  type: 'simple';
+  image: string;
+}
+
+export interface LayeredMenuItem extends BaseMenuItem {
+  type: 'layered';
+  image: string; // Base image is still useful for some contexts
+  layers: MenuItemLayer[];
+  topping?: string;
+}
+
+export type MenuItem = SimpleMenuItem | LayeredMenuItem;
 
 export const MENU_ITEMS: MenuItem[] = [
   // Gyros Types (Top Section)
   {
+    type: 'simple',
     id: 'classic-hero',
     title: 'CLASSIC HERO',
     description: 'Svinjski/Pileći/Mix: Gyros meso, gyros pita, pomfrit + 4 priloga po izboru',
@@ -41,29 +56,33 @@ export const MENU_ITEMS: MenuItem[] = [
     category: 'gyros',
   },
   {
+    type: 'simple',
     id: 'veliki-hero',
     title: 'VELIKI HERO',
     description: 'Svinjski/Pileći/Mix: Gyros meso, gyros pita, pomfrit + 4 priloga po izboru',
-    image: classicHeroImg, // Reusing for now
+    image: classicHeroImg,
     category: 'gyros',
   },
   {
+    type: 'simple',
     id: 'bas-veliki-hero',
     title: 'BAŠ VELIKI HERO',
     description: 'Svinjski/Pileći/Mix: Gyros meso, gyros pita, pomfrit + 4 priloga po izboru',
-    image: classicHeroImg, // Reusing
+    image: classicHeroImg,
     category: 'gyros',
   },
   {
+    type: 'simple',
     id: 'kids-hero-gyro',
     title: 'KIDS HERO',
     description: 'Svinjski/Pileći/Mix: Gyros meso, gyros pita, pomfrit + 4 priloga po izboru',
-    image: classicHeroImg, // Reusing
+    image: classicHeroImg,
     category: 'gyros',
   },
 
   // Sides
   {
+    type: 'simple',
     id: 'pomfrit',
     title: 'POMFRIT',
     image: pomfritImg,
@@ -71,6 +90,7 @@ export const MENU_ITEMS: MenuItem[] = [
     scale: '1.7',
   },
   {
+    type: 'simple',
     id: 'hero-pomfrit',
     title: 'HERO POMFRIT',
     image: heroPomfritImg,
@@ -78,6 +98,7 @@ export const MENU_ITEMS: MenuItem[] = [
     scale: '1.7',
   },
   {
+    type: 'simple',
     id: 'pomfrit-cheddar',
     title: 'POMFRIT CHEDDAR SIR',
     image: pomfritCheddarImg,
@@ -85,6 +106,7 @@ export const MENU_ITEMS: MenuItem[] = [
     scale: '1.7',
   },
   {
+    type: 'simple',
     id: 'pomfrit-cheddar-slanina',
     title: 'POMFRIT CHEDDAR - SLANINA',
     image: pomfritCheddarSlaninaImg,
@@ -94,6 +116,7 @@ export const MENU_ITEMS: MenuItem[] = [
 
   // Meals / Tortillas / Etc (Grid)
   {
+    type: 'simple',
     id: 'super-hero',
     title: 'SUPER HERO',
     description: 'Pilece gyros meso, kackavalj, zelena salata, paradajz, tzatziki, pomfrit + 1 sos po izboru',
@@ -101,6 +124,7 @@ export const MENU_ITEMS: MenuItem[] = [
     category: 'meals',
   },
   {
+    type: 'simple',
     id: 'hero-tortilla',
     title: 'HERO TORTILLA',
     description: 'Pilece gyros meso u tortilji + 2 sosa + 3 salate po izboru',
@@ -108,6 +132,7 @@ export const MENU_ITEMS: MenuItem[] = [
     category: 'tortillas',
   },
   {
+    type: 'layered',
     id: 'hero-full-obrok',
     title: 'HERO FULL OBROK',
     description: 'Svinjski/Pileći/Mix: Gyros meso, gyros pita, pomfrit + 1 sos + 2 salate po izboru',
@@ -119,6 +144,7 @@ export const MENU_ITEMS: MenuItem[] = [
     category: 'meals',
   },
   {
+    type: 'simple',
     id: 'chicken-hero-nuggets',
     title: 'CHICKEN HERO NUGGETS',
     description: 'Pet pilecih nuggetsa, pomfrit, grika pita + 4 namaza po izboru',
@@ -126,6 +152,7 @@ export const MENU_ITEMS: MenuItem[] = [
     category: 'meals',
   },
   {
+    type: 'simple',
     id: 'pohovani-hero',
     title: 'POHOVANI HERO',
     description: 'Pohovani kackavalj, gyros pita, pomfrit + 4 priloga po izboru',
@@ -133,6 +160,7 @@ export const MENU_ITEMS: MenuItem[] = [
     category: 'meals',
   },
   {
+    type: 'simple',
     id: 'chicken-hero-nuggets-box',
     title: 'CHICKEN HERO NUGGETS BOX',
     description: 'Pileci nuggetsi + 2 sosa po izboru',
@@ -140,6 +168,7 @@ export const MENU_ITEMS: MenuItem[] = [
     category: 'meals',
   },
   {
+    type: 'simple',
     id: 'chicken-hero-wrap',
     title: 'CHICKEN HERO WRAP',
     description: 'Priena piletina u tortilji, pomfrit, kiporou salata, paradajz, kupus',
@@ -147,6 +176,7 @@ export const MENU_ITEMS: MenuItem[] = [
     category: 'tortillas',
   },
   {
+    type: 'layered',
     id: 'vege-hero',
     title: 'VEGE HERO',
     description: 'Svinjski/Pileći/Mix: Gyros pita, pomfrit + 4 priloga po izboru',
@@ -160,6 +190,7 @@ export const MENU_ITEMS: MenuItem[] = [
 
   // Kids
   {
+    type: 'simple',
     id: 'kids-hero-obrok',
     title: 'KIDS HERO OBROK',
     description: 'Nuggets Obrok: 6 Nuggetsa, pomfrit, sok od jabuke + poklon\nGyros Obrok: Kids Hero Gyros, pomfrit, sok od jabuke + poklon',

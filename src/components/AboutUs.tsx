@@ -5,6 +5,7 @@ import iconGyros from '../assets/icon-gyros.svg';
 import iconSpecial from '../assets/icon-special.svg';
 import iconKids from '../assets/icon-kids.svg';
 import iconSalad from '../assets/icon-salad.svg';
+import { Section } from './layout/Section';
 
 const AboutUs = () => {
   const brandStory = "Gyros Heroes je savremen fast-food koncept koji spaja autentičan grčki ukus sa jasnim fokusom na kvalitet mesa i pažljivo razvijenu marinadu. Brend je nastao u Nišu i izgradio prepoznatljiv identitet kroz velike porcije, kvalitet i inovativnu prezentaciju proizvoda. Naš meni obuhvata rane veličine girosa, obrok kombinacija i priloga, namenjenih gostima koji očekuju više od standardnog girosa. Posvećeni smo brzoj usluzi, svežim sastojcima i iskustvu koje postavlja novi standard u ovoj kategoriji. Gyros Heroes je mesto gde se klasični giros pretvara u bogat i nezaboravan obrok.";
@@ -33,34 +34,36 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="o-nama" className="relative w-full bg-hero-blue pt-0 pb-[200px] md:pb-[400px] xl:py-[100px] xl:pb-[400px] flex flex-col items-center gap-[30px] md:gap-[60px] overflow-visible">
-      
-      {/* Background Illustration - Anchored to bottom, scales with width */}
-      <div className="absolute top-[220px] md:top-[280px] left-0 right-0 bottom-0 z-0 pointer-events-none opacity-80 overflow-hidden">
-        <img 
-          src={aboutUsBg} 
-          alt="" 
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 min-w-[700px] md:min-w-full w-auto md:w-full h-auto md:h-full object-cover object-top" 
-        />
-      </div>
-
+    <Section 
+      id="o-nama" 
+      className="bg-hero-blue pt-0 pb-[200px] md:pb-[400px] xl:py-[100px] xl:pb-[400px]"
+      containerClassName="flex flex-col items-center gap-[30px] md:gap-[60px]"
+      backgroundSlot={
+        <div className="absolute top-[220px] md:top-[280px] left-0 right-0 bottom-0 z-0 pointer-events-none opacity-80 overflow-hidden">
+          <img 
+            src={aboutUsBg} 
+            alt="" 
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 min-w-[700px] md:min-w-full w-auto md:w-full h-auto md:h-full object-cover object-top" 
+          />
+        </div>
+      }
+    >
       {/* Title */}
-      <div className="relative z-10 text-center px-4">
+      <div className="text-center px-4">
         <h2 className="font-montserrat font-bold text-[60px] md:text-[120px] text-white leading-none tracking-[-3px] md:tracking-[-6px]">
           O <span className="text-hero-yellow italic">Nama</span>
         </h2>
       </div>
 
       {/* Description */}
-      <div className="relative z-10 max-w-[900px] px-6 text-center">
+      <div className="max-w-[900px] px-6 text-center">
         <p className="font-montserrat font-normal text-[16px] md:text-[20px] text-grey-light leading-[1.4]">
           {brandStory}
         </p>
       </div>
 
       {/* Content Grid/Stack */}
-      <div className="relative z-10 w-full max-w-[1240px] px-4">
-        
+      <div className="w-full max-w-[1240px]">
         {/* Desktop Layout */}
         <div className="hidden xl:flex items-center justify-between relative h-[600px]">
           {/* Left Cards */}
@@ -121,9 +124,8 @@ const AboutUs = () => {
              ))}
            </div>
         </div>
-
       </div>
-    </section>
+    </Section>
   );
 };
 

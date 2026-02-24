@@ -46,7 +46,7 @@ export default function LocationsGallery() {
         {/* Locations Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 w-full">
           {LOCATIONS_DATA.map((loc, index) => (
-            <div key={index} className="bg-hero-green rounded-[40px] overflow-hidden shadow-lg flex flex-col h-full transition-transform hover:scale-[1.02] duration-300">
+            <div key={index} className="bg-hero-green rounded-[40px] overflow-hidden shadow-lg flex flex-col h-full transition-transform hover:scale-[1.02] duration-base">
               {/* Map Section */}
               <div className="h-[250px] w-full relative bg-gray-200">
                 <iframe 

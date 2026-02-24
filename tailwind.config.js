@@ -39,6 +39,17 @@ export default {
         'hero-xs': '0px 1px 2px 0px rgba(198,228,246,0.05)',
         'hero-focus': '0px 1px 2px 0px rgba(16,24,40,0.05), 0px 0px 0px 4px #FBAD18',
       },
+      transitionDuration: {
+        'fast': '150ms',
+        'base': '300ms',
+        'slow': '500ms',
+        'xl': '1000ms',
+      },
+      transitionTimingFunction: {
+        'standard': 'ease-in-out',
+        'bounce': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
     },
   },
   plugins: [],

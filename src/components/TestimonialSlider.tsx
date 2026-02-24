@@ -71,7 +71,7 @@ export default function TestimonialSlider() {
       {/* Navigation Arrows (Visible on Desktop) */}
       <button 
         onClick={scrollPrev}
-        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 rounded-full items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 text-hero-blue"
+        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 rounded-full items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-base text-hero-blue"
         aria-label="Previous slide"
       >
         <ChevronLeft size={28} />
@@ -79,7 +79,7 @@ export default function TestimonialSlider() {
 
       <button 
         onClick={scrollNext}
-        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 rounded-full items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 text-hero-blue"
+        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/90 rounded-full items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-base text-hero-blue"
         aria-label="Next slide"
       >
         <ChevronRight size={28} />

@@ -1,46 +1,24 @@
-import React, { useState } from 'react';
-import { MENU_ITEMS, MenuItem as MenuItemType } from '../data/menu';
+import React from 'react';
+import { MenuItem as MenuItemType } from '../data/menu';
 import MenuItem from './MenuItem';
+import { useMenuFilter } from '../hooks/useMenuFilter';
+
+import { Section } from './layout/Section';
 
 const Menu: React.FC = () => {
-    // Categories for mobile filtering
-    const categories = [
-        { id: 'all', label: 'Sve' },
-        { id: 'gyros', label: 'Gyros' },
-        { id: 'sides', label: 'Dodaci' },
-        { id: 'meals', label: 'Special' },
-        { id: 'tortillas', label: 'Tortilje' },
-        { id: 'kids', label: 'Kids' },
-    ];
+    const { 
+        activeCategory, 
+        setActiveCategory, 
+        filteredItems, 
+        groupedItems, 
+        categories 
+    } = useMenuFilter();
 
-    const [activeCategory, setActiveCategory] = useState('all');
-
-    const filteredItems = activeCategory === 'all' 
-        ? MENU_ITEMS 
-        : MENU_ITEMS.filter(item => {
-            // Special handling for mobile category "move"
-            const specialGyrosItems = ['vege-hero', 'hero-full-obrok'];
-
-            if (activeCategory === 'gyros') {
-                return item.category === 'gyros' || specialGyrosItems.includes(item.id);
-            }
-
-            if (activeCategory === 'meals') {
-                return item.category === 'meals' && !specialGyrosItems.includes(item.id);
-            }
-
-            return item.category === activeCategory;
-        });
-
-    // Group items for specific layout sections (Desktop view primarily)
-    const gyrosItems = MENU_ITEMS.filter(item => item.category === 'gyros');
-    const sidesItems = MENU_ITEMS.filter(item => item.category === 'sides');
-    const mealsItems = MENU_ITEMS.filter(item => item.category === 'meals' || item.category === 'tortillas');
-    const kidsItems = MENU_ITEMS.filter(item => item.category === 'kids');
+    const { gyros: gyrosItems, sides: sidesItems, meals: mealsItems, kids: kidsItems } = groupedItems;
 
     // Helper to render grid
     const renderGrid = (items: MenuItemType[]) => (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2 md:gap-8 px-4 max-w-7xl mx-auto justify-center justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2 md:gap-8 justify-center justify-items-center">
             {items.map(item => (
                 <MenuItem key={item.id} item={item} />
             ))}
@@ -48,9 +26,13 @@ const Menu: React.FC = () => {
     );
 
     return (
-        <section className="bg-hero-yellow min-h-screen py-[100px] pt-[200px] md:pt-[400px] relative overflow-hidden" id="meni">
+        <Section 
+            id="meni"
+            className="bg-hero-yellow min-h-screen py-[100px] pt-[200px] md:pt-[400px]"
+            containerClassName="flex flex-col"
+        >
             {/* Title */}
-            <div className="text-center mb-[60px] md:mb-0 relative z-20 px-4">
+            <div className="text-center mb-[60px] md:mb-0 relative z-20">
                 <h2 className="text-5xl md:text-[120px] leading-none font-bold font-montserrat text-white tracking-[-6px]">
                     Pogledaj <span className="font-bold italic text-hero-blue-dark">Meni</span>
                 </h2>
@@ -74,15 +56,15 @@ const Menu: React.FC = () => {
             </div>
 
             {/* Mobile View: Render Filtered List */}
-            <div className="md:hidden">
+            <div className="md:hidden" data-testid="menu-mobile">
                 {renderGrid(filteredItems)}
             </div>
 
             {/* Desktop View: Specific Layout matching Figma */}
-            <div className="hidden md:block space-y-[60px]">
+            <div className="hidden md:block space-y-[60px]" data-testid="menu-desktop">
                 
                 {/* 1. Gyros Section (Top) */}
-                <div className="relative max-w-7xl mx-auto px-4">
+                <div className="relative">
                      <div className="relative w-full bg-hero-green rounded-[80px] pb-[30px] pt-[200px] px-[30px] shadow-xl mt-[210px]">
                         {/* Big Image Absolute Container with Blue Background */}
                          <div className="absolute -top-[150px] left-1/2 transform -translate-x-1/2 w-[90%] md:w-[500px] lg:w-[650px] h-[300px] z-10 pointer-events-none rounded-[60px] overflow-hidden bg-hero-blue-dark">
@@ -115,21 +97,21 @@ const Menu: React.FC = () => {
                 </div>
 
                 {/* 2. Sides Grid */}
-                <div className="max-w-7xl mx-auto px-4">
+                <div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 justify-center justify-items-center">
                          {sidesItems.map(item => <MenuItem key={item.id} item={item} />)}
                     </div>
                 </div>
 
                 {/* 3. Meals Grid */}
-                 <div className="max-w-7xl mx-auto px-4">
+                 <div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 justify-center justify-items-center">
                          {mealsItems.map(item => <MenuItem key={item.id} item={item} />)}
                     </div>
                 </div>
 
                 {/* 4. Kids Section (Bottom) */}
-                 <div className="max-w-7xl mx-auto px-4 pb-20 flex justify-center">
+                 <div className="pb-20 flex justify-center">
                      {kidsItems.map(item => (
                          <div key={item.id} className="relative w-[654px] h-[250px]">
                              {/* Green Card Background */}
@@ -162,7 +144,7 @@ const Menu: React.FC = () => {
                 </div>
 
             </div>
-        </section>
+        </Section>
     );
 };
 

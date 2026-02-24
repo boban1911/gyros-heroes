@@ -11,16 +11,26 @@ A high-fidelity, single-page web application for "Gyros Heroes," a fast-food res
 *   **Recruitment:** "Pridruži se Hero timu!" section for job applications.
 *   **Testimonials:** Customer reviews section ("Šta naši gosti kažu").
 *   **Responsive Design:** Fully responsive layout optimized for mobile and desktop devices.
-*   **Localization:** Content available in Serbian.
+*   **Performance Optimized:** Implements component-level lazy loading and image optimization.
 
 ## 🛠️ Tech Stack
 
-*   **Frontend Framework:** [React](https://react.dev/) (v19)
+*   **Frontend Framework:** [React](https://react.dev/) (v18)
 *   **Build Tool:** [Vite](https://vitejs.dev/)
 *   **Language:** [TypeScript](https://www.typescriptlang.org/)
 *   **Styling:** [Tailwind CSS](https://tailwindcss.com/) (v3.4)
 *   **Icons:** [Lucide React](https://lucide.dev/)
 *   **Testing:** [Vitest](https://vitest.dev/) & [React Testing Library](https://testing-library.com/)
+
+## 🏗️ Architectural Patterns
+
+The project follows a clean, maintainable architecture with several key design patterns:
+
+*   **Separation of Concerns:** Business logic (like menu filtering) is extracted into custom hooks (e.g., `useMenuFilter`).
+*   **Discriminated Unions:** Comprehensive type safety using TypeScript discriminated unions for complex data structures (like `MenuItem`).
+*   **Component Decomposition:** Complex UI elements are broken down into specialized sub-components (e.g., `MenuItemMobile` and `MenuItemDesktop`).
+*   **Slot-based Layouts:** Reusable `Section` components with "slots" for background elements and content to ensure visual consistency and reduce boilerplate.
+*   **Centralized Configuration:** Animation durations, easings, and theme tokens are centralized in `src/constants/animations.ts` and extended in the Tailwind configuration.
 
 ## 🏁 Getting Started
 
@@ -76,19 +86,32 @@ Run the test suite using Vitest:
 npm test
 ```
 
+For coverage reports:
+```bash
+npm run test -- --coverage
+```
+
 ## 📂 Project Structure
 
 ```
 gyros-heroes/
 ├── src/
 │   ├── assets/         # Images, icons, and static assets
-│   ├── components/     # Reusable React components (Hero, Navbar, Menu, etc.)
-│   ├── data/           # Static data files (menu items, text content)
-│   ├── App.tsx         # Main application component
-│   └── main.tsx        # Application entry point
-├── conductor/          # Project documentation and specifications
+│   ├── components/     # UI Components
+│   │   ├── layout/     # Reusable layout structures (Section, etc.)
+│   │   ├── menu/       # Menu-specific sub-components
+│   │   └── ...         # Feature components (Hero, Navbar, etc.)
+│   ├── constants/      # Global constants (animations, themes)
+│   ├── data/           # Static data (menu items, content)
+│   ├── hooks/          # Custom React hooks (useMenuFilter, etc.)
+│   ├── pages/          # Main page orchestrators (Home.tsx)
+│   ├── App.tsx         # Root component
+│   └── main.tsx        # Entry point
 ├── tests/              # Unit and integration tests
-├── public/             # Static public assets
+│   ├── components/     # Component-specific tests
+│   ├── integration/    # Feature-level integration tests
+│   └── ...
+├── conductor/          # Project documentation and specifications
 └── ...config files     # Vite, Tailwind, TypeScript configurations
 ```
 

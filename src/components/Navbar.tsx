@@ -91,9 +91,9 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Slide-over Menu */}
-      <div className={`fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsMenuOpen(false)}>
+      <div className={`fixed inset-0 bg-black/50 z-[60] transition-opacity duration-base ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsMenuOpen(false)}>
         <div 
-            className={`fixed top-0 right-0 h-full w-[300px] bg-hero-blue p-6 shadow-xl transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+            className={`fixed top-0 right-0 h-full w-[300px] bg-hero-blue p-6 shadow-xl transition-transform duration-base ease-standard ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
             onClick={(e) => e.stopPropagation()}
         >
             <div className="flex justify-between items-center mb-8">

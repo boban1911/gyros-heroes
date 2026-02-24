@@ -20,14 +20,14 @@ describe('App Integration', () => {
     expect(screen.getByText(/Gyros Heroes je savremen fast-food koncept/i)).toBeDefined();
   });
 
-  it('renders the Menu section', () => {
+  it('renders the Menu section', async () => {
     render(<App />);
-    expect(screen.getByRole('heading', { level: 2, name: /Pogledaj Meni/i })).toBeDefined();
+    expect(await screen.findByRole('heading', { level: 2, name: /Pogledaj Meni/i })).toBeDefined();
     // Check for a few items to ensure menu data is loaded
-    const classicHeroes = screen.getAllByText('CLASSIC HERO');
+    const classicHeroes = await screen.findAllByText('CLASSIC HERO');
     expect(classicHeroes.length).toBeGreaterThan(0);
     
-    const pomfrits = screen.getAllByText('POMFRIT');
+    const pomfrits = await screen.findAllByText('POMFRIT');
     expect(pomfrits.length).toBeGreaterThan(0);
   });
 });

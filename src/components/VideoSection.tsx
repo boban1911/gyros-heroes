@@ -9,7 +9,7 @@ const VideoSection: React.FC = () => {
         aria-label="Promotional Video Placeholder"
       >
         {/* Play Button Container */}
-        <div className="relative size-16 md:size-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+        <div className="relative size-16 md:size-20 flex items-center justify-center transition-transform duration-base group-hover:scale-110">
             <img src={iconPlay} alt="Play Video" className="w-full h-full" />
         </div>
       </div>
