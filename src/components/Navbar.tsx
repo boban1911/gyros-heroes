@@ -9,7 +9,7 @@ const LINKS = [
   { name: 'Hero', href: '#hero' },
   { name: 'O nama', href: '#o-nama' },
   { name: 'Meni', href: '#meni' },
-  { name: 'Lokacije', href: '/locations' },
+  { name: 'Lokacije', href: '#lokacije' },
   { name: 'Posao', href: '#posao' },
   { name: 'Testimonijali', href: '#testimonijali' },
 ];

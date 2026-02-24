@@ -40,7 +40,7 @@ const Menu: React.FC = () => {
 
     // Helper to render grid
     const renderGrid = (items: MenuItemType[]) => (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 px-4 max-w-7xl mx-auto justify-center justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2 md:gap-8 px-4 max-w-7xl mx-auto justify-center justify-items-center">
             {items.map(item => (
                 <MenuItem key={item.id} item={item} />
             ))}

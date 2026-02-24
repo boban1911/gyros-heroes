@@ -10,15 +10,15 @@ const LINKS = [
   { name: 'Hero', href: '#hero' },
   { name: 'O nama', href: '#o-nama' },
   { name: 'Meni', href: '#meni' },
-  { name: 'Lokacije', href: '/locations' },
+  { name: 'Lokacije', href: '#lokacije' },
   { name: 'Posao', href: '#posao' },
   { name: 'Testimonijali', href: '#testimonijali' },
 ];
 
 const LOCATIONS = [
-  { label: 'Poruči i Pokupi', name: 'Nikole Pašića 39', href: '/locations' },
-  { label: 'Poruči i Pokupi', name: 'Park Sv. Save', href: '/locations' },
-  { label: 'Poruči i Pokupi', name: 'Bulevar Oslobođenja 89e', href: '/locations' },
+  { label: 'Poruči i Pokupi', name: 'Nikole Pašića 39', href: '#lokacije' },
+  { label: 'Poruči i Pokupi', name: 'Park Sv. Save', href: '#lokacije' },
+  { label: 'Poruči i Pokupi', name: 'Bulevar Oslobođenja 89e', href: '#lokacije' },
   { label: 'PORUČI ZA DOSTAVU NIŠ', name: 'Glovo', href: 'https://glovoapp.com/rs/sr/nis/gyros-heroes-nis/' },
   { label: 'PORUČI ZA DOSTAVU NOVI SAD', name: 'Glovo', href: 'https://glovoapp.com/rs/sr/novi-sad/gyros-heroes/' },
   { label: 'PORUČI ZA DOSTAVU NOVI SAD', name: 'Wolt', href: 'https://wolt.com/sr/srb/novi-sad/restaurant/gyros-heroes' },
