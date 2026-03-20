@@ -5,7 +5,6 @@ import AboutUs from '../components/AboutUs';
 import sunBg from '../assets/sun.webp';
 
 // Lazy loading components below the fold
-const VideoSection = lazy(() => import('../components/VideoSection'));
 const Menu = lazy(() => import('../components/Menu'));
 const LocationsGallery = lazy(() => import('../components/LocationsGallery'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
@@ -26,12 +25,6 @@ const Home: React.FC = () => {
         <AboutUs />
 
         <Suspense fallback={<SectionSkeleton />}>
-          <div className="relative z-30">
-            <div className="absolute top-0 left-0 w-full -translate-y-1/2">
-              <VideoSection />
-            </div>
-          </div>
-
           <Menu />
           <LocationsGallery />
           <JoinUs />

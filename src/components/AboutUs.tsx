@@ -36,7 +36,7 @@ const AboutUs = () => {
   return (
     <Section 
       id="o-nama" 
-      className="bg-hero-blue pt-0 pb-[200px] md:pb-[400px] xl:py-[100px] xl:pb-[400px]"
+      className="bg-hero-blue pt-0 pb-[60px] md:pb-[120px] xl:py-[100px] xl:pb-[120px]"
       containerClassName="flex flex-col items-center gap-[30px] md:gap-[60px]"
       backgroundSlot={
         <div className="absolute top-[220px] md:top-[280px] left-0 right-0 bottom-0 z-0 pointer-events-none opacity-80 overflow-hidden">

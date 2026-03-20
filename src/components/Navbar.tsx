@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import menuIcon from '../assets/icon-menu.svg';
-import arrowIcon from '../assets/icon-arrow.svg';
 import { X } from 'lucide-react';
 
 const LINKS = [
@@ -67,17 +66,6 @@ export default function Navbar() {
             
                     {/* CTA & Mobile Menu Toggle */}
                     <div className="flex items-center gap-4">
-                        {/* CTA Button */}
-                        <a 
-                          href="#" 
-                          className="hidden sm:flex items-center justify-center gap-[8px] px-[16px] py-[10px] h-[40px] rounded-full border-2 border-dandelion text-dandelion font-montserrat font-semibold text-[14px] hover:bg-dandelion/10 transition-colors whitespace-nowrap"
-                        >
-                            <div className="w-[24px] h-[24px] relative shrink-0">
-                                <img src={arrowIcon} alt="" className="absolute top-1/4 left-1/4 w-1/2 h-1/2 object-contain" />
-                            </div>
-                                                        Poruči i Pokupi
-                        </a>
-            
                         {/* Mobile Hamburger */}
                         <button 
                             className="nav:hidden text-white p-2"
@@ -113,15 +101,6 @@ export default function Navbar() {
                     {link.name}
                     </a>
                 ))}
-                 <a 
-                    href="#" 
-                    className="mt-4 flex items-center justify-center gap-[8px] px-[16px] py-[10px] h-[40px] rounded-full border-2 border-dandelion text-dandelion font-montserrat font-semibold text-[14px]"
-                >
-                    <div className="w-[24px] h-[24px] relative shrink-0">
-                        <img src={arrowIcon} alt="" className="absolute top-1/4 left-1/4 w-1/2 h-1/2 object-contain" />
-                    </div>
-                                                Poruči i Pokupi
-                </a>
             </div>
         </div>
       </div>

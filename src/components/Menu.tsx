@@ -28,7 +28,7 @@ const Menu: React.FC = () => {
     return (
         <Section 
             id="meni"
-            className="bg-hero-yellow min-h-screen py-[100px] pt-[200px] md:pt-[400px]"
+            className="bg-hero-yellow min-h-screen py-[60px] md:py-[120px]"
             containerClassName="flex flex-col"
         >
             {/* Title */}
