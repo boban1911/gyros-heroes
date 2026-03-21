@@ -16,6 +16,7 @@ describe('Footer Component', () => {
     const bgContainer = document.querySelector('footer > div.absolute');
     expect(bgContainer).toBeInTheDocument();
     expect(bgContainer).toHaveClass('aspect-[1820/1228]');
+    expect(bgContainer).toHaveClass('translate-y-[82%]');
   });
 
   it('renders city headers', () => {
