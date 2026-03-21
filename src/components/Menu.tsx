@@ -28,7 +28,7 @@ const Menu: React.FC = () => {
     return (
         <Section 
             id="meni"
-            className="bg-hero-yellow min-h-screen py-[60px] md:py-[120px]"
+            className="bg-hero-yellow py-[60px] md:pt-[120px] md:pb-[60px]"
             containerClassName="flex flex-col"
         >
             {/* Title */}
@@ -64,84 +64,92 @@ const Menu: React.FC = () => {
             <div className="hidden md:block space-y-[60px]" data-testid="menu-desktop">
                 
                 {/* 1. Gyros Section (Top) */}
-                <div className="relative">
-                     <div className="relative w-full bg-hero-green rounded-[80px] pb-[30px] pt-[200px] px-[30px] shadow-xl mt-[210px]">
-                        {/* Big Image Absolute Container with Blue Background */}
-                         <div className="absolute -top-[150px] left-1/2 transform -translate-x-1/2 w-[90%] md:w-[500px] lg:w-[650px] h-[300px] z-10 pointer-events-none rounded-[60px] overflow-hidden bg-hero-blue-dark">
-                            <img 
-                                src={gyrosItems[0]?.image} 
-                                alt="Gyros Hero" 
-                                className="absolute h-[216.67%] left-[9.63%] max-w-none top-[-65.37%] w-full object-cover" 
-                            />
-                         </div>
-
-                         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-[20px] items-start">
-                            {gyrosItems.map((item) => (
-                                <div key={item.id} className="flex flex-col gap-[10px] items-center text-center">
-                                    <div className="flex h-[72px] items-center justify-center relative w-full">
-                                        <div className="flex-none rotate-[-0.12deg]">
-                                            <h3 className="text-[30px] leading-none font-black font-montserrat uppercase text-white whitespace-pre-wrap">
-                                                {item.title}
-                                            </h3>
-                                        </div>
-                                    </div>
-                                    <div className="text-[16px] font-medium font-montserrat text-grey-black leading-[1.2] whitespace-pre-wrap">
-                                        <p className="font-bold mb-0">Svinjski/Pileći/Mix:</p>
-                                        <p className="mb-0">Gyros meso, gyros pita, pomfrit</p>
-                                        <p>+ 4 priloga po izboru</p>
-                                    </div>
-                                </div>
-                            ))}
-                         </div>
-                     </div>
-                </div>
-
-                {/* 2. Sides Grid */}
-                <div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 justify-center justify-items-center">
-                         {sidesItems.map(item => <MenuItem key={item.id} item={item} />)}
-                    </div>
-                </div>
-
-                {/* 3. Meals Grid */}
-                 <div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 justify-center justify-items-center">
-                         {mealsItems.map(item => <MenuItem key={item.id} item={item} />)}
-                    </div>
-                </div>
-
-                {/* 4. Kids Section (Bottom) */}
-                 <div className="pb-20 flex justify-center">
-                     {kidsItems.map(item => (
-                         <div key={item.id} className="relative w-[654px] h-[250px]">
-                             {/* Green Card Background */}
-                             <div className="absolute top-[calc(50%+0.23px)] left-[90px] -translate-y-1/2 w-[564px] h-[175px] bg-hero-green rounded-[80px] flex items-center pl-[180px] pr-[30px] shadow-xl">
-                                 <div className="flex flex-col gap-[10px] items-start w-full">
-                                     <div className="w-full">
-                                         <h3 className="text-[30px] font-black font-montserrat text-white uppercase leading-[1.2] whitespace-pre-wrap">
-                                             {item.title}
-                                         </h3>
-                                     </div>
-                                     <div className="text-[14px] font-medium font-montserrat text-grey-black leading-[1.2] whitespace-nowrap">
-                                         <p className="font-bold mb-0">Nuggets Obrok:</p>
-                                         <p className="mb-0">6 Nuggetsa, pomfrit, sok od jabuke + poklon</p>
-                                         <p className="font-bold mb-0">Gyros Obrok:</p>
-                                         <p>Kids Hero Gyros, pomfrit, sok od jabuke + poklon</p>
-                                     </div>
-                                 </div>
-                             </div>
-
-                             {/* Image Container - Floating Left */}
-                             <div className="absolute left-0 top-0 w-[250px] h-[250px] rounded-full bg-hero-blue-dark overflow-hidden shadow-2xl z-20">
+                {(activeCategory === 'all' || activeCategory === 'gyros') && gyrosItems.length > 0 && (
+                    <div className="relative">
+                         <div className="relative w-full bg-hero-green rounded-[80px] pb-[30px] pt-[200px] px-[30px] shadow-xl mt-[130px]">
+                            {/* Big Image Absolute Container with Blue Background */}
+                             <div className="absolute -top-[150px] left-1/2 transform -translate-x-1/2 w-[90%] md:w-[500px] lg:w-[650px] h-[300px] z-10 pointer-events-none rounded-[60px] overflow-hidden bg-hero-blue-dark">
                                 <img 
-                                    src={item.image} 
-                                    alt={item.title} 
-                                    className="absolute h-[86.11%] left-[5.44%] max-w-none top-[15.2%] w-[89.12%] object-contain" 
+                                    src={gyrosItems[0]?.image} 
+                                    alt="Gyros Hero" 
+                                    className="absolute h-[216.67%] left-[9.63%] max-w-none top-[-65.37%] w-full object-cover" 
                                 />
                              </div>
+
+                             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-[20px] items-start">
+                                {gyrosItems.map((item) => (
+                                    <div key={item.id} className="flex flex-col gap-[10px] items-center text-center">
+                                        <div className="flex h-[72px] items-center justify-center relative w-full">
+                                            <div className="flex-none rotate-[-0.12deg]">
+                                                <h3 className="text-[30px] leading-none font-black font-montserrat uppercase text-white whitespace-pre-wrap">
+                                                    {item.title}
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div className="text-[16px] font-medium font-montserrat text-grey-black leading-[1.2] whitespace-pre-wrap">
+                                            <p className="font-bold mb-0">Svinjski/Pileći/Mix:</p>
+                                            <p className="mb-0">Gyros meso, gyros pita, pomfrit</p>
+                                            <p>+ 4 priloga po izboru</p>
+                                        </div>
+                                    </div>
+                                ))}
+                             </div>
                          </div>
-                     ))}
-                </div>
+                    </div>
+                )}
+
+                {/* 2. Sides Grid */}
+                {(activeCategory === 'all' || activeCategory === 'sides') && sidesItems.length > 0 && (
+                    <div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 justify-center justify-items-center">
+                             {sidesItems.map(item => <MenuItem key={item.id} item={item} />)}
+                        </div>
+                    </div>
+                )}
+
+                {/* 3. Meals Grid */}
+                 {(activeCategory === 'all' || activeCategory === 'meals') && mealsItems.length > 0 && (
+                    <div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 justify-center justify-items-center">
+                             {mealsItems.map(item => <MenuItem key={item.id} item={item} />)}
+                        </div>
+                    </div>
+                )}
+
+                {/* 4. Kids Section (Bottom) */}
+                 {(activeCategory === 'all' || activeCategory === 'kids') && kidsItems.length > 0 && (
+                     <div className="flex justify-center">
+                         {kidsItems.map(item => (
+                             <div key={item.id} className="relative w-[654px] h-[250px]">
+                                 {/* Green Card Background */}
+                                 <div className="absolute top-[calc(50%+0.23px)] left-[90px] -translate-y-1/2 w-[564px] h-[175px] bg-hero-green rounded-[80px] flex items-center pl-[180px] pr-[30px] shadow-xl">
+                                     <div className="flex flex-col gap-[10px] items-start w-full">
+                                         <div className="w-full">
+                                             <h3 className="text-[30px] font-black font-montserrat text-white uppercase leading-[1.2] whitespace-pre-wrap">
+                                                 {item.title}
+                                             </h3>
+                                         </div>
+                                         <div className="text-[14px] font-medium font-montserrat text-grey-black leading-[1.2] whitespace-nowrap">
+                                             <p className="font-bold mb-0">Nuggets Obrok:</p>
+                                             <p className="mb-0">6 Nuggetsa, pomfrit, sok od jabuke + poklon</p>
+                                             <p className="font-bold mb-0">Gyros Obrok:</p>
+                                             <p>Kids Hero Gyros, pomfrit, sok od jabuke + poklon</p>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                                 {/* Image Container - Floating Left */}
+                                 <div className="absolute left-0 top-0 w-[250px] h-[250px] rounded-full bg-hero-blue-dark overflow-hidden shadow-2xl z-20">
+                                    <img 
+                                        src={item.image} 
+                                        alt={item.title} 
+                                        className="absolute h-[86.11%] left-[5.44%] max-w-none top-[15.2%] w-[89.12%] object-contain" 
+                                    />
+                                 </div>
+                             </div>
+                         ))}
+                    </div>
+                )}
 
             </div>
         </Section>
