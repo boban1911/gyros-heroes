@@ -33,16 +33,20 @@ const JoinUs: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 lg:gap-[30px] w-full sm:w-auto">
               <a 
-                href="#" 
-                className="bg-hero-yellow text-grey-black font-montserrat font-bold text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap"
+                href="https://forms.gle/wRqPcAD8RmUtKPnBA" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap"
               >
-                Popuni Anketu - NI
+                Popuni Anketu -&nbsp;<span className="font-bold">NI</span>
               </a>
               <a 
-                href="#" 
-                className="bg-hero-yellow text-grey-black font-montserrat font-bold text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap"
+                href="https://forms.gle/FjeKMKbKnpdTHrCw6" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap"
               >
-                Popuni Anketu - NS
+                Popuni Anketu -&nbsp;<span className="font-bold">NS</span>
               </a>
             </div>
           </div>

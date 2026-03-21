@@ -80,40 +80,6 @@ export const MENU_ITEMS: MenuItem[] = [
     category: 'gyros',
   },
 
-  // Sides
-  {
-    type: 'simple',
-    id: 'pomfrit',
-    title: 'POMFRIT',
-    image: pomfritImg,
-    category: 'sides',
-    scale: '1.7',
-  },
-  {
-    type: 'simple',
-    id: 'hero-pomfrit',
-    title: 'HERO POMFRIT',
-    image: heroPomfritImg,
-    category: 'sides',
-    scale: '1.7',
-  },
-  {
-    type: 'simple',
-    id: 'pomfrit-cheddar',
-    title: 'POMFRIT CHEDDAR SIR',
-    image: pomfritCheddarImg,
-    category: 'sides',
-    scale: '1.7',
-  },
-  {
-    type: 'simple',
-    id: 'pomfrit-cheddar-slanina',
-    title: 'POMFRIT CHEDDAR - SLANINA',
-    image: pomfritCheddarSlaninaImg,
-    category: 'sides',
-    scale: '1.7',
-  },
-
   // Meals / Tortillas / Etc (Grid)
   {
     type: 'simple',
@@ -196,5 +162,39 @@ export const MENU_ITEMS: MenuItem[] = [
     description: 'Nuggets Obrok: 6 Nuggetsa, pomfrit, sok od jabuke + poklon\nGyros Obrok: Kids Hero Gyros, pomfrit, sok od jabuke + poklon',
     image: kidsHeroObrokImg,
     category: 'kids',
+  },
+
+  // Sides (Dodaci)
+  {
+    type: 'simple',
+    id: 'pomfrit',
+    title: 'POMFRIT',
+    image: pomfritImg,
+    category: 'sides',
+    scale: '1.7',
+  },
+  {
+    type: 'simple',
+    id: 'hero-pomfrit',
+    title: 'HERO POMFRIT',
+    image: heroPomfritImg,
+    category: 'sides',
+    scale: '1.7',
+  },
+  {
+    type: 'simple',
+    id: 'pomfrit-cheddar',
+    title: 'POMFRIT CHEDDAR SIR',
+    image: pomfritCheddarImg,
+    category: 'sides',
+    scale: '1.7',
+  },
+  {
+    type: 'simple',
+    id: 'pomfrit-cheddar-slanina',
+    title: 'POMFRIT CHEDDAR - SLANINA',
+    image: pomfritCheddarSlaninaImg,
+    category: 'sides',
+    scale: '1.7',
   },
 ];

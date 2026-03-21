@@ -39,7 +39,15 @@ export const MenuItemDesktop: React.FC<MenuItemDesktopProps> = ({ item }) => {
 
           {item.description && (
             <p className="text-sm font-medium font-montserrat text-grey-black leading-[1.2] mt-4">
-              {item.description}
+              {item.description.includes('Svinjski/Pileći/Mix:') ? (
+                <>
+                  {item.description.split('Svinjski/Pileći/Mix:')[0]}
+                  <span className="font-bold">Svinjski/Pileći/Mix:</span>
+                  {item.description.split('Svinjski/Pileći/Mix:')[1]}
+                </>
+              ) : (
+                item.description
+              )}
             </p>
           )}
         </div>

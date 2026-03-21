@@ -9,21 +9,21 @@ const LOCATIONS_DATA = [
     address: 'Nikole Pašića 39',
     phone: '063 738 9890',
     mapSrc: 'https://maps.google.com/maps?q=Nikole+Pašića+39,+Niš&t=&z=15&ie=UTF8&iwloc=&output=embed',
-    hours: 'Pon - Sub: 09:00 - 23:00, Ned: 10:00 - 22:00'
+    hours: 'Pon - Čet: 09:00 - 00:00, Pet: 09:00 - 01:00, Sub: 10:00 - 01:00, Ned: 10:00 - 12:00'
   },
   {
     city: 'Niš',
     address: 'Park Sv. Save',
     phone: '065 938 1784',
     mapSrc: 'https://maps.google.com/maps?q=Park+Svetog+Save,+Niš&t=&z=15&ie=UTF8&iwloc=&output=embed',
-    hours: 'Pon - Sub: 09:00 - 23:00, Ned: 10:00 - 22:00'
+    hours: 'Pon - Čet: 09:00 - 00:00, Pet: 09:00 - 01:00, Sub: 10:00 - 01:00, Ned: 10:00 - 12:00'
   },
   {
     city: 'Novi Sad',
     address: 'Bulevar Oslobođenja 89e',
     phone: '066 373 666',
     mapSrc: 'https://maps.google.com/maps?q=Bulevar+Oslobođenja+89e,+Novi+Sad&t=&z=15&ie=UTF8&iwloc=&output=embed',
-    hours: 'Pon - Sub: 09:00 - 23:00, Ned: 10:00 - 22:00'
+    hours: 'Pon - Čet: 09:00 - 00:00, Pet: 09:00 - 01:00, Sub: 10:00 - 01:00, Ned: 10:00 - 12:00'
   }
 ];
 

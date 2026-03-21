@@ -4,10 +4,9 @@ import { MENU_ITEMS, MenuItem } from '../data/menu';
 export const CATEGORIES = [
   { id: 'all', label: 'Sve' },
   { id: 'gyros', label: 'Gyros' },
-  { id: 'sides', label: 'Dodaci' },
   { id: 'meals', label: 'Special' },
-  { id: 'tortillas', label: 'Tortilje' },
   { id: 'kids', label: 'Kids' },
+  { id: 'sides', label: 'Dodaci' },
 ];
 
 export const useMenuFilter = () => {
@@ -27,7 +26,7 @@ export const useMenuFilter = () => {
       }
 
       if (activeCategory === 'meals') {
-        return item.category === 'meals' && !specialGyrosItems.includes(item.id);
+        return (item.category === 'meals' && !specialGyrosItems.includes(item.id)) || item.category === 'tortillas';
       }
 
       return item.category === activeCategory;

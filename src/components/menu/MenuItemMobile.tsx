@@ -16,7 +16,15 @@ export const MenuItemMobile: React.FC<MenuItemMobileProps> = ({ item }) => {
           </h3>
           {item.description && (
             <div className="text-[10px] font-medium font-montserrat text-grey-black leading-[1.2] mt-1 line-clamp-2 whitespace-pre-line">
-              {item.description}
+              {item.description.includes('Svinjski/Pileći/Mix:') ? (
+                <>
+                  {item.description.split('Svinjski/Pileći/Mix:')[0]}
+                  <span className="font-bold">Svinjski/Pileći/Mix:</span>
+                  {item.description.split('Svinjski/Pileći/Mix:')[1]}
+                </>
+              ) : (
+                item.description
+              )}
             </div>
           )}
         </div>
