@@ -33,7 +33,7 @@ const Menu: React.FC = () => {
         >
             {/* Title */}
             <div className="text-center mb-[30px] md:mb-[60px] relative z-20">
-                <h2 className="text-5xl md:text-[120px] leading-none font-bold font-montserrat text-white tracking-[-6px]">
+                <h2 className="text-5xl md:text-[120px] leading-none font-bold font-montserrat text-white tracking-[-2px] md:tracking-[-6px]">
                     Pogledaj <span className="font-bold italic text-hero-blue-dark">Meni</span>
                 </h2>
             </div>
