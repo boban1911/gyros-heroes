@@ -32,7 +32,7 @@ const Menu: React.FC = () => {
             containerClassName="flex flex-col"
         >
             {/* Title */}
-            <div className="text-center mb-[60px] md:mb-0 relative z-20">
+            <div className="text-center mb-[60px] md:mb-[120px] relative z-20">
                 <h2 className="text-5xl md:text-[120px] leading-none font-bold font-montserrat text-white tracking-[-6px]">
                     Pogledaj <span className="font-bold italic text-hero-blue-dark">Meni</span>
                 </h2>
@@ -56,7 +56,7 @@ const Menu: React.FC = () => {
             </div>
 
             {/* Mobile View: Render Filtered List */}
-            <div className="md:hidden" data-testid="menu-mobile">
+            <div className="md:hidden mt-4" data-testid="menu-mobile">
                 {renderGrid(filteredItems)}
             </div>
 
@@ -66,7 +66,7 @@ const Menu: React.FC = () => {
                 {/* 1. Gyros Section (Top) */}
                 {(activeCategory === 'all' || activeCategory === 'gyros') && gyrosItems.length > 0 && (
                     <div className="relative">
-                         <div className="relative w-full bg-hero-green rounded-[80px] pb-[30px] pt-[200px] px-[30px] shadow-xl mt-[130px]">
+                         <div className="relative w-full bg-hero-green rounded-[80px] pb-[30px] pt-[200px] px-[30px] shadow-xl mt-[250px]">
                             {/* Big Image Absolute Container with Blue Background */}
                              <div className="absolute -top-[150px] left-1/2 transform -translate-x-1/2 w-[90%] md:w-[500px] lg:w-[650px] h-[300px] z-10 pointer-events-none rounded-[60px] overflow-hidden bg-hero-blue-dark">
                                 <img 
