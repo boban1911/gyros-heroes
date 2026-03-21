@@ -23,8 +23,7 @@ const Footer: React.FC = () => {
     <footer className="bg-hero-blue-dark relative w-full overflow-hidden flex flex-col items-center pt-[60px] pb-[40px] md:pt-[100px] md:pb-[100px]" data-node-id="1:4652">
       
       {/* Background Illustration - Silhouette of buildings at the bottom */}
-      {/* Pushed down further to match the subtle rooftops in the design */}
-      <div className="absolute -bottom-[1050px] md:-bottom-[1000px] left-1/2 -translate-x-1/2 w-full max-w-[1820px] h-[1228px] z-0 pointer-events-none">
+      <div className="absolute -bottom-[20px] md:-bottom-[100px] left-1/2 -translate-x-1/2 w-[200%] sm:w-[150%] md:w-full max-w-[1820px] aspect-[1820/1228] z-0 pointer-events-none">
         <img 
           src={footerBg} 
           alt="" 

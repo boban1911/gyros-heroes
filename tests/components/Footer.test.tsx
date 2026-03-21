@@ -7,61 +7,47 @@ import React from 'react';
 describe('Footer Component', () => {
   it('renders the footer element', () => {
     render(<MemoryRouter><Footer /></MemoryRouter>);
-    // Check by data-node-id since role might be ambiguous if not explicitly set as contentinfo
     const footer = document.querySelector('footer');
     expect(footer).toBeInTheDocument();
   });
 
-  it('renders the logo', () => {
+  it('renders the background illustration', () => {
     render(<MemoryRouter><Footer /></MemoryRouter>);
-    const logo = screen.getByAltText('Gyros Heroes Logo');
-    expect(logo).toBeInTheDocument();
+    const bgContainer = document.querySelector('footer > div.absolute');
+    expect(bgContainer).toBeInTheDocument();
+    expect(bgContainer).toHaveClass('aspect-[1820/1228]');
   });
 
-  it('renders navigation links', () => {
+  it('renders city headers', () => {
     render(<MemoryRouter><Footer /></MemoryRouter>);
-    expect(screen.getByText('Hero')).toBeInTheDocument();
-    expect(screen.getByText('O nama')).toBeInTheDocument();
-    expect(screen.getByText('Meni')).toBeInTheDocument();
-    expect(screen.getByText('Lokacije')).toBeInTheDocument();
-    expect(screen.getByText('Posao')).toBeInTheDocument();
-    expect(screen.getByText('Testimonijali')).toBeInTheDocument();
+    expect(screen.getByText('Niš')).toBeInTheDocument();
+    expect(screen.getByText('Novi Sad')).toBeInTheDocument();
   });
 
-  it('renders location entries', () => {
+  it('renders social media links with correct handles', () => {
     render(<MemoryRouter><Footer /></MemoryRouter>);
-    expect(screen.getAllByText('Poruči i Pokupi').length).toBe(3);
-    expect(screen.getByText('Nikole Pašića 39')).toBeInTheDocument();
-    expect(screen.getByText('Park Sv. Save')).toBeInTheDocument();
-    expect(screen.getByText('Bulevar Oslobođenja 89e')).toBeInTheDocument();
+    expect(screen.getByText('gyrosheroespremiumfood')).toBeInTheDocument();
+    expect(screen.getByText('gyros.heroes.nis')).toBeInTheDocument();
+    expect(screen.getByText('gyrosheroesnovisad')).toBeInTheDocument();
+    expect(screen.getByText('gyros.heroes.ns')).toBeInTheDocument();
     
-    expect(screen.getByText('PORUČI ZA DOSTAVU NIŠ')).toBeInTheDocument();
-    expect(screen.getAllByText('PORUČI ZA DOSTAVU NOVI SAD').length).toBe(2);
-    expect(screen.getAllByText('Glovo').length).toBe(2);
-    expect(screen.getByText('Wolt')).toBeInTheDocument();
+    const links = screen.getAllByRole('link');
+    expect(links.some(l => l.getAttribute('href')?.includes('facebook.com/gyrosheroespremiumfood'))).toBe(true);
+    expect(links.some(l => l.getAttribute('href')?.includes('instagram.com/gyros.heroes.nis'))).toBe(true);
   });
 
-  it('renders social media links', () => {
+  it('renders legal and copyright information', () => {
     render(<MemoryRouter><Footer /></MemoryRouter>);
-    const facebookImg = screen.getByAltText('Facebook');
-    const instagramImg = screen.getByAltText('Instagram');
-    
-    expect(facebookImg).toBeInTheDocument();
-    expect(instagramImg).toBeInTheDocument();
-    
-    const facebookLink = facebookImg.closest('a');
-    const instagramLink = instagramImg.closest('a');
-    
-    expect(facebookLink).toHaveAttribute('href', '#');
-    expect(instagramLink).toHaveAttribute('href', '#');
-  });
-
-  it('renders bottom bar information', () => {
-    render(<MemoryRouter><Footer /></MemoryRouter>);
-    expect(screen.getByText('All right reserved')).toBeInTheDocument();
+    expect(screen.getByText('Uslovi Korišćenja')).toBeInTheDocument();
+    expect(screen.getByText('Politika Privatnosti')).toBeInTheDocument();
+    expect(screen.getByText('Podešavanje Kolačića')).toBeInTheDocument();
+    expect(screen.getByText('Sva prava zadržana')).toBeInTheDocument();
     expect(screen.getByText('Gyros Heroes 2025')).toBeInTheDocument();
-    expect(screen.getByText('Term & Conditions')).toBeInTheDocument();
-    expect(screen.getByText('Privacy Policy')).toBeInTheDocument();
-    expect(screen.getByText('Cookie Settings')).toBeInTheDocument();
+  });
+
+  it('renders icons', () => {
+    render(<MemoryRouter><Footer /></MemoryRouter>);
+    // Copyright icon
+    expect(screen.getByAltText('Copyright icon')).toBeInTheDocument();
   });
 });
