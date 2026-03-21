@@ -43,7 +43,7 @@ describe('Footer Component', () => {
     expect(screen.getByText('Politika Privatnosti')).toBeInTheDocument();
     expect(screen.getByText('Podešavanje Kolačića')).toBeInTheDocument();
     expect(screen.getByText('Sva prava zadržana')).toBeInTheDocument();
-    expect(screen.getByText('Gyros Heroes 2025')).toBeInTheDocument();
+    expect(screen.getByText('Gyros Heroes 2026')).toBeInTheDocument();
   });
 
   it('renders icons', () => {

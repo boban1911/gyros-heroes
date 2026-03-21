@@ -29,7 +29,7 @@ export const PrivacyPolicyContent = (
         Za sva dodatna pitanja o našoj politici upravljanja privatnim podacima slobodno kontaktirajte naše filijale ili nam pišite putem naših zvaničnih profila na socijalnim mrežama.
       </p>
     </div>
-    <p className="text-sm text-white/50 pt-6">Poslednje ažuriranje: 2025.</p>
+    <p className="text-sm text-white/50 pt-6">Poslednje ažuriranje: 2026.</p>
   </div>
 );
 
@@ -62,7 +62,7 @@ export const TermsConditionsContent = (
         Zadržavamo potpuno pravo da izmenimo sve uslove bez prethodne i zvanične pismene najave. Savetujemo vam da povremeno proverite ovu stranicu. 
       </p>
     </div>
-    <p className="text-sm text-white/50 pt-6">Poslednje ažuriranje: 2025.</p>
+    <p className="text-sm text-white/50 pt-6">Poslednje ažuriranje: 2026.</p>
   </div>
 );
 
@@ -89,6 +89,6 @@ export const CookiePolicyContent = (
         Kolačićima se najjednostavnije rukuje direktno iz administrativnih podešavanja unutar pretraživača koji trenutno koristite (Chrome, Safari, Firefox). Isključivanjem ovih alata može se dogoditi da celokupan estetski doživljaj posete postane usporen.
       </p>
     </div>
-    <p className="text-sm text-white/50 pt-6">Poslednje ažuriranje: 2025.</p>
+    <p className="text-sm text-white/50 pt-6">Poslednje ažuriranje: 2026.</p>
   </div>
 );

@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center gap-[4px] font-montserrat font-normal text-[14px] md:text-[16px] text-white whitespace-nowrap mt-2 opacity-80 md:opacity-100 cursor-default">
                 <span>Sva prava zadržana</span>
                 <img src={iconCopyright} alt="Copyright icon" className="size-[20px] md:size-[24px]" />
-                <span>Gyros Heroes 2025</span>
+                <span>Gyros Heroes 2026</span>
             </div>
         </div>
 
