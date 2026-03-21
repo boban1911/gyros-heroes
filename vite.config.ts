@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
+import { resolve } from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -47,6 +48,14 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        pozivnica: resolve(__dirname, 'pozivnica/index.html'),
+      },
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
