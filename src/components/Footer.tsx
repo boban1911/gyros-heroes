@@ -31,10 +31,10 @@ const Footer: React.FC = () => {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1440px] px-6 md:px-[100px] flex flex-col items-center gap-[40px] md:gap-[60px]">
+      <div className="relative z-10 w-full max-w-[1440px] px-6 md:px-12 lg:px-[100px] flex flex-col items-center gap-[40px] md:gap-[60px]">
         
         {/* Social Media Row */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 mt-8 w-full max-w-3xl">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16 mt-8 w-full max-w-5xl">
           
           {/* Niš */}
           <div className="flex flex-col items-center gap-4">
@@ -52,10 +52,10 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Vertical Divider for Desktop */}
-          <div className="hidden md:block w-px h-[60px] bg-white opacity-20"></div>
+          <div className="hidden lg:block w-px h-[60px] bg-white opacity-20"></div>
 
-          {/* Horizontal Divider for Mobile */}
-          <div className="block md:hidden w-[100px] h-px bg-white opacity-20"></div>
+          {/* Horizontal Divider for Mobile/Tablet */}
+          <div className="block lg:hidden w-[100px] h-px bg-white opacity-20"></div>
 
           {/* Novi Sad */}
           <div className="flex flex-col items-center gap-4">
