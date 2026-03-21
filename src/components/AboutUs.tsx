@@ -8,7 +8,7 @@ import iconSalad from '../assets/icon-salad.svg';
 import { Section } from './layout/Section';
 
 const AboutUs = () => {
-  const brandStory = "Gyros Heroes je savremen fast-food koncept koji spaja autentičan grčki ukus sa jasnim fokusom na kvalitet mesa i pažljivo razvijenu marinadu. Brend je nastao u Nišu i izgradio prepoznatljiv identitet kroz velike porcije, kvalitet i inovativnu prezentaciju proizvoda. Naš meni obuhvata rane veličine girosa, obrok kombinacija i priloga, namenjenih gostima koji očekuju više od standardnog girosa. Posvećeni smo brzoj usluzi, svežim sastojcima i iskustvu koje postavlja novi standard u ovoj kategoriji. Gyros Heroes je mesto gde se klasični giros pretvara u bogat i nezaboravan obrok.";
+  const brandStory = "Gyros Heroes je savremen fast-food koncept koji spaja autentičan grčki ukus sa jasnim fokusom na kvalitet mesa i pažljivo razvijenu marinadu. Brend je nastao u Nišu i danas predstavlja najbolji giros u Nišu i Novom Sadu, sa prepoznatljivim identitetom kroz velike porcije, kvalitet i inovativnu prezentaciju. Naš meni obuhvata razne veličine girosa, obrok kombinacije i priloge, namenjene gostima koji očekuju više od standardnog girosa. Posvećeni smo brzoj usluzi, svežim sastojcima i iskustvu koje postavlja novi standard u ovoj kategoriji. Gyros Heroes je mesto gde se klasični giros pretvara u bogat i nezaboravan obrok.";
 
   const cards = [
     {

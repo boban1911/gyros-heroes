@@ -43,7 +43,7 @@ export default function Hero() {
                   {/* Niš Block */}
                   <div className="flex flex-col items-center gap-6">
                       <h2 className="font-montserrat font-bold text-[24px] md:text-[32px] tracking-[-1.2px] md:tracking-[-1.6px]">
-                          Poruči <span className="text-hero-yellow">Niš</span>
+                          Poruči Giros <span className="text-hero-yellow">Niš</span>
                       </h2>
                                           <div className="flex flex-col items-center md:flex-row gap-4 w-full md:w-auto">
                                               <a href="tel:0637389890" className="bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[44px] md:h-[60px] w-fit px-4 md:px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap">
@@ -58,7 +58,7 @@ export default function Hero() {
                                       {/* Novi Sad Block */}
                                       <div className="flex flex-col items-center gap-6">
                                           <h2 className="font-montserrat font-bold text-[24px] md:text-[32px] tracking-[-1.2px] md:tracking-[-1.6px]">
-                                              Poruči <span className="text-hero-yellow">Novi Sad</span>
+                                              Poruči Giros <span className="text-hero-yellow">Novi Sad</span>
                                           </h2>
                                           <div className="flex flex-col items-center md:flex-row gap-4 w-full md:w-auto">
                                               <a href="tel:066373666" className="bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[44px] md:h-[60px] w-fit px-4 md:px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap">
