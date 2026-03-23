@@ -1,5 +1,5 @@
 import React from 'react';
-import joinUsImg from '../assets/join-us.webp';
+import joinUsImg from '../assets/join-us-new.webp';
 
 const JoinUs: React.FC = () => {
   return (
