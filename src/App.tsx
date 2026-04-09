@@ -1,16 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Pozivnica from './pages/Pozivnica';
 import CookieBanner from './components/CookieBanner';
+import AnalyticsTracker from './components/AnalyticsTracker';
 
 function App() {
   return (
     <>
       <Router>
+        <AnalyticsTracker />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/pozivnica" element={<Pozivnica />} />
         </Routes>
       </Router>
       <CookieBanner />

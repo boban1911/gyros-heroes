@@ -2,6 +2,7 @@ import React from 'react';
 import GallerySlider from './GallerySlider';
 import phoneIcon from '../assets/phone-call.png';
 import locationIcon from '../assets/location.png';
+import { trackEvent } from '../utils/analytics';
 
 const LOCATIONS_DATA = [
   {
@@ -71,6 +72,7 @@ export default function LocationsGallery() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 group/address"
+                    onClick={() => trackEvent('Locations', 'Directions Click', `${loc.address}, ${loc.city}`)}
                   >
                     <img src={locationIcon} alt="" className="w-6 h-6 object-contain shrink-0 group-hover/address:scale-110 transition-transform" />
                     <p className="font-montserrat font-semibold text-[18px] text-white leading-tight group-hover/address:text-hero-yellow transition-colors">{loc.address}</p>
@@ -82,7 +84,7 @@ export default function LocationsGallery() {
                         <div className="w-6 h-6 flex items-center justify-center shrink-0">
                              <img src={phoneIcon} alt="Phone" className="w-full h-full object-contain" />
                         </div>
-                        <a href={`tel:${loc.phone.replace(/\s/g, '')}`} className="font-montserrat font-bold text-[22px] text-white hover:text-hero-yellow transition-colors tracking-wide">
+                        <a href={`tel:${loc.phone.replace(/\s/g, '')}`} className="font-montserrat font-bold text-[22px] text-white hover:text-hero-yellow transition-colors tracking-wide" onClick={() => trackEvent('Locations', 'Phone Click', `${loc.address}, ${loc.city}`)}>
                             {loc.phone}
                         </a>
                     </div>

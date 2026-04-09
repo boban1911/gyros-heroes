@@ -1,19 +1,27 @@
-## Figma MCP Integration Rules
-These rules define how to translate Figma inputs into code for this project and must be followed for every Figma-driven change.
+# Gyros Heroes - AI Assistant Context
 
-### Required flow (do not skip)
-1. Run get_design_context first to fetch the structured representation for the exact node(s).
-2. If the response is too large or truncated, run get_metadata to get the high‑level node map and then re‑fetch only the required node(s) with get_design_context.
-3. ALWAYS run get_screenshot for a visual reference of the node variant being implemented before starting any code changes.
-4. Only after you have both get_design_context and get_screenshot, download any assets needed and start implementation.
-5. Translate the output (usually React + Tailwind) into this project's conventions, styles and framework.  Reuse the project's color tokens, components, and typography wherever possible.
-6. Validate against Figma for 1:1 look and behavior before marking complete.
+## Project Overview
+**Name:** Gyros Heroes
+**Type:** React Web Application
+**Purpose:** Marketing/Menu site for a fast-food brand. Primarily a long-scrolling landing page structure (`Home.tsx`).
 
-### Implementation rules
-- Treat the Figma MCP output (React + Tailwind) as a representation of design and behavior, not as final code style.
-- Replace Tailwind utility classes with the project's preferred utilities/design‑system tokens when applicable.
-- Reuse existing components (e.g., buttons, inputs, typography, icon wrappers) instead of duplicating functionality.
-- Use the project's color system, typography scale, and spacing tokens consistently.
-- Respect existing routing, state management, and data‑fetch patterns already adopted in the repo.
-- Strive for 1:1 visual parity with the Figma design. When conflicts arise, prefer design‑system tokens and adjust spacing or sizes minimally to match visuals.
-- Validate the final UI against the Figma screenshot for both look and behavior.
+## Tech Stack
+- **Framework:** React 18, Vite, TypeScript
+- **Styling:** Tailwind CSS (Custom config: `tailwind.config.js`)
+- **Routing:** React Router v7 (`react-router-dom`)
+- **Testing:** Vitest, React Testing Library (`@testing-library/react`)
+- **Key Libraries:** `embla-carousel-react` (Sliders), `lucide-react` (Icons)
+
+## Architecture & Conventions
+- **Component Pattern:** Reusable components are primarily in `src/components/`, heavily relying on composition. Lazy loading and React `Suspense` are used for components "below the fold" in `Home.tsx` to optimize performance.
+- **Data Management:** Static data storage pattern. Content such as the restaurant menu is modeled as strong-typed objects residing in `src/data/` (e.g., `src/data/menu.ts` exporting `MenuItem` models) instead of a live API.
+- **Styling Standards:** Avoid arbitrary Tailwind values. Utilize predefined theme settings from `tailwind.config.js`:
+  - **Colors:** `hero-blue`, `hero-blue-dark`, `hero-yellow`, `hero-green`, `dandelion`
+  - **Fonts:** `montserrat`, `inter`
+  - **Shadows:** `hero-focus`, `hero-xs`
+- **Asset Optimization:** Assets (like `.webp` images) are managed under `src/assets/` and optimized on build via `vite-plugin-image-optimizer`.
+
+## Figma MCP Guidelines (If APPLICABLE)
+- Treat the Figma MCP output as a representation of design and behavior.
+- Replace Tailwind utility classes with the project's preferred design‑system tokens.
+- Reuse existing components (buttons, typography, icon wrappers) and adhere strictly to 1:1 visual parity.

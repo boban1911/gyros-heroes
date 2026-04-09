@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { initializeAnalytics } from '../utils/analytics';
 
 const CookieBanner: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,11 +14,15 @@ const CookieBanner: React.FC = () => {
         setIsVisible(true);
       }, 1500);
       return () => clearTimeout(timer);
+    } else {
+      // Initialize analytics immediately if previously accepted
+      initializeAnalytics();
     }
   }, []);
 
   const handleAccept = () => {
     localStorage.setItem('gyrosHeroes_cookiesAccepted', 'true');
+    initializeAnalytics();
     setIsVisible(false);
     // Unmount completely after transition
     setTimeout(() => {

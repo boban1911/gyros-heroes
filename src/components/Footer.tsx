@@ -4,6 +4,7 @@ import footerBg from '../assets/footer/footer-bg-new.svg';
 import { Facebook, Instagram } from 'lucide-react';
 import LegalModal from './LegalModal';
 import { PrivacyPolicyContent, TermsConditionsContent, CookiePolicyContent } from '../constants/legalText';
+import { trackEvent } from '../utils/analytics';
 
 const Footer: React.FC = () => {
   const [activeLegal, setActiveLegal] = useState<{title: string, content: React.ReactNode} | null>(null);
@@ -40,11 +41,11 @@ const Footer: React.FC = () => {
           <div className="flex flex-col items-center gap-4">
             <span className="font-montserrat font-bold text-[18px] md:text-[20px] text-white tracking-widest uppercase">Niš</span>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-               <a href="https://www.facebook.com/gyrosheroespremiumfood" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group">
+               <a href="https://www.facebook.com/gyrosheroespremiumfood" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group" onClick={() => trackEvent('Social', 'Click', 'Facebook Niš')}>
                   <Facebook className="size-[24px] text-hero-yellow group-hover:text-white transition-colors" strokeWidth={1.5} />
                   <span className="font-montserrat font-semibold text-[14px] md:text-[16px] text-hero-yellow group-hover:text-white transition-colors">gyrosheroespremiumfood</span>
                </a>
-               <a href="https://www.instagram.com/gyros.heroes.nis/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group">
+               <a href="https://www.instagram.com/gyros.heroes.nis/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group" onClick={() => trackEvent('Social', 'Click', 'Instagram Niš')}>
                   <Instagram className="size-[24px] text-hero-yellow group-hover:text-white transition-colors" strokeWidth={1.5} />
                   <span className="font-montserrat font-semibold text-[14px] md:text-[16px] text-hero-yellow group-hover:text-white transition-colors">gyros.heroes.nis</span>
                </a>
@@ -61,11 +62,11 @@ const Footer: React.FC = () => {
           <div className="flex flex-col items-center gap-4">
             <span className="font-montserrat font-bold text-[18px] md:text-[20px] text-white tracking-widest uppercase">Novi Sad</span>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-               <a href="https://www.facebook.com/gyrosheroesnovisad" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group">
+               <a href="https://www.facebook.com/gyrosheroesnovisad" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group" onClick={() => trackEvent('Social', 'Click', 'Facebook Novi Sad')}>
                   <Facebook className="size-[24px] text-hero-yellow group-hover:text-white transition-colors" strokeWidth={1.5} />
                   <span className="font-montserrat font-semibold text-[14px] md:text-[16px] text-hero-yellow group-hover:text-white transition-colors">gyrosheroesnovisad</span>
                </a>
-               <a href="https://www.instagram.com/gyros.heroes.ns/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group">
+               <a href="https://www.instagram.com/gyros.heroes.ns/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group" onClick={() => trackEvent('Social', 'Click', 'Instagram Novi Sad')}>
                   <Instagram className="size-[24px] text-hero-yellow group-hover:text-white transition-colors" strokeWidth={1.5} />
                   <span className="font-montserrat font-semibold text-[14px] md:text-[16px] text-hero-yellow group-hover:text-white transition-colors">gyros.heroes.ns</span>
                </a>

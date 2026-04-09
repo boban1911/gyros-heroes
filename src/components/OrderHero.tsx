@@ -1,4 +1,5 @@
 import React from 'react';
+import { trackEvent } from '../utils/analytics';
 
 const OrderHero: React.FC = () => {
   return (
@@ -31,6 +32,7 @@ const OrderHero: React.FC = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-full lg:w-auto bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap gap-1"
+                onClick={() => trackEvent('Order Conversion', 'Delivery Click', 'Glovo - Niš')}
               >
                 <span className="font-medium">Poruči Glovo -</span>
                 <span className="font-bold">NI</span>
@@ -40,18 +42,21 @@ const OrderHero: React.FC = () => {
             {/* Bottom Row: Glovo NS & Wolt NS */}
             <div className="flex flex-col md:flex-row gap-[20px] lg:gap-[30px] w-full lg:w-auto">
               <a 
-                href="#" // TODO: Add Glovo NS link when available
+                href="https://glovoapp.com/sr/rs/novi-sad/stores/gyros-heroes-qnd"
+                target="_blank" 
+                rel="noopener noreferrer"
                 className="w-full lg:w-auto bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap gap-1"
-                onClick={(e) => e.preventDefault()} // Prevent default for placeholder
+                onClick={() => trackEvent('Order Conversion', 'Delivery Click', 'Glovo - Novi Sad')}
               >
                 <span className="font-medium">Poruči Glovo -</span>
                 <span className="font-bold">NS</span>
               </a>
               <a 
-                href="https://wolt.com/sr/srb/novi-sad/restaurant/gyros-heroes-ns" 
+                href="https://wolt.com/sr/srb/novi_sad/restaurant/gyros-heroes-ns" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-full lg:w-auto bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap gap-1"
+                onClick={() => trackEvent('Order Conversion', 'Delivery Click', 'Wolt - Novi Sad')}
               >
                 <span className="font-medium">Poruči Wolt -</span>
                 <span className="font-bold">NS</span>

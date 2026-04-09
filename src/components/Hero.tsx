@@ -1,5 +1,6 @@
 import heroBg from '../assets/hero-bg.webp';
 import SuperheroMascot from './SuperheroMascot';
+import { trackEvent } from '../utils/analytics';
 
 export default function Hero() {
   return (
@@ -46,10 +47,10 @@ export default function Hero() {
                           Poruči Giros <span className="text-hero-yellow">Niš</span>
                       </h2>
                                           <div className="flex flex-col items-center md:flex-row gap-4 w-full md:w-auto">
-                                              <a href="tel:0637389890" className="bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[44px] md:h-[60px] w-fit px-4 md:px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap">
+                                              <a href="tel:0637389890" className="bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[44px] md:h-[60px] w-fit px-4 md:px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap" onClick={() => trackEvent('Order Conversion', 'Pickup Click', 'Centar - Niš')}>
                                                   <span className="font-medium">Poruči i pokupi</span><span className="font-bold">&nbsp;- CENTAR</span>
                                               </a>
-                                              <a href="tel:0659381784" className="bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[44px] md:h-[60px] w-fit px-4 md:px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap">
+                                              <a href="tel:0659381784" className="bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[44px] md:h-[60px] w-fit px-4 md:px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap" onClick={() => trackEvent('Order Conversion', 'Pickup Click', 'Park Sv. Save - Niš')}>
                                                   <span className="font-medium">Poruči i pokupi</span><span className="font-bold">&nbsp;- PARK SV.SAVE</span>
                                               </a>
                                           </div>
@@ -61,7 +62,7 @@ export default function Hero() {
                                               Poruči Giros <span className="text-hero-yellow">Novi Sad</span>
                                           </h2>
                                           <div className="flex flex-col items-center md:flex-row gap-4 w-full md:w-auto">
-                                              <a href="tel:066373666" className="bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[44px] md:h-[60px] w-fit px-4 md:px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap">
+                                              <a href="tel:066373666" className="bg-hero-yellow text-grey-black font-montserrat text-[14px] md:text-[16px] h-[44px] md:h-[60px] w-fit px-4 md:px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap" onClick={() => trackEvent('Order Conversion', 'Pickup Click', 'Bul. Oslobodjenja - Novi Sad')}>
                                                   <span className="font-medium">Poruči i pokupi</span><span className="font-bold">&nbsp;- BUL. OSLOBODJENJA</span>
                                               </a>
                                           </div>
