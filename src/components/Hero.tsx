@@ -29,14 +29,17 @@ export default function Hero() {
           {/* Content Container */}
           <div className="relative z-10 flex flex-col items-center justify-start w-full px-4 pt-[150px] md:pt-[204px] pb-20 text-center text-white">
               
-              {/* Headline */}
-              <h1 className="w-full font-montserrat font-extrabold leading-none text-[64px] md:text-[150px] xl:text-[250px] mb-12 drop-shadow-lg flex flex-col items-center">
+              {/* Invisible H1 for SEO */}
+              <h1 className="sr-only">Gyros Heroes - Najbolji autentični giros u Nišu i Novom Sadu</h1>
+
+              {/* Visual Headline */}
+              <div className="w-full font-montserrat font-extrabold leading-none text-[64px] md:text-[150px] xl:text-[250px] mb-12 drop-shadow-lg flex flex-col items-center">
                   <span className="block">
                       <span className="text-hero-yellow italic">HERO</span>
                       <span> IS</span>
                   </span>
                   <span className="block">IN TOWN!</span>
-              </h1>
+              </div>
 
               {/* Ordering Blocks Container */}
               <div className="flex flex-col gap-12 w-full max-w-4xl">

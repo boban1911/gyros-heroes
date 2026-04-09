@@ -10,6 +10,7 @@ const LocationsGallery = lazy(() => import('../components/LocationsGallery'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
 const JoinUs = lazy(() => import('../components/JoinUs'));
 const OrderHero = lazy(() => import('../components/OrderHero'));
+const SEOContent = lazy(() => import('../components/SEOContent'));
 const Footer = lazy(() => import('../components/Footer'));
 
 // Simple fallback component
@@ -39,6 +40,7 @@ const Home: React.FC = () => {
             </div>
             <Testimonials />
             <OrderHero />
+            <SEOContent />
           </div>
         </Suspense>
       </main>
