@@ -1,9 +1,15 @@
 import { Resend } from 'resend';
 
-const apiKey = process.env.RESEND_API_KEY;
-const from = process.env.RESEND_FROM_EMAIL ?? 'loyalty@gyrosheroes.rs';
+let cachedClient: Resend | null = null;
+let cachedClientInitialized = false;
 
-const client = apiKey ? new Resend(apiKey) : null;
+function getClient(): Resend | null {
+  if (cachedClientInitialized) return cachedClient;
+  cachedClientInitialized = true;
+  const apiKey = process.env.RESEND_API_KEY;
+  cachedClient = apiKey ? new Resend(apiKey) : null;
+  return cachedClient;
+}
 
 export interface MagicLinkEmail {
   to: string;
@@ -12,6 +18,8 @@ export interface MagicLinkEmail {
 }
 
 export async function sendMagicLink({ to, name, url }: MagicLinkEmail): Promise<void> {
+  const from = process.env.RESEND_FROM_EMAIL ?? 'loyalty@gyrosheroes.rs';
+  const client = getClient();
   const subject = 'Aktiviraj svoju Gyros Heroes karticu';
   const text = `Zdravo ${name},
 

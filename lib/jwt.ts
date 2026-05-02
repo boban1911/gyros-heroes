@@ -1,12 +1,16 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { createHash, randomBytes } from 'node:crypto';
 
-const SECRET = (() => {
+let cachedSecret: Uint8Array | null = null;
+
+function getSecret(): Uint8Array {
+  if (cachedSecret) return cachedSecret;
   const raw = process.env.JWT_SECRET;
   if (!raw) throw new Error('JWT_SECRET is not set');
   if (raw.length < 32) throw new Error('JWT_SECRET must be at least 32 chars');
-  return new TextEncoder().encode(raw);
-})();
+  cachedSecret = new TextEncoder().encode(raw);
+  return cachedSecret;
+}
 
 export interface CustomerSessionClaims {
   sub: string; // customer id
@@ -26,11 +30,11 @@ export async function signSession(claims: SessionClaims, ttlSeconds: number): Pr
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime(Math.floor(Date.now() / 1000) + ttlSeconds)
-    .sign(SECRET);
+    .sign(getSecret());
 }
 
 export async function verifySession<T extends SessionClaims>(token: string): Promise<T> {
-  const { payload } = await jwtVerify(token, SECRET);
+  const { payload } = await jwtVerify(token, getSecret());
   return payload as unknown as T;
 }
 
