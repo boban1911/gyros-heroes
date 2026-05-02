@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import sunBg from '../assets/sun.webp';
+import superheroTortilla from '../assets/superhero-tortilla.svg';
 
 type SubmitState =
   | { kind: 'idle' }
@@ -43,91 +46,157 @@ const Loyalty: React.FC = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-hero-blue">
+    <div className="relative min-h-screen bg-hero-blue overflow-hidden">
       <Navbar />
-      <main className="px-5 pt-[120px] pb-[80px] flex justify-center">
-        <section className="w-full max-w-[560px] bg-white rounded-[40px] p-8 md:p-12 shadow-hero-xs">
-          <h1 className="font-montserrat font-bold text-[40px] md:text-[56px] leading-[1.05] text-hero-blue-dark">
-            Postani <span className="italic text-hero-yellow">Hero</span>
-          </h1>
-          <p className="font-montserrat text-grey-black text-base md:text-lg mt-4 leading-relaxed">
-            Registruj se i preuzmi Hero karticu u Google Wallet. Sakupljaj pečate i osvoji 10. gyros besplatno.
-          </p>
 
-          {initialError && state.kind === 'idle' && (
-            <p className="mt-6 px-4 py-3 rounded-2xl bg-red-50 text-red-700 text-sm font-medium">
-              {errorCopyByCode[initialError] ?? 'Došlo je do greške. Pokušaj ponovo.'}
+      {/* Sun glow background */}
+      <div className="absolute top-[-100px] left-0 right-0 h-[900px] pointer-events-none z-0 overflow-hidden opacity-90">
+        <img src={sunBg} alt="" className="w-full h-full object-cover" />
+      </div>
+
+      <main className="relative z-10 px-5 pt-[140px] md:pt-[180px] pb-[100px]">
+        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-xs lg:gap-sm items-stretch">
+
+          {/* LEFT: Headline + mascot */}
+          <div className="order-2 lg:order-1 w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-8">
+            <h1 className="font-montserrat font-bold text-[60px] md:text-[100px] xl:text-[140px] leading-[0.95] tracking-[-3px] md:tracking-[-5px] text-white">
+              <span className="block">Postani</span>
+              <span className="block text-hero-yellow italic">Hero</span>
+            </h1>
+            <p className="mt-6 max-w-[480px] font-montserrat font-medium text-white/90 text-[18px] md:text-[22px] leading-[1.4]">
+              Sakupljaj pečate uz svaku porciju i osvoji
+              <span className="text-hero-yellow font-bold"> 10. gyros besplatno</span>.
+              Bez plastične kartice — pravo u tvoj Google Wallet.
             </p>
-          )}
 
-          {state.kind === 'success' ? (
-            <div className="mt-8 px-5 py-6 rounded-3xl bg-hero-green/10 text-hero-blue-dark">
-              <h2 className="font-montserrat font-bold text-2xl">Proveri inbox!</h2>
-              <p className="mt-2 text-grey-black">
-                Poslali smo ti link na <strong>{email}</strong>. Klikni na njega da aktiviraš karticu.
-              </p>
-              <p className="mt-2 text-sm text-grey-middle">Link važi 24 sata.</p>
+            <div className="mt-10 hidden lg:block w-[320px] xl:w-[420px] -ml-6">
+              <img
+                src={superheroTortilla}
+                alt="Gyros Heroes mascot"
+                className="w-full h-auto drop-shadow-2xl"
+                style={{ transform: 'rotate(-8deg)' }}
+              />
             </div>
-          ) : (
-            <form className="mt-8 flex flex-col gap-5" onSubmit={onSubmit}>
-              <label className="flex flex-col gap-2">
-                <span className="font-montserrat font-semibold text-grey-black">Ime i prezime</span>
-                <input
-                  type="text"
-                  required
-                  minLength={2}
-                  maxLength={80}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="h-[50px] rounded-full border border-grey-light px-5 font-inter text-grey-black focus:outline-none focus:shadow-hero-focus focus:border-hero-yellow transition-shadow duration-fast"
-                  autoComplete="name"
-                />
-              </label>
+          </div>
 
-              <label className="flex flex-col gap-2">
-                <span className="font-montserrat font-semibold text-grey-black">Email</span>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-[50px] rounded-full border border-grey-light px-5 font-inter text-grey-black focus:outline-none focus:shadow-hero-focus focus:border-hero-yellow transition-shadow duration-fast"
-                  autoComplete="email"
-                />
-              </label>
-
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  required
-                  checked={consent}
-                  onChange={(e) => setConsent(e.target.checked)}
-                  className="mt-1 w-5 h-5 accent-hero-yellow"
-                />
-                <span className="font-inter text-sm text-grey-black leading-relaxed">
-                  Slažem se sa obradom mojih podataka u svrhu programa lojalnosti i prijema email obaveštenja.
-                </span>
-              </label>
-
-              {state.kind === 'error' && (
-                <p className="px-4 py-3 rounded-2xl bg-red-50 text-red-700 text-sm font-medium">
-                  Nešto nije u redu. Pokušaj ponovo. ({state.message})
+          {/* RIGHT: Form card */}
+          <div className="order-1 lg:order-2 w-full lg:flex-1 lg:max-w-[600px]">
+            <div className="bg-hero-green rounded-[40px] lg:rounded-lg p-6 md:p-10 lg:p-[40px] shadow-hero-xs">
+              {initialError && state.kind === 'idle' && (
+                <p className="mb-6 px-5 py-4 rounded-3xl bg-white/15 border border-white/30 text-white text-sm font-montserrat font-medium">
+                  {errorCopyByCode[initialError] ?? 'Došlo je do greške. Pokušaj ponovo.'}
                 </p>
               )}
 
-              <button
-                type="submit"
-                disabled={state.kind === 'submitting' || !consent}
-                className="bg-hero-yellow text-grey-black font-montserrat font-semibold text-base h-[60px] px-8 rounded-full shadow-hero-xs hover:bg-hero-blue-dark hover:text-white transition-colors duration-base disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {state.kind === 'submitting' ? 'Šaljem…' : 'Pošalji link za aktivaciju'}
-              </button>
-            </form>
-          )}
-        </section>
+              {state.kind === 'success' ? (
+                <div className="text-center py-8">
+                  <div className="text-[64px] mb-4">✉️</div>
+                  <h2 className="font-montserrat font-black text-[36px] md:text-[44px] text-white leading-[1.05]">
+                    Proveri inbox!
+                  </h2>
+                  <p className="mt-4 font-montserrat text-white/95 text-[17px] leading-[1.5]">
+                    Poslali smo aktivacioni link na
+                    <br />
+                    <span className="font-bold text-hero-blue-dark bg-white/20 px-3 py-1 rounded-full inline-block mt-2">
+                      {email}
+                    </span>
+                  </p>
+                  <p className="mt-6 font-montserrat text-white/70 text-sm">
+                    Link važi 24 sata.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <h2 className="font-montserrat font-black text-[28px] md:text-[36px] text-white leading-[1.05] mb-6">
+                    Aktiviraj svoju Hero karticu
+                  </h2>
+
+                  <form className="flex flex-col gap-5" onSubmit={onSubmit}>
+                    <Field
+                      label="Ime i prezime"
+                      type="text"
+                      value={name}
+                      onChange={setName}
+                      required
+                      minLength={2}
+                      maxLength={80}
+                      autoComplete="name"
+                    />
+
+                    <Field
+                      label="Email"
+                      type="email"
+                      value={email}
+                      onChange={setEmail}
+                      required
+                      autoComplete="email"
+                    />
+
+                    <label className="flex items-start gap-3 cursor-pointer mt-1">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={consent}
+                        onChange={(e) => setConsent(e.target.checked)}
+                        className="mt-1 w-5 h-5 accent-hero-yellow flex-shrink-0"
+                      />
+                      <span className="font-montserrat text-sm text-white/90 leading-[1.5]">
+                        Slažem se sa obradom mojih podataka u svrhu programa lojalnosti
+                        i prijema email obaveštenja od Gyros Heroes.
+                      </span>
+                    </label>
+
+                    {state.kind === 'error' && (
+                      <p className="px-4 py-3 rounded-2xl bg-red-500/20 border border-red-300/40 text-white text-sm font-montserrat font-medium">
+                        Nešto nije u redu. Pokušaj ponovo.
+                      </p>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={state.kind === 'submitting' || !consent}
+                      className="mt-2 bg-hero-yellow text-grey-black font-montserrat font-bold text-[15px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-hero-yellow disabled:hover:text-grey-black"
+                    >
+                      {state.kind === 'submitting' ? 'Šaljem…' : 'Pošalji aktivacioni link'}
+                    </button>
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
       </main>
+
+      <Footer />
     </div>
   );
 };
+
+interface FieldProps {
+  label: string;
+  type: 'text' | 'email';
+  value: string;
+  onChange: (v: string) => void;
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  autoComplete?: string;
+}
+
+const Field: React.FC<FieldProps> = ({ label, type, value, onChange, required, minLength, maxLength, autoComplete }) => (
+  <label className="flex flex-col gap-2">
+    <span className="font-montserrat font-semibold text-white text-[14px] tracking-wide">{label}</span>
+    <input
+      type={type}
+      required={required}
+      minLength={minLength}
+      maxLength={maxLength}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      autoComplete={autoComplete}
+      className="h-[50px] md:h-[56px] rounded-full bg-white/95 px-5 font-montserrat font-medium text-grey-black placeholder:text-grey-middle border-2 border-transparent focus:outline-none focus:border-hero-yellow focus:bg-white transition-colors duration-fast"
+    />
+  </label>
+);
 
 export default Loyalty;
