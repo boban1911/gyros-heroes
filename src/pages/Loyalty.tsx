@@ -48,22 +48,22 @@ const Loyalty: React.FC = () => {
     <div className="relative min-h-screen bg-hero-blue overflow-hidden">
       <Navbar />
 
-      <main className="relative z-10 px-5 pt-[140px] md:pt-[180px] pb-[100px]">
-        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-xs lg:gap-sm items-stretch">
+      <main className="relative z-10 px-5 pt-[100px] md:pt-[110px] pb-12 lg:pb-16">
+        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
 
           {/* LEFT: Headline + mascot */}
-          <div className="order-2 lg:order-1 w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-8">
-            <h1 className="font-montserrat font-bold text-[60px] md:text-[100px] xl:text-[140px] leading-[0.95] tracking-[-3px] md:tracking-[-5px] text-white">
+          <div className="order-2 lg:order-1 w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-4 relative">
+            <h1 className="font-montserrat font-bold text-[56px] md:text-[88px] xl:text-[110px] leading-[0.95] tracking-[-2px] md:tracking-[-4px] text-white">
               <span className="block">Postani</span>
               <span className="block text-hero-yellow italic">Hero</span>
             </h1>
-            <p className="mt-6 max-w-[480px] font-montserrat font-medium text-white/90 text-[18px] md:text-[22px] leading-[1.4]">
+            <p className="mt-5 max-w-[480px] font-montserrat font-medium text-white/90 text-[16px] md:text-[20px] leading-[1.4]">
               Sakupljaj pečate uz svaku porciju i osvoji
               <span className="text-hero-yellow font-bold"> 10. gyros besplatno</span>.
               Bez plastične kartice — pravo u tvoj Google Wallet.
             </p>
 
-            <div className="mt-10 hidden lg:block w-[320px] xl:w-[420px] -ml-6">
+            <div className="hidden lg:block absolute -bottom-12 -left-6 w-[220px] xl:w-[280px] pointer-events-none">
               <img
                 src={superheroTortilla}
                 alt="Gyros Heroes mascot"
@@ -74,8 +74,8 @@ const Loyalty: React.FC = () => {
           </div>
 
           {/* RIGHT: Form card */}
-          <div className="order-1 lg:order-2 w-full lg:flex-1 lg:max-w-[600px]">
-            <div className="bg-hero-green rounded-[40px] lg:rounded-lg p-6 md:p-10 lg:p-[40px] shadow-hero-xs">
+          <div className="order-1 lg:order-2 w-full lg:flex-1 lg:max-w-[560px]">
+            <div className="bg-hero-green rounded-[40px] lg:rounded-lg p-6 md:p-8 lg:p-[36px] shadow-hero-xs">
               {initialError && state.kind === 'idle' && (
                 <p className="mb-6 px-5 py-4 rounded-3xl bg-white/15 border border-white/30 text-white text-sm font-montserrat font-medium">
                   {errorCopyByCode[initialError] ?? 'Došlo je do greške. Pokušaj ponovo.'}
@@ -101,11 +101,11 @@ const Loyalty: React.FC = () => {
                 </div>
               ) : (
                 <>
-                  <h2 className="font-montserrat font-black text-[28px] md:text-[36px] text-white leading-[1.05] mb-6">
+                  <h2 className="font-montserrat font-black text-[24px] md:text-[28px] text-white leading-[1.05] mb-5">
                     Aktiviraj svoju Hero karticu
                   </h2>
 
-                  <form className="flex flex-col gap-5" onSubmit={onSubmit}>
+                  <form className="flex flex-col gap-4" onSubmit={onSubmit}>
                     <Field
                       label="Ime i prezime"
                       type="text"
