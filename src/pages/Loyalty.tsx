@@ -133,6 +133,9 @@ const Loyalty: React.FC = () => {
                     {state.kind === 'error' && (
                       <p className="px-4 py-3 rounded-2xl bg-red-500/20 border border-red-300/40 text-white text-sm font-montserrat font-medium">
                         Nešto nije u redu. Pokušaj ponovo.
+                        <span className="block mt-1 text-xs opacity-70 font-normal">
+                          ({state.message})
+                        </span>
                       </p>
                     )}
 

@@ -56,6 +56,18 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    proxy: {
+      // Forward API calls to a locally running `vercel dev` (default port 3000).
+      // Run `vercel dev --listen 3001` (or any free port) alongside `npm run dev`
+      // and update the target if you change ports. Lets the UI keep Vite's HMR
+      // while exercising real Vercel Functions + Neon.
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
