@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import sunBg from '../assets/sun.webp';
 import superheroTortilla from '../assets/superhero-tortilla.svg';
 
 type SubmitState =
@@ -48,11 +47,6 @@ const Loyalty: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-hero-blue overflow-hidden">
       <Navbar />
-
-      {/* Sun glow background */}
-      <div className="absolute top-[-100px] left-0 right-0 h-[900px] pointer-events-none z-0 overflow-hidden opacity-90">
-        <img src={sunBg} alt="" className="w-full h-full object-cover" />
-      </div>
 
       <main className="relative z-10 px-5 pt-[140px] md:pt-[180px] pb-[100px]">
         <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-xs lg:gap-sm items-stretch">
