@@ -48,15 +48,15 @@ const Loyalty: React.FC = () => {
       <Navbar />
 
       <main className="relative z-10 px-5 pt-[100px] md:pt-[110px] pb-12 lg:pb-16">
-        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+        <div className="max-w-[1400px] mx-auto px-[20px] nav:px-[100px] flex flex-col lg:flex-row gap-8 lg:gap-6 items-center">
 
           {/* LEFT: Headline */}
-          <div className="order-2 lg:order-1 w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-4">
+          <div className="order-2 lg:order-1 w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
             <h1 className="font-montserrat font-bold text-[56px] md:text-[88px] xl:text-[110px] leading-[0.95] tracking-[-2px] md:tracking-[-4px] text-white">
               <span className="block">Postani</span>
               <span className="block text-hero-yellow italic">Hero</span>
             </h1>
-            <p className="mt-5 max-w-[480px] font-montserrat font-medium text-white/90 text-[16px] md:text-[20px] leading-[1.4]">
+            <p className="mt-5 max-w-[460px] font-montserrat font-medium text-white/90 text-[16px] md:text-[20px] leading-[1.4]">
               Sakupljaj pečate uz svaku porciju i osvoji
               <span className="text-hero-yellow font-bold"> 10. gyros besplatno</span>.
               Bez plastične kartice — pravo u tvoj Google Wallet.
@@ -64,7 +64,7 @@ const Loyalty: React.FC = () => {
           </div>
 
           {/* RIGHT: Form card */}
-          <div className="order-1 lg:order-2 w-full lg:flex-1 lg:max-w-[560px]">
+          <div className="order-1 lg:order-2 w-full lg:w-auto lg:flex-shrink-0 lg:max-w-[520px]">
             <div className="bg-hero-green rounded-[40px] lg:rounded-lg p-6 md:p-8 lg:p-[36px] shadow-hero-xs">
               {initialError && state.kind === 'idle' && (
                 <p className="mb-6 px-5 py-4 rounded-3xl bg-white/15 border border-white/30 text-white text-sm font-montserrat font-medium">
