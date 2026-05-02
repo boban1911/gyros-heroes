@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import superheroTortilla from '../assets/superhero-tortilla.svg';
 
 type SubmitState =
   | { kind: 'idle' }
@@ -51,8 +50,8 @@ const Loyalty: React.FC = () => {
       <main className="relative z-10 px-5 pt-[100px] md:pt-[110px] pb-12 lg:pb-16">
         <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
 
-          {/* LEFT: Headline + mascot */}
-          <div className="order-2 lg:order-1 w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-4 relative">
+          {/* LEFT: Headline */}
+          <div className="order-2 lg:order-1 w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-4">
             <h1 className="font-montserrat font-bold text-[56px] md:text-[88px] xl:text-[110px] leading-[0.95] tracking-[-2px] md:tracking-[-4px] text-white">
               <span className="block">Postani</span>
               <span className="block text-hero-yellow italic">Hero</span>
@@ -62,15 +61,6 @@ const Loyalty: React.FC = () => {
               <span className="text-hero-yellow font-bold"> 10. gyros besplatno</span>.
               Bez plastične kartice — pravo u tvoj Google Wallet.
             </p>
-
-            <div className="hidden lg:block absolute -bottom-12 -left-6 w-[220px] xl:w-[280px] pointer-events-none">
-              <img
-                src={superheroTortilla}
-                alt="Gyros Heroes mascot"
-                className="w-full h-auto drop-shadow-2xl"
-                style={{ transform: 'rotate(-8deg)' }}
-              />
-            </div>
           </div>
 
           {/* RIGHT: Form card */}
