@@ -1,0 +1,64 @@
+import type { LoyaltyClassSpec } from './google';
+
+const CLASS_SUFFIX = 'gyros_heroes_loyalty_v1';
+const SITE_BASE = 'https://www.gyrosheroes.rs';
+
+export function loyaltyClassId(issuerId: string): string {
+  return `${issuerId}.${CLASS_SUFFIX}`;
+}
+
+export function buildLoyaltyClass(opts: {
+  issuerId: string;
+  reviewStatus?: 'DRAFT' | 'UNDER_REVIEW';
+}): LoyaltyClassSpec {
+  return {
+    id: loyaltyClassId(opts.issuerId),
+    issuerName: 'Gyros Heroes',
+    programName: 'Hero kartica',
+    programLogo: {
+      sourceUri: { uri: `${SITE_BASE}/wallet/logo-660.png` },
+      contentDescription: {
+        defaultValue: { language: 'sr', value: 'Gyros Heroes logo' },
+      },
+    },
+    hexBackgroundColor: '#4866B0',
+    countryCode: 'RS',
+    localizedIssuerName: {
+      defaultValue: { language: 'sr', value: 'Gyros Heroes' },
+    },
+
+    rewardsTierLabel: 'Pečati',
+    rewardsTier: '0',
+    secondaryRewardsTierLabel: 'Cilj',
+    secondaryRewardsTier: '10',
+
+    textModulesData: [
+      {
+        id: 'how_it_works',
+        header: 'Kako funkcioniše',
+        body: 'Pokaži ovu karticu pri svakoj poseti. Kada sakupiš 10 pečata, sledeći gyros je na nas.',
+      },
+      {
+        id: 'rules',
+        header: 'Pravila',
+        body: 'Hero kartica važi u svim Gyros Heroes lokacijama u Nišu i Novom Sadu. Po lokaciji jedan pečat dnevno. Kartica je personalna i nije prenosiva. Gyros Heroes zadržava pravo izmena uslova programa uz prethodnu najavu.',
+      },
+    ],
+
+    linksModuleData: {
+      uris: [
+        { uri: `${SITE_BASE}/loyalty/card`, description: 'Otvori karticu' },
+        { uri: SITE_BASE, description: 'Sajt' },
+      ],
+    },
+
+    locations: [
+      { latitude: 43.3185, longitude: 21.8956 },
+      { latitude: 43.3207, longitude: 21.9192 },
+      { latitude: 45.252, longitude: 19.838 },
+    ],
+
+    multipleDevicesAndHoldersAllowedStatus: 'ONE_USER_ALL_DEVICES',
+    reviewStatus: opts.reviewStatus ?? 'DRAFT',
+  };
+}
