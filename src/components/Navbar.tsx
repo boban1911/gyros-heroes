@@ -15,8 +15,21 @@ const LINKS = [
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const isOnCard = location.pathname === '/loyalty/card';
+
+  const handleSignOut = async () => {
+    if (isSigningOut) return;
+    setIsSigningOut(true);
+    try {
+      await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' });
+    } finally {
+      setIsMenuOpen(false);
+      navigate('/loyalty', { replace: true });
+    }
+  };
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -65,9 +78,29 @@ export default function Navbar() {
                     </div>
             
                     {/* CTA & Mobile Menu Toggle */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
+                        {/* Loyalty CTA — desktop */}
+                        {isOnCard ? (
+                          <button
+                            type="button"
+                            onClick={handleSignOut}
+                            disabled={isSigningOut}
+                            className="hidden nav:flex bg-transparent text-white font-montserrat font-semibold text-[14px] h-[44px] px-4 items-center justify-center rounded-full border border-white/40 hover:bg-white/10 transition-colors duration-base whitespace-nowrap cursor-pointer disabled:opacity-50"
+                          >
+                            Odjavi se
+                          </button>
+                        ) : (
+                          <a
+                              href="/loyalty"
+                              onClick={(e) => handleLinkClick(e, '/loyalty')}
+                              className="hidden nav:flex bg-hero-yellow text-grey-black font-montserrat font-bold text-[14px] h-[44px] px-5 items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap cursor-pointer"
+                          >
+                              Hero kartica
+                          </a>
+                        )}
+
                         {/* Mobile Hamburger */}
-                        <button 
+                        <button
                             className="nav:hidden text-white p-2"
                             onClick={() => setIsMenuOpen(true)}
                             aria-label="Open menu"
@@ -91,6 +124,24 @@ export default function Navbar() {
                 </button>
             </div>
             <div className="flex flex-col gap-4">
+                {isOnCard ? (
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    disabled={isSigningOut}
+                    className="bg-transparent text-white font-montserrat font-semibold text-[15px] h-[48px] px-5 flex items-center justify-center rounded-full border border-white/40 hover:bg-white/10 transition-colors duration-base mb-2 cursor-pointer disabled:opacity-50"
+                  >
+                    Odjavi se
+                  </button>
+                ) : (
+                  <a
+                      href="/loyalty"
+                      onClick={(e) => handleLinkClick(e, '/loyalty')}
+                      className="bg-hero-yellow text-grey-black font-montserrat font-bold text-[15px] h-[48px] px-5 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base mb-2 cursor-pointer"
+                  >
+                      Postani Hero
+                  </a>
+                )}
                 {LINKS.map((link) => (
                     <a
                     key={link.name}

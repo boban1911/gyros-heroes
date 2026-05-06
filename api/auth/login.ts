@@ -7,9 +7,7 @@ import { newOpaqueToken } from '../../lib/jwt';
 import { sendMagicLink } from '../../lib/email';
 
 const Body = z.object({
-  name: z.string().trim().min(2).max(80),
   email: z.string().trim().toLowerCase().email().max(254),
-  consent: z.literal(true),
 });
 
 const MAGIC_LINK_TTL_MS = 1000 * 60 * 60 * 24; // 24h
@@ -24,18 +22,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!parsed.success) {
     return res.status(400).json({ error: 'invalid_input', details: parsed.error.flatten() });
   }
-  const { name, email } = parsed.data;
+  const { email } = parsed.data;
 
-  // Upsert customer (return existing on conflict so re-registration just resends a link).
-  const inserted = await db
-    .insert(customers)
-    .values({ name, email })
-    .onConflictDoUpdate({ target: customers.email, set: { name } })
-    .returning({ id: customers.id, name: customers.name });
+  const rows = await db
+    .select({ id: customers.id, name: customers.name })
+    .from(customers)
+    .where(eq(customers.email, email))
+    .limit(1);
+  const customer = rows[0];
 
-  const customer = inserted[0];
+  // Don't leak existence: always respond ok. Skip email send if no account.
   if (!customer) {
-    return res.status(500).json({ error: 'customer_upsert_failed' });
+    return res.status(200).json({ ok: true });
   }
 
   const { token, hash } = newOpaqueToken();
@@ -51,7 +49,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const url = `${baseUrl}/loyalty/verify?token=${token}`;
 
   try {
-    await sendMagicLink({ to: email, name: customer.name, url, kind: 'register' });
+    await sendMagicLink({ to: email, name: customer.name, url, kind: 'login' });
   } catch (err) {
     return res.status(502).json({ error: 'email_send_failed', message: (err as Error).message });
   }

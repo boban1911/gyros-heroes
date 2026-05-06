@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import superheroTortilla from '../assets/superhero-tortilla.svg';
+import cityBg from '../assets/footer/footer-bg-new.svg';
 
 interface CardState {
   customer: { id: string; name: string; email: string };
@@ -56,11 +56,20 @@ const LoyaltyCard: React.FC = () => {
   }, [state.kind, navigate]);
 
   return (
-    <div className="relative min-h-screen bg-hero-blue overflow-hidden">
+    <div className="relative min-h-screen bg-hero-blue overflow-x-clip">
       <Navbar />
 
-      <main className="relative z-10 px-5 pt-[140px] md:pt-[180px] pb-[100px]">
-        <div className="max-w-[900px] mx-auto">
+      {/* City silhouette backdrop */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200%] sm:w-[150%] md:w-full max-w-[1820px] aspect-[1820/1228] z-0 pointer-events-none">
+        <img
+          src={cityBg}
+          alt=""
+          className="w-full h-full object-contain object-top opacity-20 md:opacity-30"
+        />
+      </div>
+
+      <main className="relative z-10 px-5 pt-[100px] md:pt-[110px] pb-12 lg:pb-16">
+        <div className="max-w-[760px] mx-auto">
           {state.kind === 'loading' && (
             <div className="h-[400px] flex items-center justify-center">
               <p className="font-montserrat text-white/80 text-lg">Učitavam karticu…</p>
@@ -75,7 +84,7 @@ const LoyaltyCard: React.FC = () => {
             </div>
           )}
 
-          {state.kind === 'ready' && <CardView data={state.data} />}
+          {state.kind === 'ready' && <CardLayout data={state.data} />}
         </div>
       </main>
 
@@ -84,126 +93,131 @@ const LoyaltyCard: React.FC = () => {
   );
 };
 
-const CardView: React.FC<{ data: CardState }> = ({ data }) => {
+const CardLayout: React.FC<{ data: CardState }> = ({ data }) => {
   const { customer, card } = data;
   const ready = card.status === 'ready_to_redeem';
   const firstName = customer.name.split(' ')[0];
+  const remaining = card.stampsRequired - card.stampsCount;
 
   return (
-    <>
-      {/* Greeting headline */}
-      <div className="text-center mb-10">
-        <h1 className="font-montserrat font-bold text-[48px] md:text-[80px] xl:text-[96px] leading-[0.95] tracking-[-2px] md:tracking-[-4px] text-white">
-          <span className="block">Zdravo,</span>
-          <span className="block text-hero-yellow italic">{firstName}!</span>
+    <div className="flex flex-col items-center text-center gap-6 md:gap-8">
+      {/* Greeting */}
+      <div>
+        <h1 className="font-montserrat font-bold text-[32px] md:text-[44px] leading-[1.05] tracking-[-1px] md:tracking-[-1.5px] text-white">
+          Zdravo, <span className="text-hero-yellow italic">{firstName}!</span>
         </h1>
-        <p className="mt-4 font-montserrat font-medium text-white/90 text-[16px] md:text-[20px]">
-          Tvoja Hero kartica je aktivna.
+        <p className="mt-2 font-montserrat font-medium text-white/85 text-[15px] md:text-[17px]">
+          {ready ? (
+            <>Tvoja <span className="text-hero-yellow font-bold">Hero kartica</span> je spremna — sledeća poseta = besplatan gyros 🎉</>
+          ) : (
+            <>Još <span className="text-hero-yellow font-bold">{remaining} {remaining === 1 ? 'pečat' : 'pečata'}</span> do nagrade.</>
+          )}
         </p>
       </div>
 
-      {/* The loyalty card */}
-      <div
-        className={`relative rounded-[40px] lg:rounded-lg p-6 md:p-10 lg:p-[40px] overflow-hidden ${
-          ready ? 'bg-hero-yellow' : 'bg-hero-green'
-        }`}
-      >
-        {/* Decorative mascot in corner */}
-        <div className="absolute -right-12 -bottom-16 w-[220px] md:w-[280px] opacity-30 pointer-events-none">
-          <img
-            src={superheroTortilla}
-            alt=""
-            className="w-full h-auto"
-            style={{ transform: 'rotate(15deg)' }}
-          />
-        </div>
-
-        <div className="relative z-10">
-          <div className="flex items-baseline justify-between flex-wrap gap-4">
-            <div>
-              <p className={`font-montserrat font-bold text-sm tracking-widest uppercase ${ready ? 'text-grey-black/70' : 'text-white/70'}`}>
-                Hero kartica
-              </p>
-              <p className={`font-montserrat font-black text-[64px] md:text-[88px] leading-none mt-2 ${ready ? 'text-grey-black' : 'text-white'}`}>
-                {card.stampsCount}
-                <span className={`text-[32px] md:text-[40px] font-bold ${ready ? 'text-grey-black/50' : 'text-white/50'}`}>
-                  /{card.stampsRequired}
-                </span>
-              </p>
-            </div>
-            {ready && (
-              <div className="bg-hero-blue-dark text-white font-montserrat font-bold px-5 py-2 rounded-full text-sm md:text-base shadow-hero-xs">
-                🎉 SPREMNO!
-              </div>
-            )}
-          </div>
-
-          {/* Stamp grid */}
-          <div className="mt-8 grid grid-cols-5 gap-3 md:gap-4 max-w-[480px]">
-            {Array.from({ length: card.stampsRequired }).map((_, i) => {
-              const filled = i < card.stampsCount;
-              return (
-                <div
-                  key={i}
-                  className={`aspect-square rounded-full flex items-center justify-center font-montserrat font-black text-xl md:text-2xl transition-colors duration-base ${
-                    filled
-                      ? ready
-                        ? 'bg-hero-blue-dark text-hero-yellow'
-                        : 'bg-hero-yellow text-grey-black'
-                      : ready
-                        ? 'bg-grey-black/10 border-2 border-grey-black/20 text-transparent'
-                        : 'bg-white/10 border-2 border-white/30 text-transparent'
-                  }`}
-                  aria-label={filled ? 'Sakupljen pečat' : 'Prazan pečat'}
-                >
-                  {filled ? '★' : '·'}
-                </div>
-              );
-            })}
-          </div>
-
-          {ready && (
-            <p className="mt-8 font-montserrat font-bold text-grey-black text-[18px] md:text-[22px] leading-[1.3]">
-              {card.rewardDescription} — pokaži ovu karticu na kasi!
-            </p>
-          )}
-
-          {!ready && (
-            <p className="mt-8 font-montserrat font-medium text-white/90 text-[15px] md:text-[17px] leading-[1.4]">
-              Još {card.stampsRequired - card.stampsCount}{' '}
-              {card.stampsRequired - card.stampsCount === 1 ? 'pečat' : 'pečata'} do nagrade:{' '}
-              <span className="font-bold text-hero-yellow">{card.rewardDescription}</span>.
-            </p>
-          )}
-        </div>
-      </div>
+      {/* Big card */}
+      <ActiveCard card={card} ready={ready} />
 
       {/* Wallet CTA */}
-      <div className="mt-8 bg-hero-blue-dark rounded-[40px] lg:rounded-lg p-6 md:p-8 text-center">
-        <p className="font-montserrat font-bold text-white text-[18px] md:text-[20px] mb-2">
-          Dodaj karticu u Google Wallet
-        </p>
-        <p className="font-montserrat text-white/70 text-sm mb-5">
-          Sa karticom u telefonu ne moraš da pamtiš ništa — samo skeniraj na kasi.
-        </p>
-        <button
-          type="button"
-          disabled
-          className="bg-hero-yellow text-grey-black font-montserrat font-bold text-[15px] md:text-[16px] h-[50px] md:h-[60px] px-8 rounded-full shadow-hero-xs disabled:opacity-60 disabled:cursor-not-allowed"
-          title="Dostupno uskoro"
-        >
-          🔒 Uskoro dostupno
-        </button>
-      </div>
+      <WalletCta />
 
       {card.totalRedemptions > 0 && (
-        <p className="mt-6 text-center font-montserrat text-white/70 text-sm">
-          Do sada si iskoristio nagradu {card.totalRedemptions}{' '}
-          {card.totalRedemptions === 1 ? 'put' : 'puta'}. Hero status: ⚡
+        <p className="font-montserrat text-white/70 text-sm">
+          Iskorišćenih nagrada: <span className="font-bold text-hero-yellow">{card.totalRedemptions}</span> ⚡
         </p>
       )}
-    </>
+    </div>
   );
 };
+
+interface ActiveCardProps {
+  card: CardState['card'];
+  ready: boolean;
+}
+
+const ActiveCard: React.FC<ActiveCardProps> = ({ card, ready }) => (
+  <div
+    className={`w-full rounded-[32px] lg:rounded-[40px] p-6 md:p-8 shadow-hero-xs ${
+      ready ? 'bg-hero-yellow' : 'bg-hero-green'
+    }`}
+  >
+    {/* Top row: label + status */}
+    <div className="flex items-baseline justify-between gap-3 mb-5 md:mb-6">
+      <span
+        className={`font-montserrat font-bold text-[12px] md:text-[13px] tracking-[1.5px] uppercase ${
+          ready ? 'text-grey-black/70' : 'text-white/75'
+        }`}
+      >
+        Hero kartica
+      </span>
+      {ready ? (
+        <span className="bg-hero-blue-dark text-hero-yellow font-montserrat font-bold px-3 py-1 rounded-full text-[11px] md:text-[12px] tracking-wide shadow-hero-xs">
+          🎉 SPREMNO
+        </span>
+      ) : (
+        <span className={`font-montserrat font-black text-[18px] md:text-[22px] ${ready ? 'text-grey-black' : 'text-white'}`}>
+          {card.stampsCount}
+          <span className={ready ? 'text-grey-black/50' : 'text-white/55'}> / {card.stampsRequired}</span>
+        </span>
+      )}
+    </div>
+
+    {/* Stamp strip — 1×10 on desktop, 5×2 on mobile */}
+    <div className="grid grid-cols-5 md:grid-cols-10 gap-2 md:gap-3">
+      {Array.from({ length: card.stampsRequired }).map((_, i) => {
+        const filled = i < card.stampsCount;
+        return (
+          <div
+            key={i}
+            className={`aspect-square rounded-full flex items-center justify-center font-montserrat font-black text-[20px] md:text-[18px] ${
+              filled
+                ? ready
+                  ? 'bg-hero-blue-dark text-hero-yellow shadow-hero-xs'
+                  : 'bg-hero-yellow text-grey-black shadow-hero-xs'
+                : ready
+                  ? 'border-2 border-dashed border-grey-black/25 text-transparent'
+                  : 'border-2 border-dashed border-white/35 text-transparent'
+            }`}
+            aria-label={filled ? 'Sakupljen pečat' : 'Prazan pečat'}
+          >
+            {filled ? '★' : '·'}
+          </div>
+        );
+      })}
+    </div>
+
+    {/* Reward line */}
+    <div className={`mt-5 md:mt-6 pt-5 md:pt-6 border-t ${ready ? 'border-grey-black/15' : 'border-white/20'}`}>
+      <p
+        className={`font-montserrat font-medium text-[14px] md:text-[15px] leading-[1.4] ${
+          ready ? 'text-grey-black' : 'text-white/90'
+        }`}
+      >
+        {ready ? (
+          <><strong>{card.rewardDescription}</strong> — pokaži ovu karticu na kasi!</>
+        ) : (
+          <>Nagrada: <span className="font-bold text-hero-yellow">{card.rewardDescription}</span></>
+        )}
+      </p>
+    </div>
+  </div>
+);
+
+const WalletCta: React.FC = () => (
+  <div className="w-full bg-hero-blue-dark rounded-[24px] lg:rounded-[28px] px-5 md:px-6 py-4 flex items-center gap-4 shadow-hero-xs">
+    <div className="flex-1 min-w-0 text-left">
+      <p className="font-montserrat font-bold text-white text-[15px] md:text-[16px] leading-tight">Google Wallet</p>
+      <p className="font-montserrat text-white/70 text-[12px] md:text-[13px] mt-0.5">Sačuvaj karticu u telefon</p>
+    </div>
+    <button
+      type="button"
+      disabled
+      className="flex-shrink-0 bg-hero-yellow text-grey-black font-montserrat font-bold text-[13px] md:text-[14px] h-[40px] md:h-[44px] px-4 md:px-5 rounded-full shadow-hero-xs disabled:opacity-60 disabled:cursor-not-allowed"
+      title="Dostupno uskoro"
+    >
+      🔒 Uskoro
+    </button>
+  </div>
+);
 
 export default LoyaltyCard;
