@@ -14,7 +14,8 @@
     "db:studio": "node --env-file=.env.local node_modules/drizzle-kit/bin.cjs studio",
     "wallet:create-class": "node --env-file=.env.local --import tsx scripts/wallet-create-class.ts",
     "wallet:preview-link": "node --env-file=.env.local --import tsx scripts/wallet-preview-link.ts",
-    "wallet:bump-stamp": "node --env-file=.env.local --import tsx scripts/wallet-bump-stamp.ts"
+    "wallet:bump-stamp": "node --env-file=.env.local --import tsx scripts/wallet-bump-stamp.ts",
+    "seed:staff": "node --env-file=.env.local --import tsx scripts/seed-staff-user.ts"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
   "type": "module",
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
+    "bcryptjs": "^3.0.3",
     "drizzle-orm": "^0.45.2",
     "embla-carousel-react": "^8.6.0",
     "jose": "^6.2.3",
@@ -36,6 +38,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
+    "@types/bcryptjs": "^2.4.6",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vercel/node": "^5.7.15",

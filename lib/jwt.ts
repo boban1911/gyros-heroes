@@ -48,3 +48,46 @@ export function newOpaqueToken(): { token: string; hash: string } {
 export function hashOpaqueToken(token: string): string {
   return createHash('sha256').update(token).digest('hex');
 }
+
+export interface QrTokenClaims {
+  cardId: string;
+  jti: string;
+  iat: number;
+  exp: number;
+}
+
+/**
+ * Sign a short-lived QR token bound to a loyalty card. `jti` is the primary
+ * key in `qr_tokens` so the scan endpoint can mark it consumed and reject
+ * replays.
+ */
+export async function signQrToken(cardId: string, ttlSeconds: number): Promise<{
+  token: string;
+  jti: string;
+  iat: number;
+  exp: number;
+}> {
+  const jti = randomBytes(16).toString('base64url');
+  const iat = Math.floor(Date.now() / 1000);
+  const exp = iat + ttlSeconds;
+  const token = await new SignJWT({ cardId })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setJti(jti)
+    .setIssuedAt(iat)
+    .setExpirationTime(exp)
+    .sign(getSecret());
+  return { token, jti, iat, exp };
+}
+
+/** Verify a QR token signature + expiry. Returns claims or throws. */
+export async function verifyQrToken(token: string): Promise<QrTokenClaims> {
+  const { payload } = await jwtVerify(token, getSecret());
+  const cardId = typeof payload.cardId === 'string' ? payload.cardId : null;
+  const jti = typeof payload.jti === 'string' ? payload.jti : null;
+  const iat = typeof payload.iat === 'number' ? payload.iat : null;
+  const exp = typeof payload.exp === 'number' ? payload.exp : null;
+  if (!cardId || !jti || iat === null || exp === null) {
+    throw new Error('qr_token_malformed');
+  }
+  return { cardId, jti, iat, exp };
+}
