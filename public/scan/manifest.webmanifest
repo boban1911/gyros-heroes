@@ -1,0 +1,26 @@
+{
+  "name": "Gyros Heroes Scanner",
+  "short_name": "GH Scanner",
+  "description": "Skener loyalty kartica za Gyros Heroes osoblje.",
+  "lang": "sr",
+  "start_url": "/scan/",
+  "scope": "/scan/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1F3B81",
+  "theme_color": "#1F3B81",
+  "icons": [
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wallet/logo-660.png",
+      "sizes": "660x660",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

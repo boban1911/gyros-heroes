@@ -53,6 +53,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         pozivnica: resolve(__dirname, 'pozivnica/index.html'),
+        scan: resolve(__dirname, 'scan/index.html'),
       },
     },
   },
