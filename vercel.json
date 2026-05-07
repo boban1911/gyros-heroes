@@ -10,6 +10,8 @@
     }
   },
   "rewrites": [
-    { "source": "/loyalty/verify", "destination": "/api/auth/verify" }
+    { "source": "/loyalty/verify", "destination": "/api/auth/verify" },
+    { "source": "/scan", "destination": "/scan/index.html" },
+    { "source": "/scan/login", "destination": "/scan/index.html" }
   ]
 }
