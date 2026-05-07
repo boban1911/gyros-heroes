@@ -18,6 +18,8 @@ export interface MagicLinkEmail {
   name: string;
   url: string;
   kind: MagicLinkKind;
+  /** Optional Save-to-Google-Wallet URL — when present, renders a secondary CTA. */
+  walletSaveUrl?: string;
 }
 
 interface MagicLinkCopy {
@@ -45,7 +47,13 @@ const COPY: Record<MagicLinkKind, MagicLinkCopy> = {
   },
 };
 
-export async function sendMagicLink({ to, name, url, kind }: MagicLinkEmail): Promise<void> {
+export async function sendMagicLink({
+  to,
+  name,
+  url,
+  kind,
+  walletSaveUrl,
+}: MagicLinkEmail): Promise<void> {
   const from = process.env.RESEND_FROM_EMAIL ?? 'loyalty@gyrosheroes.rs';
   const client = getClient();
   const copy = COPY[kind];
@@ -56,7 +64,7 @@ export async function sendMagicLink({ to, name, url, kind }: MagicLinkEmail): Pr
 ${copy.textIntro}
 
 ${url}
-
+${walletSaveUrl ? `\nSačuvaj karticu u Google Wallet:\n${walletSaveUrl}\n` : ''}
 Link važi 24 sata. Ako nisi tražio ovaj email, slobodno ga ignoriši.
 
 — Gyros Heroes`;
@@ -93,6 +101,18 @@ Link važi 24 sata. Ako nisi tražio ovaj email, slobodno ga ignoriši.
                   </td>
                 </tr>
               </table>
+              ${
+                walletSaveUrl
+                  ? `<p style="font-family:-apple-system,'Segoe UI',Inter,Arial,sans-serif;font-size:14px;color:#5F6470;line-height:20px;margin:28px 0 12px">Imaš Android telefon? Sačuvaj karticu odmah u Google Wallet:</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="border:2px solid #1F3B81;border-radius:60px;background:#FFFFFF">
+                    <a href="${walletSaveUrl}" style="display:inline-block;color:#1F3B81;text-decoration:none;padding:14px 28px;font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:15px;border-radius:60px">Sačuvaj u Google Wallet</a>
+                  </td>
+                </tr>
+              </table>`
+                  : ''
+              }
               <p style="font-family:-apple-system,'Segoe UI',Inter,Arial,sans-serif;font-size:13px;color:#9596A4;line-height:20px;margin:24px 0 0">Link važi 24 sata. Ako nisi tražio ovaj email, slobodno ga ignoriši.</p>
             </td>
           </tr>

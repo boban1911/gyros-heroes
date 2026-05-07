@@ -203,21 +203,41 @@ const ActiveCard: React.FC<ActiveCardProps> = ({ card, ready }) => (
   </div>
 );
 
-const WalletCta: React.FC = () => (
-  <div className="w-full bg-hero-blue-dark rounded-[24px] lg:rounded-[28px] px-5 md:px-6 py-4 flex items-center gap-4 shadow-hero-xs">
-    <div className="flex-1 min-w-0 text-left">
-      <p className="font-montserrat font-bold text-white text-[15px] md:text-[16px] leading-tight">Google Wallet</p>
-      <p className="font-montserrat text-white/70 text-[12px] md:text-[13px] mt-0.5">Sačuvaj karticu u telefon</p>
+const WalletCta: React.FC = () => {
+  const [phase, setPhase] = useState<'idle' | 'loading' | 'error'>('idle');
+
+  async function handleSave() {
+    if (phase === 'loading') return;
+    setPhase('loading');
+    try {
+      const res = await fetch('/api/wallet/google/save-url', { credentials: 'same-origin' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const body = (await res.json()) as { url: string };
+      setPhase('idle');
+      window.open(body.url, '_blank', 'noopener');
+    } catch {
+      setPhase('error');
+    }
+  }
+
+  return (
+    <div className="w-full bg-hero-blue-dark rounded-[24px] lg:rounded-[28px] px-5 md:px-6 py-4 flex items-center gap-4 shadow-hero-xs">
+      <div className="flex-1 min-w-0 text-left">
+        <p className="font-montserrat font-bold text-white text-[15px] md:text-[16px] leading-tight">Google Wallet</p>
+        <p className="font-montserrat text-white/70 text-[12px] md:text-[13px] mt-0.5">
+          {phase === 'error' ? 'Trenutno nedostupno. Pokušaj ponovo.' : 'Sačuvaj karticu u telefon'}
+        </p>
+      </div>
+      <button
+        type="button"
+        onClick={handleSave}
+        disabled={phase === 'loading'}
+        className="flex-shrink-0 bg-hero-yellow text-grey-black font-montserrat font-bold text-[13px] md:text-[14px] h-[40px] md:h-[44px] px-4 md:px-5 rounded-full shadow-hero-xs hover:bg-white transition-colors duration-base disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {phase === 'loading' ? '…' : 'Sačuvaj'}
+      </button>
     </div>
-    <button
-      type="button"
-      disabled
-      className="flex-shrink-0 bg-hero-yellow text-grey-black font-montserrat font-bold text-[13px] md:text-[14px] h-[40px] md:h-[44px] px-4 md:px-5 rounded-full shadow-hero-xs disabled:opacity-60 disabled:cursor-not-allowed"
-      title="Dostupno uskoro"
-    >
-      🔒 Uskoro
-    </button>
-  </div>
-);
+  );
+};
 
 export default LoyaltyCard;

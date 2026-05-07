@@ -21,16 +21,21 @@ export function buildLoyaltyClass(opts: {
         defaultValue: { language: 'sr', value: 'Gyros Heroes logo' },
       },
     },
+    heroImage: {
+      sourceUri: { uri: `${SITE_BASE}/wallet/hero-1032x336.png` },
+      contentDescription: {
+        defaultValue: { language: 'sr', value: 'Gyros Heroes — autentični gyros' },
+      },
+    },
     hexBackgroundColor: '#4866B0',
     countryCode: 'RS',
     localizedIssuerName: {
       defaultValue: { language: 'sr', value: 'Gyros Heroes' },
     },
 
-    rewardsTierLabel: 'Pečati',
-    rewardsTier: '0',
-    secondaryRewardsTierLabel: 'Cilj',
-    secondaryRewardsTier: '10',
+    // Per-user loyaltyPoints + secondaryLoyaltyPoints on each LoyaltyObject
+    // already carry the labels + values. The class-level rewardsTier* fields
+    // would render a second, stale "Pečati: 0" row in the details panel.
 
     textModulesData: [
       {

@@ -5,6 +5,7 @@ import { db } from '../../db/client';
 import { customers, magicLinks } from '../../db/schema';
 import { newOpaqueToken } from '../../lib/jwt';
 import { sendMagicLink } from '../../lib/email';
+import { customerSaveUrl } from '../../lib/wallet/customer';
 
 const Body = z.object({
   email: z.string().trim().toLowerCase().email().max(254),
@@ -48,8 +49,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const baseUrl = process.env.APP_BASE_URL ?? `https://${req.headers.host}`;
   const url = `${baseUrl}/loyalty/verify?token=${token}`;
 
+  // Best-effort wallet Save URL — works for customers who already have a
+  // loyalty_cards row (i.e. registered after the wallet feature shipped).
+  let walletSaveUrl: string | undefined;
   try {
-    await sendMagicLink({ to: email, name: customer.name, url, kind: 'login' });
+    walletSaveUrl = await customerSaveUrl(customer.id);
+  } catch (err) {
+    console.error('[login] wallet save URL build failed:', (err as Error).message);
+  }
+
+  try {
+    await sendMagicLink({ to: email, name: customer.name, url, kind: 'login', walletSaveUrl });
   } catch (err) {
     return res.status(502).json({ error: 'email_send_failed', message: (err as Error).message });
   }

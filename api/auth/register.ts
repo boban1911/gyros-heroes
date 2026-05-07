@@ -1,10 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
-import { eq } from 'drizzle-orm';
 import { db } from '../../db/client';
-import { customers, magicLinks } from '../../db/schema';
+import { customers, loyaltyCards, magicLinks } from '../../db/schema';
 import { newOpaqueToken } from '../../lib/jwt';
 import { sendMagicLink } from '../../lib/email';
+import { customerSaveUrl } from '../../lib/wallet/customer';
 
 const Body = z.object({
   name: z.string().trim().min(2).max(80),
@@ -38,6 +38,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({ error: 'customer_upsert_failed' });
   }
 
+  // Ensure the customer has a loyalty_cards row up front so we can attach a
+  // Google Wallet object to it before the email is sent. Idempotent on
+  // re-registration.
+  await db
+    .insert(loyaltyCards)
+    .values({ customerId: customer.id })
+    .onConflictDoNothing({ target: loyaltyCards.customerId });
+
   const { token, hash } = newOpaqueToken();
   const expiresAt = new Date(Date.now() + MAGIC_LINK_TTL_MS);
 
@@ -50,8 +58,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const baseUrl = process.env.APP_BASE_URL ?? `https://${req.headers.host}`;
   const url = `${baseUrl}/loyalty/verify?token=${token}`;
 
+  // Best-effort: ensure a Google Wallet LoyaltyObject exists and produce a
+  // Save URL for the email. If the Wallet API is unavailable, send the email
+  // without the secondary CTA — auth still works.
+  let walletSaveUrl: string | undefined;
   try {
-    await sendMagicLink({ to: email, name: customer.name, url, kind: 'register' });
+    walletSaveUrl = await customerSaveUrl(customer.id);
+  } catch (err) {
+    console.error('[register] wallet object creation failed:', (err as Error).message);
+  }
+
+  try {
+    await sendMagicLink({
+      to: email,
+      name: customer.name,
+      url,
+      kind: 'register',
+      walletSaveUrl,
+    });
   } catch (err) {
     return res.status(502).json({ error: 'email_send_failed', message: (err as Error).message });
   }
