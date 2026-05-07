@@ -68,7 +68,12 @@ async function getAccessToken(): Promise<string> {
   return data.access_token;
 }
 
-async function walletFetch(method: string, path: string, body?: unknown): Promise<unknown> {
+async function walletFetch(
+  method: string,
+  path: string,
+  body?: unknown,
+  options: { tolerate404?: boolean } = {},
+): Promise<unknown> {
   const token = await getAccessToken();
   const res = await fetch(`${WALLET_API}${path}`, {
     method,
@@ -78,7 +83,7 @@ async function walletFetch(method: string, path: string, body?: unknown): Promis
     },
     body: body ? JSON.stringify(body) : undefined,
   });
-  if (res.status === 404) return null;
+  if (res.status === 404 && options.tolerate404) return null;
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`Wallet API ${method} ${path} failed (${res.status}): ${text}`);
@@ -92,7 +97,7 @@ export interface LoyaltyClassSpec {
 }
 
 export async function getLoyaltyClass(id: string): Promise<unknown | null> {
-  return walletFetch('GET', `/loyaltyClass/${encodeURIComponent(id)}`);
+  return walletFetch('GET', `/loyaltyClass/${encodeURIComponent(id)}`, undefined, { tolerate404: true });
 }
 
 export async function createLoyaltyClass(spec: LoyaltyClassSpec): Promise<unknown> {
@@ -110,7 +115,7 @@ export interface LoyaltyObjectSpec {
 }
 
 export async function getLoyaltyObject(id: string): Promise<unknown | null> {
-  return walletFetch('GET', `/loyaltyObject/${encodeURIComponent(id)}`);
+  return walletFetch('GET', `/loyaltyObject/${encodeURIComponent(id)}`, undefined, { tolerate404: true });
 }
 
 export async function createLoyaltyObject(spec: LoyaltyObjectSpec): Promise<unknown> {
