@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Single-page marketing site for "Gyros Heroes," a Serbian fast-food brand. The product is essentially one long-scrolling landing page (`src/pages/Home.tsx`) plus a secondary static `pozivnica/` HTML page bundled by Vite.
 
-A loyalty-card feature is being added on top: customer registration + Google Wallet pass + staff scan PWA. The backend lives in `api/` (Vercel Functions) backed by Neon Postgres (`db/`, Drizzle ORM). See `~/.claude/plans/1-i-want-to-calm-bumblebee.md` for the full design.
+A loyalty-card feature is being added on top: customer registration + Google Wallet pass + staff scan PWA. The backend lives in `api/` (Vercel Functions) backed by Neon Postgres (`db/`, Drizzle ORM). See `conductor/tracks/loyalty_card_20260507/plan.md` for the full design and `conductor/tracks/loyalty_card_20260507/progress.md` for current step status.
 
 ## Commands
 

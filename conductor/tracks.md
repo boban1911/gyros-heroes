@@ -29,3 +29,8 @@
 
 - [x] **Track: Sun Background Implementation**
 *Link: [./tracks/sun_background_20260222/](./tracks/sun_background_20260222/)*
+
+---
+
+- [ ] **Track: Loyalty Card Feature (registration + Google Wallet + staff scan PWA)**
+*Link: [./tracks/loyalty_card_20260507/](./tracks/loyalty_card_20260507/)*
