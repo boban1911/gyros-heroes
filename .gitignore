@@ -23,3 +23,6 @@ pnpm-debug.log*
 coverage/
 .vercel
 .env*.local
+
+# Claude Code agent worktrees
+.claude/worktrees/
