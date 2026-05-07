@@ -10,20 +10,24 @@ afterEach(() => {
   cleanup();
 });
 
-// Mock matchMedia for embla-carousel
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: vi.fn().mockImplementation(query => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: vi.fn(), // deprecated
-    removeListener: vi.fn(), // deprecated
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
-});
+// Mock matchMedia for embla-carousel — only when running in a browser-like env.
+// Backend tests opt into the node environment via `// @vitest-environment node`,
+// where `window` is undefined and these mocks are unnecessary.
+if (typeof window !== 'undefined') {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(), // deprecated
+      removeListener: vi.fn(), // deprecated
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
+  });
+}
 
 // Mock IntersectionObserver
 const IntersectionObserverMock = vi.fn(() => ({
