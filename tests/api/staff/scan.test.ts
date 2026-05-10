@@ -13,12 +13,21 @@ vi.mock('../../../db/client', () => ({
   schema: {},
 }));
 
+const applyReadyToRedeemVisualMock = vi.fn(async () => {});
+const applyActiveVisualMock = vi.fn(async () => {});
+vi.mock('../../../lib/wallet/passVisual', () => ({
+  applyReadyToRedeemVisual: applyReadyToRedeemVisualMock,
+  applyActiveVisual: applyActiveVisualMock,
+}));
+
 beforeAll(() => {
   process.env.JWT_SECRET = TEST_SECRET;
 });
 
 beforeEach(() => {
   dbMock = createFakeDb();
+  applyReadyToRedeemVisualMock.mockClear();
+  applyActiveVisualMock.mockClear();
 });
 
 afterEach(() => {
@@ -97,6 +106,7 @@ describe('POST /api/staff/scan', () => {
         id: CARD_ID,
         stampsCount: 3,
         status: 'active',
+        googleObjectId: 'iss.card_abc',
         customerName: 'Marko',
       },
     ]);
@@ -119,6 +129,8 @@ describe('POST /api/staff/scan', () => {
 
     expect(statusCode()).toBe(200);
     expect(jsonBody()).toEqual({
+      action: 'stamped',
+      cardId: CARD_ID,
       customerName: 'Marko',
       stampsCount: 4,
       stampsRequired: 10,
@@ -133,6 +145,8 @@ describe('POST /api/staff/scan', () => {
     expect((inserted as { cardId: string }).cardId).toBe(CARD_ID);
     expect((inserted as { staffId: string }).staffId).toBe(STAFF_ID);
     expect((inserted as { qrJti: string }).qrJti).toBe(jti);
+    // Did not cross the threshold — wallet visual stays untouched.
+    expect(applyReadyToRedeemVisualMock).not.toHaveBeenCalled();
   });
 
   it('reaching stamps_required flips status to ready_to_redeem and sets justBecameRedeemable: true', async () => {
@@ -145,7 +159,13 @@ describe('POST /api/staff/scan', () => {
     ]);
     // Card already has 9 stamps, current status active.
     dbMock.queue.push([
-      { id: CARD_ID, stampsCount: 9, status: 'active', customerName: 'Ana' },
+      {
+        id: CARD_ID,
+        stampsCount: 9,
+        status: 'active',
+        googleObjectId: 'iss.card_ana',
+        customerName: 'Ana',
+      },
     ]);
     dbMock.queue.push([{ stampsRequired: 10, scanCooldownSeconds: 1800 }]);
     dbMock.queue.push([]); // no last-stamp cooldown row
@@ -161,15 +181,19 @@ describe('POST /api/staff/scan', () => {
 
     expect(statusCode()).toBe(200);
     expect(jsonBody()).toEqual({
+      action: 'stamped',
+      cardId: CARD_ID,
       customerName: 'Ana',
       stampsCount: 10,
       stampsRequired: 10,
       status: 'ready_to_redeem',
       justBecameRedeemable: true,
     });
+    expect(applyReadyToRedeemVisualMock).toHaveBeenCalledTimes(1);
+    expect(applyReadyToRedeemVisualMock).toHaveBeenCalledWith('iss.card_ana');
   });
 
-  it('subsequent scan after redeemable state stays consistent (justBecameRedeemable=false)', async () => {
+  it('threshold flip with no saved wallet pass (googleObjectId null) skips the visual call', async () => {
     const handler = (await import('../../../api/staff/scan')).default;
     const { token, jti } = await mintToken(CARD_ID, 60);
 
@@ -177,16 +201,51 @@ describe('POST /api/staff/scan', () => {
     dbMock.queue.push([
       { jti, cardId: CARD_ID, expiresAt: new Date(Date.now() + 60_000), usedAt: null },
     ]);
-    // Card is already in ready_to_redeem with 10 stamps — test the branch
-    // where status was already redeemable so justBecameRedeemable must be false.
     dbMock.queue.push([
-      { id: CARD_ID, stampsCount: 10, status: 'ready_to_redeem', customerName: 'Ivan' },
+      {
+        id: CARD_ID,
+        stampsCount: 9,
+        status: 'active',
+        googleObjectId: null,
+        customerName: 'NoWallet',
+      },
     ]);
     dbMock.queue.push([{ stampsRequired: 10, scanCooldownSeconds: 1800 }]);
-    dbMock.queue.push([]); // no recent stamp (cooldown not blocking)
+    dbMock.queue.push([]);
     dbMock.queue.push([{ jti }]);
     dbMock.queue.push(undefined);
     dbMock.queue.push(undefined);
+
+    const { res, statusCode } = makeRes();
+    await handler(
+      makeReq({ qrToken: token }, { cookie: 'gh_staff=valid' }) as unknown as Parameters<typeof handler>[0],
+      res as unknown as Parameters<typeof handler>[1],
+    );
+
+    expect(statusCode()).toBe(200);
+    expect(applyReadyToRedeemVisualMock).not.toHaveBeenCalled();
+  });
+
+  it('scanning a card already in ready_to_redeem returns awaiting_redeem without consuming token or stamping', async () => {
+    const handler = (await import('../../../api/staff/scan')).default;
+    const { token, jti } = await mintToken(CARD_ID, 60);
+
+    pushStaffPrincipal();
+    dbMock.queue.push([
+      { jti, cardId: CARD_ID, expiresAt: new Date(Date.now() + 60_000), usedAt: null },
+    ]);
+    dbMock.queue.push([
+      {
+        id: CARD_ID,
+        stampsCount: 10,
+        status: 'ready_to_redeem',
+        googleObjectId: 'iss.card_ivan',
+        customerName: 'Ivan',
+      },
+    ]);
+    dbMock.queue.push([{ stampsRequired: 10, scanCooldownSeconds: 1800 }]);
+    // No further queries expected — the handler short-circuits before
+    // cooldown lookup, token consume, card update, or stamp_events insert.
 
     const { res, statusCode, jsonBody } = makeRes();
     await handler(
@@ -195,10 +254,20 @@ describe('POST /api/staff/scan', () => {
     );
 
     expect(statusCode()).toBe(200);
-    const body = jsonBody() as { justBecameRedeemable: boolean; status: string; stampsCount: number };
-    expect(body.justBecameRedeemable).toBe(false);
-    expect(body.status).toBe('ready_to_redeem');
-    expect(body.stampsCount).toBe(11);
+    expect(jsonBody()).toEqual({
+      action: 'awaiting_redeem',
+      cardId: CARD_ID,
+      customerName: 'Ivan',
+      stampsCount: 10,
+      stampsRequired: 10,
+      status: 'ready_to_redeem',
+    });
+    // No stamp event written.
+    expect(
+      dbMock.insertValues.some(
+        (v) => typeof v === 'object' && v !== null && 'type' in v && (v as { type: string }).type === 'stamp',
+      ),
+    ).toBe(false);
   });
 
   it('expired QR token → 400 token_expired', async () => {
@@ -272,7 +341,13 @@ describe('POST /api/staff/scan', () => {
       { jti, cardId: CARD_ID, expiresAt: new Date(Date.now() + 60_000), usedAt: null },
     ]);
     dbMock.queue.push([
-      { id: CARD_ID, stampsCount: 2, status: 'active', customerName: 'Petar' },
+      {
+        id: CARD_ID,
+        stampsCount: 2,
+        status: 'active',
+        googleObjectId: null,
+        customerName: 'Petar',
+      },
     ]);
     dbMock.queue.push([{ stampsRequired: 10, scanCooldownSeconds: 1800 }]);
     // Last stamp 60 seconds ago — well within the 1800s cooldown.
@@ -348,6 +423,150 @@ describe('POST /api/staff/scan', () => {
     expect(jsonBody()).toEqual({ error: 'card_not_found' });
   });
 
+  describe('TOTP rotating-barcode path', () => {
+    const TOTP_SECRET_B32 = 'GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ';
+
+    async function currentCode(): Promise<string> {
+      const { generate } = await import('../../../lib/totp');
+      return generate(TOTP_SECRET_B32);
+    }
+
+    it('happy path: valid TOTP increments stamp, no qr_tokens row consumed', async () => {
+      const handler = (await import('../../../api/staff/scan')).default;
+      const code = await currentCode();
+      const payload = `gh:card:${CARD_ID}:${code}`;
+
+      pushStaffPrincipal();
+      // No qr_tokens lookup on the TOTP path — straight to the card join.
+      dbMock.queue.push([
+        {
+          id: CARD_ID,
+          stampsCount: 4,
+          status: 'active',
+          totpSecret: TOTP_SECRET_B32,
+          googleObjectId: null,
+          customerName: 'Mila',
+        },
+      ]);
+      dbMock.queue.push([{ stampsRequired: 10, scanCooldownSeconds: 1800 }]);
+      dbMock.queue.push([]); // no prior stamp / no cooldown
+      dbMock.queue.push(undefined); // update loyalty_cards
+      dbMock.queue.push(undefined); // insert stamp_events
+
+      const { res, statusCode, jsonBody } = makeRes();
+      await handler(
+        makeReq({ qrToken: payload }, { cookie: 'gh_staff=valid' }) as unknown as Parameters<typeof handler>[0],
+        res as unknown as Parameters<typeof handler>[1],
+      );
+
+      expect(statusCode()).toBe(200);
+      expect(jsonBody()).toEqual({
+        action: 'stamped',
+        cardId: CARD_ID,
+        customerName: 'Mila',
+        stampsCount: 5,
+        stampsRequired: 10,
+        status: 'active',
+        justBecameRedeemable: false,
+      });
+      const inserted = dbMock.insertValues.find(
+        (v) => typeof v === 'object' && v !== null && 'type' in v && (v as { type: string }).type === 'stamp',
+      ) as { qrJti: string | null } | undefined;
+      expect(inserted).toBeDefined();
+      // No JWT jti on the rotating-barcode path.
+      expect(inserted?.qrJti).toBeNull();
+    });
+
+    it('wrong TOTP code → 400 invalid_token', async () => {
+      const handler = (await import('../../../api/staff/scan')).default;
+      const payload = `gh:card:${CARD_ID}:000000`;
+
+      pushStaffPrincipal();
+      dbMock.queue.push([
+        {
+          id: CARD_ID,
+          stampsCount: 1,
+          status: 'active',
+          totpSecret: TOTP_SECRET_B32,
+          googleObjectId: null,
+          customerName: 'Wrong',
+        },
+      ]);
+
+      const { res, statusCode, jsonBody } = makeRes();
+      await handler(
+        makeReq({ qrToken: payload }, { cookie: 'gh_staff=valid' }) as unknown as Parameters<typeof handler>[0],
+        res as unknown as Parameters<typeof handler>[1],
+      );
+
+      expect(statusCode()).toBe(400);
+      expect(jsonBody()).toEqual({ error: 'invalid_token' });
+    });
+
+    it('unknown card id → 404 card_not_found', async () => {
+      const handler = (await import('../../../api/staff/scan')).default;
+      const code = await currentCode();
+      const payload = `gh:card:${CARD_ID}:${code}`;
+
+      pushStaffPrincipal();
+      dbMock.queue.push([]); // card join returns nothing
+
+      const { res, statusCode, jsonBody } = makeRes();
+      await handler(
+        makeReq({ qrToken: payload }, { cookie: 'gh_staff=valid' }) as unknown as Parameters<typeof handler>[0],
+        res as unknown as Parameters<typeof handler>[1],
+      );
+
+      expect(statusCode()).toBe(404);
+      expect(jsonBody()).toEqual({ error: 'card_not_found' });
+    });
+
+    it('cooldown active on TOTP path → 429', async () => {
+      const handler = (await import('../../../api/staff/scan')).default;
+      const code = await currentCode();
+      const payload = `gh:card:${CARD_ID}:${code}`;
+
+      pushStaffPrincipal();
+      dbMock.queue.push([
+        {
+          id: CARD_ID,
+          stampsCount: 2,
+          status: 'active',
+          totpSecret: TOTP_SECRET_B32,
+          googleObjectId: null,
+          customerName: 'Cool',
+        },
+      ]);
+      dbMock.queue.push([{ stampsRequired: 10, scanCooldownSeconds: 1800 }]);
+      dbMock.queue.push([{ createdAt: new Date(Date.now() - 60_000) }]); // recent stamp
+
+      const { res, statusCode, jsonBody } = makeRes();
+      await handler(
+        makeReq({ qrToken: payload }, { cookie: 'gh_staff=valid' }) as unknown as Parameters<typeof handler>[0],
+        res as unknown as Parameters<typeof handler>[1],
+      );
+
+      expect(statusCode()).toBe(429);
+      const body = jsonBody() as { error: string; retryAfterSeconds: number };
+      expect(body.error).toBe('cooldown_active');
+      expect(body.retryAfterSeconds).toBeGreaterThan(0);
+    });
+
+    it('malformed payload (not JWT, not TOTP) → 400 invalid_token', async () => {
+      const handler = (await import('../../../api/staff/scan')).default;
+      pushStaffPrincipal();
+
+      const { res, statusCode, jsonBody } = makeRes();
+      await handler(
+        makeReq({ qrToken: 'not-a-jwt-or-totp-payload' }, { cookie: 'gh_staff=valid' }) as unknown as Parameters<typeof handler>[0],
+        res as unknown as Parameters<typeof handler>[1],
+      );
+
+      expect(statusCode()).toBe(400);
+      expect(jsonBody()).toEqual({ error: 'invalid_token' });
+    });
+  });
+
   it('concurrent token consumption race: returning() empty → 409 token_already_used', async () => {
     const handler = (await import('../../../api/staff/scan')).default;
     const { token, jti } = await mintToken(CARD_ID, 60);
@@ -356,7 +575,13 @@ describe('POST /api/staff/scan', () => {
       { jti, cardId: CARD_ID, expiresAt: new Date(Date.now() + 60_000), usedAt: null },
     ]);
     dbMock.queue.push([
-      { id: CARD_ID, stampsCount: 2, status: 'active', customerName: 'Race' },
+      {
+        id: CARD_ID,
+        stampsCount: 2,
+        status: 'active',
+        googleObjectId: null,
+        customerName: 'Race',
+      },
     ]);
     dbMock.queue.push([{ stampsRequired: 10, scanCooldownSeconds: 1800 }]);
     dbMock.queue.push([]); // no cooldown

@@ -24,7 +24,13 @@ export const PrivacyPolicyContent = (
       </p>
     </div>
     <div>
-      <h3 className="text-xl font-bold text-white mb-2">4. Kontakt</h3>
+      <h3 className="text-xl font-bold text-white mb-2">4. Brisanje Naloga (Pravo na Zaborav)</h3>
+      <p>
+        Ukoliko ste registrovani korisnik našeg Hero programa lojalnosti, u svakom trenutku možete sami i bez obrazloženja trajno obrisati svoj nalog. Postupak pokrećete iz svoje kartice na adresi <strong>/loyalty/card</strong>, klikom na opciju „Obriši nalog“ i potvrdom unosom reči <strong>OBRIŠI</strong>. Brisanjem naloga nepovratno uklanjamo vaš korisnički zapis (ime i email), pripadajuću Hero karticu, kompletnu istoriju sakupljenih pečata i iskorišćenih nagrada, kao i sve nevažeće tokene magičnih linkova. Ova radnja je nepovratna i ne može se poništiti.
+      </p>
+    </div>
+    <div>
+      <h3 className="text-xl font-bold text-white mb-2">5. Kontakt</h3>
       <p>
         Za sva dodatna pitanja o našoj politici upravljanja privatnim podacima slobodno kontaktirajte naše filijale ili nam pišite putem naših zvaničnih profila na socijalnim mrežama.
       </p>

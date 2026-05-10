@@ -6,6 +6,7 @@ import AnalyticsTracker from './components/AnalyticsTracker';
 
 const Loyalty = lazy(() => import('./pages/Loyalty'));
 const LoyaltyCard = lazy(() => import('./pages/LoyaltyCard'));
+const Admin = lazy(() => import('./pages/Admin'));
 
 const RouteFallback: React.FC = () => (
   <div className="min-h-screen w-full bg-hero-blue" />
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/loyalty" element={<Loyalty />} />
             <Route path="/loyalty/card" element={<LoyaltyCard />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </Suspense>
       </Router>

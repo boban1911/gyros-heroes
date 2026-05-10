@@ -1,6 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../../db/client';
 import { customers, loyaltyCards } from '../../db/schema';
+import { generateSecret } from '../totp';
 import {
   createLoyaltyObject,
   getLoyaltyObject,
@@ -25,6 +26,18 @@ function objectIdFor(issuerId: string, customerId: string): string {
   return `${issuerId}.card_${customerId.replace(/-/g, '')}`;
 }
 
+/**
+ * Ensure the customer's loyalty card has a TOTP secret, generating + persisting
+ * one lazily for cards created before the rotating-barcode feature shipped.
+ * Returns the (possibly newly minted) secret.
+ */
+async function ensureTotpSecret(cardId: string, existing: string | null): Promise<string> {
+  if (existing) return existing;
+  const secret = generateSecret();
+  await db.update(loyaltyCards).set({ totpSecret: secret }).where(eq(loyaltyCards.id, cardId));
+  return secret;
+}
+
 async function buildSpec(customerId: string): Promise<LoyaltyObjectSpec> {
   const { classId } = envIds();
   const [row] = await db
@@ -32,12 +45,15 @@ async function buildSpec(customerId: string): Promise<LoyaltyObjectSpec> {
       name: customers.name,
       cardId: loyaltyCards.id,
       stampsCount: loyaltyCards.stampsCount,
+      totpSecret: loyaltyCards.totpSecret,
     })
     .from(customers)
     .innerJoin(loyaltyCards, eq(loyaltyCards.customerId, customers.id))
     .where(eq(customers.id, customerId))
     .limit(1);
   if (!row) throw new Error(`No loyalty card for customer ${customerId}`);
+
+  const totpSecret = await ensureTotpSecret(row.cardId, row.totpSecret);
 
   const { issuerId } = envIds();
   return {
@@ -48,10 +64,14 @@ async function buildSpec(customerId: string): Promise<LoyaltyObjectSpec> {
     accountId: row.cardId,
     loyaltyPoints: { label: 'Pečati', balance: { int: row.stampsCount } },
     secondaryLoyaltyPoints: { label: 'Cilj', balance: { int: STAMPS_REQUIRED } },
-    barcode: {
+    rotatingBarcode: {
       type: 'QR_CODE',
-      value: `gh:card:${row.cardId}`,
-      alternateText: '',
+      valuePattern: `gh:card:${row.cardId}:{TOTP_VALUE_0}`,
+      totpDetails: {
+        algorithm: 'TOTP_SHA1',
+        periodMillis: 30000,
+        parameters: [{ key: totpSecret, valueLength: 6 }],
+      },
     },
   };
 }

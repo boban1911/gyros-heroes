@@ -1,0 +1,1 @@
+ALTER TABLE "loyalty_cards" ADD COLUMN "totp_secret" text;

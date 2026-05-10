@@ -39,6 +39,7 @@ export const loyaltyCards = pgTable(
     totalRedemptions: integer('total_redemptions').notNull().default(0),
     status: text('status').notNull().default('active'),
     googleObjectId: text('google_object_id').unique(),
+    totpSecret: text('totp_secret'),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [check('loyalty_cards_status_check', sql`${t.status} in ('active','ready_to_redeem')`)],

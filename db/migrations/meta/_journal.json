@@ -15,6 +15,13 @@
       "when": 1777743932000,
       "tag": "0001_seed_loyalty_config",
       "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1778251627551,
+      "tag": "0002_concerned_zombie",
+      "breakpoints": true
     }
   ]
 }

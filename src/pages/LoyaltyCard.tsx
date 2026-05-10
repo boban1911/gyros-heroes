@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import CardQr from '../components/loyalty/CardQr';
 import cityBg from '../assets/footer/footer-bg-new.svg';
 
 interface CardState {
@@ -118,6 +119,9 @@ const CardLayout: React.FC<{ data: CardState }> = ({ data }) => {
       {/* Big card */}
       <ActiveCard card={card} ready={ready} />
 
+      {/* Live QR — show at the cashier */}
+      <CardQr />
+
       {/* Wallet CTA */}
       <WalletCta />
 
@@ -125,6 +129,112 @@ const CardLayout: React.FC<{ data: CardState }> = ({ data }) => {
         <p className="font-montserrat text-white/70 text-sm">
           Iskorišćenih nagrada: <span className="font-bold text-hero-yellow">{card.totalRedemptions}</span> ⚡
         </p>
+      )}
+
+      <DeleteAccount />
+    </div>
+  );
+};
+
+const CONFIRM_PHRASE = 'OBRIŠI';
+
+const DeleteAccount: React.FC = () => {
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [confirmText, setConfirmText] = useState('');
+  const [phase, setPhase] = useState<'idle' | 'submitting' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  function reset() {
+    setOpen(false);
+    setConfirmText('');
+    setPhase('idle');
+    setErrorMsg(null);
+  }
+
+  const canConfirm = confirmText === CONFIRM_PHRASE && phase !== 'submitting';
+
+  async function handleDelete() {
+    if (!canConfirm) return;
+    setPhase('submitting');
+    setErrorMsg(null);
+    try {
+      const res = await fetch('/api/account/delete', {
+        method: 'DELETE',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ confirm: CONFIRM_PHRASE }),
+      });
+      if (!res.ok) {
+        setPhase('error');
+        setErrorMsg(`Brisanje neuspešno (HTTP ${res.status}). Pokušaj ponovo.`);
+        return;
+      }
+      navigate('/', { replace: true });
+    } catch {
+      setPhase('error');
+      setErrorMsg('Brisanje neuspešno. Proveri internet i pokušaj ponovo.');
+    }
+  }
+
+  return (
+    <div className="w-full mt-4 md:mt-6 pt-6 border-t border-white/15 text-left">
+      <p className="font-montserrat text-white/60 text-[12px] md:text-[13px] leading-[1.5]">
+        Želiš da napustiš Hero klub? Možeš trajno obrisati svoj nalog i sve podatke (kartica,
+        pečati, istorija nagrada, magični linkovi). Ova radnja je nepovratna.
+      </p>
+
+      {!open && (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="mt-2 font-montserrat text-white/70 hover:text-hero-yellow underline underline-offset-4 text-[12px] md:text-[13px] transition-colors duration-base"
+        >
+          Obriši nalog
+        </button>
+      )}
+
+      {open && (
+        <div className="mt-3 bg-hero-blue-dark/60 rounded-[20px] p-4 md:p-5 space-y-3">
+          <p className="font-montserrat text-white/85 text-[13px] md:text-[14px]">
+            Za potvrdu unesi reč <span className="font-bold text-hero-yellow">OBRIŠI</span> u polje
+            ispod. Nalog će biti odmah i trajno uklonjen.
+          </p>
+          <input
+            type="text"
+            value={confirmText}
+            onChange={(e) => setConfirmText(e.target.value)}
+            autoCapitalize="characters"
+            autoCorrect="off"
+            spellCheck={false}
+            placeholder="OBRIŠI"
+            className="w-full bg-hero-blue rounded-full px-4 py-2 font-montserrat text-white placeholder-white/40 text-[14px] outline-none border border-white/20 focus:border-hero-yellow"
+            aria-label="Potvrdi brisanje upisom reči OBRIŠI"
+          />
+          {errorMsg && (
+            <p role="alert" className="font-montserrat text-hero-yellow text-[12px] md:text-[13px]">
+              {errorMsg}
+            </p>
+          )}
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={!canConfirm}
+              className="bg-hero-yellow text-grey-black font-montserrat font-bold text-[13px] md:text-[14px] h-[40px] px-5 rounded-full shadow-hero-xs hover:bg-white transition-colors duration-base disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {phase === 'submitting' ? 'Brisanje…' : 'Trajno obriši'}
+            </button>
+            <button
+              type="button"
+              onClick={reset}
+              disabled={phase === 'submitting'}
+              className="bg-transparent border border-white/30 text-white font-montserrat font-bold text-[13px] md:text-[14px] h-[40px] px-5 rounded-full hover:bg-white/10 transition-colors duration-base disabled:opacity-50"
+            >
+              Otkaži
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
