@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Crown, ScanLine, ShieldOff } from 'lucide-react';
+import { ChevronDown, Crown, Download, ScanLine, ShieldOff, Trash2, Users } from 'lucide-react';
 import Footer from '../components/Footer';
 import Logo from '../components/Logo';
 import cityBg from '../assets/footer/footer-bg-new.svg';
@@ -33,6 +33,25 @@ interface StaffRow {
   role: StaffRole;
   isActive: boolean;
   createdAt: string;
+}
+
+interface CustomerCard {
+  id: string;
+  stampsCount: number;
+  totalRedemptions: number;
+  status: 'active' | 'ready_to_redeem';
+  hasWalletPass: boolean;
+  createdAt: string;
+  lastStampAt: string | null;
+}
+
+interface CustomerRow {
+  id: string;
+  email: string;
+  name: string;
+  emailVerifiedAt: string | null;
+  createdAt: string;
+  card: CustomerCard | null;
 }
 
 type ToastTone = 'success' | 'warning' | 'error';
@@ -718,6 +737,297 @@ const StatusPill: React.FC<StatusPillProps> = ({ row, isSelf, pending, onToggle 
   );
 };
 
+interface CustomersSectionProps {
+  customers: CustomerRow[];
+  stampsRequired: number;
+  onChanged: (next: CustomerRow[]) => void;
+  showToast: (toast: ToastState) => void;
+}
+
+const CONFIRM_PHRASE = 'OBRIŠI';
+
+function csvEscape(value: unknown): string {
+  if (value === null || value === undefined) return '';
+  const s = String(value);
+  if (/[",\n\r]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+  return s;
+}
+
+function buildCustomersCsv(rows: CustomerRow[]): string {
+  const header = [
+    'email',
+    'name',
+    'stamps',
+    'status',
+    'redemptions',
+    'has_wallet_pass',
+    'last_stamp_at',
+    'registered_at',
+    'email_verified_at',
+  ];
+  const lines = [header.join(',')];
+  for (const r of rows) {
+    lines.push(
+      [
+        r.email,
+        r.name,
+        r.card?.stampsCount ?? 0,
+        r.card?.status ?? 'no_card',
+        r.card?.totalRedemptions ?? 0,
+        r.card?.hasWalletPass ? 'yes' : 'no',
+        r.card?.lastStampAt ?? '',
+        r.createdAt,
+        r.emailVerifiedAt ?? '',
+      ]
+        .map(csvEscape)
+        .join(','),
+    );
+  }
+  return lines.join('\n');
+}
+
+function CustomersSection({ customers, stampsRequired, onChanged, showToast }: CustomersSectionProps) {
+  const [query, setQuery] = useState('');
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [confirmText, setConfirmText] = useState('');
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const filtered = (() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return customers;
+    return customers.filter(
+      (c) => c.email.toLowerCase().includes(q) || c.name.toLowerCase().includes(q),
+    );
+  })();
+
+  const toggleExpand = useCallback((id: string) => {
+    setExpandedId((curr) => (curr === id ? null : id));
+    setConfirmText('');
+  }, []);
+
+  const handleExport = useCallback(() => {
+    const csv = buildCustomersCsv(filtered);
+    const blob = new Blob([`﻿${csv}`], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 16);
+    link.href = url;
+    link.download = `gyros-heroes-korisnici-${ts}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showToast({ tone: 'success', message: `Izvezeno ${filtered.length} redova.` });
+  }, [filtered, showToast]);
+
+  const handleDelete = useCallback(
+    async (row: CustomerRow) => {
+      if (deletingId) return;
+      if (confirmText.trim().toUpperCase() !== CONFIRM_PHRASE) {
+        showToast({ tone: 'warning', message: `Upiši "${CONFIRM_PHRASE}" da potvrdiš brisanje.` });
+        return;
+      }
+      setDeletingId(row.id);
+      try {
+        const res = await fetch(`/api/admin/customers?id=${encodeURIComponent(row.id)}`, {
+          method: 'DELETE',
+          credentials: 'same-origin',
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          onChanged(customers.filter((c) => c.id !== row.id));
+          setExpandedId(null);
+          setConfirmText('');
+          showToast({ tone: 'success', message: 'Korisnik obrisan.' });
+        } else if (res.status === 404) {
+          onChanged(customers.filter((c) => c.id !== row.id));
+          showToast({ tone: 'warning', message: 'Korisnik već ne postoji.' });
+        } else {
+          showToast({ tone: 'error', message: 'Greška pri brisanju.' });
+        }
+      } catch {
+        showToast({ tone: 'error', message: 'Mreža nije dostupna.' });
+      } finally {
+        setDeletingId(null);
+      }
+    },
+    [deletingId, confirmText, customers, onChanged, showToast],
+  );
+
+  return (
+    <section className="bg-white/95 rounded-[40px] lg:rounded-[48px] p-6 md:p-8 lg:p-[40px] shadow-hero-xs">
+      <div className="flex items-baseline justify-between mb-1 flex-wrap gap-3">
+        <h2 className="font-montserrat font-black text-[26px] md:text-[34px] text-grey-black leading-[1.05] flex items-center gap-3">
+          <Users className="w-7 h-7 text-hero-blue-dark" strokeWidth={2.25} />
+          <span>
+            Hero <span className="text-hero-blue-dark italic">korisnici</span>
+          </span>
+        </h2>
+        <span className="font-montserrat font-bold text-[12px] tracking-[1.5px] uppercase text-grey-black/60">
+          {customers.length} {customers.length === 1 ? 'korisnik' : 'korisnika'}
+        </span>
+      </div>
+      <p className="font-montserrat text-grey-black/70 text-[14px] md:text-[15px] mb-6">
+        Pregled svih registrovanih korisnika programa, broj pečata i istorija.
+      </p>
+
+      <div className="flex flex-col md:flex-row md:items-center gap-3 mb-5">
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Pretraga po email-u ili imenu…"
+          className="flex-1 h-[50px] md:h-[56px] rounded-full bg-grey-light/30 px-5 font-montserrat font-medium text-grey-black placeholder:text-grey-black/45 border-2 border-transparent focus:outline-none focus:border-hero-blue-dark focus:bg-white transition-colors duration-fast"
+        />
+        <button
+          type="button"
+          onClick={handleExport}
+          disabled={filtered.length === 0}
+          className="bg-hero-blue-dark text-white font-montserrat font-bold text-[13px] md:text-[14px] h-[50px] md:h-[56px] px-6 inline-flex items-center justify-center gap-2 rounded-full hover:bg-hero-blue transition-colors duration-base disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <Download className="w-4 h-4" strokeWidth={2.5} />
+          Izvezi CSV
+        </button>
+      </div>
+
+      {filtered.length === 0 ? (
+        <p className="font-montserrat text-grey-black/55 text-[14px] py-8 text-center">
+          {customers.length === 0 ? 'Još nema registrovanih korisnika.' : 'Nema rezultata za zadatu pretragu.'}
+        </p>
+      ) : (
+        <ul className="flex flex-col divide-y divide-grey-black/5 -mx-2">
+          {filtered.map((row) => {
+            const isExpanded = expandedId === row.id;
+            const stamps = row.card?.stampsCount ?? 0;
+            const status = row.card?.status ?? null;
+            const ratio = stampsRequired > 0 ? Math.min(1, stamps / stampsRequired) : 0;
+            return (
+              <li key={row.id} className="px-2">
+                <button
+                  type="button"
+                  onClick={() => toggleExpand(row.id)}
+                  className="w-full grid grid-cols-[1fr_auto] md:grid-cols-[2fr_1fr_1fr_auto] items-center gap-3 md:gap-4 py-4 text-left hover:bg-grey-light/20 rounded-2xl transition-colors duration-fast"
+                  aria-expanded={isExpanded}
+                >
+                  <div className="min-w-0">
+                    <p className="font-montserrat font-bold text-grey-black truncate">{row.name}</p>
+                    <p className="font-montserrat text-grey-black/65 text-[13px] truncate">{row.email}</p>
+                  </div>
+                  <div className="hidden md:flex flex-col gap-1.5 min-w-0">
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="font-montserrat font-black text-[18px] text-grey-black">
+                        {stamps}
+                      </span>
+                      <span className="font-montserrat text-grey-black/50 text-[12px]">/ {stampsRequired}</span>
+                    </div>
+                    <div className="h-1.5 bg-grey-light/40 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full ${status === 'ready_to_redeem' ? 'bg-hero-yellow' : 'bg-hero-green'}`}
+                        style={{ width: `${ratio * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div className="hidden md:block">
+                    {status === 'ready_to_redeem' ? (
+                      <span className="inline-flex items-center bg-hero-yellow/20 text-grey-black border border-hero-yellow/50 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-widest">
+                        Spremno
+                      </span>
+                    ) : status === 'active' ? (
+                      <span className="inline-flex items-center bg-hero-green/15 text-hero-green border border-hero-green/40 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-widest">
+                        Aktivno
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center bg-grey-light/40 text-grey-black/60 border border-grey-black/10 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-widest">
+                        Bez kartice
+                      </span>
+                    )}
+                  </div>
+                  <div className="md:hidden text-right">
+                    <p className="font-montserrat font-black text-[16px] text-grey-black leading-none">
+                      {stamps}
+                      <span className="text-grey-black/45 font-medium text-[12px]"> /{stampsRequired}</span>
+                    </p>
+                    {status === 'ready_to_redeem' && (
+                      <p className="font-montserrat font-bold text-[10px] tracking-widest uppercase text-hero-yellow-dark mt-1">
+                        Spremno
+                      </p>
+                    )}
+                  </div>
+                  <ChevronDown
+                    className={`hidden md:block w-5 h-5 text-grey-black/40 transition-transform duration-base ${isExpanded ? 'rotate-180' : ''}`}
+                    strokeWidth={2.25}
+                  />
+                </button>
+
+                {isExpanded && (
+                  <div className="bg-grey-light/25 rounded-[20px] p-4 md:p-5 mb-3 grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-3 font-montserrat text-[13px]">
+                    <DetailItem label="Otkupi" value={String(row.card?.totalRedemptions ?? 0)} />
+                    <DetailItem
+                      label="Wallet pass"
+                      value={row.card?.hasWalletPass ? 'Da' : 'Ne'}
+                    />
+                    <DetailItem
+                      label="Poslednji pečat"
+                      value={row.card?.lastStampAt ? formatRelative(row.card.lastStampAt) : '—'}
+                    />
+                    <DetailItem
+                      label="Email potvrđen"
+                      value={row.emailVerifiedAt ? 'Da' : 'Ne'}
+                    />
+                    <DetailItem label="Registrovan" value={formatDate(row.createdAt)} />
+                    {row.card && (
+                      <DetailItem label="Kartica od" value={formatDate(row.card.createdAt)} />
+                    )}
+                    <div className="col-span-2 md:col-span-4 mt-2 pt-3 border-t border-grey-black/10">
+                      <p className="font-montserrat font-bold text-[12px] tracking-widest uppercase text-hero-blue-dark mb-2">
+                        Force delete
+                      </p>
+                      <p className="font-montserrat text-grey-black/70 text-[12.5px] mb-3 leading-snug">
+                        Trajno briše korisnika, karticu i istoriju. Pass u Google Walletu se postavlja na EXPIRED.
+                        Upiši <span className="font-bold text-grey-black">{CONFIRM_PHRASE}</span> da bi potvrdio.
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <input
+                          type="text"
+                          value={confirmText}
+                          onChange={(e) => setConfirmText(e.target.value)}
+                          placeholder={CONFIRM_PHRASE}
+                          className="flex-1 h-[44px] rounded-full bg-white px-5 font-montserrat font-medium text-grey-black border-2 border-grey-black/15 focus:outline-none focus:border-hero-blue-dark transition-colors duration-fast"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(row)}
+                          disabled={
+                            deletingId === row.id ||
+                            confirmText.trim().toUpperCase() !== CONFIRM_PHRASE
+                          }
+                          className="bg-hero-blue-dark text-white font-montserrat font-bold text-[13px] h-[44px] px-5 inline-flex items-center justify-center gap-2 rounded-full hover:bg-hero-blue transition-colors duration-base disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <Trash2 className="w-4 h-4" strokeWidth={2.5} />
+                          {deletingId === row.id ? 'Brišem…' : 'Obriši trajno'}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+const DetailItem: React.FC<{ label: string; value: string }> = ({ label, value }) => (
+  <div className="min-w-0">
+    <p className="font-montserrat font-bold text-[10px] tracking-[1.5px] uppercase text-grey-black/55 mb-0.5">
+      {label}
+    </p>
+    <p className="font-montserrat font-medium text-grey-black truncate">{value}</p>
+  </div>
+);
+
 function formatRelative(iso: string): string {
   try {
     const ms = Date.now() - new Date(iso).getTime();
@@ -808,6 +1118,7 @@ function Admin() {
   const [me, setMe] = useState<StaffPrincipal | null>(null);
   const [config, setConfig] = useState<LoyaltyConfigRow | null>(null);
   const [staff, setStaff] = useState<StaffRow[]>([]);
+  const [customerRows, setCustomerRows] = useState<CustomerRow[]>([]);
   const [toast, setToast] = useState<ToastState | null>(null);
   const [toastVisible, setToastVisible] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
@@ -847,12 +1158,16 @@ function Admin() {
           setStatus('forbidden');
           return;
         }
-        const [cfgRes, staffRes] = await Promise.all([
+        const [cfgRes, staffRes, customersRes] = await Promise.all([
           fetch('/api/admin/config', {
             credentials: 'same-origin',
             headers: { Accept: 'application/json' },
           }),
           fetch('/api/admin/staff', {
+            credentials: 'same-origin',
+            headers: { Accept: 'application/json' },
+          }),
+          fetch('/api/admin/customers', {
             credentials: 'same-origin',
             headers: { Accept: 'application/json' },
           }),
@@ -865,6 +1180,10 @@ function Admin() {
         if (staffRes.ok) {
           const data = (await staffRes.json()) as { staff: StaffRow[] };
           setStaff(data.staff);
+        }
+        if (customersRes.ok) {
+          const data = (await customersRes.json()) as { customers: CustomerRow[] };
+          setCustomerRows(data.customers);
         }
         setStatus('admin');
       } catch {
@@ -934,6 +1253,13 @@ function Admin() {
             showToast={showToast}
           />
         ) : null}
+
+        <CustomersSection
+          customers={customerRows}
+          stampsRequired={config?.stampsRequired ?? 10}
+          onChanged={(next) => setCustomerRows(next)}
+          showToast={showToast}
+        />
       </div>
 
       {toast ? (
