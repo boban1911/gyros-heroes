@@ -1,6 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronDown, Crown, Download, ScanLine, ShieldOff, Trash2, Users } from 'lucide-react';
+import {
+  ChevronDown,
+  Crown,
+  Download,
+  type LucideIcon,
+  ScanLine,
+  ShieldOff,
+  SlidersHorizontal,
+  Trash2,
+  UserCog,
+  Users,
+} from 'lucide-react';
 import Footer from '../components/Footer';
 import Logo from '../components/Logo';
 import cityBg from '../assets/footer/footer-bg-new.svg';
@@ -62,6 +73,88 @@ interface ToastState {
 }
 
 type SessionStatus = 'loading' | 'admin' | 'forbidden' | 'anonymous';
+
+type AdminTab = 'config' | 'staff' | 'customers';
+
+const TAB_HASHES: Record<AdminTab, string> = {
+  config: '#pravila',
+  staff: '#tim',
+  customers: '#korisnici',
+};
+
+function tabFromHash(hash: string): AdminTab {
+  switch (hash) {
+    case '#tim':
+      return 'staff';
+    case '#korisnici':
+      return 'customers';
+    case '#pravila':
+    default:
+      return 'config';
+  }
+}
+
+interface TabDef {
+  key: AdminTab;
+  label: string;
+  icon: LucideIcon;
+}
+
+const TABS: ReadonlyArray<TabDef> = [
+  { key: 'config', label: 'Pravila', icon: SlidersHorizontal },
+  { key: 'staff', label: 'Tim', icon: UserCog },
+  { key: 'customers', label: 'Korisnici', icon: Users },
+];
+
+interface AdminTabsProps {
+  active: AdminTab;
+  onChange: (tab: AdminTab) => void;
+  customersCount: number;
+  staffCount: number;
+}
+
+function AdminTabs({ active, onChange, customersCount, staffCount }: AdminTabsProps) {
+  return (
+    <div
+      role="tablist"
+      aria-label="Admin sekcije"
+      className="bg-white/10 backdrop-blur-sm border border-white/15 rounded-full p-1.5 inline-flex items-center gap-1 max-w-full overflow-x-auto"
+    >
+      {TABS.map((tab) => {
+        const isActive = active === tab.key;
+        const Icon = tab.icon;
+        const badge =
+          tab.key === 'customers' ? customersCount : tab.key === 'staff' ? staffCount : null;
+        return (
+          <button
+            key={tab.key}
+            type="button"
+            role="tab"
+            aria-selected={isActive}
+            onClick={() => onChange(tab.key)}
+            className={`relative inline-flex items-center gap-2 rounded-full px-4 md:px-5 h-10 md:h-11 font-montserrat font-bold text-[12px] md:text-[13px] tracking-wide uppercase whitespace-nowrap transition-colors duration-base ${
+              isActive
+                ? 'bg-hero-yellow text-grey-black shadow-hero-xs'
+                : 'text-white/85 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            <Icon className="w-4 h-4" strokeWidth={2.25} />
+            {tab.label}
+            {badge !== null && (
+              <span
+                className={`ml-0.5 inline-flex items-center justify-center min-w-[22px] h-[20px] px-1.5 rounded-full text-[10px] font-black ${
+                  isActive ? 'bg-grey-black text-hero-yellow' : 'bg-white/15 text-white'
+                }`}
+              >
+                {badge}
+              </span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 function classNamesForToast(tone: ToastTone): string {
   switch (tone) {
@@ -1122,7 +1215,23 @@ function Admin() {
   const [toast, setToast] = useState<ToastState | null>(null);
   const [toastVisible, setToastVisible] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
+  const [activeTab, setActiveTab] = useState<AdminTab>(() =>
+    typeof window === 'undefined' ? 'config' : tabFromHash(window.location.hash),
+  );
   const toastTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const onHashChange = () => setActiveTab(tabFromHash(window.location.hash));
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  const selectTab = useCallback((tab: AdminTab) => {
+    setActiveTab(tab);
+    if (typeof window !== 'undefined' && window.location.hash !== TAB_HASHES[tab]) {
+      window.history.replaceState(null, '', TAB_HASHES[tab]);
+    }
+  }, []);
 
   const showToast = useCallback((next: ToastState) => {
     setToast(next);
@@ -1232,20 +1341,31 @@ function Admin() {
         />
       )}
 
-      <div className="max-w-[1400px] mx-auto px-[20px] nav:px-[100px] mt-10 md:mt-14 flex flex-col gap-6 md:gap-8">
-        {config ? (
-          <ConfigSection
-            config={config}
-            onSaved={(next) => setConfig(next)}
-            showToast={showToast}
-          />
-        ) : (
-          <section className="bg-hero-green/40 border border-white/15 rounded-[40px] p-8 text-white/85 text-sm font-montserrat">
-            Učitavam konfiguraciju…
-          </section>
-        )}
+      <div className="max-w-[1400px] mx-auto px-[20px] nav:px-[100px] mt-8 md:mt-10 flex justify-center md:justify-start">
+        <AdminTabs
+          active={activeTab}
+          onChange={selectTab}
+          customersCount={customerRows.length}
+          staffCount={staff.length}
+        />
+      </div>
 
-        {me ? (
+      <div className="max-w-[1400px] mx-auto px-[20px] nav:px-[100px] mt-6 md:mt-8 flex flex-col gap-6 md:gap-8">
+        {activeTab === 'config' ? (
+          config ? (
+            <ConfigSection
+              config={config}
+              onSaved={(next) => setConfig(next)}
+              showToast={showToast}
+            />
+          ) : (
+            <section className="bg-hero-green/40 border border-white/15 rounded-[40px] p-8 text-white/85 text-sm font-montserrat">
+              Učitavam konfiguraciju…
+            </section>
+          )
+        ) : null}
+
+        {activeTab === 'staff' && me ? (
           <StaffSection
             staff={staff}
             meId={me.id}
@@ -1254,12 +1374,14 @@ function Admin() {
           />
         ) : null}
 
-        <CustomersSection
-          customers={customerRows}
-          stampsRequired={config?.stampsRequired ?? 10}
-          onChanged={(next) => setCustomerRows(next)}
-          showToast={showToast}
-        />
+        {activeTab === 'customers' ? (
+          <CustomersSection
+            customers={customerRows}
+            stampsRequired={config?.stampsRequired ?? 10}
+            onChanged={(next) => setCustomerRows(next)}
+            showToast={showToast}
+          />
+        ) : null}
       </div>
 
       {toast ? (
