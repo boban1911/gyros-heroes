@@ -25,41 +25,6 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-interface JsonResponse {
-  status: ReturnType<typeof vi.fn>;
-  setHeader: ReturnType<typeof vi.fn>;
-  json: ReturnType<typeof vi.fn>;
-}
-
-function makeRes(): { res: JsonResponse; statusCode: () => number | null; jsonBody: () => unknown } {
-  let code: number | null = null;
-  let body: unknown = undefined;
-  const res: JsonResponse = {
-    status: vi.fn((s: number) => {
-      code = s;
-      return res;
-    }),
-    setHeader: vi.fn(),
-    json: vi.fn((b: unknown) => {
-      body = b;
-      return res;
-    }),
-  };
-  return { res, statusCode: () => code, jsonBody: () => body };
-}
-
-function makeReq(body: unknown, opts: { method?: string; cookie?: string } = {}): {
-  method: string;
-  body: unknown;
-  headers: { cookie?: string };
-} {
-  return {
-    method: opts.method ?? 'GET',
-    body,
-    headers: opts.cookie ? { cookie: opts.cookie } : {},
-  };
-}
-
 const ADMIN_ID = '11111111-1111-4111-8111-111111111111';
 const OTHER_ID = '22222222-2222-4222-8222-222222222222';
 
@@ -71,9 +36,13 @@ function pushStaffPrincipal(): void {
   dbMock.queue.push([{ staffId: ADMIN_ID, role: 'staff', isActive: true }]);
 }
 
+async function loadApp() {
+  return (await import('../../../server/app')).default;
+}
+
 describe('GET /api/admin/staff', () => {
   it('returns list ordered by createdAt desc, no passwordHash', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
     dbMock.queue.push([
       {
@@ -94,48 +63,40 @@ describe('GET /api/admin/staff', () => {
       },
     ]);
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq(undefined, { method: 'GET', cookie: 'gh_staff=valid' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/admin/staff', {
+      method: 'GET',
+      headers: { cookie: 'gh_staff=valid' },
+    });
 
-    expect(statusCode()).toBe(200);
-    const body = jsonBody() as { staff: Array<Record<string, unknown>> };
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as { staff: Array<Record<string, unknown>> };
     expect(body.staff).toHaveLength(2);
     expect(body.staff[0]).not.toHaveProperty('passwordHash');
     expect(body.staff[0].email).toBe('admin@gh.rs');
   });
 
   it('no cookie → 401', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
-    const { res, statusCode } = makeRes();
-    await handler(
-      makeReq(undefined, { method: 'GET' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(401);
+    const app = await loadApp();
+    const res = await app.request('/api/admin/staff', { method: 'GET' });
+    expect(res.status).toBe(401);
   });
 
   it('non-admin → 403', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
+    const app = await loadApp();
     pushStaffPrincipal();
-    const { res, statusCode } = makeRes();
-    await handler(
-      makeReq(undefined, { method: 'GET', cookie: 'gh_staff=valid' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(403);
+    const res = await app.request('/api/admin/staff', {
+      method: 'GET',
+      headers: { cookie: 'gh_staff=valid' },
+    });
+    expect(res.status).toBe(403);
   });
 });
 
 describe('POST /api/admin/staff', () => {
   it('creates new staff and returns row without passwordHash', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
-    // duplicate-check select: empty
     dbMock.queue.push([]);
-    // insert .returning
     dbMock.queue.push([
       {
         id: OTHER_ID,
@@ -147,17 +108,14 @@ describe('POST /api/admin/staff', () => {
       },
     ]);
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq(
-        { email: 'new@gh.rs', name: 'Nova', password: 'secret-pass-123', role: 'staff' },
-        { method: 'POST', cookie: 'gh_staff=valid' },
-      ) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/admin/staff', {
+      method: 'POST',
+      headers: { cookie: 'gh_staff=valid', 'content-type': 'application/json' },
+      body: JSON.stringify({ email: 'new@gh.rs', name: 'Nova', password: 'secret-pass-123', role: 'staff' }),
+    });
 
-    expect(statusCode()).toBe(201);
-    const body = jsonBody() as Record<string, unknown>;
+    expect(res.status).toBe(201);
+    const body = (await res.json()) as Record<string, unknown>;
     expect(body).not.toHaveProperty('passwordHash');
     expect(body.email).toBe('new@gh.rs');
     const inserted = dbMock.insertValues[0] as { email: string; passwordHash: string };
@@ -167,45 +125,39 @@ describe('POST /api/admin/staff', () => {
   });
 
   it('duplicate email → 409', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
     dbMock.queue.push([{ id: OTHER_ID }]);
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq(
-        { email: 'dup@gh.rs', name: 'Dup', password: 'secret-pass-123', role: 'staff' },
-        { method: 'POST', cookie: 'gh_staff=valid' },
-      ) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/admin/staff', {
+      method: 'POST',
+      headers: { cookie: 'gh_staff=valid', 'content-type': 'application/json' },
+      body: JSON.stringify({ email: 'dup@gh.rs', name: 'Dup', password: 'secret-pass-123', role: 'staff' }),
+    });
 
-    expect(statusCode()).toBe(409);
-    expect(jsonBody()).toEqual({ error: 'email_already_exists' });
+    expect(res.status).toBe(409);
+    expect(await res.json()).toEqual({ error: 'email_already_exists' });
   });
 
   it('rejects invalid role/short password', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq(
-        { email: 'x@gh.rs', name: 'X', password: 'short', role: 'staff' },
-        { method: 'POST', cookie: 'gh_staff=valid' },
-      ) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/admin/staff', {
+      method: 'POST',
+      headers: { cookie: 'gh_staff=valid', 'content-type': 'application/json' },
+      body: JSON.stringify({ email: 'x@gh.rs', name: 'X', password: 'short', role: 'staff' }),
+    });
 
-    expect(statusCode()).toBe(400);
-    const body = jsonBody() as { error: string };
+    expect(res.status).toBe(400);
+    const body = (await res.json()) as { error: string };
     expect(body.error).toBe('invalid_input');
   });
 });
 
 describe('PATCH /api/admin/staff', () => {
   it('toggles isActive on another user', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
     dbMock.queue.push([
       {
@@ -218,40 +170,34 @@ describe('PATCH /api/admin/staff', () => {
       },
     ]);
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq(
-        { id: OTHER_ID, isActive: false },
-        { method: 'PATCH', cookie: 'gh_staff=valid' },
-      ) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/admin/staff', {
+      method: 'PATCH',
+      headers: { cookie: 'gh_staff=valid', 'content-type': 'application/json' },
+      body: JSON.stringify({ id: OTHER_ID, isActive: false }),
+    });
 
-    expect(statusCode()).toBe(200);
-    const body = jsonBody() as Record<string, unknown>;
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as Record<string, unknown>;
     expect(body.isActive).toBe(false);
     expect(body).not.toHaveProperty('passwordHash');
   });
 
   it('refuses self-deactivation', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq(
-        { id: ADMIN_ID, isActive: false },
-        { method: 'PATCH', cookie: 'gh_staff=valid' },
-      ) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/admin/staff', {
+      method: 'PATCH',
+      headers: { cookie: 'gh_staff=valid', 'content-type': 'application/json' },
+      body: JSON.stringify({ id: ADMIN_ID, isActive: false }),
+    });
 
-    expect(statusCode()).toBe(400);
-    expect(jsonBody()).toEqual({ error: 'cannot_deactivate_self' });
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ error: 'cannot_deactivate_self' });
   });
 
   it('allows reactivating self', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
     dbMock.queue.push([
       {
@@ -264,41 +210,31 @@ describe('PATCH /api/admin/staff', () => {
       },
     ]);
 
-    const { res, statusCode } = makeRes();
-    await handler(
-      makeReq(
-        { id: ADMIN_ID, isActive: true },
-        { method: 'PATCH', cookie: 'gh_staff=valid' },
-      ) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/admin/staff', {
+      method: 'PATCH',
+      headers: { cookie: 'gh_staff=valid', 'content-type': 'application/json' },
+      body: JSON.stringify({ id: ADMIN_ID, isActive: true }),
+    });
 
-    expect(statusCode()).toBe(200);
+    expect(res.status).toBe(200);
   });
 
   it('staff (non-admin) → 403', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
+    const app = await loadApp();
     pushStaffPrincipal();
-    const { res, statusCode } = makeRes();
-    await handler(
-      makeReq(
-        { id: OTHER_ID, isActive: false },
-        { method: 'PATCH', cookie: 'gh_staff=valid' },
-      ) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(403);
+    const res = await app.request('/api/admin/staff', {
+      method: 'PATCH',
+      headers: { cookie: 'gh_staff=valid', 'content-type': 'application/json' },
+      body: JSON.stringify({ id: OTHER_ID, isActive: false }),
+    });
+    expect(res.status).toBe(403);
   });
 });
 
 describe('method handling', () => {
   it('unsupported method → 405', async () => {
-    const handler = (await import('../../../api/admin/staff')).default;
-    const { res, statusCode } = makeRes();
-    await handler(
-      makeReq(undefined, { method: 'DELETE' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(405);
+    const app = await loadApp();
+    const res = await app.request('/api/admin/staff', { method: 'DELETE' });
+    expect(res.status).toBe(405);
   });
 });

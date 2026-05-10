@@ -32,42 +32,6 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-interface JsonResponse {
-  status: ReturnType<typeof vi.fn>;
-  setHeader: ReturnType<typeof vi.fn>;
-  json: ReturnType<typeof vi.fn>;
-}
-
-function makeRes(): { res: JsonResponse; statusCode: () => number | null; jsonBody: () => unknown } {
-  let code: number | null = null;
-  let body: unknown = undefined;
-  const res: JsonResponse = {
-    status: vi.fn((s: number) => {
-      code = s;
-      return res;
-    }),
-    setHeader: vi.fn(),
-    json: vi.fn((b: unknown) => {
-      body = b;
-      return res;
-    }),
-  };
-  return { res, statusCode: () => code, jsonBody: () => body };
-}
-
-function makeReq(opts: {
-  method?: string;
-  cookie?: string;
-  query?: Record<string, string>;
-} = {}): { method: string; body: undefined; headers: { cookie?: string }; query: Record<string, string> } {
-  return {
-    method: opts.method ?? 'GET',
-    body: undefined,
-    headers: opts.cookie ? { cookie: opts.cookie } : {},
-    query: opts.query ?? {},
-  };
-}
-
 const ADMIN_ID = '11111111-1111-4111-8111-111111111111';
 const CUSTOMER_A = '33333333-3333-4333-8333-333333333333';
 const CUSTOMER_B = '44444444-4444-4444-8444-444444444444';
@@ -81,11 +45,14 @@ function pushStaffPrincipal(): void {
   dbMock.queue.push([{ staffId: ADMIN_ID, role: 'staff', isActive: true }]);
 }
 
+async function loadApp() {
+  return (await import('../../../server/app')).default;
+}
+
 describe('GET /api/admin/customers', () => {
   it('returns customers with card aggregates and lastStampAt merged', async () => {
-    const handler = (await import('../../../api/admin/customers')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
-    // join select (customers leftJoin loyalty_cards)
     dbMock.queue.push([
       {
         id: CUSTOMER_A,
@@ -114,17 +81,15 @@ describe('GET /api/admin/customers', () => {
         cardCreatedAt: null,
       },
     ]);
-    // lastStamp aggregate
     dbMock.queue.push([{ cardId: CARD_A, lastStampAt: new Date('2026-05-02T12:00:00Z') }]);
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq({ method: 'GET', cookie: 'gh_staff=valid' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/admin/customers', {
+      method: 'GET',
+      headers: { cookie: 'gh_staff=valid' },
+    });
 
-    expect(statusCode()).toBe(200);
-    const body = jsonBody() as { customers: Array<Record<string, unknown>> };
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as { customers: Array<Record<string, unknown>> };
     expect(body.customers).toHaveLength(2);
     expect(body.customers[0].id).toBe(CUSTOMER_A);
     const cardA = body.customers[0].card as Record<string, unknown>;
@@ -136,137 +101,100 @@ describe('GET /api/admin/customers', () => {
   });
 
   it('no cookie → 401', async () => {
-    const handler = (await import('../../../api/admin/customers')).default;
-    const { res, statusCode } = makeRes();
-    await handler(
-      makeReq({ method: 'GET' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(401);
+    const app = await loadApp();
+    const res = await app.request('/api/admin/customers', { method: 'GET' });
+    expect(res.status).toBe(401);
   });
 
   it('non-admin → 403', async () => {
-    const handler = (await import('../../../api/admin/customers')).default;
+    const app = await loadApp();
     pushStaffPrincipal();
-    const { res, statusCode } = makeRes();
-    await handler(
-      makeReq({ method: 'GET', cookie: 'gh_staff=valid' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(403);
+    const res = await app.request('/api/admin/customers', {
+      method: 'GET',
+      headers: { cookie: 'gh_staff=valid' },
+    });
+    expect(res.status).toBe(403);
   });
 });
 
 describe('DELETE /api/admin/customers', () => {
   it('admin force-delete: expires wallet pass and cascades DB delete', async () => {
-    const handler = (await import('../../../api/admin/customers')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
-    // existence check
     dbMock.queue.push([{ id: CUSTOMER_A }]);
-    // googleObjectId lookup
     dbMock.queue.push([{ googleObjectId: 'go-1' }]);
-    // delete
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq({
-        method: 'DELETE',
-        cookie: 'gh_staff=valid',
-        query: { id: CUSTOMER_A },
-      }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request(`/api/admin/customers?id=${CUSTOMER_A}`, {
+      method: 'DELETE',
+      headers: { cookie: 'gh_staff=valid' },
+    });
 
-    expect(statusCode()).toBe(200);
-    expect(jsonBody()).toEqual({ ok: true });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
     expect(expirePassMock).toHaveBeenCalledWith('go-1');
     expect(dbMock.deleteSpy).toHaveBeenCalled();
   });
 
   it('skips expirePass when no wallet pass exists', async () => {
-    const handler = (await import('../../../api/admin/customers')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
     dbMock.queue.push([{ id: CUSTOMER_A }]);
     dbMock.queue.push([{ googleObjectId: null }]);
 
-    const { res, statusCode } = makeRes();
-    await handler(
-      makeReq({
-        method: 'DELETE',
-        cookie: 'gh_staff=valid',
-        query: { id: CUSTOMER_A },
-      }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request(`/api/admin/customers?id=${CUSTOMER_A}`, {
+      method: 'DELETE',
+      headers: { cookie: 'gh_staff=valid' },
+    });
 
-    expect(statusCode()).toBe(200);
+    expect(res.status).toBe(200);
     expect(expirePassMock).not.toHaveBeenCalled();
     expect(dbMock.deleteSpy).toHaveBeenCalled();
   });
 
   it('returns 404 when customer not found', async () => {
-    const handler = (await import('../../../api/admin/customers')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
     dbMock.queue.push([]);
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq({
-        method: 'DELETE',
-        cookie: 'gh_staff=valid',
-        query: { id: CUSTOMER_A },
-      }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request(`/api/admin/customers?id=${CUSTOMER_A}`, {
+      method: 'DELETE',
+      headers: { cookie: 'gh_staff=valid' },
+    });
 
-    expect(statusCode()).toBe(404);
-    expect((jsonBody() as { error: string }).error).toBe('customer_not_found');
+    expect(res.status).toBe(404);
+    expect(((await res.json()) as { error: string }).error).toBe('customer_not_found');
     expect(dbMock.deleteSpy).not.toHaveBeenCalled();
   });
 
   it('returns 400 for missing or invalid id', async () => {
-    const handler = (await import('../../../api/admin/customers')).default;
+    const app = await loadApp();
     pushAdminPrincipal();
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq({
-        method: 'DELETE',
-        cookie: 'gh_staff=valid',
-        query: { id: 'not-a-uuid' },
-      }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/admin/customers?id=not-a-uuid', {
+      method: 'DELETE',
+      headers: { cookie: 'gh_staff=valid' },
+    });
 
-    expect(statusCode()).toBe(400);
-    expect((jsonBody() as { error: string }).error).toBe('invalid_id');
+    expect(res.status).toBe(400);
+    expect(((await res.json()) as { error: string }).error).toBe('invalid_id');
   });
 
   it('non-admin → 403', async () => {
-    const handler = (await import('../../../api/admin/customers')).default;
+    const app = await loadApp();
     pushStaffPrincipal();
-    const { res, statusCode } = makeRes();
-    await handler(
-      makeReq({
-        method: 'DELETE',
-        cookie: 'gh_staff=valid',
-        query: { id: CUSTOMER_A },
-      }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(403);
+    const res = await app.request(`/api/admin/customers?id=${CUSTOMER_A}`, {
+      method: 'DELETE',
+      headers: { cookie: 'gh_staff=valid' },
+    });
+    expect(res.status).toBe(403);
   });
 });
 
 describe('method routing', () => {
   it('PUT → 405 with Allow header', async () => {
-    const handler = (await import('../../../api/admin/customers')).default;
-    const { res, statusCode } = makeRes();
-    await handler(
-      makeReq({ method: 'PUT' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(405);
-    expect(res.setHeader).toHaveBeenCalledWith('Allow', 'GET, DELETE');
+    const app = await loadApp();
+    const res = await app.request('/api/admin/customers', { method: 'PUT' });
+    expect(res.status).toBe(405);
+    expect(res.headers.get('Allow')).toBe('GET, DELETE');
   });
 });

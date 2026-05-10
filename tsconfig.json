@@ -17,6 +17,6 @@
     "jsx": "react-jsx",
     "types": ["vite/client", "node"]
   },
-  "include": ["src", "src/vite-env.d.ts", "api", "db", "drizzle.config.ts"],
+  "include": ["src", "src/vite-env.d.ts", "api", "db", "server", "lib", "drizzle.config.ts"],
   "exclude": ["node_modules", "dist", "db/migrations"]
 }

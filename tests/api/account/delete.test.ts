@@ -34,182 +34,131 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-interface JsonResponse {
-  status: ReturnType<typeof vi.fn>;
-  setHeader: ReturnType<typeof vi.fn>;
-  json: ReturnType<typeof vi.fn>;
-}
-
-function makeRes(): {
-  res: JsonResponse;
-  statusCode: () => number | null;
-  jsonBody: () => unknown;
-  setHeaders: () => Array<[string, unknown]>;
-} {
-  let code: number | null = null;
-  let body: unknown = undefined;
-  const headers: Array<[string, unknown]> = [];
-  const res: JsonResponse = {
-    status: vi.fn((s: number) => {
-      code = s;
-      return res;
-    }),
-    setHeader: vi.fn((name: string, value: unknown) => {
-      headers.push([name, value]);
-      return res;
-    }),
-    json: vi.fn((b: unknown) => {
-      body = b;
-      return res;
-    }),
-  };
-  return { res, statusCode: () => code, jsonBody: () => body, setHeaders: () => headers };
-}
-
-function makeReq(
-  body: unknown,
-  opts: { method?: string; cookie?: string } = {},
-): { method: string; body: unknown; headers: { cookie?: string } } {
-  return {
-    method: opts.method ?? 'DELETE',
-    body,
-    headers: opts.cookie ? { cookie: opts.cookie } : {},
-  };
-}
-
 async function customerCookie(): Promise<string> {
   const token = await signSession({ sub: CUSTOMER_ID, kind: 'customer' }, 60);
   return `gh_session=${token}`;
 }
 
+async function loadApp() {
+  return (await import('../../../server/app')).default;
+}
+
 describe('DELETE /api/account/delete', () => {
   it('rejects GET with 405 + Allow: DELETE', async () => {
-    const handler = (await import('../../../api/account/delete')).default;
-    const { res, statusCode, jsonBody, setHeaders } = makeRes();
-    await handler(
-      makeReq(undefined, { method: 'GET' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(405);
-    expect(jsonBody()).toEqual({ error: 'method_not_allowed' });
-    expect(setHeaders()).toContainEqual(['Allow', 'DELETE']);
+    const app = await loadApp();
+    const res = await app.request('/api/account/delete', { method: 'GET' });
+    expect(res.status).toBe(405);
+    expect(await res.json()).toEqual({ error: 'method_not_allowed' });
+    expect(res.headers.get('Allow')).toBe('DELETE');
   });
 
   it('rejects POST with 405 + Allow: DELETE', async () => {
-    const handler = (await import('../../../api/account/delete')).default;
-    const { res, statusCode, setHeaders } = makeRes();
-    await handler(
-      makeReq({ confirm: 'OBRIŠI' }, { method: 'POST' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(405);
-    expect(setHeaders()).toContainEqual(['Allow', 'DELETE']);
+    const app = await loadApp();
+    const res = await app.request('/api/account/delete', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ confirm: 'OBRIŠI' }),
+    });
+    expect(res.status).toBe(405);
+    expect(res.headers.get('Allow')).toBe('DELETE');
   });
 
   it('returns 401 when no session cookie', async () => {
-    const handler = (await import('../../../api/account/delete')).default;
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq({ confirm: 'OBRIŠI' }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(401);
-    expect(jsonBody()).toEqual({ error: 'unauthorized' });
+    const app = await loadApp();
+    const res = await app.request('/api/account/delete', {
+      method: 'DELETE',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ confirm: 'OBRIŠI' }),
+    });
+    expect(res.status).toBe(401);
+    expect(await res.json()).toEqual({ error: 'unauthorized' });
     expect(dbMock.deleteSpy).not.toHaveBeenCalled();
   });
 
   it('returns 400 confirmation_required when body lacks the magic word', async () => {
-    const handler = (await import('../../../api/account/delete')).default;
+    const app = await loadApp();
     const cookie = await customerCookie();
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq({ confirm: 'delete' }, { cookie }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(400);
-    expect(jsonBody()).toEqual({ error: 'confirmation_required' });
+    const res = await app.request('/api/account/delete', {
+      method: 'DELETE',
+      headers: { cookie, 'content-type': 'application/json' },
+      body: JSON.stringify({ confirm: 'delete' }),
+    });
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ error: 'confirmation_required' });
     expect(dbMock.deleteSpy).not.toHaveBeenCalled();
   });
 
   it('returns 400 when body is empty', async () => {
-    const handler = (await import('../../../api/account/delete')).default;
+    const app = await loadApp();
     const cookie = await customerCookie();
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq(undefined, { cookie }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
-    expect(statusCode()).toBe(400);
-    expect(jsonBody()).toEqual({ error: 'confirmation_required' });
+    const res = await app.request('/api/account/delete', {
+      method: 'DELETE',
+      headers: { cookie },
+    });
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ error: 'confirmation_required' });
     expect(dbMock.deleteSpy).not.toHaveBeenCalled();
   });
 
   it('happy path: expires wallet pass, deletes customer, clears cookie, returns ok', async () => {
-    const handler = (await import('../../../api/account/delete')).default;
+    const app = await loadApp();
     const cookie = await customerCookie();
-    // 1) select googleObjectId, 2) delete customers.
     dbMock.queue.push([{ googleObjectId: 'issuer.obj-happy' }]);
     dbMock.queue.push(undefined);
 
-    const { res, statusCode, jsonBody, setHeaders } = makeRes();
-    await handler(
-      makeReq({ confirm: 'OBRIŠI' }, { cookie }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/account/delete', {
+      method: 'DELETE',
+      headers: { cookie, 'content-type': 'application/json' },
+      body: JSON.stringify({ confirm: 'OBRIŠI' }),
+    });
 
-    expect(statusCode()).toBe(200);
-    expect(jsonBody()).toEqual({ ok: true });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
     expect(expirePassMock).toHaveBeenCalledTimes(1);
     expect(expirePassMock).toHaveBeenCalledWith('issuer.obj-happy');
     expect(dbMock.deleteSpy).toHaveBeenCalledTimes(1);
 
-    const setCookie = setHeaders().find(([name]) => name === 'Set-Cookie');
-    expect(setCookie).toBeDefined();
-    const cookieValue = String(setCookie?.[1] ?? '');
-    expect(cookieValue).toMatch(/^gh_session=;/);
-    expect(cookieValue).toMatch(/Max-Age=0/);
-    expect(cookieValue).toMatch(/Path=\//);
-    expect(cookieValue).toMatch(/SameSite=Lax/);
+    const setCookie = res.headers.get('Set-Cookie');
+    expect(setCookie).toMatch(/^gh_session=;/);
+    expect(setCookie).toMatch(/Max-Age=0/);
+    expect(setCookie).toMatch(/Path=\//);
+    expect(setCookie).toMatch(/SameSite=Lax/);
   });
 
   it('skips wallet expire when customer has no saved Google Wallet pass', async () => {
-    const handler = (await import('../../../api/account/delete')).default;
+    const app = await loadApp();
     const cookie = await customerCookie();
-    // googleObjectId is null — never saved a wallet pass.
     dbMock.queue.push([{ googleObjectId: null }]);
     dbMock.queue.push(undefined);
 
-    const { res, statusCode, jsonBody } = makeRes();
-    await handler(
-      makeReq({ confirm: 'OBRIŠI' }, { cookie }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/account/delete', {
+      method: 'DELETE',
+      headers: { cookie, 'content-type': 'application/json' },
+      body: JSON.stringify({ confirm: 'OBRIŠI' }),
+    });
 
-    expect(statusCode()).toBe(200);
-    expect(jsonBody()).toEqual({ ok: true });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
     expect(expirePassMock).not.toHaveBeenCalled();
     expect(dbMock.deleteSpy).toHaveBeenCalledTimes(1);
   });
 
   it('still completes deletion when expirePass rejects', async () => {
-    const handler = (await import('../../../api/account/delete')).default;
+    const app = await loadApp();
     const cookie = await customerCookie();
     dbMock.queue.push([{ googleObjectId: 'issuer.obj-broken' }]);
     dbMock.queue.push(undefined);
     expirePassMock.mockRejectedValueOnce(new Error('wallet down'));
 
-    const { res, statusCode, jsonBody, setHeaders } = makeRes();
-    await handler(
-      makeReq({ confirm: 'OBRIŠI' }, { cookie }) as unknown as Parameters<typeof handler>[0],
-      res as unknown as Parameters<typeof handler>[1],
-    );
+    const res = await app.request('/api/account/delete', {
+      method: 'DELETE',
+      headers: { cookie, 'content-type': 'application/json' },
+      body: JSON.stringify({ confirm: 'OBRIŠI' }),
+    });
 
-    expect(statusCode()).toBe(200);
-    expect(jsonBody()).toEqual({ ok: true });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
     expect(dbMock.deleteSpy).toHaveBeenCalledTimes(1);
-
-    const setCookie = setHeaders().find(([name]) => name === 'Set-Cookie');
-    expect(setCookie).toBeDefined();
-    expect(String(setCookie?.[1] ?? '')).toMatch(/^gh_session=;/);
+    expect(res.headers.get('Set-Cookie')).toMatch(/^gh_session=;/);
   });
 });
