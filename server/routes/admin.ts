@@ -1,12 +1,13 @@
 import { Hono, type Context } from 'hono';
 import bcrypt from 'bcryptjs';
-import { desc, eq, max } from 'drizzle-orm';
+import { desc, eq, max, sql } from 'drizzle-orm';
 import { z } from 'zod';
-import { db } from '../../db/client';
-import { customers, loyaltyCards, loyaltyConfig, staffUsers, stampEvents } from '../../db/schema';
-import { expirePass } from '../../lib/wallet/passLifecycle';
-import { requireAdmin, type AppVariables } from '../middleware/auth';
-import { methodNotAllowed } from '../middleware/methodNotAllowed';
+import { db } from '../../db/client.js';
+import { customers, loyaltyCards, loyaltyConfig, staffUsers, stampEvents } from '../../db/schema.js';
+import { expirePass } from '../../lib/wallet/passLifecycle.js';
+import { applyReadyToRedeemVisual, syncWalletPoints } from '../../lib/wallet/passVisual.js';
+import { requireAdmin, type AppVariables } from '../middleware/auth.js';
+import { methodNotAllowed } from '../middleware/methodNotAllowed.js';
 
 export const adminRoutes = new Hono<{ Variables: AppVariables }>();
 
@@ -15,6 +16,11 @@ const ConfigBody = z.object({
   rewardDescription: z.string().trim().min(1).max(200),
   scanCooldownSeconds: z.number().int().min(0).max(86_400),
   qrTokenTtlSeconds: z.number().int().min(10).max(3_600),
+});
+
+const StampBody = z.object({
+  cardId: z.string().uuid(),
+  delta: z.number().int().min(1).max(50),
 });
 
 const StaffCreateBody = z.object({
@@ -194,6 +200,80 @@ adminRoutes.delete('/admin/customers', requireAdmin, async (c) => {
   return c.json({ ok: true }, 200);
 });
 
+adminRoutes.post('/admin/customers/stamp', requireAdmin, async (c) => {
+  const principal = c.get('staff');
+  const body = await readJson(c);
+  const parsed = StampBody.safeParse(body);
+  if (!parsed.success) {
+    return c.json({ error: 'invalid_input', details: parsed.error.flatten() }, 400);
+  }
+  const { cardId, delta } = parsed.data;
+
+  const cardRows = await db
+    .select({
+      id: loyaltyCards.id,
+      stampsCount: loyaltyCards.stampsCount,
+      status: loyaltyCards.status,
+      googleObjectId: loyaltyCards.googleObjectId,
+    })
+    .from(loyaltyCards)
+    .where(eq(loyaltyCards.id, cardId))
+    .limit(1);
+  const card = cardRows[0];
+  if (!card) return c.json({ error: 'card_not_found' }, 404);
+
+  const configRows = await db
+    .select({ stampsRequired: loyaltyConfig.stampsRequired })
+    .from(loyaltyConfig)
+    .where(eq(loyaltyConfig.id, 1))
+    .limit(1);
+  const stampsRequired = configRows[0]?.stampsRequired ?? 10;
+
+  if (card.status === 'ready_to_redeem') {
+    return c.json({ error: 'card_ready_to_redeem' }, 409);
+  }
+
+  const targetCount = Math.min(card.stampsCount + delta, stampsRequired);
+  const added = targetCount - card.stampsCount;
+  if (added <= 0) {
+    return c.json({ error: 'no_stamps_added' }, 409);
+  }
+  const justBecameRedeemable = targetCount >= stampsRequired;
+  const nextStatus = justBecameRedeemable ? 'ready_to_redeem' : card.status;
+
+  await db
+    .update(loyaltyCards)
+    .set({ stampsCount: sql`${loyaltyCards.stampsCount} + ${added}`, status: nextStatus })
+    .where(eq(loyaltyCards.id, card.id));
+
+  await db.insert(stampEvents).values(
+    Array.from({ length: added }, () => ({
+      cardId: card.id,
+      type: 'stamp' as const,
+      staffId: principal.id,
+    })),
+  );
+
+  if (card.googleObjectId) {
+    await syncWalletPoints(card.googleObjectId, targetCount);
+    if (justBecameRedeemable) {
+      await applyReadyToRedeemVisual(card.googleObjectId);
+    }
+  }
+
+  return c.json(
+    {
+      ok: true,
+      cardId: card.id,
+      stampsCount: targetCount,
+      stampsRequired,
+      status: nextStatus,
+      justBecameRedeemable,
+    },
+    200,
+  );
+});
+
 // ---------- /admin/staff ----------
 
 adminRoutes.get('/admin/staff', requireAdmin, async (c) => {
@@ -260,4 +340,5 @@ adminRoutes.patch('/admin/staff', requireAdmin, async (c) => {
 
 adminRoutes.all('/admin/config', methodNotAllowed(['GET', 'PUT']));
 adminRoutes.all('/admin/customers', methodNotAllowed(['GET', 'DELETE']));
+adminRoutes.all('/admin/customers/stamp', methodNotAllowed(['POST']));
 adminRoutes.all('/admin/staff', methodNotAllowed(['GET', 'POST', 'PATCH']));

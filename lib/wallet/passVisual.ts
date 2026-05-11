@@ -1,4 +1,4 @@
-import { patchLoyaltyObject } from './google';
+import { patchLoyaltyObject } from './google.js';
 
 /**
  * Visual states for the customer's Google Wallet LoyaltyObject. The pass
@@ -40,6 +40,24 @@ export async function applyActiveVisual(googleObjectId: string): Promise<void> {
       state: 'ACTIVE',
       hexBackgroundColor: HERO_BLUE,
       textModulesData: [],
+    });
+  } catch (err) {
+    console.error('[wallet]', err);
+  }
+}
+
+/**
+ * Push the current stamp count to Google Wallet so the live pass shows the
+ * same `loyaltyPoints` balance as the DB. Best-effort: failures are logged
+ * and swallowed so DB writes are never rolled back because of Wallet issues.
+ */
+export async function syncWalletPoints(
+  googleObjectId: string,
+  stampsCount: number,
+): Promise<void> {
+  try {
+    await patchLoyaltyObject(googleObjectId, {
+      loyaltyPoints: { label: 'Pečati', balance: { int: stampsCount } },
     });
   } catch (err) {
     console.error('[wallet]', err);

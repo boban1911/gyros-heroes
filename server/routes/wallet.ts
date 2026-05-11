@@ -1,11 +1,11 @@
 import { Hono } from 'hono';
 import { eq } from 'drizzle-orm';
-import { db } from '../../db/client';
-import { loyaltyCards, loyaltyConfig, qrTokens } from '../../db/schema';
-import { signQrToken } from '../../lib/jwt';
-import { customerSaveUrl } from '../../lib/wallet/customer';
-import { requireCustomer, type AppVariables } from '../middleware/auth';
-import { methodNotAllowed } from '../middleware/methodNotAllowed';
+import { db } from '../../db/client.js';
+import { loyaltyCards, loyaltyConfig, qrTokens } from '../../db/schema.js';
+import { signQrToken } from '../../lib/jwt.js';
+import { customerSaveUrl } from '../../lib/wallet/customer.js';
+import { requireCustomer, type AppVariables } from '../middleware/auth.js';
+import { methodNotAllowed } from '../middleware/methodNotAllowed.js';
 
 export const walletRoutes = new Hono<{ Variables: AppVariables }>();
 

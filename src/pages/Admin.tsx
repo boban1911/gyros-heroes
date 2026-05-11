@@ -5,6 +5,7 @@ import {
   Crown,
   Download,
   type LucideIcon,
+  Plus,
   ScanLine,
   ShieldOff,
   SlidersHorizontal,
@@ -884,6 +885,8 @@ function CustomersSection({ customers, stampsRequired, onChanged, showToast }: C
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [confirmText, setConfirmText] = useState('');
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [stampingId, setStampingId] = useState<string | null>(null);
+  const [stampDelta, setStampDelta] = useState<Record<string, string>>({});
 
   const filtered = (() => {
     const q = query.trim().toLowerCase();
@@ -945,6 +948,66 @@ function CustomersSection({ customers, stampsRequired, onChanged, showToast }: C
       }
     },
     [deletingId, confirmText, customers, onChanged, showToast],
+  );
+
+  const handleAddStamp = useCallback(
+    async (row: CustomerRow) => {
+      if (stampingId || !row.card) return;
+      const raw = stampDelta[row.id] ?? '1';
+      const delta = Number.parseInt(raw, 10);
+      if (!Number.isFinite(delta) || delta < 1 || delta > 50) {
+        showToast({ tone: 'warning', message: 'Unesi broj između 1 i 50.' });
+        return;
+      }
+      setStampingId(row.id);
+      try {
+        const res = await fetch('/api/admin/customers/stamp', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ cardId: row.card.id, delta }),
+        });
+        const data = (await res.json().catch(() => null)) as
+          | { stampsCount: number; status: 'active' | 'ready_to_redeem'; justBecameRedeemable: boolean }
+          | { error: string }
+          | null;
+        if (res.ok && data && 'stampsCount' in data) {
+          onChanged(
+            customers.map((c) =>
+              c.id === row.id && c.card
+                ? {
+                    ...c,
+                    card: {
+                      ...c.card,
+                      stampsCount: data.stampsCount,
+                      status: data.status,
+                      lastStampAt: new Date().toISOString(),
+                    },
+                  }
+                : c,
+            ),
+          );
+          setStampDelta((m) => ({ ...m, [row.id]: '1' }));
+          showToast({
+            tone: 'success',
+            message: data.justBecameRedeemable
+              ? 'Pečati dodati. Kartica spremna za otkup!'
+              : 'Pečati dodati.',
+          });
+        } else if (res.status === 409 && data && 'error' in data && data.error === 'card_ready_to_redeem') {
+          showToast({ tone: 'warning', message: 'Kartica je već spremna za otkup.' });
+        } else if (res.status === 404) {
+          showToast({ tone: 'warning', message: 'Kartica nije pronađena.' });
+        } else {
+          showToast({ tone: 'error', message: 'Greška pri dodavanju pečata.' });
+        }
+      } catch {
+        showToast({ tone: 'error', message: 'Mreža nije dostupna.' });
+      } finally {
+        setStampingId(null);
+      }
+    },
+    [stampingId, stampDelta, customers, onChanged, showToast],
   );
 
   return (
@@ -1070,6 +1133,45 @@ function CustomersSection({ customers, stampsRequired, onChanged, showToast }: C
                     <DetailItem label="Registrovan" value={formatDate(row.createdAt)} />
                     {row.card && (
                       <DetailItem label="Kartica od" value={formatDate(row.card.createdAt)} />
+                    )}
+                    {row.card && (
+                      <div className="col-span-2 md:col-span-4 mt-2 pt-3 border-t border-grey-black/10">
+                        <p className="font-montserrat font-bold text-[12px] tracking-widest uppercase text-hero-green mb-2">
+                          Dodaj pečate ručno
+                        </p>
+                        <p className="font-montserrat text-grey-black/70 text-[12.5px] mb-3 leading-snug">
+                          Dodaje pečate kao da je staff skenirao QR. Google Wallet pass se odmah ažurira.
+                          {row.card.status === 'ready_to_redeem' && (
+                            <span className="block mt-1 font-bold text-hero-yellow-dark">
+                              Kartica je spremna za otkup — pečati se ne mogu dodati dok se nagrada ne iskoristi.
+                            </span>
+                          )}
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-2">
+                          <input
+                            type="number"
+                            min={1}
+                            max={50}
+                            value={stampDelta[row.id] ?? '1'}
+                            onChange={(e) =>
+                              setStampDelta((m) => ({ ...m, [row.id]: e.target.value }))
+                            }
+                            disabled={row.card.status === 'ready_to_redeem'}
+                            className="sm:w-[120px] h-[44px] rounded-full bg-white px-5 font-montserrat font-medium text-grey-black border-2 border-grey-black/15 focus:outline-none focus:border-hero-green transition-colors duration-fast disabled:opacity-50"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleAddStamp(row)}
+                            disabled={
+                              stampingId === row.id || row.card.status === 'ready_to_redeem'
+                            }
+                            className="bg-hero-green text-white font-montserrat font-bold text-[13px] h-[44px] px-5 inline-flex items-center justify-center gap-2 rounded-full hover:bg-hero-green/85 transition-colors duration-base disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            <Plus className="w-4 h-4" strokeWidth={2.5} />
+                            {stampingId === row.id ? 'Dodajem…' : 'Dodaj pečate'}
+                          </button>
+                        </div>
+                      </div>
                     )}
                     <div className="col-span-2 md:col-span-4 mt-2 pt-3 border-t border-grey-black/10">
                       <p className="font-montserrat font-bold text-[12px] tracking-widest uppercase text-hero-blue-dark mb-2">

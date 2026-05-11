@@ -1,13 +1,13 @@
 import { Hono, type Context } from 'hono';
 import { z } from 'zod';
 import { and, eq, gt, isNull } from 'drizzle-orm';
-import { db } from '../../db/client';
-import { customers, loyaltyCards, magicLinks } from '../../db/schema';
-import { hashOpaqueToken, newOpaqueToken } from '../../lib/jwt';
-import { sendMagicLink } from '../../lib/email';
-import { customerSaveUrl } from '../../lib/wallet/customer';
-import { clearCustomerSession, setCustomerSession, type AppVariables } from '../middleware/auth';
-import { methodNotAllowed } from '../middleware/methodNotAllowed';
+import { db } from '../../db/client.js';
+import { customers, loyaltyCards, magicLinks } from '../../db/schema.js';
+import { hashOpaqueToken, newOpaqueToken } from '../../lib/jwt.js';
+import { sendMagicLink } from '../../lib/email.js';
+import { customerSaveUrl } from '../../lib/wallet/customer.js';
+import { clearCustomerSession, setCustomerSession, type AppVariables } from '../middleware/auth.js';
+import { methodNotAllowed } from '../middleware/methodNotAllowed.js';
 
 export const authRoutes = new Hono<{ Variables: AppVariables }>();
 

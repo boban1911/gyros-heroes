@@ -1,13 +1,14 @@
 import { eq } from 'drizzle-orm';
-import { db } from '../../db/client';
-import { customers, loyaltyCards } from '../../db/schema';
-import { generateSecret } from '../totp';
+import { db } from '../../db/client.js';
+import { customers, loyaltyCards } from '../../db/schema.js';
+import { generateSecret } from '../totp.js';
 import {
   createLoyaltyObject,
   getLoyaltyObject,
   signSaveJwt,
   type LoyaltyObjectSpec,
-} from './google';
+} from './google.js';
+import { syncWalletPoints } from './passVisual.js';
 
 const STAMPS_REQUIRED = 10;
 
@@ -89,13 +90,22 @@ export async function ensureCustomerWalletObject(customerId: string): Promise<st
   const objectId = objectIdFor(issuerId, customerId);
 
   const [card] = await db
-    .select({ id: loyaltyCards.id, googleObjectId: loyaltyCards.googleObjectId })
+    .select({
+      id: loyaltyCards.id,
+      stampsCount: loyaltyCards.stampsCount,
+      googleObjectId: loyaltyCards.googleObjectId,
+    })
     .from(loyaltyCards)
     .where(eq(loyaltyCards.customerId, customerId))
     .limit(1);
   if (!card) throw new Error(`No loyalty card for customer ${customerId}`);
 
-  if (card.googleObjectId) return card.googleObjectId;
+  if (card.googleObjectId) {
+    // Self-heal stale points: a pass created early in the card's life still
+    // shows the count from creation time unless we PATCH it on every refresh.
+    await syncWalletPoints(card.googleObjectId, card.stampsCount);
+    return card.googleObjectId;
+  }
 
   // Defensive: maybe the object already exists on Google's side from a prior
   // partial run — adopt it instead of erroring on duplicate POST.

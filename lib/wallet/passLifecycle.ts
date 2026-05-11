@@ -1,4 +1,4 @@
-import { patchLoyaltyObject } from './google';
+import { patchLoyaltyObject } from './google.js';
 
 /**
  * Lifecycle state changes for the customer's Google Wallet LoyaltyObject.

@@ -1,11 +1,11 @@
 import { Hono } from 'hono';
-import type { AppVariables } from './middleware/auth';
-import { healthRoutes } from './routes/health';
-import { authRoutes, verifyMagicLinkHandler } from './routes/auth';
-import { accountRoutes } from './routes/account';
-import { walletRoutes } from './routes/wallet';
-import { staffRoutes } from './routes/staff';
-import { adminRoutes } from './routes/admin';
+import type { AppVariables } from './middleware/auth.js';
+import { healthRoutes } from './routes/health.js';
+import { authRoutes, verifyMagicLinkHandler } from './routes/auth.js';
+import { accountRoutes } from './routes/account.js';
+import { walletRoutes } from './routes/wallet.js';
+import { staffRoutes } from './routes/staff.js';
+import { adminRoutes } from './routes/admin.js';
 
 export const app = new Hono<{ Variables: AppVariables }>();
 

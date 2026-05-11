@@ -1,6 +1,6 @@
 import { neon, type NeonQueryFunction } from '@neondatabase/serverless';
 import { drizzle, type NeonHttpDatabase } from 'drizzle-orm/neon-http';
-import * as schema from './schema';
+import * as schema from './schema.js';
 
 let cachedDb: NeonHttpDatabase<typeof schema> | null = null;
 let cachedSql: NeonQueryFunction<false, false> | null = null;

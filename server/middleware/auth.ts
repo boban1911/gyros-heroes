@@ -2,15 +2,15 @@ import type { Context, MiddlewareHandler } from 'hono';
 import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
 import type { CookieOptions } from 'hono/utils/cookie';
 import { and, eq, gt } from 'drizzle-orm';
-import { db } from '../../db/client';
-import { staffSessions, staffUsers } from '../../db/schema';
+import { db } from '../../db/client.js';
+import { staffSessions, staffUsers } from '../../db/schema.js';
 import {
   hashOpaqueToken,
   newOpaqueToken,
   signSession,
   verifySession,
   type CustomerSessionClaims,
-} from '../../lib/jwt';
+} from '../../lib/jwt.js';
 
 const CUSTOMER_COOKIE = 'gh_session';
 const STAFF_COOKIE = 'gh_staff';

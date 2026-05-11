@@ -2,7 +2,7 @@ import { Hono, type Context } from 'hono';
 import bcrypt from 'bcryptjs';
 import { and, desc, eq, isNull, sql } from 'drizzle-orm';
 import { z } from 'zod';
-import { db } from '../../db/client';
+import { db } from '../../db/client.js';
 import {
   customers,
   loyaltyCards,
@@ -10,17 +10,21 @@ import {
   qrTokens,
   staffUsers,
   stampEvents,
-} from '../../db/schema';
-import { verifyQrToken } from '../../lib/jwt';
-import { verify as verifyTotp } from '../../lib/totp';
-import { applyActiveVisual, applyReadyToRedeemVisual } from '../../lib/wallet/passVisual';
+} from '../../db/schema.js';
+import { verifyQrToken } from '../../lib/jwt.js';
+import { verify as verifyTotp } from '../../lib/totp.js';
+import {
+  applyActiveVisual,
+  applyReadyToRedeemVisual,
+  syncWalletPoints,
+} from '../../lib/wallet/passVisual.js';
 import {
   clearStaffSession,
   requireStaff,
   setStaffSession,
   type AppVariables,
-} from '../middleware/auth';
-import { methodNotAllowed } from '../middleware/methodNotAllowed';
+} from '../middleware/auth.js';
+import { methodNotAllowed } from '../middleware/methodNotAllowed.js';
 
 export const staffRoutes = new Hono<{ Variables: AppVariables }>();
 
@@ -323,8 +327,11 @@ staffRoutes.post('/staff/scan', requireStaff, async (c) => {
     qrJti: claims ? claims.jti : null,
   });
 
-  if (justBecameRedeemable && card.googleObjectId) {
-    await applyReadyToRedeemVisual(card.googleObjectId);
+  if (card.googleObjectId) {
+    await syncWalletPoints(card.googleObjectId, newCount);
+    if (justBecameRedeemable) {
+      await applyReadyToRedeemVisual(card.googleObjectId);
+    }
   }
 
   return c.json(

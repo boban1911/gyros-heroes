@@ -1,4 +1,4 @@
-import type { LoyaltyClassSpec } from './google';
+import type { LoyaltyClassSpec } from './google.js';
 
 const CLASS_SUFFIX = 'gyros_heroes_loyalty_v1';
 const SITE_BASE = 'https://www.gyrosheroes.rs';

@@ -1,10 +1,10 @@
 import { Hono } from 'hono';
 import { eq } from 'drizzle-orm';
-import { db } from '../../db/client';
-import { customers, loyaltyCards, loyaltyConfig } from '../../db/schema';
-import { expirePass } from '../../lib/wallet/passLifecycle';
-import { clearCustomerSession, requireCustomer, type AppVariables } from '../middleware/auth';
-import { methodNotAllowed } from '../middleware/methodNotAllowed';
+import { db } from '../../db/client.js';
+import { customers, loyaltyCards, loyaltyConfig } from '../../db/schema.js';
+import { expirePass } from '../../lib/wallet/passLifecycle.js';
+import { clearCustomerSession, requireCustomer, type AppVariables } from '../middleware/auth.js';
+import { methodNotAllowed } from '../middleware/methodNotAllowed.js';
 
 export const accountRoutes = new Hono<{ Variables: AppVariables }>();
 
