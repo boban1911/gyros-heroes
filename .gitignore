@@ -22,7 +22,13 @@ pnpm-debug.log*
 *.sw?
 coverage/
 .vercel
-.env*.local
+# Anything env-shaped except a checked-in example. Both `.env.local` (vercel
+# env pull output) and `.env.preview-loyalty` (vercel env pull --environment
+# preview) contain real secrets — don't commit either.
+.env
+.env.*
+!.env.example
 
-# Claude Code agent worktrees
+# Claude Code agent worktrees + hook state
 .claude/worktrees/
+.claude/.claudemd-eval-state

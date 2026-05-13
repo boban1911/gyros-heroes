@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   ChevronDown,
   Crown,
@@ -1307,8 +1307,131 @@ const StatChip: React.FC<{ label: string; value: string; unit?: string }> = ({ l
   </div>
 );
 
+interface AdminLoginProps {
+  onLoggedIn: () => void;
+}
+
+const AdminLogin: React.FC<AdminLoginProps> = ({ onLoggedIn }) => {
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    emailRef.current?.focus();
+  }, []);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (submitting) return;
+    setErrorMessage(null);
+
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail || !password) {
+      setErrorMessage('Unesi email i lozinku.');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/staff/login', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email: trimmedEmail, password }),
+      });
+      if (res.ok) {
+        onLoggedIn();
+        return;
+      }
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (res.status === 401 || data.error === 'invalid_credentials') {
+        setErrorMessage('Pogrešan email ili lozinka.');
+      } else if (data.error === 'invalid_input') {
+        setErrorMessage('Proveri unete podatke.');
+      } else {
+        setErrorMessage('Greška pri prijavi. Pokušaj ponovo.');
+      }
+    } catch {
+      setErrorMessage('Mreža nije dostupna. Pokušaj ponovo.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <PageShell>
+      <div className="max-w-[1400px] mx-auto px-[20px] nav:px-[100px]">
+        <div className="max-w-[460px] mx-auto pt-[40px] md:pt-[60px]">
+          <p className="font-montserrat font-bold text-hero-yellow text-[12px] md:text-[14px] tracking-[2px] uppercase mb-2 text-center">
+            Komandni centar
+          </p>
+          <h1 className="font-montserrat font-bold text-[40px] md:text-[56px] leading-[0.95] tracking-[-1.5px] text-white text-center mb-6">
+            Prijavi se kao <span className="text-hero-yellow italic">admin</span>
+          </h1>
+
+          <div className="bg-hero-green rounded-[40px] lg:rounded-[48px] p-6 md:p-8 lg:p-[36px] shadow-hero-xs">
+            <p className="font-montserrat text-white/85 text-[14px] mb-6">
+              Email i lozinka. Staff nalozi vide samo skener — ne admin panel.
+            </p>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
+              <label className="flex flex-col gap-2">
+                <span className="font-montserrat font-semibold text-white text-[13px] md:text-[14px] tracking-wide">
+                  Email
+                </span>
+                <input
+                  ref={emailRef}
+                  type="email"
+                  autoComplete="email"
+                  inputMode="email"
+                  required
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  disabled={submitting}
+                  className="h-[50px] md:h-[56px] rounded-full bg-white/95 px-5 font-montserrat font-medium text-grey-black border-2 border-transparent focus:outline-none focus:border-hero-yellow focus:bg-white transition-colors duration-fast disabled:opacity-70"
+                />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="font-montserrat font-semibold text-white text-[13px] md:text-[14px] tracking-wide">
+                  Lozinka
+                </span>
+                <input
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  disabled={submitting}
+                  className="h-[50px] md:h-[56px] rounded-full bg-white/95 px-5 font-montserrat font-medium text-grey-black border-2 border-transparent focus:outline-none focus:border-hero-yellow focus:bg-white transition-colors duration-fast disabled:opacity-70"
+                />
+              </label>
+
+              {errorMessage ? (
+                <p
+                  role="alert"
+                  className="px-4 py-3 rounded-2xl bg-hero-blue-dark/60 border border-hero-yellow/40 text-hero-yellow text-[14px] font-montserrat font-medium text-center"
+                >
+                  {errorMessage}
+                </p>
+              ) : null}
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="mt-2 bg-hero-yellow text-grey-black font-montserrat font-bold text-[15px] md:text-[16px] h-[50px] md:h-[60px] px-8 flex items-center justify-center rounded-full shadow-hero-xs hover:bg-white hover:text-hero-yellow transition-colors duration-base whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-hero-yellow disabled:hover:text-grey-black"
+              >
+                {submitting ? 'Prijavljujem…' : 'Prijavi se'}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </PageShell>
+  );
+};
+
 function Admin() {
-  const navigate = useNavigate();
   const [status, setStatus] = useState<SessionStatus>('loading');
   const [me, setMe] = useState<StaffPrincipal | null>(null);
   const [config, setConfig] = useState<LoyaltyConfigRow | null>(null);
@@ -1347,71 +1470,65 @@ function Admin() {
     }, TOAST_DURATION_MS);
   }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-    async function bootstrap(): Promise<void> {
-      try {
-        const meRes = await fetch('/api/staff/me', {
+  const bootstrap = useCallback(async (): Promise<void> => {
+    setStatus('loading');
+    try {
+      const meRes = await fetch('/api/staff/me', {
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' },
+      });
+      if (!meRes.ok) {
+        setMe(null);
+        setStatus('anonymous');
+        return;
+      }
+      const principal = (await meRes.json()) as StaffPrincipal;
+      setMe(principal);
+      if (principal.role !== 'admin') {
+        setStatus('forbidden');
+        return;
+      }
+      const [cfgRes, staffRes, customersRes] = await Promise.all([
+        fetch('/api/admin/config', {
           credentials: 'same-origin',
           headers: { Accept: 'application/json' },
-        });
-        if (!meRes.ok) {
-          if (!cancelled) {
-            setStatus('anonymous');
-            navigate('/scan/login', { replace: true });
-          }
-          return;
-        }
-        const principal = (await meRes.json()) as StaffPrincipal;
-        if (cancelled) return;
-        setMe(principal);
-        if (principal.role !== 'admin') {
-          setStatus('forbidden');
-          return;
-        }
-        const [cfgRes, staffRes, customersRes] = await Promise.all([
-          fetch('/api/admin/config', {
-            credentials: 'same-origin',
-            headers: { Accept: 'application/json' },
-          }),
-          fetch('/api/admin/staff', {
-            credentials: 'same-origin',
-            headers: { Accept: 'application/json' },
-          }),
-          fetch('/api/admin/customers', {
-            credentials: 'same-origin',
-            headers: { Accept: 'application/json' },
-          }),
-        ]);
-        if (cancelled) return;
-        if (cfgRes.ok) {
-          const cfg = (await cfgRes.json()) as LoyaltyConfigRow;
-          setConfig(cfg);
-        }
-        if (staffRes.ok) {
-          const data = (await staffRes.json()) as { staff: StaffRow[] };
-          setStaff(data.staff);
-        }
-        if (customersRes.ok) {
-          const data = (await customersRes.json()) as { customers: CustomerRow[] };
-          setCustomerRows(data.customers);
-        }
-        setStatus('admin');
-      } catch {
-        if (!cancelled) {
-          setStatus('anonymous');
-          navigate('/scan/login', { replace: true });
-        }
+        }),
+        fetch('/api/admin/staff', {
+          credentials: 'same-origin',
+          headers: { Accept: 'application/json' },
+        }),
+        fetch('/api/admin/customers', {
+          credentials: 'same-origin',
+          headers: { Accept: 'application/json' },
+        }),
+      ]);
+      if (cfgRes.ok) {
+        const cfg = (await cfgRes.json()) as LoyaltyConfigRow;
+        setConfig(cfg);
       }
+      if (staffRes.ok) {
+        const data = (await staffRes.json()) as { staff: StaffRow[] };
+        setStaff(data.staff);
+      }
+      if (customersRes.ok) {
+        const data = (await customersRes.json()) as { customers: CustomerRow[] };
+        setCustomerRows(data.customers);
+      }
+      setStatus('admin');
+    } catch {
+      setMe(null);
+      setStatus('anonymous');
     }
+  }, []);
+
+  useEffect(() => {
     void bootstrap();
     return () => {
-      cancelled = true;
       if (toastTimerRef.current !== null) {
         window.clearTimeout(toastTimerRef.current);
       }
     };
-  }, [navigate]);
+  }, [bootstrap]);
 
   const handleLogout = useCallback(async () => {
     if (loggingOut) return;
@@ -1421,11 +1538,19 @@ function Admin() {
     } catch {
       // ignore
     }
-    navigate('/scan/login', { replace: true });
-  }, [loggingOut, navigate]);
+    setLoggingOut(false);
+    setMe(null);
+    setConfig(null);
+    setStaff([]);
+    setCustomerRows([]);
+    setStatus('anonymous');
+  }, [loggingOut]);
 
-  if (status === 'loading' || status === 'anonymous') {
+  if (status === 'loading') {
     return <FullScreenLoader />;
+  }
+  if (status === 'anonymous') {
+    return <AdminLogin onLoggedIn={() => void bootstrap()} />;
   }
   if (status === 'forbidden') {
     return <NoAccess onLogout={handleLogout} loggingOut={loggingOut} />;
