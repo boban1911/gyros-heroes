@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../../db/client.js';
 import { customers, loyaltyCards } from '../../db/schema.js';
-import { generateSecret } from '../totp.js';
+import { base32ToHex, generateSecret } from '../totp.js';
 import {
   createLoyaltyObject,
   getLoyaltyObject,
@@ -71,7 +71,7 @@ async function buildSpec(customerId: string): Promise<LoyaltyObjectSpec> {
       totpDetails: {
         algorithm: 'TOTP_SHA1',
         periodMillis: 30000,
-        parameters: [{ key: totpSecret, valueLength: 6 }],
+        parameters: [{ key: base32ToHex(totpSecret), valueLength: 6 }],
       },
     },
   };

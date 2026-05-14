@@ -42,6 +42,16 @@ export function generateSecret(byteLength = 20): string {
   return base32Encode(new Uint8Array(randomBytes(byteLength)));
 }
 
+/**
+ * Convert a Base32-encoded TOTP secret to a Base16 (hex) string. Google
+ * Wallet's `totpDetails.parameters[].key` requires Base16; our internal
+ * storage uses Base32 to stay compatible with standard authenticator apps
+ * and our own verifier.
+ */
+export function base32ToHex(secret: string): string {
+  return Buffer.from(base32Decode(secret)).toString('hex');
+}
+
 interface VerifyOptions {
   window?: number;
   periodSeconds?: number;
