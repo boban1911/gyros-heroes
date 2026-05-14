@@ -5,7 +5,7 @@ import Logo from '../../components/Logo';
 import cityBg from '../../assets/footer/footer-bg-new.svg';
 import { useStaffSession } from '../hooks/useStaffSession';
 
-const TOAST_DURATION_MS = 2400;
+const TOAST_DURATION_MS = 3200;
 
 type ToastTone = 'success' | 'celebrate' | 'warning' | 'error';
 
@@ -265,7 +265,7 @@ function Scanner() {
 
       {toast ? (
         <div
-          className={`fixed top-[max(env(safe-area-inset-top),12px)] left-0 right-0 z-30 px-4 flex justify-center transform transition-all duration-500 ease-in-out pointer-events-none ${
+          className={`fixed top-[max(env(safe-area-inset-top),12px)] left-0 right-0 z-50 px-4 flex justify-center transform transition-all duration-500 ease-in-out pointer-events-none ${
             toastVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
           }`}
           role="status"
