@@ -1,18 +1,13 @@
 import type { LoyaltyClassSpec } from './google.js';
 
-const CLASS_SUFFIX = 'gyros_heroes_loyalty_v1';
 const SITE_BASE = 'https://www.gyrosheroes.rs';
 
-export function loyaltyClassId(issuerId: string): string {
-  return `${issuerId}.${CLASS_SUFFIX}`;
-}
-
 export function buildLoyaltyClass(opts: {
-  issuerId: string;
+  classId: string;
   reviewStatus?: 'DRAFT' | 'UNDER_REVIEW';
 }): LoyaltyClassSpec {
   return {
-    id: loyaltyClassId(opts.issuerId),
+    id: opts.classId,
     issuerName: 'Gyros Heroes',
     programName: 'Hero kartica',
     programLogo: {

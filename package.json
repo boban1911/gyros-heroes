@@ -13,7 +13,7 @@
     "db:migrate:ci": "node node_modules/drizzle-kit/bin.cjs migrate",
     "db:push": "node --env-file=.env.local node_modules/drizzle-kit/bin.cjs push",
     "db:studio": "node --env-file=.env.local node_modules/drizzle-kit/bin.cjs studio",
-    "wallet:create-class": "node --env-file=.env.local --import tsx scripts/wallet-create-class.ts",
+    "wallet:upsert-class": "node --env-file=.env.local --import tsx scripts/wallet-upsert-class.ts",
     "wallet:preview-link": "node --env-file=.env.local --import tsx scripts/wallet-preview-link.ts",
     "wallet:bump-stamp": "node --env-file=.env.local --import tsx scripts/wallet-bump-stamp.ts",
     "seed:staff": "node --env-file=.env.local --import tsx scripts/seed-staff-user.ts"
