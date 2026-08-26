@@ -4,7 +4,7 @@ import { and, eq, gt, isNull } from 'drizzle-orm';
 import { db } from '../../db/client.js';
 import { customers, loyaltyCards, magicLinks } from '../../db/schema.js';
 import { hashOpaqueToken, newOpaqueToken } from '../../lib/jwt.js';
-import { sendMagicLink } from '../../lib/email.js';
+import { EmailSendError, sendMagicLink, type EmailFailureCode } from '../../lib/email.js';
 import { customerSaveUrl } from '../../lib/wallet/customer.js';
 import { clearCustomerSession, setCustomerSession, type AppVariables } from '../middleware/auth.js';
 import { methodNotAllowed } from '../middleware/methodNotAllowed.js';
@@ -22,6 +22,41 @@ const LoginBody = z.object({
 });
 
 const MAGIC_LINK_TTL_MS = 1000 * 60 * 60 * 24; // 24h
+
+/**
+ * HTTP status per failure code. Misconfiguration is ours (5xx), a bad address
+ * is the caller's (400), throttling gets 429 so clients can back off.
+ */
+const EMAIL_FAILURE_STATUS: Record<EmailFailureCode, 400 | 429 | 500 | 502> = {
+  email_not_configured: 500,
+  email_auth_failed: 500,
+  email_domain_unverified: 500,
+  email_recipient_restricted: 500,
+  email_invalid_recipient: 400,
+  email_rate_limited: 429,
+  email_send_failed: 502,
+};
+
+/**
+ * Logs the provider's own words (server-side only) and answers with a stable
+ * code. The raw text can name the sending domain and account state, so it
+ * stays out of the response body.
+ */
+function emailFailureResponse(c: Context, scope: 'register' | 'login', to: string, err: unknown) {
+  const failure =
+    err instanceof EmailSendError
+      ? err
+      : new EmailSendError('email_send_failed', (err as Error).message);
+
+  console.error(`[${scope}] magic-link email failed`, {
+    code: failure.code,
+    statusCode: failure.statusCode,
+    providerMessage: failure.providerMessage,
+    to,
+  });
+
+  return c.json({ error: failure.code }, EMAIL_FAILURE_STATUS[failure.code]);
+}
 
 async function readJson(c: Context): Promise<unknown> {
   try {
@@ -87,7 +122,7 @@ authRoutes.post('/auth/register', async (c) => {
       walletSaveUrl,
     });
   } catch (err) {
-    return c.json({ error: 'email_send_failed', message: (err as Error).message }, 502);
+    return emailFailureResponse(c, 'register', email, err);
   }
 
   return c.json({ ok: true }, 200);
@@ -133,7 +168,7 @@ authRoutes.post('/auth/login', async (c) => {
   try {
     await sendMagicLink({ to: email, name: customer.name, url, kind: 'login', walletSaveUrl });
   } catch (err) {
-    return c.json({ error: 'email_send_failed', message: (err as Error).message }, 502);
+    return emailFailureResponse(c, 'login', email, err);
   }
 
   return c.json({ ok: true }, 200);

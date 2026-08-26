@@ -19,6 +19,24 @@ const errorCopyByCode: Record<string, string> = {
   invalid_or_expired: 'Link je istekao ili je već iskorišćen. Zatraži novi.',
 };
 
+const GENERIC_SUBMIT_ERROR = 'Nešto nije u redu. Pokušaj ponovo.';
+
+/**
+ * Submit-time error codes from /api/auth/*. Everything the customer can act on
+ * says so; the rest admits the problem is on our side, so nobody keeps
+ * retyping a correct email address.
+ */
+const submitErrorCopyByCode: Record<string, string> = {
+  invalid_input: 'Proveri unete podatke — ime i email moraju biti ispravni.',
+  email_invalid_recipient: 'Ova email adresa nije ispravna. Proveri je i pokušaj ponovo.',
+  email_rate_limited: 'Previše pokušaja u kratkom roku. Sačekaj minut pa probaj ponovo.',
+  email_not_configured: 'Slanje emaila trenutno ne radi na našoj strani. Pokušaj kasnije.',
+  email_auth_failed: 'Slanje emaila trenutno ne radi na našoj strani. Pokušaj kasnije.',
+  email_domain_unverified: 'Slanje emaila trenutno ne radi na našoj strani. Pokušaj kasnije.',
+  email_recipient_restricted: 'Slanje emaila trenutno ne radi na našoj strani. Pokušaj kasnije.',
+  email_send_failed: 'Email nije uspeo da ode. Pokušaj ponovo za koji minut.',
+};
+
 const Loyalty: React.FC = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
@@ -313,7 +331,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ email, state, onEmail, onSubmit, 
 
 const ErrorBanner: React.FC<{ message: string }> = ({ message }) => (
   <p className="px-4 py-3 rounded-2xl bg-red-500/20 border border-red-300/40 text-white text-sm font-montserrat font-medium">
-    Nešto nije u redu. Pokušaj ponovo.
+    {submitErrorCopyByCode[message] ?? GENERIC_SUBMIT_ERROR}
     <span className="block mt-1 text-xs opacity-70 font-normal">({message})</span>
   </p>
 );

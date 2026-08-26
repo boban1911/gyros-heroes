@@ -44,7 +44,18 @@ export function createFakeDb(): FakeDb {
   const updateSets: unknown[] = [];
 
   function makeChain(): unknown {
-    const passthrough = ['from', 'where', 'innerJoin', 'leftJoin', 'orderBy', 'limit', 'returning', 'groupBy'];
+    const passthrough = [
+      'from',
+      'where',
+      'innerJoin',
+      'leftJoin',
+      'orderBy',
+      'limit',
+      'returning',
+      'groupBy',
+      'onConflictDoUpdate',
+      'onConflictDoNothing',
+    ];
     const chain: Record<string, unknown> = {};
     for (const method of passthrough) {
       chain[method] = vi.fn(() => chain);

@@ -56,6 +56,7 @@ A loyalty-card feature is being added on top: customer registration + Google Wal
 Topic-specific docs in `docs/`, loaded on demand (not auto-included in context):
 
 - [`docs/google-wallet.md`](docs/google-wallet.md) — issuer/class IDs, service account location, env vars, how the sync invariant is implemented end-to-end, testing.
+- [`docs/email.md`](docs/email.md) — Resend env vars, the `/api/auth/*` email failure codes and what each one means, retry policy.
 - [`docs/local-dev.md`](docs/local-dev.md) — `:5173` vs `:3000`, env pulls, common gotchas.
 - [`docs/vercel-cli.md`](docs/vercel-cli.md) — CLI 53.3.2 quirks (the `preview --yes` branch bug, secret piping).
 - [`conductor/code_styleguides/typescript.md`](conductor/code_styleguides/typescript.md) — full TS style guide.
